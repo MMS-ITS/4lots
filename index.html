@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bar X Ranch — 4-Lot Feasibility Portfolio (Rebuilt)</title>
+<style>
+  :root{
+    --ink:#1a2b33; --muted:#5b6b72; --faint:#8a979d; --line:#dfe5e7;
+    --paper:#ffffff; --wash:#f6f8f8;
+    --teal:#0f766e; --teal-wash:#e9f3f1;
+    --amber:#b45309; --amber-wash:#fdf3e3;
+    --red:#b42318; --red-wash:#fdecea;
+    --green:#166534; --green-wash:#e8f2ea;
+    --blue:#1e40af; --blue-wash:#eaeef9;
+    --maxw:940px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--wash); color:var(--ink);
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  .doc{max-width:var(--maxw); margin:0 auto; background:var(--paper); padding:56px 60px 72px;}
+  h1,h2,h3,h4{line-height:1.2; margin:0 0 .35em;}
+  h1{font-size:30px; letter-spacing:-.01em;}
+  h2{font-size:21px; margin-top:0; padding-top:8px;}
+  h3{font-size:16px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);}
+  h4{font-size:15px;}
+  p{margin:0 0 .8em;}
+  a{color:var(--teal);}
+  small{color:var(--muted);}
+  .sub{color:var(--muted); font-size:15px; margin-top:-.2em;}
+  .rule{border:0; border-top:1px solid var(--line); margin:34px 0;}
+  section{margin:36px 0; padding-top:6px;}
+  section > h2{border-top:3px solid var(--ink); padding-top:12px;}
+
+  /* header */
+  header.masthead{border-bottom:2px solid var(--ink); padding-bottom:18px; margin-bottom:6px;}
+  .kicker{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--teal); font-weight:700;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:6px 26px; margin-top:14px; font-size:13px; color:var(--muted);}
+  .meta-row b{color:var(--ink); font-weight:600;}
+
+  /* callouts */
+  .note{border:1px solid var(--line); border-left-width:4px; border-radius:6px; padding:14px 16px; margin:16px 0; background:var(--wash); font-size:14.5px;}
+  .note.teal{border-left-color:var(--teal); background:var(--teal-wash);}
+  .note.amber{border-left-color:var(--amber); background:var(--amber-wash);}
+  .note.red{border-left-color:var(--red); background:var(--red-wash);}
+  .note.blue{border-left-color:var(--blue); background:var(--blue-wash);}
+  .note .lbl{font-weight:700; text-transform:uppercase; letter-spacing:.05em; font-size:12px; display:block; margin-bottom:4px;}
+  .note.teal .lbl{color:var(--teal);} .note.amber .lbl{color:var(--amber);}
+  .note.red .lbl{color:var(--red);} .note.blue .lbl{color:var(--blue);}
+
+  /* confidence chips */
+  .cf{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:1px 7px; border-radius:10px; vertical-align:middle; white-space:nowrap;}
+  .cf.v{background:var(--green-wash); color:var(--green);}
+  .cf.u{background:var(--amber-wash); color:var(--amber);}
+  .cf.e{background:var(--blue-wash); color:var(--blue);}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+  caption{caption-side:top; text-align:left; font-size:12.5px; color:var(--muted); margin-bottom:6px;}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}
+  thead th{background:var(--ink); color:#fff; font-size:12px; letter-spacing:.03em; text-transform:uppercase; font-weight:600;}
+  tbody tr:nth-child(even){background:var(--wash);}
+  td.num,th.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .tot td{font-weight:700; border-top:2px solid var(--ink); background:#eef2f2;}
+  .strike{color:var(--red); text-decoration:line-through;}
+  .fix{color:var(--green); font-weight:600;}
+
+  /* KPI strip */
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:20px 0;}
+  .kpi{border:1px solid var(--line); border-radius:8px; padding:14px;}
+  .kpi .k{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .kpi .v{font-size:23px; font-weight:700; margin:4px 0 2px; letter-spacing:-.01em;}
+  .kpi .d{font-size:12.5px; color:var(--muted);}
+  .kpi.flag{border-color:var(--amber); background:var(--amber-wash);}
+
+  /* lot cards */
+  .lot{border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin:16px 0; page-break-inside:avoid;}
+  .lot .top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
+  .lot h4{margin:0; font-size:17px;}
+  .lot .addr{color:var(--muted); font-size:13px;}
+  .lot .price{text-align:right; white-space:nowrap;}
+  .lot .price .p{font-size:20px; font-weight:700;}
+  .lot .price .pa{font-size:12.5px; color:var(--muted);}
+  .badges{margin:8px 0 2px; display:flex; gap:6px; flex-wrap:wrap;}
+  .badge{font-size:11px; font-weight:700; letter-spacing:.03em; padding:2px 8px; border-radius:12px; text-transform:uppercase;}
+  .badge.ae{background:var(--amber-wash); color:var(--amber);}
+  .badge.wf{background:var(--blue-wash); color:var(--blue);}
+  .badge.q{background:#eef2f2; color:var(--muted);}
+  .lot dl{display:grid; grid-template-columns:150px 1fr; gap:2px 14px; margin:12px 0 0; font-size:13.5px;}
+  .lot dt{color:var(--muted);}
+  .lot dd{margin:0;}
+
+  ol.steps{margin:12px 0; padding-left:22px;} ol.steps li{margin:7px 0;}
+  ul.tight{margin:8px 0; padding-left:20px;} ul.tight li{margin:4px 0;}
+  .legend{font-size:12.5px; color:var(--muted); display:flex; gap:18px; flex-wrap:wrap; margin:8px 0 0;}
+  footer.docfoot{border-top:2px solid var(--ink); margin-top:44px; padding-top:16px; font-size:12px; color:var(--muted);}
+  .toc ol{columns:2; column-gap:36px; margin:8px 0; padding-left:20px; font-size:14px;}
+  .toc li{margin:3px 0; break-inside:avoid;}
+
+  @media (max-width:720px){
+    .doc{padding:28px 20px 48px;}
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .lot dl{grid-template-columns:1fr;}
+    .lot dt{margin-top:6px;}
+    .toc ol{columns:1;}
+  }
+  @media print{
+    body{background:#fff;} .doc{max-width:none; padding:0;}
+    section{page-break-inside:auto;} .lot,table,.note{page-break-inside:avoid;}
+    a{color:var(--ink); text-decoration:none;}
+  }
+</style>
+</head>
+<body>
+<main class="doc">
+
+<header class="masthead">
+  <div class="kicker">Independent Feasibility Review &amp; Correction</div>
+  <h1>Bar X Ranch — 4-Lot Feasibility Portfolio</h1>
+  <p class="sub">Land acquisition · 5-bedroom build · private-lake access · Zone AE flood exposure — Angleton (unincorporated Brazoria County), TX 77515</p>
+  <div class="meta-row">
+    <span><b>Version:</b> 2.0 (rebuild)</span>
+    <span><b>Prepared:</b> 10 Sep 2026</span>
+    <span><b>Supersedes:</b> v1 generated portfolio (9 pp.)</span>
+    <span><b>Basis:</b> primary regulation + public records</span>
+    <span><b>Full audit:</b> <a href="docs/AUDIT.md">docs/AUDIT.md</a></span>
+    <span><b>Sources:</b> <a href="docs/SOURCES.md">docs/SOURCES.md</a></span>
+  </div>
+</header>
+
+<div class="note amber" style="margin-top:20px;">
+  <span class="lbl">Read this first — status of this document</span>
+  This is a <b>corrected rebuild</b> of an earlier generated portfolio. It fixes material errors in that document (septic sizing, permit fees, flood interpretation, and cost totals) and adds costs the original omitted entirely (windstorm insurance, property tax, POA carry, and the house itself). <b>It remains a desktop screening study.</b> No lot has been surveyed, no soil tested, and no BFE confirmed in writing. Every figure marked <span class="cf u">unverified</span> or <span class="cf e">estimate</span> must be confirmed before it is relied on for a purchase decision. See the disclaimer in the footer.
+</div>
+
+<div class="legend">
+  <span><span class="cf v">verified</span> traced to a primary/official source</span>
+  <span><span class="cf u">unverified</span> from listing copy or the original doc; not confirmed</span>
+  <span><span class="cf e">estimate</span> planning figure, ranged</span>
+</div>
+
+<!-- ============ TOC ============ -->
+<section class="toc" style="border-top:none;">
+  <h3 style="border-top:3px solid var(--ink); padding-top:12px;">Contents</h3>
+  <ol>
+    <li><a href="#verdict">Verdict &amp; the open premise</a></li>
+    <li><a href="#snapshot">Portfolio snapshot</a></li>
+    <li><a href="#lots">The four lots</a></li>
+    <li><a href="#flood">Flood: what we actually know</a></li>
+    <li><a href="#build">Buildability — 5BR + garage</a></li>
+    <li><a href="#septic">Septic (OSSF) — corrected</a></li>
+    <li><a href="#cost">Cost to build — corrected</a></li>
+    <li><a href="#carry">Annual carrying cost</a></li>
+    <li><a href="#insure">Insurance: flood + windstorm</a></li>
+    <li><a href="#fishing">Fishing &amp; amenities</a></li>
+    <li><a href="#corrections">What changed from v1</a></li>
+    <li><a href="#next">Due-diligence sequence</a></li>
+  </ol>
+</section>
+
+<!-- ============ VERDICT ============ -->
+<section id="verdict">
+  <h2>1 · Verdict, and the question that must be answered first</h2>
+  <p>The four lots are <b>likely buildable for a 5-bedroom home</b>, and their natural elevation (reported 28–30 ft, above the estimated ~24 ft base flood elevation) is a genuine advantage. But "buildable" is not the same as "advisable," and the earlier document reached a favourable conclusion by understating cost 3–6× and omitting whole categories of expense. Corrected, the picture is:</p>
+  <ul class="tight">
+    <li><b>Land is the small number.</b> The all-in cost of putting a family into a house here is <b>~$490k–$890k on one lot</b>, of which land ($45k–$82.5k) is under 15%.</li>
+    <li><b>Flood exposure is real and permanent.</b> These are Zone AE parcels behind a non-accredited levee. Elevation helps; it does not remove the mapping, the insurance question, or the county's 2-ft freeboard rule.</li>
+    <li><b>The binding constraints are soil and utilities</b>, not the flood zone — soil class decides the septic system ($8k vs $25k), and distance to power decides the service-extension cost ($0 vs $25k).</li>
+  </ul>
+
+  <div class="note red">
+    <span class="lbl">The unresolved premise</span>
+    The headline is <b>“$234,500 · 4 lots,”</b> but every comparison is written to help pick <em>one</em> lot to build on. <b>These are different decisions.</b> Buying one lot to build needs a ranked recommendation; buying four as an investment needs a carrying-cost and resale thesis. Until you decide which, no total can be sized. This document provides the inputs for <em>both</em> but recommends resolving the premise before spending on survey or soil work.
+  </div>
+</section>
+
+<!-- ============ SNAPSHOT ============ -->
+<section id="snapshot">
+  <h2>2 · Portfolio snapshot</h2>
+  <div class="kpis">
+    <div class="kpi">
+      <div class="k">Land, all 4 lots</div>
+      <div class="v">$234,500</div>
+      <div class="d">~4.95 ac <span class="cf u">acreage unverified</span></div>
+    </div>
+    <div class="kpi flag">
+      <div class="k">All-in, one lot built</div>
+      <div class="v">~$490k–890k</div>
+      <div class="d">land + site + 5BR house <span class="cf e">est.</span></div>
+    </div>
+    <div class="kpi flag">
+      <div class="k">Annual carry, 4 vacant lots</div>
+      <div class="v">~$5.1–5.8k</div>
+      <div class="d">tax + POA + mowing <span class="cf v">rates verified</span></div>
+    </div>
+    <div class="kpi flag">
+      <div class="k">Insurance once built</div>
+      <div class="v">~$5–9.5k/yr</div>
+      <div class="d">flood + windstorm + HO <span class="cf e">est.</span></div>
+    </div>
+  </div>
+  <div class="note teal">
+    <span class="lbl">Site facts that hold for all four lots</span>
+    FEMA FIRM Panel <b>48039C0605K</b>, effective <b>30 Dec 2020</b> <span class="cf v">verified</span> · mapped <b>Zone AE</b> (1% annual-chance) behind the non-accredited Angleton Levee · Brazoria County requires finished floor <b>≥ 24 in above BFE</b> (freeboard set by Commissioners Court in <b>May 2005</b>) <span class="cf v">verified</span> · water &amp; sewer are <b>private well + on-site septic</b> (no municipal service) · school district is <b>Columbia-Brazoria ISD</b> <span class="cf v">verified</span>.
+  </div>
+</section>
+
+<!-- ============ LOTS ============ -->
+<section id="lots">
+  <h2>3 · The four lots</h2>
+  <p>Per-acre pricing below is computed <b>on each lot’s stated acreage on a single consistent basis</b> — unlike v1, which priced one lot on a different (larger) acreage and so mis-ranked it. Flood data is shown once, at portfolio level, rather than copy-pasted per lot, because a single generic BFE was never lot-specific.</p>
+
+  <table>
+    <caption>Price normalised to stated acreage. Lowest $/acre in bold.</caption>
+    <thead>
+      <tr><th>Lot</th><th>Section / ID</th><th class="num">Price</th><th class="num">Stated size</th><th class="num">$/acre (stated)</th><th>Water</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1127 Saddle Horn Bend</td><td>Bar X Ranch Sec 2</td><td class="num">$82,500</td><td class="num">1.95 ac</td><td class="num"><b>$42,308</b></td><td>Waterfront <span class="cf u">u</span></td></tr>
+      <tr><td>336 Wagon Wheel Trl W</td><td>Bar X Ranch (Lot 167) <span class="cf u">sec?</span></td><td class="num">$45,000</td><td class="num">1.00 ac</td><td class="num">$45,000</td><td>Waterfront <span class="cf u">u</span></td></tr>
+      <tr><td>Lot 29 Broken Arrow Trl</td><td>Bar X Ranch Sec 16</td><td class="num">$49,000</td><td class="num">~1.0 ac <span class="cf u">est</span></td><td class="num">~$49,000</td><td>Interior <span class="cf u">u</span></td></tr>
+      <tr><td>750 Wagon Wheel Trl</td><td>Bar X Ranch <span class="cf u">sec?</span></td><td class="num">$58,000</td><td class="num">1.0 ac <span class="cf u">/1.27?</span></td><td class="num">$58,000</td><td><b>Waterfront?</b> <span class="cf u">conflict</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="note amber">
+    <span class="lbl">Two facts to resolve by plat before ranking</span>
+    <b>(1) 750 Wagon Wheel Trl.</b> v1 classed it interior/road-frontage, but the listing of record markets it as a <b>cleared waterfront lot</b>. If correct, three of four lots are waterfront and the "cheapest waterfront" framing changes.
+    <b>(2) Its acreage.</b> The card shows 1.0 ac but references a 1.27-ac LoopNet figure — a 27% swing. On the stated 1.0 ac this is <b>the most expensive land per acre in the portfolio</b>, not the mid-priced lot v1 implied.
+  </div>
+
+  <!-- Card 1 -->
+  <div class="lot">
+    <div class="top">
+      <div>
+        <h4>1127 Saddle Horn Bend</h4>
+        <div class="addr">Angleton, TX 77515 · Bar X Ranch Sec 2 <span class="cf v">sec verified via street</span></div>
+        <div class="badges"><span class="badge ae">Zone AE</span><span class="badge wf">Waterfront</span><span class="badge q">Largest</span></div>
+      </div>
+      <div class="price"><div class="p">$82,500</div><div class="pa">$42,308/acre · 1.95 ac</div></div>
+    </div>
+    <dl>
+      <dt>Best for</dt><dd>Setback geometry — the extra acre is the real advantage for a 5BR + drainfield + reserve + well spacing.</dd>
+      <dt>Water body</dt><dd>Possibly <b>Mill Bayou</b> frontage (per neighbouring listing), not the "Bastrop Bayou West Trib" v1 assumed. <span class="cf u">confirm</span></dd>
+      <dt>Watch</dt><dd>Waterfront slope: the lake edge is the low point; LOMA turns on lowest adjacent grade at the structure.</dd>
+    </dl>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="lot">
+    <div class="top">
+      <div>
+        <h4>336 Wagon Wheel Trl W</h4>
+        <div class="addr">Angleton, TX 77515 · Bar X Ranch, "Lot 167" <span class="cf u">section not identified</span></div>
+        <div class="badges"><span class="badge ae">Zone AE</span><span class="badge wf">Waterfront</span><span class="badge q">Lowest price</span></div>
+      </div>
+      <div class="price"><div class="p">$45,000</div><div class="pa">$45,000/acre · 1.00 ac</div></div>
+    </div>
+    <dl>
+      <dt>Best for</dt><dd>Lowest total outlay; cleared waterfront (less clearing cost).</dd>
+      <dt>Watch</dt><dd>1-acre <b>waterfront</b> is the tightest lot for TCEQ setbacks: well 100 ft from spray field, absorption 75 ft from normal pool. Test the footprint before buying.</dd>
+      <dt>Dues</dt><dd>v1's "$250/yr" understates likely POA cost (~$525/yr incl. vacant-lot mowing). <span class="cf u">confirm via resale cert</span></dd>
+    </dl>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="lot">
+    <div class="top">
+      <div>
+        <h4>Lot 29 Broken Arrow Trl</h4>
+        <div class="addr">Angleton, TX 77515 · Bar X Ranch Sec 16</div>
+        <div class="badges"><span class="badge ae">Zone AE</span><span class="badge q">Cul-de-sac</span><span class="badge q">Interior</span></div>
+      </div>
+      <div class="price"><div class="p">$49,000</div><div class="pa">~$49,000/acre · ~1.0 ac est.</div></div>
+    </div>
+    <dl>
+      <dt>Best for</dt><dd>Privacy / low traffic; interior lot avoids the waterfront setback squeeze.</dd>
+      <dt>Watch</dt><dd>Acreage is estimated, not stated — confirm from plat. Sec 16 deed restrictions may differ from Sec 2.</dd>
+    </dl>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="lot" style="border-color:var(--amber);">
+    <div class="top">
+      <div>
+        <h4>750 Wagon Wheel Trl</h4>
+        <div class="addr">Angleton, TX 77515 · Bar X Ranch <span class="cf u">section not identified</span></div>
+        <div class="badges"><span class="badge ae">Zone AE</span><span class="badge wf">Waterfront?</span><span class="badge q">Priciest / acre</span></div>
+      </div>
+      <div class="price"><div class="p">$58,000</div><div class="pa">$58,000/acre · 1.0 ac (1.27?)</div></div>
+    </div>
+    <dl>
+      <dt>Status</dt><dd><b>Unresolved.</b> Frontage (waterfront vs interior) and acreage (1.0 vs 1.27) both conflict between v1 and the listing of record. Do not rank until the plat settles both.</dd>
+      <dt>On stated size</dt><dd>Most expensive land per acre in the portfolio, by ~18% over the next dearest.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ FLOOD ============ -->
+<section id="flood">
+  <h2>4 · Flood: what we actually know, and what we don't</h2>
+  <p>The listing claim of "no flood risk" is false — all four lots are in a mapped <b>Special Flood Hazard Area (Zone AE)</b> because the Angleton Levee is not FEMA-accredited, regardless of natural ground height. That much is solid. The rest of v1's flood analysis rested on one optimistic assumption that was never justified.</p>
+
+  <table>
+    <caption>The estimated BFE drives everything downstream — and it was picked from the bottom of a range.</caption>
+    <thead><tr><th>If site BFE is…</th><th class="num">Finished floor req. (BFE+2 ft)</th><th>vs natural ground 28–30 ft</th><th>Consequence</th></tr></thead>
+    <tbody>
+      <tr><td>24.0 ft <span class="cf u">v1's figure</span></td><td class="num">26.0 ft</td><td>2–4 ft below grade</td><td>Met at grade. No fill for BFE. LOMA plausible.</td></tr>
+      <tr><td>25.0 ft (midpoint)</td><td class="num">27.0 ft</td><td>1–3 ft below grade</td><td>Still met at grade.</td></tr>
+      <tr><td><b>26.4 ft</b> (upstream cross-section)</td><td class="num"><b>28.4 ft</b></td><td>at/above grade on a 28-ft lot</td><td><b>Fill/stem wall needed; LOMA weaker.</b></td></tr>
+    </tbody>
+  </table>
+
+  <div class="note blue">
+    <span class="lbl">The good news v1 failed to state plainly</span>
+    At 28–30 ft natural grade, the county's 26-ft minimum floor is <b>not the binding constraint</b> — build at grade and the finished floor lands near 28.5–31 ft on its own. v1's diagrams drew the finished floor <em>below</em> the ground, which is impossible; the reality is a comfortable margin, <em>if</em> the ~24 ft BFE holds per lot.
+  </div>
+  <div class="note amber">
+    <span class="lbl">What must be confirmed in writing, per lot</span>
+    <ul class="tight" style="margin-bottom:0;">
+      <li><b>Site-specific BFE</b> from Brazoria County Floodplain Administration — and which cross-section governs each lot (Bastrop Bayou West Trib vs Mill Bayou differ).</li>
+      <li><b>Lowest adjacent grade</b> from a topographic survey — not a single "28–30 ft" band applied to all four.</li>
+      <li><b>Pluvial (rainfall) ponding risk</b> — flat clay prairie floods from rain, not just rivers; the riverine BFE says nothing about it.</li>
+      <li><b>Levee accreditation trajectory</b> and any pending LOMR/preliminary FIRM.</li>
+    </ul>
+  </div>
+  <p style="font-size:13.5px;color:var(--muted);"><b>Correction:</b> the 24-in freeboard was set in 2005, not "raised after Harvey 2017." And fill + a LOMA are mutually exclusive — placing fill converts a (fee-free) LOMA into a LOMR-F, which carries a FEMA fee.</p>
+</section>
+
+<!-- ============ BUILDABILITY ============ -->
+<section id="build">
+  <h2>5 · Buildability — 5-bedroom + 2-car garage</h2>
+  <table>
+    <thead><tr><th>Requirement</th><th>Figure</th><th>Source / status</th></tr></thead>
+    <tbody>
+      <tr><td>Minimum living area</td><td>1,800 sq ft</td><td>Bar X ACC restrictions <span class="cf u">confirm per section</span></td></tr>
+      <tr><td>Attached garage</td><td>22 × 20 = 440 sq ft</td><td>ACC <span class="cf u">u</span></td></tr>
+      <tr><td>Finished-floor elevation</td><td>≥ BFE + 24 in</td><td>Brazoria County <span class="cf v">verified</span></td></tr>
+      <tr><td>Water</td><td>Private well</td><td>Register w/ Brazoria County Groundwater Conservation District <span class="cf v">v</span></td></tr>
+      <tr><td>Sewer</td><td>On-site septic (OSSF)</td><td>TCEQ 30 TAC 285 — see §6 <span class="cf v">v</span></td></tr>
+      <tr><td>Exterior materials</td><td>Brick / stone / stucco / Hardie</td><td>ACC; no mobile/trailer/metal siding <span class="cf u">u</span></td></tr>
+      <tr><td>Windstorm</td><td>WPI-8, engineer-certified</td><td>TDI — first-tier catastrophe county <span class="cf v">verified</span></td></tr>
+      <tr><td>Contractor</td><td>County IRC registration</td><td>Required before permit issues; no fee <span class="cf v">v</span></td></tr>
+    </tbody>
+  </table>
+  <div class="note amber">
+    <span class="lbl">Design-basis mismatch to fix</span>
+    v1 sized the <b>septic for 5 bedrooms</b> while sizing the <b>house at the 1,800 sq ft minimum</b>. Those aren't the same house — 5 bedrooms plus living space is realistically 2,400–2,800 sq ft. The plan that drives the septic must also drive the square footage, the permit fee, and the pad. All figures here assume a ~2,400–2,800 sq ft 5BR.
+  </div>
+</section>
+
+<!-- ============ SEPTIC ============ -->
+<section id="septic">
+  <h2>6 · Septic (OSSF) — corrected against 30 TAC §285.91</h2>
+  <p>This is where v1 was most wrong. The tank size it landed on (1,250 gal) happens to be right, but the drainfield was undersized 3–6×, the loading rate was off the regulatory table entirely, and the likely system type and its cost were absent.</p>
+
+  <table>
+    <caption>Wastewater flow (Q), 5 BR under 4,500 sq ft — 30 TAC §285.91 Table III</caption>
+    <thead><tr><th>Basis</th><th class="num">Q (gpd)</th><th>→ Tank (§285.91(2))</th></tr></thead>
+    <tbody>
+      <tr><td>No water-saving devices (default)</td><td class="num">450</td><td rowspan="2">Both fall in the 351–500 band → <b>1,250 gal</b> tank <span class="cf v">v</span></td></tr>
+      <tr><td>With water-saving devices</td><td class="num">360</td></tr>
+    </tbody>
+  </table>
+
+  <table>
+    <caption>Absorptive area = Q ÷ Ra (at Q = 450). Ra caps at 0.50 for the <em>most</em> permeable soil — v1's "0.6 gpd/sf" is off the table.</caption>
+    <thead><tr><th>Soil class</th><th class="num">Ra (gal/sf/day)</th><th class="num">Required absorptive area</th><th>Likely here?</th></tr></thead>
+    <tbody>
+      <tr><td>Ia</td><td class="num">&gt;0.50</td><td class="num">~900 sq ft</td><td></td></tr>
+      <tr><td>Ib</td><td class="num">0.38</td><td class="num">~1,184 sq ft</td><td></td></tr>
+      <tr><td>II</td><td class="num">0.25</td><td class="num">~1,800 sq ft</td><td></td></tr>
+      <tr><td>III</td><td class="num">0.20</td><td class="num"><b>~2,250 sq ft</b></td><td>likely (coastal clay)</td></tr>
+      <tr><td>IV</td><td class="num">0.10</td><td class="num"><b>~4,500 sq ft</b></td><td>likely (coastal clay)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note red">
+    <span class="lbl">Likely system: aerobic, not conventional — and it's the biggest missing cost</span>
+    Brazoria's coastal-prairie clay is Class III–IV. Class IV generally <b>cannot use a conventional drainfield</b>, so the permitted system is probably an <b>aerobic treatment unit (600-gal min) + spray/drip field</b>, requiring <b>~2,250–4,500 sq ft</b> plus 100% reserve, and a <b>TCEQ-mandated maintenance contract (~$300–600/yr, forever)</b>. Installed cost <b>$15k–$25k</b>. v1 budgeted only the permit and soil test — the <b>system itself was missing entirely</b>.
+  </div>
+
+  <table>
+    <caption>TCEQ minimum separation distances (Table X) — these govern layout on 1-acre waterfront lots</caption>
+    <thead><tr><th>From</th><th>To</th><th class="num">Min.</th></tr></thead>
+    <tbody>
+      <tr><td>Private well / cistern</td><td>Soil absorption / spray field</td><td class="num">100 ft</td></tr>
+      <tr><td>Private well / cistern</td><td>Tank</td><td class="num">50 ft</td></tr>
+      <tr><td>Lake / pond (normal pool)</td><td>Soil absorption / unlined ET</td><td class="num">75 ft</td></tr>
+      <tr><td>Lake / pond (normal pool)</td><td>Surface (spray) application</td><td class="num">50 ft</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ COST ============ -->
+<section id="cost">
+  <h2>7 · Cost to build — corrected</h2>
+  <p>v1 put pre-construction "soft costs" at ~$11k–$17k and called fill "minimal." Rebuilt from the county's actual fee schedule plus the omitted line items, one lot:</p>
+
+  <table>
+    <caption>Pre-construction, one lot, 5BR. "In v1?" flags what the earlier document missed or mis-stated.</caption>
+    <thead><tr><th>Item</th><th class="num">Low</th><th class="num">High</th><th>In v1?</th></tr></thead>
+    <tbody>
+      <tr><td>County development/building permit (flood zone: $75 + $0.04/sf)</td><td class="num">$165</td><td class="num">$200</td><td>overstated 7–11×</td></tr>
+      <tr><td>Fill &amp; grading permit</td><td class="num">$0</td><td class="num">$80</td><td>missing</td></tr>
+      <tr><td>Contractor IRC registration</td><td class="num">$0</td><td class="num">$0</td><td>missing</td></tr>
+      <tr><td>OSSF site/soil evaluation</td><td class="num">$350</td><td class="num">$600</td><td>✓</td></tr>
+      <tr><td>OSSF permit to construct</td><td class="num">$300</td><td class="num">$500</td><td>✓</td></tr>
+      <tr><td><b>OSSF system installed</b> (conventional → aerobic+spray)</td><td class="num"><b>$8,000</b></td><td class="num"><b>$25,000</b></td><td><b>missing</b></td></tr>
+      <tr><td>Water well drilled + pump + pressure tank</td><td class="num">$10,000</td><td class="num">$20,000</td><td>✓ (low)</td></tr>
+      <tr><td>Water treatment (coastal groundwater)</td><td class="num">$0</td><td class="num">$8,000</td><td>missing</td></tr>
+      <tr><td>Boundary + topographic survey</td><td class="num">$1,500</td><td class="num">$3,500</td><td>missing</td></tr>
+      <tr><td>Elevation certificate</td><td class="num">$500</td><td class="num">$900</td><td>✓</td></tr>
+      <tr><td>LOMA/LOMR-F preparation (no FEMA fee for LOMA)</td><td class="num">$500</td><td class="num">$1,200</td><td>partly</td></tr>
+      <tr><td>Driveway culvert / county road access</td><td class="num">$1,500</td><td class="num">$5,000</td><td>missing</td></tr>
+      <tr><td>Electric service extension</td><td class="num">$0</td><td class="num">$25,000</td><td>missing</td></tr>
+      <tr><td>Propane tank + set (no natural gas)</td><td class="num">$1,000</td><td class="num">$3,000</td><td>missing</td></tr>
+      <tr><td>Clearing &amp; grubbing</td><td class="num">$1,500</td><td class="num">$6,000</td><td>missing</td></tr>
+      <tr><td>Engineered pad / fill</td><td class="num">$0</td><td class="num">$8,000</td><td>partly</td></tr>
+      <tr><td>POA ACC review + transfer/resale cert</td><td class="num">$500</td><td class="num">$750</td><td>partly</td></tr>
+      <tr class="tot"><td>Pre-construction subtotal</td><td class="num">~$26,000</td><td class="num">~$108,000</td><td class="strike">v1: $11–17k</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13.5px;color:var(--muted);">Central planning case <b>$45k–$65k</b>. The two wildcards that decide where you land: <b>soil class</b> (septic type) and <b>distance to power</b>.</p>
+
+  <table>
+    <caption>All-in, one lot built</caption>
+    <thead><tr><th>Component</th><th class="num">Low</th><th class="num">High</th></tr></thead>
+    <tbody>
+      <tr><td>Land (one lot)</td><td class="num">$45,000</td><td class="num">$82,500</td></tr>
+      <tr><td>Pre-construction (above)</td><td class="num">$26,000</td><td class="num">$108,000</td></tr>
+      <tr><td>House, 2,400–2,800 sq ft @ $175–$250/sf <span class="cf e">est.</span></td><td class="num">$420,000</td><td class="num">$700,000</td></tr>
+      <tr class="tot"><td>Total, one lot built</td><td class="num">~$490,000</td><td class="num">~$890,000</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ CARRY ============ -->
+<section id="carry">
+  <h2>8 · Annual carrying cost — the number v1 omitted</h2>
+  <table>
+    <caption>Holding four vacant lots. Tax rates: Brazoria County TY2025 Truth-in-Taxation. <span class="cf v">verified</span></caption>
+    <thead><tr><th>Item</th><th>Basis</th><th class="num">Per year</th></tr></thead>
+    <tbody>
+      <tr><td>Property tax</td><td>~1.45–1.55% of $234,500 (County 0.3048 + Columbia-Brazoria ISD 0.9530 + hospital/drainage/ESD, per $100; no homestead/ag)</td><td class="num">$2,950–$3,650</td></tr>
+      <tr><td>POA dues</td><td>4 × ~$400/lot</td><td class="num">~$1,600</td></tr>
+      <tr><td>Vacant-lot mowing</td><td>4 × ~$125/lot</td><td class="num">~$500</td></tr>
+      <tr class="tot"><td>Total, 4 vacant lots</td><td></td><td class="num">~$5,050–$5,750</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13.5px;color:var(--muted);">≈ a 2.2–2.5% annual drag on the $234,500 land basis, before any build. Over a 3-year hold, ~$15k–$17k. POA/mowing figures from listing data — <span class="cf u">confirm via resale certificate</span>.</p>
+</section>
+
+<!-- ============ INSURANCE ============ -->
+<section id="insure">
+  <h2>9 · Insurance: flood <em>and</em> windstorm</h2>
+  <p>v1 showed only a flood range ($600–$1,800/yr) and omitted windstorm — which, on the coast, is typically the larger line.</p>
+  <table>
+    <thead><tr><th>Coverage</th><th>Note</th><th class="num">Est. annual</th></tr></thead>
+    <tbody>
+      <tr><td>Flood (NFIP / private)</td><td>Risk Rating 2.0 prices on first-floor height + <b>distance to water</b> → waterfront lots cost more. NFIP building cap $250k; excess flood needed above.</td><td class="num">$1,500–$4,000</td></tr>
+      <tr><td>Windstorm (TWIA)</td><td>First-tier catastrophe county; WPI-8 engineer cert required. State average residential premium ~$2,541 <span class="cf v">verified</span></td><td class="num">$2,500–$4,000</td></tr>
+      <tr><td>Homeowners (ex-wind, ex-flood)</td><td>Fire, liability, contents</td><td class="num">$1,000–$1,500</td></tr>
+      <tr class="tot"><td>Total once built <span class="cf e">est.</span></td><td></td><td class="num">~$5,000–$9,500</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13.5px;color:var(--muted);">A LOMA (if granted) lifts the federal <em>mandatory-purchase</em> requirement on the flood line but does not end the exposure, and a lender may still require coverage. Windstorm is unaffected by any LOMA.</p>
+</section>
+
+<!-- ============ FISHING ============ -->
+<section id="fishing">
+  <h2>10 · Fishing &amp; amenities — corrected</h2>
+  <p>Bar X Ranch offers <b>two stocked lakes with boat ramp and pier</b>, plus (per listings) two swimming pools, two clubhouses, tennis and basketball courts, two playgrounds and pavilions — a richer amenity base than v1 described, and the reason dues are higher than v1 assumed.</p>
+  <div class="note amber">
+    <span class="lbl">Correcting v1's "10/day · no license on private"</span>
+    <ul class="tight" style="margin-bottom:0;">
+      <li><b>These two claims can't both be regulatory.</b> Texas requires no licence on waters <em>wholly enclosed within private property</em> — and where that holds, <b>no state bag/size limits apply either</b>. So "10/day" can only be a <b>POA house rule</b>, not state law. <span class="cf v">TPWD verified</span></li>
+      <li><b>The private-water status is itself an open question.</b> The exemption requires the water not be subject to overflow from public water — but these lots sit in a mapped 1%-annual-chance floodplain in the Bastrop Bayou watershed. The flood finding undercuts the fishing premise.</li>
+      <li>Statewide baseline (if public water): blue/channel catfish ~25/day combined; largemouth bass 5. <b>Black drum</b> (v1's on-site species) is brackish/saltwater — a bad data pull. Beach is ~30 min, not 20.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CORRECTIONS ============ -->
+<section id="corrections">
+  <h2>11 · What changed from v1 (top corrections)</h2>
+  <table>
+    <thead><tr><th>#</th><th>v1 said</th><th>Corrected</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="strike">Drainfield ~600–800 sf @ 0.6 gpd/sf</td><td class="fix">0.6 exceeds every TCEQ soil class; 2,250–4,500 sf on likely clay</td></tr>
+      <tr><td>2</td><td class="strike">Septic = permit cost only</td><td class="fix">Aerobic system likely; $15k–$25k installed + maintenance contract</td></tr>
+      <tr><td>3</td><td class="strike">Building permit $1,200–$1,800 + separate floodplain permit</td><td class="fix">One combined permit, ~$165 total</td></tr>
+      <tr><td>4</td><td class="strike">Soft costs ~$11k–$17k</td><td class="fix">~$26k–$108k; central $45k–$65k</td></tr>
+      <tr><td>5</td><td class="strike">(no construction cost)</td><td class="fix">House $420k–$700k; all-in one lot $490k–$890k</td></tr>
+      <tr><td>6</td><td class="strike">(no windstorm)</td><td class="fix">TWIA avg ~$2,541/yr; WPI-8 engineer cert required</td></tr>
+      <tr><td>7</td><td class="strike">(no property tax / carry)</td><td class="fix">~$5,050–$5,750/yr on four vacant lots</td></tr>
+      <tr><td>8</td><td class="strike">Harvey 2017 raised freeboard to 2 ft</td><td class="fix">Set May 2005, 12 years earlier</td></tr>
+      <tr><td>9</td><td class="strike">750 Wagon Wheel = interior lot</td><td class="fix">Listing of record says waterfront — resolve by plat</td></tr>
+      <tr><td>10</td><td class="strike">LOMA ~$500–$900 fee; also place fill</td><td class="fix">No FEMA fee for LOMA; fill forecloses LOMA (→ LOMR-F)</td></tr>
+      <tr><td>11</td><td class="strike">"Zoning 0140," single-family zoning</td><td class="fix">No county zoning; 0140 is a BCAD land-use code; deed restrictions govern</td></tr>
+      <tr><td>12</td><td class="strike">POA $250/yr (one lot only)</td><td class="fix">~$525/yr per vacant lot; ~$2,100/yr for four</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13.5px;color:var(--muted);">Full 25-item list with severity and sourcing in <a href="docs/AUDIT.md">docs/AUDIT.md</a>.</p>
+</section>
+
+<!-- ============ NEXT ============ -->
+<section id="next">
+  <h2>12 · Due-diligence sequence</h2>
+  <ol class="steps">
+    <li><b>Decide the premise</b> — one lot or four. Nothing else sizes until this is answered.</li>
+    <li><b>Pull parcel IDs</b> for all four from BCAD (account #, legal description, acreage of record, plat). v1 contained none.</li>
+    <li><b>Confirm jurisdiction</b> — unincorporated county vs Angleton city limits, per parcel.</li>
+    <li><b>Request written BFE per lot</b> from Brazoria County Floodplain &amp; 911 Administration, 451 N Velasco Ste 210, Angleton TX 77515 · 979-864-1295 (also 281-756-1295). Ask which stream governs each lot.</li>
+    <li><b>Resolve 750 Wagon Wheel's frontage &amp; acreage</b> from the plat.</li>
+    <li><b>Order a soil/site evaluation</b> on the shortlisted lot — it decides septic type, the largest cost swing.</li>
+    <li><b>Order boundary + topo survey</b>; test septic/well/lake setbacks against a real 5BR footprint.</li>
+    <li><b>Get 3 quotes each</b> for well, septic, and electric service extension.</li>
+    <li><b>Get TWIA windstorm + RR2.0 flood quotes</b> on the actual structure; price excess flood above $250k.</li>
+    <li><b>Pull recorded restrictions</b> for each lot's specific section + a POA resale certificate.</li>
+    <li><b>Confirm Angleton Levee accreditation status</b> and check for pending LOMR / preliminary FIRM.</li>
+    <li><b>Re-run the comparison</b> and issue a ranked recommendation.</li>
+  </ol>
+</section>
+
+<footer class="docfoot">
+  <p><b>Disclaimer.</b> This is an independent desktop review of an existing document, prepared from published regulations and public records. It is <b>not</b> a survey, engineering opinion, flood determination, insurance advice, legal advice, or an appraisal, and it is not a substitute for the licensed professionals and the written county determination named in §12. Figures marked <span class="cf e">estimate</span> are planning ranges; figures marked <span class="cf u">unverified</span> derive from third-party listing copy or the superseded v1 and must be independently confirmed before any purchase decision.</p>
+  <p>Bar X Ranch — 4-Lot Feasibility Portfolio · v2.0 rebuild · prepared 10 Sep 2026 · sources: <a href="docs/SOURCES.md">docs/SOURCES.md</a> · audit: <a href="docs/AUDIT.md">docs/AUDIT.md</a></p>
+</footer>
+
+</main>
+</body>
+</html>
