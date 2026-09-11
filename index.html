@@ -128,7 +128,9 @@ table.compact{font-size:7.7pt;} table.compact th,table.compact td{padding:.9mm 1
 .badge.etj{background:var(--violet-w); color:var(--violet);}
 .badge.red{background:var(--red-w); color:var(--red);}
 .cols2{display:grid; grid-template-columns:1fr 1fr; gap:4mm;}
-.cols2c{display:grid; grid-template-columns:1.15fr 1fr; gap:4mm;}
+.cols2c{display:grid; grid-template-columns:1.15fr 1fr; gap:4mm; align-items:stretch;}
+.cols2c > div{display:flex; flex-direction:column;}
+.cols2c > div > .map{flex:1 1 auto; min-height:66mm;}
 dl.facts{display:grid; grid-template-columns:30mm 1fr; gap:.6mm 2.6mm; margin:0; font-size:8.1pt;}
 dl.facts dt{color:var(--faint); text-transform:uppercase; letter-spacing:.05em; font-size:7.2pt; padding-top:.5mm;}
 dl.facts dd{margin:0;}
@@ -608,7 +610,7 @@ its record. Boundaries are for orientation only and are not a survey.</p>
       <dt>Flood</dt><dd>Zone AE, SFHA · FIRM panel 48039C0420K eff. 30 Dec 2020</dd>
       <dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 1,594 ft from the parcel</dd>
       <dt>Ground (LiDAR)</dt><dd>24–25 ft at the parcel; 18–30 ft across the surrounding 600 ft (the 18 ft readings are the bayou channel itself).</dd>
-      <dt>Water body</dt><dd>Mill Bayou. 19 of the 40 recorded boundary vertices lie within 60 ft of a 13.0-acre mapped water body; the Mill Bayou centreline is 112 ft off the boundary.</dd>
+      <dt>Water body</dt><dd><b>Mill Bayou — a tree-lined stream corridor, not open water.</b> The bayou flowline runs 66 ft off the boundary and 19 of the 40 recorded vertices lie within 60 ft of the mapped channel corridor. But the nearest NHD <em>waterbody</em> is <b>395 ft</b> away: aerial imagery shows a wooded channel, not a pond.</dd>
       <dt>Highway</dt><dd>0.09 mi (about 480 ft) south of State Highway 35 — Closest of the four to SH 35 — expect audible highway traffic.</dd>
       <dt>School district</dt><dd>Columbia-Brazoria ISD</dd>
       <dt>Jurisdiction</dt><dd>Unincorporated county · no city limits, no ETJ</dd>
@@ -617,11 +619,11 @@ its record. Boundaries are for orientation only and are not a survey.</p>
   </div>
 </div>
 
-<h3>Listing photography and street imagery</h3>
+<h3>Aerial imagery — USGS NAIP, public domain</h3>
 <div class="shots">
-  <div class="shot"><img src="assets/photos/lot1-1.jpg" alt="Waterfront view" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Waterfront view</span><span class="s">Save as assets/photos/lot1-1.jpg</span></div></div>
-  <div class="shot"><img src="assets/photos/lot1-2.jpg" alt="Lot / frontage" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Lot / frontage</span><span class="s">Save as assets/photos/lot1-2.jpg</span></div></div>
-  <div class="shot"><img src="assets/photos/lot1-3.jpg" alt="Street / access" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Street / access</span><span class="s">Save as assets/photos/lot1-3.jpg</span></div></div>
+  <div class="shot"><img src="assets/photos/lot1-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">recorded boundary and the A–B section line</span></div></div>
+  <div class="shot"><img src="assets/photos/lot1-2.jpg" alt="The water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The water frontage at B</span><span class="s">close range, 30 cm imagery</span></div></div>
+  <div class="shot"><img src="assets/photos/lot1-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined, streets and water</span></div></div>
 </div>
 <div class="linkrow">
   <a class="lnk g" href="https://www.google.com/maps/search/?api=1&query=29.141219,-95.559141">Open in Google Maps</a>
@@ -630,11 +632,11 @@ its record. Boundaries are for orientation only and are not a survey.</p>
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID 183667</a>
   <a class="lnk" href="https://www.loopnet.com/property/1127-saddle-horn-bnd-angleton-tx-77515/48039-15340084000/">LoopNet listing</a>
 </div>
-<p class="xs">Listing photographs on Zillow, Redfin and Realtor.com are licensed to those
-platforms and to the listing brokerage, so they are linked rather than reproduced. To place the
-waterfront photographs inline, download them from the listing pages above and save them into
-<code>assets/photos/</code> as <code>lot1-1.jpg</code>, <code>lot1-2.jpg</code> and
-<code>lot1-3.jpg</code> — the frames above will pick them up automatically on reload.</p>
+<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
+the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
+and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
+rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
+appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
   <div class="note teal" style="margin-top:1mm;">
@@ -685,11 +687,11 @@ waterfront photographs inline, download them from the listing pages above and sa
   </div>
 </div>
 
-<h3>Listing photography and street imagery</h3>
+<h3>Aerial imagery — USGS NAIP, public domain</h3>
 <div class="shots">
-  <div class="shot"><img src="assets/photos/lot2-1.jpg" alt="Waterfront view" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Waterfront view</span><span class="s">Save as assets/photos/lot2-1.jpg</span></div></div>
-  <div class="shot"><img src="assets/photos/lot2-2.jpg" alt="Lot / frontage" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Lot / frontage</span><span class="s">Save as assets/photos/lot2-2.jpg</span></div></div>
-  <div class="shot"><img src="assets/photos/lot2-3.jpg" alt="Street / access" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Street / access</span><span class="s">Save as assets/photos/lot2-3.jpg</span></div></div>
+  <div class="shot"><img src="assets/photos/lot2-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">recorded boundary and the A–B section line</span></div></div>
+  <div class="shot"><img src="assets/photos/lot2-2.jpg" alt="The water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The water frontage at B</span><span class="s">close range, 30 cm imagery</span></div></div>
+  <div class="shot"><img src="assets/photos/lot2-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined, streets and water</span></div></div>
 </div>
 <div class="linkrow">
   <a class="lnk g" href="https://www.google.com/maps/search/?api=1&query=29.140524,-95.541472">Open in Google Maps</a>
@@ -698,11 +700,11 @@ waterfront photographs inline, download them from the listing pages above and sa
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID 183367</a>
   
 </div>
-<p class="xs">Listing photographs on Zillow, Redfin and Realtor.com are licensed to those
-platforms and to the listing brokerage, so they are linked rather than reproduced. To place the
-waterfront photographs inline, download them from the listing pages above and save them into
-<code>assets/photos/</code> as <code>lot2-1.jpg</code>, <code>lot2-2.jpg</code> and
-<code>lot2-3.jpg</code> — the frames above will pick them up automatically on reload.</p>
+<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
+the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
+and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
+rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
+appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
   <div class="note teal" style="margin-top:1mm;">
@@ -753,11 +755,11 @@ waterfront photographs inline, download them from the listing pages above and sa
   </div>
 </div>
 
-<h3>Listing photography and street imagery</h3>
+<h3>Aerial imagery — USGS NAIP, public domain</h3>
 <div class="shots">
-  <div class="shot"><img src="assets/photos/lot3-1.jpg" alt="Waterfront view" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Waterfront view</span><span class="s">Save as assets/photos/lot3-1.jpg</span></div></div>
-  <div class="shot"><img src="assets/photos/lot3-2.jpg" alt="Lot / frontage" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Lot / frontage</span><span class="s">Save as assets/photos/lot3-2.jpg</span></div></div>
-  <div class="shot"><img src="assets/photos/lot3-3.jpg" alt="Street / access" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Street / access</span><span class="s">Save as assets/photos/lot3-3.jpg</span></div></div>
+  <div class="shot"><img src="assets/photos/lot3-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">recorded boundary and the A–B section line</span></div></div>
+  <div class="shot"><img src="assets/photos/lot3-2.jpg" alt="The water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The water frontage at B</span><span class="s">close range, 30 cm imagery</span></div></div>
+  <div class="shot"><img src="assets/photos/lot3-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined, streets and water</span></div></div>
 </div>
 <div class="linkrow">
   <a class="lnk g" href="https://www.google.com/maps/search/?api=1&query=29.144419,-95.543456">Open in Google Maps</a>
@@ -766,11 +768,11 @@ waterfront photographs inline, download them from the listing pages above and sa
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID 186219</a>
   
 </div>
-<p class="xs">Listing photographs on Zillow, Redfin and Realtor.com are licensed to those
-platforms and to the listing brokerage, so they are linked rather than reproduced. To place the
-waterfront photographs inline, download them from the listing pages above and save them into
-<code>assets/photos/</code> as <code>lot3-1.jpg</code>, <code>lot3-2.jpg</code> and
-<code>lot3-3.jpg</code> — the frames above will pick them up automatically on reload.</p>
+<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
+the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
+and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
+rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
+appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
   <div class="note green" style="margin-top:1mm;">
@@ -812,7 +814,7 @@ waterfront photographs inline, download them from the listing pages above and sa
       <dt>Flood</dt><dd>Zone AE, SFHA · FIRM panel 48039C0420K eff. 30 Dec 2020</dd>
       <dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 1,492 ft from the parcel</dd>
       <dt>Ground (LiDAR)</dt><dd>24 ft at the parcel (a 24 ft contour passes within 1 ft of the centroid); 23–30 ft across the surrounding 600 ft.</dd>
-      <dt>Water body</dt><dd>Flag Pond — a 101.5-acre lake, by far the largest water body in the study area. 8 of 17 boundary vertices lie within 11 ft of both the pond and the Flag Lake Levee embankment (National Inventory of Dams ID TX06298).</dd>
+      <dt>Water body</dt><dd><b>Flag Pond — a 101.5-acre lake</b>, by far the largest water body here, and confirmed by name in the USGS hydrography at <b>14 ft</b> from the boundary. 8 of 17 vertices sit within 11 ft of both the mapped pond extent and the Flag Lake Levee embankment (NID TX06298). Note the aerial: the <em>visible</em> shoreline lies further out than the mapped pool boundary.</dd>
       <dt>Highway</dt><dd>1.03 mi south of State Highway 35 — Quietest of the four by a wide margin — a mile off the highway.</dd>
       <dt>School district</dt><dd>Columbia-Brazoria ISD</dd>
       <dt>Jurisdiction</dt><dd>Unincorporated county · no city limits, no ETJ</dd>
@@ -821,11 +823,11 @@ waterfront photographs inline, download them from the listing pages above and sa
   </div>
 </div>
 
-<h3>Listing photography and street imagery</h3>
+<h3>Aerial imagery — USGS NAIP, public domain</h3>
 <div class="shots">
-  <div class="shot"><img src="assets/photos/lot4-1.jpg" alt="Waterfront view" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Waterfront view</span><span class="s">Save as assets/photos/lot4-1.jpg</span></div></div>
-  <div class="shot"><img src="assets/photos/lot4-2.jpg" alt="Lot / frontage" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Lot / frontage</span><span class="s">Save as assets/photos/lot4-2.jpg</span></div></div>
-  <div class="shot"><img src="assets/photos/lot4-3.jpg" alt="Street / access" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Street / access</span><span class="s">Save as assets/photos/lot4-3.jpg</span></div></div>
+  <div class="shot"><img src="assets/photos/lot4-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">recorded boundary and the A–B section line</span></div></div>
+  <div class="shot"><img src="assets/photos/lot4-2.jpg" alt="The water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The water frontage at B</span><span class="s">close range, 30 cm imagery</span></div></div>
+  <div class="shot"><img src="assets/photos/lot4-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined, streets and water</span></div></div>
 </div>
 <div class="linkrow">
   <a class="lnk g" href="https://www.google.com/maps/search/?api=1&query=29.130575,-95.541987">Open in Google Maps</a>
@@ -834,11 +836,11 @@ waterfront photographs inline, download them from the listing pages above and sa
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID 183332</a>
   <a class="lnk" href="https://www.realtor.com/realestateandhomes-detail/750-Wagon-Wheel-Trl_Angleton_TX_77515_M88761-47581">Realtor.com listing</a>
 </div>
-<p class="xs">Listing photographs on Zillow, Redfin and Realtor.com are licensed to those
-platforms and to the listing brokerage, so they are linked rather than reproduced. To place the
-waterfront photographs inline, download them from the listing pages above and save them into
-<code>assets/photos/</code> as <code>lot4-1.jpg</code>, <code>lot4-2.jpg</code> and
-<code>lot4-3.jpg</code> — the frames above will pick them up automatically on reload.</p>
+<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
+the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
+and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
+rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
+appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
   <div class="note teal" style="margin-top:1mm;">

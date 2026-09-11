@@ -75,6 +75,8 @@ documented with its exact query in [`EVIDENCE.md`](EVIDENCE.md).
 | S26 | **US Census Bureau ACS 2024 5-year estimates**, census tract 6625 | Population, age, income, home value, tenure, race, Hispanic origin and Asian Indian population (§27) | via [Census Reporter](https://censusreporter.org/) |
 | S27 | **ERA5 reanalysis**, daily 1991–2020 at the parcels | Monthly climate normals in Celsius, rainfall, heat-day counts, frost dates and growing-season length (§22) | [Open-Meteo archive](https://open-meteo.com/) |
 | S28 | **OpenStreetMap** (Overpass) and **OSRM** | Water-body geometry for the waterfront measurement; nearest-amenity searches; road distances and drive times (§24–27) | [Overpass](https://overpass-api.de/) · [OSRM](https://router.project-osrm.org/) |
+| S28b | **USGS National Hydrography Dataset** (NHD) | Independent check on the waterfront finding — refined Lot 1 from pond frontage to bayou corridor | [hydro.nationalmap.gov](https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer) |
+| S28c | **USGS NAIP** aerial photography, 30 cm, public domain | The lot imagery in §6–9 | [imagery.nationalmap.gov](https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPPlus/ImageServer) |
 | S29 | **National Inventory of Dams** | Flag Lake Levee TX06298 beside Lot 4, and Bar X Development Dam TX01759 upstream of Lot 1 | NID records |
 
 ## Closed in v3.0

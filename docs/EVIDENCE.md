@@ -100,6 +100,39 @@ body (OpenStreetMap `natural=water`, `waterway=*`), counting how many vertices f
 
 All four are waterfront. OSM water geometry is not authoritative for a boundary; the plat is.
 
+## 4b. Corroborating the waterfront finding against USGS hydrography
+
+The OSM measurement in §4 was re-tested against the **USGS National Hydrography Dataset**
+(`hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer`, layers 12 Waterbody, 9 Area,
+6 Flowline), measured from every recorded parcel-boundary vertex.
+
+| Lot | Nearest NHD **waterbody** | Nearest NHD **flowline** | Reading |
+|---|---|---|---|
+| 1 | **395 ft** | 66 ft (Mill Bayou, 107 ft named) | **A tree-lined stream corridor, not a pond.** NAIP imagery confirms a wooded channel. |
+| 2 | **41 ft** | 72 ft | Genuine pond adjacency |
+| 3 | **59 ft** | 89 ft | Genuine pond adjacency |
+| 4 | **14 ft — named Flag Pond** | 167 ft (canal/ditch) | Confirmed on the main lake |
+
+This refines rather than overturns §4: all four are water-adjacent, but **Lot 1's frontage is bayou
+corridor rather than open water**, and on Lot 4 the *visible* shoreline in the imagery sits further
+out than the mapped pool boundary — the mapped extent includes the levee-enclosed pool.
+
+## 4c. Aerial imagery
+
+`tools/aerials.py` builds three images per lot from the **USGS NAIPPlus ImageServer**
+(`imagery.nationalmap.gov`, 30 cm, 4-band, public domain) via `exportImage`, and draws on the
+recorded boundary and the A–B section line:
+
+```
+GET https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPPlus/ImageServer/exportImage
+    ?bbox=<xmin,ymin,xmax,ymax>&bboxSR=3857&imageSR=3857&size=1600,1200
+    &format=jpg&interpolation=RSP_BilinearInterpolation&f=image
+```
+
+NAIP is US Department of Agriculture aerial photography and is in the public domain, so it can be
+reproduced in this document. Listing photographs on Zillow, Redfin and Realtor.com cannot — they are
+licensed to those platforms and to the listing brokerage, and are linked instead.
+
 ## 5. Dams
 
 - **Flag Lake Levee**, National Inventory of Dams **TX06298**, 11 ft from the Lot 4 boundary.

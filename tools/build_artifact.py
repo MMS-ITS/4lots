@@ -33,9 +33,12 @@ EXTRA = {
     'lot1': dict(
         short="1127 Saddle Horn Bend",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — Mill Bayou'), ('q', 'Largest — 1.95 ac')],
-        water="Mill Bayou. 19 of the 40 recorded boundary vertices lie within 60 ft of a "
-              "13.0-acre mapped water body; the Mill Bayou centreline is 112 ft off the boundary.",
-        frontage="Roughly half the perimeter is water frontage — the most of the four.",
+        water="<b>Mill Bayou — a tree-lined stream corridor, not open water.</b> The bayou "
+              "flowline runs 66 ft off the boundary and 19 of the 40 recorded vertices lie within "
+              "60 ft of the mapped channel corridor. But the nearest NHD <em>waterbody</em> is "
+              "<b>395 ft</b> away: aerial imagery shows a wooded channel, not a pond.",
+        frontage="Roughly half the perimeter backs onto the bayou corridor — the longest water "
+                 "boundary of the four, but the least open water.",
         ground="24–25 ft at the parcel; 18–30 ft across the surrounding 600 ft "
                "(the 18 ft readings are the bayou channel itself).",
         sh35="0.09 mi (about 480 ft) south of State Highway 35",
@@ -90,9 +93,11 @@ EXTRA = {
     'lot4': dict(
         short="750 Wagon Wheel Trail",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — Flag Lake'), ('red', 'Abuts a dam'), ('q', 'Dearest / acre')],
-        water="Flag Pond — a 101.5-acre lake, by far the largest water body in the study area. "
-              "8 of 17 boundary vertices lie within 11 ft of both the pond and the Flag Lake "
-              "Levee embankment (National Inventory of Dams ID TX06298).",
+        water="<b>Flag Pond — a 101.5-acre lake</b>, by far the largest water body here, and "
+              "confirmed by name in the USGS hydrography at <b>14 ft</b> from the boundary. 8 of 17 "
+              "vertices sit within 11 ft of both the mapped pond extent and the Flag Lake Levee "
+              "embankment (NID TX06298). Note the aerial: the <em>visible</em> shoreline lies "
+              "further out than the mapped pool boundary.",
         frontage="Genuine big-lake frontage. This is the only one of the four on the main lake.",
         ground="24 ft at the parcel (a 24 ft contour passes within 1 ft of the centroid); "
                "23–30 ft across the surrounding 600 ft.",
@@ -368,7 +373,9 @@ table.compact{font-size:7.7pt;} table.compact th,table.compact td{padding:.9mm 1
 .badge.etj{background:var(--violet-w); color:var(--violet);}
 .badge.red{background:var(--red-w); color:var(--red);}
 .cols2{display:grid; grid-template-columns:1fr 1fr; gap:4mm;}
-.cols2c{display:grid; grid-template-columns:1.15fr 1fr; gap:4mm;}
+.cols2c{display:grid; grid-template-columns:1.15fr 1fr; gap:4mm; align-items:stretch;}
+.cols2c > div{display:flex; flex-direction:column;}
+.cols2c > div > .map{flex:1 1 auto; min-height:66mm;}
 dl.facts{display:grid; grid-template-columns:30mm 1fr; gap:.6mm 2.6mm; margin:0; font-size:8.1pt;}
 dl.facts dt{color:var(--faint); text-transform:uppercase; letter-spacing:.05em; font-size:7.2pt; padding-top:.5mm;}
 dl.facts dd{margin:0;}
@@ -1069,7 +1076,7 @@ for k in ORDER:
   </div>
 </div>
 
-<h3>Listing photography and street imagery</h3>
+<h3>Aerial imagery — USGS NAIP, public domain</h3>
 <div class="shots">
   %s
   %s
@@ -1082,11 +1089,11 @@ for k in ORDER:
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID %s</a>
   %s
 </div>
-<p class="xs">Listing photographs on Zillow, Redfin and Realtor.com are licensed to those
-platforms and to the listing brokerage, so they are linked rather than reproduced. To place the
-waterfront photographs inline, download them from the listing pages above and save them into
-<code>assets/photos/</code> as <code>lot%d-1.jpg</code>, <code>lot%d-2.jpg</code> and
-<code>lot%d-3.jpg</code> — the frames above will pick them up automatically on reload.</p>
+<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
+the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
+and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
+rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
+appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
   <div class="note %s" style="margin-top:1mm;">
@@ -1120,9 +1127,9 @@ waterfront photographs inline, download them from the listing pages above and sa
         p['sh35'] + ' — ' + p['noise'],
         ('Unincorporated county · <b>inside the Baileys Prairie ETJ</b>'
          if k == 'lot2' else 'Unincorporated county · no city limits, no ETJ'),
-        shot(p['lot'], 1, 'Waterfront view', 'Save as assets/photos/lot%d-1.jpg' % p['lot']),
-        shot(p['lot'], 2, 'Lot / frontage', 'Save as assets/photos/lot%d-2.jpg' % p['lot']),
-        shot(p['lot'], 3, 'Street / access', 'Save as assets/photos/lot%d-3.jpg' % p['lot']),
+        shot(p['lot'], 1, 'The parcel', 'recorded boundary and the A–B section line'),
+        shot(p['lot'], 2, 'The water frontage at B', 'close range, 30 cm imagery'),
+        shot(p['lot'], 3, 'Neighbourhood context', 'the parcel outlined, streets and water'),
         gmap_link(p), gsv_link(p), zillow_link(p['short']), p['pid'],
         ('<a class="lnk" href="https://www.realtor.com/realestateandhomes-detail/'
          '750-Wagon-Wheel-Trl_Angleton_TX_77515_M88761-47581">Realtor.com listing</a>'
@@ -1130,7 +1137,6 @@ waterfront photographs inline, download them from the listing pages above and sa
          '<a class="lnk" href="https://www.loopnet.com/property/'
          '1127-saddle-horn-bnd-angleton-tx-77515/48039-15340084000/">LoopNet listing</a>'
          if k == 'lot1' else ''),
-        p['lot'], p['lot'], p['lot'],
         ('green' if k in ('lot3',) else 'teal'), p['best'],
         p['watch'],
         ('green' if k == 'lot3' else 'blue'), p['verdict'],
