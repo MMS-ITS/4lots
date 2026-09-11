@@ -113,8 +113,15 @@ EXTRA = {
         verdict="Best lot to live on, worst lot to buy on price. The dam needs answering first.",
     ),
 }
+WATER_SHORT = {
+    'lot1': "<b>Mill Bayou</b> — a tree-lined stream corridor. Nearest mapped waterbody 395 ft.",
+    'lot2': "Unnamed <b>12.6-acre pond</b>, 41 ft off the boundary. Shortest frontage of the four.",
+    'lot3': "The <b>same 12.6-acre pond</b> as Lot 2, 59 ft off, with about twice the frontage.",
+    'lot4': "<b>Flag Pond, 101.5 ac</b> — named in USGS hydrography 14 ft off, plus the levee.",
+}
 for k, v in EXTRA.items():
     LOTS[k].update(v)
+    LOTS[k]['water_short'] = WATER_SHORT[k]
 
 # ------------------------------------------------------------------ climate (Celsius)
 # ERA5 reanalysis at 29.139 N, 95.547 W, daily 1991-2020, aggregated to monthly means.
@@ -280,6 +287,8 @@ a{color:var(--teal); text-decoration:none; border-bottom:.5pt solid rgba(15,118,
   font-size:7.4pt; letter-spacing:.02em; color:var(--faint);
 }
 .foot b{color:var(--muted); font-weight:600;}
+.foot span:first-child{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+                       margin-right:6mm;}
 .foot .pg{white-space:nowrap;}
 
 /* ---------------- type ---------------- */
@@ -391,10 +400,12 @@ dl.facts dd{margin:0;}
         padding:.9mm 2mm; border-bottom-right-radius:1.2mm; z-index:2;}
 .mapfall{display:none; padding:4mm; font-size:8.4pt; color:var(--muted);}
 .mapfall b{color:var(--ink);}
-.shots{display:grid; grid-template-columns:repeat(3,1fr); gap:2mm; margin:2.5mm 0;}
-.shot{position:relative; aspect-ratio:4/3; border:.6pt solid var(--line2); border-radius:1.2mm;
-      overflow:hidden; background:var(--wash);}
-.shot img{width:100%; height:100%; object-fit:cover; display:block;}
+.shots{display:grid; grid-template-columns:1fr 1fr; gap:3mm; margin:2mm 0;}
+figure.shot,figure.hero{position:relative; margin:0; border:.6pt solid var(--line2);
+      border-radius:1.2mm; overflow:hidden; background:var(--wash);}
+figure.hero{margin:0 0 2.5mm;}
+figure.shot img,figure.hero img{width:100%; height:auto; display:block;}
+figure.shot figcaption,figure.hero figcaption{display:none;}
 .shot .ph{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center;
           align-items:center; text-align:center; padding:2mm; gap:1mm;
           background:repeating-linear-gradient(45deg,#f2f6f6,#f2f6f6 3mm,#eaf0f0 3mm,#eaf0f0 6mm);}
@@ -529,11 +540,12 @@ def map_fallback(p):
             % (p['short'], lat, lon, p['pid'], p['legal_description'], lat, lon))
 
 
-def shot(lot_n, i, title, sub):
-    return ('<div class="shot"><img src="assets/photos/lot%d-%d.jpg" alt="%s" '
+def shot(lot_n, i, title, sub, cls='shot'):
+    return ('<figure class="%s"><img src="assets/photos/lot%d-%d.jpg" alt="%s" '
             'onload="this.parentNode.querySelector(\'.ph\').style.display=\'none\'">'
-            '<div class="ph"><span class="t">%s</span><span class="s">%s</span></div></div>'
-            % (lot_n, i, title, title, sub))
+            '<div class="ph"><span class="t">%s</span><span class="s">%s</span></div>'
+            '<figcaption>%s</figcaption></figure>'
+            % (cls, lot_n, i, title, title, sub, sub))
 
 
 def bar(label, value, pct, cls=''):
@@ -1033,11 +1045,45 @@ its record. Boundaries are for orientation only and are not a survey.</p>
 
 # =========================================================================== 8-11. lot pages
 LOT_SEC = {'lot1': 6, 'lot2': 7, 'lot3': 8, 'lot4': 9}
+
+
+def facts_pairs(p, k):
+    return [
+        ('Legal', '%s · %.2f ac of record' % (lot_label(p['legal_description']),
+                                              p['acres_of_record'])),
+        ('Situs of record', p['situs_of_record'] or '&mdash; none assigned &mdash;'),
+        ('Deed · plat · restrictions', '%s · %s · %s'
+         % (p['deed_reference'], p['plat'].split(' (')[0], p['recorded_restrictions'].split(' (')[0])),
+        ('Dimensions', 'bbox %d × %d ft · county polygon %.3f ac'
+         % (p['bbox_ft'][0], p['bbox_ft'][1], p['gis_polygon_acres'])),
+        ('Flood', 'Zone %s · panel %s, 30 Dec 2020'
+         % (p['fema_zone_2020'], p['firm_panel'])),
+        ('Nearest BFE line', '<b>%s ft NAVD88</b>, %s ft off the parcel'
+         % (p['nearest_published_bfe_ft_navd88'], format(p['nearest_bfe_line_ft_away'], ','))),
+        ('Ground (LiDAR)', p['ground'].split(';')[0]),
+        ('Soil', ('<b>Asa silty clay loam</b> — well drained, prime farmland'
+                  if k in ('lot1', 'lot2') else
+                  '<b>Pledger clay</b> — vertisol, hydrologic group D')),
+        ('Water', p['water_short']),
+        ('Highway', p['sh35']),
+        ('Jurisdiction', ('Unincorporated · <b>Baileys Prairie ETJ</b>'
+                          if k == 'lot2' else 'Unincorporated · no city limits or ETJ')),
+    ]
+
+
 for k in ORDER:
     p = LOTS[k]
     ppa = p['asking_price_usd'] / p['acres_of_record']
     prem = 100 * (p['asking_price_usd'] / p['bcad_appraised_usd'] - 1)
     badges = ''.join('<span class="badge %s">%s</span>' % (c, t) for c, t in p['badges'])
+    pairs = facts_pairs(p, k)
+    half = (len(pairs) + 1) // 2
+
+    def dl(items):
+        return ('<dl class="facts">'
+                + ''.join('<dt>%s</dt><dd>%s</dd>' % (a, b) for a, b in items)
+                + '</dl>')
+
     add("""
 <div class="lothead">
   <div>
@@ -1053,35 +1099,12 @@ for k in ORDER:
   </div>
 </div>
 
-<div class="cols2c">
-  <div>
-    %s
-  </div>
-  <div>
-    <dl class="facts">
-      <dt>Legal</dt><dd>%s</dd>
-      <dt>Situs of record</dt><dd>%s</dd>
-      <dt>Deed reference</dt><dd>%s</dd>
-      <dt>Plat / restrictions</dt><dd>%s · restrictions %s</dd>
-      <dt>Dimensions</dt><dd>Bounding box %d × %d ft; county polygon computes %.3f ac</dd>
-      <dt>Flood</dt><dd>Zone %s, SFHA · FIRM panel %s eff. %s</dd>
-      <dt>Nearest BFE line</dt><dd><b>%s ft NAVD88</b>, %s ft from the parcel</dd>
-      <dt>Ground (LiDAR)</dt><dd>%s</dd>
-      <dt>Water body</dt><dd>%s</dd>
-      <dt>Highway</dt><dd>%s</dd>
-      <dt>School district</dt><dd>Columbia-Brazoria ISD</dd>
-      <dt>Jurisdiction</dt><dd>%s</dd>
-      <dt>Windstorm</dt><dd>TDI Inland I — 120 mph 3-second gust</dd>
-    </dl>
-  </div>
-</div>
+%s
 
-<h3>Aerial imagery — USGS NAIP, public domain</h3>
-<div class="shots">
-  %s
-  %s
-  %s
-</div>
+<div class="cols2" style="gap:5mm;">%s%s</div>
+
+<div class="shots">%s%s</div>
+
 <div class="linkrow">
   <a class="lnk g" href="%s">Open in Google Maps</a>
   <a class="lnk" href="%s">Google Street View</a>
@@ -1089,19 +1112,10 @@ for k in ORDER:
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID %s</a>
   %s
 </div>
-<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
-the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
-and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
-rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
-appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
-  <div class="note %s" style="margin-top:1mm;">
-    <span class="lbl">Best for</span>%s
-  </div>
-  <div class="note amber" style="margin-top:1mm;">
-    <span class="lbl">Watch</span>%s
-  </div>
+  <div class="note %s" style="margin-top:0;"><span class="lbl">Best for</span>%s</div>
+  <div class="note amber" style="margin-top:0;"><span class="lbl">Watch</span>%s</div>
 </div>
 <div class="note %s" style="margin-bottom:0;">
   <span class="lbl">Verdict on this lot</span>%s
@@ -1113,23 +1127,10 @@ appraisal district's mapping polygon and is for orientation only; it is not a su
         badges,
         format(p['asking_price_usd'], ','), format(round(ppa), ','), p['acres_of_record'],
         ('#15602f' if prem < 0 else '#a91f14'), prem,
-        mapbox('Live Google Maps satellite — %s' % p['short'], gmap_lot(p),
-               map_fallback(p), cls='map'),
-        p['legal_description'],
-        p['situs_of_record'] if p['situs_of_record'].strip() else '— none assigned —',
-        p['deed_reference'],
-        p['plat'], p['recorded_restrictions'],
-        p['bbox_ft'][0], p['bbox_ft'][1], p['gis_polygon_acres'],
-        p['fema_zone_2020'], p['firm_panel'], p['firm_effective'],
-        p['nearest_published_bfe_ft_navd88'], format(p['nearest_bfe_line_ft_away'], ','),
-        p['ground'],
-        p['water'],
-        p['sh35'] + ' — ' + p['noise'],
-        ('Unincorporated county · <b>inside the Baileys Prairie ETJ</b>'
-         if k == 'lot2' else 'Unincorporated county · no city limits, no ETJ'),
-        shot(p['lot'], 1, 'The parcel', 'recorded boundary and the A–B section line'),
-        shot(p['lot'], 2, 'The water frontage at B', 'close range, 30 cm imagery'),
-        shot(p['lot'], 3, 'Neighbourhood context', 'the parcel outlined, streets and water'),
+        shot(p['lot'], 1, 'The parcel', 'boundary of record and section A–B', cls='hero'),
+        dl(pairs[:half]), dl(pairs[half:]),
+        shot(p['lot'], 2, 'Water frontage at B', 'close range'),
+        shot(p['lot'], 3, 'Neighbourhood context', 'the parcel outlined'),
         gmap_link(p), gsv_link(p), zillow_link(p['short']), p['pid'],
         ('<a class="lnk" href="https://www.realtor.com/realestateandhomes-detail/'
          '750-Wagon-Wheel-Trl_Angleton_TX_77515_M88761-47581">Realtor.com listing</a>'
@@ -1141,6 +1142,7 @@ appraisal district's mapping polygon and is for orientation only; it is not a su
         p['watch'],
         ('green' if k == 'lot3' else 'blue'), p['verdict'],
     ), "%d · Lot %d — %s" % (LOT_SEC[k], p['lot'], p['short']), k)
+
 
 # =========================================================================== 12. flood
 add("""
@@ -2375,10 +2377,10 @@ for i, (anchor, foot, html) in enumerate(SHEETS, start=1):
     out.append('<section class="sheet"%s>' % (' id="%s"' % anchor if anchor else ''))
     out.append('<span class="smark" aria-hidden="true">[[S:%s]]</span>' % (anchor or i))
     out.append(html)
-    out.append('<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> '
-               'v%s · prepared for %s · %s</span>'
+    out.append('<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>'
+               '&nbsp; v%s &nbsp;·&nbsp; %s</span>'
                '<span class="pg">%s &nbsp;·&nbsp; %s</span></div>'
-               % (VERSION, PREPARED_FOR, PREPARED_ON, foot, pg))
+               % (VERSION, PREPARED_FOR, foot, pg))
     out.append('</section>')
 
 out.append("""

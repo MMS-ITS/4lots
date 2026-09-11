@@ -35,6 +35,8 @@ a{color:var(--teal); text-decoration:none; border-bottom:.5pt solid rgba(15,118,
   font-size:7.4pt; letter-spacing:.02em; color:var(--faint);
 }
 .foot b{color:var(--muted); font-weight:600;}
+.foot span:first-child{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+                       margin-right:6mm;}
 .foot .pg{white-space:nowrap;}
 
 /* ---------------- type ---------------- */
@@ -146,10 +148,12 @@ dl.facts dd{margin:0;}
         padding:.9mm 2mm; border-bottom-right-radius:1.2mm; z-index:2;}
 .mapfall{display:none; padding:4mm; font-size:8.4pt; color:var(--muted);}
 .mapfall b{color:var(--ink);}
-.shots{display:grid; grid-template-columns:repeat(3,1fr); gap:2mm; margin:2.5mm 0;}
-.shot{position:relative; aspect-ratio:4/3; border:.6pt solid var(--line2); border-radius:1.2mm;
-      overflow:hidden; background:var(--wash);}
-.shot img{width:100%; height:100%; object-fit:cover; display:block;}
+.shots{display:grid; grid-template-columns:1fr 1fr; gap:3mm; margin:2mm 0;}
+figure.shot,figure.hero{position:relative; margin:0; border:.6pt solid var(--line2);
+      border-radius:1.2mm; overflow:hidden; background:var(--wash);}
+figure.hero{margin:0 0 2.5mm;}
+figure.shot img,figure.hero img{width:100%; height:auto; display:block;}
+figure.shot figcaption,figure.hero figcaption{display:none;}
 .shot .ph{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center;
           align-items:center; text-align:center; padding:2mm; gap:1mm;
           background:repeating-linear-gradient(45deg,#f2f6f6,#f2f6f6 3mm,#eaf0f0 3mm,#eaf0f0 6mm);}
@@ -283,7 +287,7 @@ buildability, cost, flood and windstorm exposure, and what it is actually like t
 published regulation and public records. It is not a survey, an engineering opinion, a flood
 determination, insurance advice, legal advice or an appraisal. Read the disclaimer on the final
 page before relying on any figure in it.</p>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">Cover &nbsp;·&nbsp; <b>Page 1 of 34</b></span></div></section><section class="sheet" id="toc"><span class="smark" aria-hidden="true">[[S:toc]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">Cover &nbsp;·&nbsp; <b>Page 1 of 34</b></span></div></section><section class="sheet" id="toc"><span class="smark" aria-hidden="true">[[S:toc]]</span>
 <h2><span class="n">Contents</span></h2>
 <div class="toc"><ol style="list-style:none;padding-left:0;"><li><a href="#verdict">1 · Verdict</a><span class="pgn">3</span></li><li><a href="#snapshot">2 · Snapshot</a><span class="pgn">4</span></li><li><a href="#parcels">3 · Parcel record</a><span class="pgn">5</span></li><li><a href="#value">4 · Value</a><span class="pgn">6</span></li><li><a href="#map">5 · Combined map</a><span class="pgn">7</span></li><li><a href="#lot1">6 · Lot 1 — 1127 Saddle Horn Bend</a><span class="pgn">8</span></li><li><a href="#lot2">7 · Lot 2 — 336 Wagon Wheel Trail W</a><span class="pgn">9</span></li><li><a href="#lot3">8 · Lot 3 — Lot 29 Broken Arrow Trail</a><span class="pgn">10</span></li><li><a href="#lot4">9 · Lot 4 — 750 Wagon Wheel Trail</a><span class="pgn">11</span></li><li><a href="#flood">10 · Flood</a><span class="pgn">12</span></li><li><a href="#terrain">11 · Terrain method</a><span class="pgn">13</span></li><li><a href="#terrain1">12 · Terrain — Lot 1</a><span class="pgn">14</span></li><li><a href="#terrain2">13 · Terrain — Lot 2</a><span class="pgn">15</span></li><li><a href="#terrain3">14 · Terrain — Lot 3</a><span class="pgn">16</span></li><li><a href="#terrain4">15 · Terrain — Lot 4</a><span class="pgn">17</span></li><li><a href="#soil">16 · Soil</a><span class="pgn">18</span></li></ol><ol style="list-style:none;padding-left:0;"><li><a href="#restrictions">17 · Restrictions</a><span class="pgn">19</span></li><li><a href="#septic">18 · Septic</a><span class="pgn">20</span></li><li><a href="#cost">19 · Cost</a><span class="pgn">21</span></li><li><a href="#carry">20 · Carrying cost</a><span class="pgn">22</span></li><li><a href="#wind">21 · Wind &amp; insurance</a><span class="pgn">23</span></li><li><a href="#climate">22 · Climate</a><span class="pgn">24</span></li><li><a href="#hazards">23 · Hazards</a><span class="pgn">25</span></li><li><a href="#services">24 · Services</a><span class="pgn">26</span></li><li><a href="#services2">25 · Schools &amp; going out</a><span class="pgn">27</span></li><li><a href="#leisure">26 · Coast &amp; outdoors</a><span class="pgn">28</span></li><li><a href="#community">27 · Neighbourhood</a><span class="pgn">29</span></li><li><a href="#amenities">28 · Amenities &amp; fishing</a><span class="pgn">30</span></li><li><a href="#scorecard">29 · Scorecard</a><span class="pgn">31</span></li><li><a href="#corrections">30 · Corrections</a><span class="pgn">32</span></li><li><a href="#next">31 · Next steps</a><span class="pgn">33</span></li><li><a href="#sources">Sources &amp; sign-off</a><span class="pgn">34</span></li></ol></div>
 <h3>How to read this document</h3>
@@ -316,7 +320,7 @@ typeface as facts.</p>
         Floodplain Administration can issue the determination a lender and an insurer will accept.</li>
   </ul>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">Contents &nbsp;·&nbsp; <b>Page 2 of 34</b></span></div></section><section class="sheet" id="verdict"><span class="smark" aria-hidden="true">[[S:verdict]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">Contents &nbsp;·&nbsp; <b>Page 2 of 34</b></span></div></section><section class="sheet" id="verdict"><span class="smark" aria-hidden="true">[[S:verdict]]</span>
 <h2><span class="n">1 ·</span> Verdict and recommendation</h2>
 <p class="lead">You asked which one lot to buy and build on, weighted for gardening, hobby farming,
 scenery, a good developed neighbourhood, quick access to amenities and safety from flood and storm.
@@ -402,7 +406,7 @@ Two findings in this edition decide it, and neither was in any earlier version.<
   a three-year window, on a portfolio already asking 15.6% above the county's appraised value. The
   build needs one lot; the other three add carry, not capability.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">1 · Verdict &nbsp;·&nbsp; <b>Page 3 of 34</b></span></div></section><section class="sheet" id="snapshot"><span class="smark" aria-hidden="true">[[S:snapshot]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">1 · Verdict &nbsp;·&nbsp; <b>Page 3 of 34</b></span></div></section><section class="sheet" id="snapshot"><span class="smark" aria-hidden="true">[[S:snapshot]]</span>
 <h2><span class="n">2 ·</span> Portfolio snapshot</h2>
 <div class="kpis">
   <div class="kpi"><div class="k">Land, all four lots</div><div class="v">$234,500</div>
@@ -463,7 +467,7 @@ unknowns that a $600 soil test and three phone calls would resolve.</p>
     tax by roughly $260–$300 on the portfolio.</p>
   </div>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">2 · Snapshot &nbsp;·&nbsp; <b>Page 4 of 34</b></span></div></section><section class="sheet" id="parcels"><span class="smark" aria-hidden="true">[[S:parcels]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">2 · Snapshot &nbsp;·&nbsp; <b>Page 4 of 34</b></span></div></section><section class="sheet" id="parcels"><span class="smark" aria-hidden="true">[[S:parcels]]</span>
 <h2><span class="n">3 ·</span> The parcel record — established for the first time</h2>
 <p>Neither earlier edition contained a single parcel identifier. Every lot is now tied to its
 Brazoria County Appraisal District record. This is the table that resolves the acreage disputes,
@@ -506,7 +510,7 @@ the section numbers and the value question.</p>
 
 <p class="xs">Owner-of-record names are in the BCAD record and are deliberately not reproduced here.
 Search by PID at <a href="https://esearch.brazoriacad.org/">esearch.brazoriacad.org</a>.</p>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">3 · Parcel record &nbsp;·&nbsp; <b>Page 5 of 34</b></span></div></section><section class="sheet" id="value"><span class="smark" aria-hidden="true">[[S:value]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">3 · Parcel record &nbsp;·&nbsp; <b>Page 5 of 34</b></span></div></section><section class="sheet" id="value"><span class="smark" aria-hidden="true">[[S:value]]</span>
 <h2><span class="n">4 ·</span> Value — asking price against the county's own number</h2>
 <p>Pricing land per acre only works once the acreage is right, which is why neither earlier edition
 could do it. With the acreage of record established, two independent value tests are available: price
@@ -550,7 +554,7 @@ per acre, and price against the appraisal the county already publishes for each 
   so. Do not treat either figure as survey-grade — but do notice that on Lot 2 the gap is large
   enough to matter to a septic layout on a 1-acre lot.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">4 · Value &nbsp;·&nbsp; <b>Page 6 of 34</b></span></div></section><section class="sheet" id="map"><span class="smark" aria-hidden="true">[[S:map]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">4 · Value &nbsp;·&nbsp; <b>Page 6 of 34</b></span></div></section><section class="sheet" id="map"><span class="smark" aria-hidden="true">[[S:map]]</span>
 <h2><span class="n">5 ·</span> All four lots on one interactive map</h2>
 <p>The map below is live Google Maps satellite imagery with all four parcels pinned in order. Use the
 buttons to switch between the four-lot route view, the whole subdivision, and each lot individually.
@@ -581,7 +585,7 @@ its record. Boundaries are for orientation only and are not a survey.</p>
   <th class="n">PID</th><th>Open live</th></tr></thead>
   <tbody><tr><td><span class="rank">1</span></td><td><b>1127 Saddle Horn Bend</b></td><td class="n">29.141219</td><td class="n">-95.559141</td><td class="n">183667</td><td><a href="https://www.google.com/maps/search/?api=1&query=29.141219,-95.559141">Google&nbsp;Maps</a> · <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=29.141219,-95.559141">Street&nbsp;View</a></td></tr><tr><td><span class="rank">2</span></td><td><b>336 Wagon Wheel Trail W</b></td><td class="n">29.140524</td><td class="n">-95.541472</td><td class="n">183367</td><td><a href="https://www.google.com/maps/search/?api=1&query=29.140524,-95.541472">Google&nbsp;Maps</a> · <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=29.140524,-95.541472">Street&nbsp;View</a></td></tr><tr><td><span class="rank">3</span></td><td><b>Lot 29 Broken Arrow Trail</b></td><td class="n">29.144419</td><td class="n">-95.543456</td><td class="n">186219</td><td><a href="https://www.google.com/maps/search/?api=1&query=29.144419,-95.543456">Google&nbsp;Maps</a> · <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=29.144419,-95.543456">Street&nbsp;View</a></td></tr><tr><td><span class="rank">4</span></td><td><b>750 Wagon Wheel Trail</b></td><td class="n">29.130575</td><td class="n">-95.541987</td><td class="n">183332</td><td><a href="https://www.google.com/maps/search/?api=1&query=29.130575,-95.541987">Google&nbsp;Maps</a> · <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=29.130575,-95.541987">Street&nbsp;View</a></td></tr></tbody>
 </table>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">5 · Combined map &nbsp;·&nbsp; <b>Page 7 of 34</b></span></div></section><section class="sheet" id="lot1"><span class="smark" aria-hidden="true">[[S:lot1]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">5 · Combined map &nbsp;·&nbsp; <b>Page 7 of 34</b></span></div></section><section class="sheet" id="lot1"><span class="smark" aria-hidden="true">[[S:lot1]]</span>
 <div class="lothead">
   <div>
     <div class="id">Lot 1 of 4 · PID 183667 · 1534-0084-000</div>
@@ -596,35 +600,12 @@ its record. Boundaries are for orientation only and are not a survey.</p>
   </div>
 </div>
 
-<div class="cols2c">
-  <div>
-    <div class="map"><span class="maplbl noprint">Live Google Maps satellite — 1127 Saddle Horn Bend</span><iframe src="https://maps.google.com/maps?q=29.141219,-95.559141&z=18&t=k&hl=en&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Live Google Maps satellite — 1127 Saddle Horn Bend"></iframe><div class="mapfall"><b>1127 Saddle Horn Bend — live satellite map.</b> Interactive in the browser version; this is a printed copy.<br>Parcel centroid <b>29.141219, -95.559141</b> · PID 183667 · BAR X RANCH SEC 2 (A0038 J B BAILEY) BLK 1 LOT 84 ACRES 1.95<br><span class='xs'>Open: google.com/maps/search/?api=1&amp;query=29.141219,-95.559141</span></div></div>
-  </div>
-  <div>
-    <dl class="facts">
-      <dt>Legal</dt><dd>BAR X RANCH SEC 2 (A0038 J B BAILEY) BLK 1 LOT 84 ACRES 1.95</dd>
-      <dt>Situs of record</dt><dd>1127 SADDLE HORN BEND</dd>
-      <dt>Deed reference</dt><dd>2008-031507</dd>
-      <dt>Plat / restrictions</dt><dd>16/119 (17 Sep 1980) · restrictions 1532/471</dd>
-      <dt>Dimensions</dt><dd>Bounding box 316 × 460 ft; county polygon computes 2.000 ac</dd>
-      <dt>Flood</dt><dd>Zone AE, SFHA · FIRM panel 48039C0420K eff. 30 Dec 2020</dd>
-      <dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 1,594 ft from the parcel</dd>
-      <dt>Ground (LiDAR)</dt><dd>24–25 ft at the parcel; 18–30 ft across the surrounding 600 ft (the 18 ft readings are the bayou channel itself).</dd>
-      <dt>Water body</dt><dd><b>Mill Bayou — a tree-lined stream corridor, not open water.</b> The bayou flowline runs 66 ft off the boundary and 19 of the 40 recorded vertices lie within 60 ft of the mapped channel corridor. But the nearest NHD <em>waterbody</em> is <b>395 ft</b> away: aerial imagery shows a wooded channel, not a pond.</dd>
-      <dt>Highway</dt><dd>0.09 mi (about 480 ft) south of State Highway 35 — Closest of the four to SH 35 — expect audible highway traffic.</dd>
-      <dt>School district</dt><dd>Columbia-Brazoria ISD</dd>
-      <dt>Jurisdiction</dt><dd>Unincorporated county · no city limits, no ETJ</dd>
-      <dt>Windstorm</dt><dd>TDI Inland I — 120 mph 3-second gust</dd>
-    </dl>
-  </div>
-</div>
+<figure class="hero"><img src="assets/photos/lot1-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">boundary of record and section A–B</span></div><figcaption>boundary of record and section A–B</figcaption></figure>
 
-<h3>Aerial imagery — USGS NAIP, public domain</h3>
-<div class="shots">
-  <div class="shot"><img src="assets/photos/lot1-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">recorded boundary and the A–B section line</span></div></div>
-  <div class="shot"><img src="assets/photos/lot1-2.jpg" alt="The water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The water frontage at B</span><span class="s">close range, 30 cm imagery</span></div></div>
-  <div class="shot"><img src="assets/photos/lot1-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined, streets and water</span></div></div>
-</div>
+<div class="cols2" style="gap:5mm;"><dl class="facts"><dt>Legal</dt><dd>Block 1, Lot 84 · 1.95 ac of record</dd><dt>Situs of record</dt><dd>1127 SADDLE HORN BEND</dd><dt>Deed · plat · restrictions</dt><dd>2008-031507 · 16/119 · 1532/471</dd><dt>Dimensions</dt><dd>bbox 316 × 460 ft · county polygon 2.000 ac</dd><dt>Flood</dt><dd>Zone AE · panel 48039C0420K, 30 Dec 2020</dd><dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 1,594 ft off the parcel</dd></dl><dl class="facts"><dt>Ground (LiDAR)</dt><dd>24–25 ft at the parcel</dd><dt>Soil</dt><dd><b>Asa silty clay loam</b> — well drained, prime farmland</dd><dt>Water</dt><dd><b>Mill Bayou</b> — a tree-lined stream corridor. Nearest mapped waterbody 395 ft.</dd><dt>Highway</dt><dd>0.09 mi (about 480 ft) south of State Highway 35</dd><dt>Jurisdiction</dt><dd>Unincorporated · no city limits or ETJ</dd></dl></div>
+
+<div class="shots"><figure class="shot"><img src="assets/photos/lot1-2.jpg" alt="Water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Water frontage at B</span><span class="s">close range</span></div><figcaption>close range</figcaption></figure><figure class="shot"><img src="assets/photos/lot1-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined</span></div><figcaption>the parcel outlined</figcaption></figure></div>
+
 <div class="linkrow">
   <a class="lnk g" href="https://www.google.com/maps/search/?api=1&query=29.141219,-95.559141">Open in Google Maps</a>
   <a class="lnk" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=29.141219,-95.559141">Google Street View</a>
@@ -632,24 +613,15 @@ its record. Boundaries are for orientation only and are not a survey.</p>
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID 183667</a>
   <a class="lnk" href="https://www.loopnet.com/property/1127-saddle-horn-bnd-angleton-tx-77515/48039-15340084000/">LoopNet listing</a>
 </div>
-<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
-the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
-and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
-rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
-appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
-  <div class="note teal" style="margin-top:1mm;">
-    <span class="lbl">Best for</span>Setback geometry. The extra acre is the only thing on offer here that actually solves the 5BR + drainfield + 100% reserve + well-spacing puzzle comfortably.
-  </div>
-  <div class="note amber" style="margin-top:1mm;">
-    <span class="lbl">Watch</span>Longest water frontage means the largest share of the lot is in the low ground near the channel, and the TCEQ 75 ft absorption setback bites along all of it. It also sits downstream of Bar X Development Dam (NID TX01759) on a Mill Bayou tributary.
-  </div>
+  <div class="note teal" style="margin-top:0;"><span class="lbl">Best for</span>Setback geometry. The extra acre is the only thing on offer here that actually solves the 5BR + drainfield + 100% reserve + well-spacing puzzle comfortably.</div>
+  <div class="note amber" style="margin-top:0;"><span class="lbl">Watch</span>Longest water frontage means the largest share of the lot is in the low ground near the channel, and the TCEQ 75 ft absorption setback bites along all of it. It also sits downstream of Bar X Development Dam (NID TX01759) on a Mill Bayou tributary.</div>
 </div>
 <div class="note blue" style="margin-bottom:0;">
   <span class="lbl">Verdict on this lot</span>Buy this one if the plan is a large house and you will pay for the pad.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">6 · Lot 1 — 1127 Saddle Horn Bend &nbsp;·&nbsp; <b>Page 8 of 34</b></span></div></section><section class="sheet" id="lot2"><span class="smark" aria-hidden="true">[[S:lot2]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">6 · Lot 1 — 1127 Saddle Horn Bend &nbsp;·&nbsp; <b>Page 8 of 34</b></span></div></section><section class="sheet" id="lot2"><span class="smark" aria-hidden="true">[[S:lot2]]</span>
 <div class="lothead">
   <div>
     <div class="id">Lot 2 of 4 · PID 183367 · 1533-0167-000</div>
@@ -664,35 +636,12 @@ appraisal district's mapping polygon and is for orientation only; it is not a su
   </div>
 </div>
 
-<div class="cols2c">
-  <div>
-    <div class="map"><span class="maplbl noprint">Live Google Maps satellite — 336 Wagon Wheel Trail W</span><iframe src="https://maps.google.com/maps?q=29.140524,-95.541472&z=18&t=k&hl=en&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Live Google Maps satellite — 336 Wagon Wheel Trail W"></iframe><div class="mapfall"><b>336 Wagon Wheel Trail W — live satellite map.</b> Interactive in the browser version; this is a printed copy.<br>Parcel centroid <b>29.140524, -95.541472</b> · PID 183367 · BAR X RANCH (A0038 J B BAILEY) LOT 167 ACRES 1.<br><span class='xs'>Open: google.com/maps/search/?api=1&amp;query=29.140524,-95.541472</span></div></div>
-  </div>
-  <div>
-    <dl class="facts">
-      <dt>Legal</dt><dd>BAR X RANCH (A0038 J B BAILEY) LOT 167 ACRES 1.</dd>
-      <dt>Situs of record</dt><dd>336 WAGON WHEEL TRAIL</dd>
-      <dt>Deed reference</dt><dd>V1523P212</dd>
-      <dt>Plat / restrictions</dt><dd>16/104 (9 Jun 1980) · restrictions 1515/679 (+ drainage easements 1712/500)</dd>
-      <dt>Dimensions</dt><dd>Bounding box 424 × 187 ft; county polygon computes 0.872 ac</dd>
-      <dt>Flood</dt><dd>Zone AE, SFHA · FIRM panel 48039C0420K eff. 30 Dec 2020</dd>
-      <dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 1,010 ft from the parcel</dd>
-      <dt>Ground (LiDAR)</dt><dd>28 ft at the parcel; 21–29 ft across the surrounding 600 ft.</dd>
-      <dt>Water body</dt><dd>An unnamed 12.6-acre mapped water body. 4 of 12 boundary vertices lie within 60 ft of it — the shortest water frontage of the four.</dd>
-      <dt>Highway</dt><dd>0.37 mi south of State Highway 35 — Far enough off SH 35 to be quiet; closest of the four to FM 521 (1.24 mi).</dd>
-      <dt>School district</dt><dd>Columbia-Brazoria ISD</dd>
-      <dt>Jurisdiction</dt><dd>Unincorporated county · <b>inside the Baileys Prairie ETJ</b></dd>
-      <dt>Windstorm</dt><dd>TDI Inland I — 120 mph 3-second gust</dd>
-    </dl>
-  </div>
-</div>
+<figure class="hero"><img src="assets/photos/lot2-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">boundary of record and section A–B</span></div><figcaption>boundary of record and section A–B</figcaption></figure>
 
-<h3>Aerial imagery — USGS NAIP, public domain</h3>
-<div class="shots">
-  <div class="shot"><img src="assets/photos/lot2-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">recorded boundary and the A–B section line</span></div></div>
-  <div class="shot"><img src="assets/photos/lot2-2.jpg" alt="The water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The water frontage at B</span><span class="s">close range, 30 cm imagery</span></div></div>
-  <div class="shot"><img src="assets/photos/lot2-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined, streets and water</span></div></div>
-</div>
+<div class="cols2" style="gap:5mm;"><dl class="facts"><dt>Legal</dt><dd>Lot 167 · 1.00 ac of record</dd><dt>Situs of record</dt><dd>336 WAGON WHEEL TRAIL</dd><dt>Deed · plat · restrictions</dt><dd>V1523P212 · 16/104 · 1515/679</dd><dt>Dimensions</dt><dd>bbox 424 × 187 ft · county polygon 0.872 ac</dd><dt>Flood</dt><dd>Zone AE · panel 48039C0420K, 30 Dec 2020</dd><dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 1,010 ft off the parcel</dd></dl><dl class="facts"><dt>Ground (LiDAR)</dt><dd>28 ft at the parcel</dd><dt>Soil</dt><dd><b>Asa silty clay loam</b> — well drained, prime farmland</dd><dt>Water</dt><dd>Unnamed <b>12.6-acre pond</b>, 41 ft off the boundary. Shortest frontage of the four.</dd><dt>Highway</dt><dd>0.37 mi south of State Highway 35</dd><dt>Jurisdiction</dt><dd>Unincorporated · <b>Baileys Prairie ETJ</b></dd></dl></div>
+
+<div class="shots"><figure class="shot"><img src="assets/photos/lot2-2.jpg" alt="Water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Water frontage at B</span><span class="s">close range</span></div><figcaption>close range</figcaption></figure><figure class="shot"><img src="assets/photos/lot2-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined</span></div><figcaption>the parcel outlined</figcaption></figure></div>
+
 <div class="linkrow">
   <a class="lnk g" href="https://www.google.com/maps/search/?api=1&query=29.140524,-95.541472">Open in Google Maps</a>
   <a class="lnk" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=29.140524,-95.541472">Google Street View</a>
@@ -700,24 +649,15 @@ appraisal district's mapping polygon and is for orientation only; it is not a su
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID 183367</a>
   
 </div>
-<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
-the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
-and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
-rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
-appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
-  <div class="note teal" style="margin-top:1mm;">
-    <span class="lbl">Best for</span>Lowest cash outlay, and the highest natural ground of the four at 28 ft — which is the single most valuable physical attribute in a Zone AE subdivision.
-  </div>
-  <div class="note amber" style="margin-top:1mm;">
-    <span class="lbl">Watch</span>The shape is the problem: 424 ft × 187 ft on 1.00 acre of record, and the county's own polygon computes to 0.872 acre. Fitting a 5BR footprint, a 2,250–4,500 sq ft spray field, a 100% reserve area and a well at 100 ft from the field on a 187 ft width is the tightest test in the portfolio. This is also the only lot inside the Baileys Prairie ETJ, so Baileys Prairie subdivision regulation reaches it.
-  </div>
+  <div class="note teal" style="margin-top:0;"><span class="lbl">Best for</span>Lowest cash outlay, and the highest natural ground of the four at 28 ft — which is the single most valuable physical attribute in a Zone AE subdivision.</div>
+  <div class="note amber" style="margin-top:0;"><span class="lbl">Watch</span>The shape is the problem: 424 ft × 187 ft on 1.00 acre of record, and the county's own polygon computes to 0.872 acre. Fitting a 5BR footprint, a 2,250–4,500 sq ft spray field, a 100% reserve area and a well at 100 ft from the field on a 187 ft width is the tightest test in the portfolio. This is also the only lot inside the Baileys Prairie ETJ, so Baileys Prairie subdivision regulation reaches it.</div>
 </div>
 <div class="note blue" style="margin-bottom:0;">
   <span class="lbl">Verdict on this lot</span>Cheapest entry and the best ground, but prove the footprint fits before you bid.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">7 · Lot 2 — 336 Wagon Wheel Trail W &nbsp;·&nbsp; <b>Page 9 of 34</b></span></div></section><section class="sheet" id="lot3"><span class="smark" aria-hidden="true">[[S:lot3]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">7 · Lot 2 — 336 Wagon Wheel Trail W &nbsp;·&nbsp; <b>Page 9 of 34</b></span></div></section><section class="sheet" id="lot3"><span class="smark" aria-hidden="true">[[S:lot3]]</span>
 <div class="lothead">
   <div>
     <div class="id">Lot 3 of 4 · PID 186219 · 1549-0029-000</div>
@@ -732,35 +672,12 @@ appraisal district's mapping polygon and is for orientation only; it is not a su
   </div>
 </div>
 
-<div class="cols2c">
-  <div>
-    <div class="map"><span class="maplbl noprint">Live Google Maps satellite — Lot 29 Broken Arrow Trail</span><iframe src="https://maps.google.com/maps?q=29.144419,-95.543456&z=18&t=k&hl=en&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Live Google Maps satellite — Lot 29 Broken Arrow Trail"></iframe><div class="mapfall"><b>Lot 29 Broken Arrow Trail — live satellite map.</b> Interactive in the browser version; this is a printed copy.<br>Parcel centroid <b>29.144419, -95.543456</b> · PID 186219 · BAR X RANCH SEC 16 (A0038 J B BAILEY) BLK 1 LOT 29 ACRES 1.3<br><span class='xs'>Open: google.com/maps/search/?api=1&amp;query=29.144419,-95.543456</span></div></div>
-  </div>
-  <div>
-    <dl class="facts">
-      <dt>Legal</dt><dd>BAR X RANCH SEC 16 (A0038 J B BAILEY) BLK 1 LOT 29 ACRES 1.3</dd>
-      <dt>Situs of record</dt><dd>HIGHWAY 35</dd>
-      <dt>Deed reference</dt><dd>V268P248</dd>
-      <dt>Plat / restrictions</dt><dd>17/219 (23 Jul 1984) · restrictions 84-29/885</dd>
-      <dt>Dimensions</dt><dd>Bounding box 370 × 354 ft; county polygon computes 1.166 ac</dd>
-      <dt>Flood</dt><dd>Zone AE, SFHA · FIRM panel 48039C0420K eff. 30 Dec 2020</dd>
-      <dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 2,477 ft from the parcel</dd>
-      <dt>Ground (LiDAR)</dt><dd>26 ft at the parcel (a 26 ft contour runs 3 ft from the centroid); 21–28 ft across the surrounding 600 ft.</dd>
-      <dt>Water body</dt><dd>The same unnamed 12.6-acre water body as Lot 2. 7 of 13 boundary vertices lie within 60 ft of it.</dd>
-      <dt>Highway</dt><dd>0.10 mi (about 530 ft) south of State Highway 35 — Effectively tied with Lot 1 as the closest to the highway. Its situs of record is literally 'HIGHWAY 35'.</dd>
-      <dt>School district</dt><dd>Columbia-Brazoria ISD</dd>
-      <dt>Jurisdiction</dt><dd>Unincorporated county · no city limits, no ETJ</dd>
-      <dt>Windstorm</dt><dd>TDI Inland I — 120 mph 3-second gust</dd>
-    </dl>
-  </div>
-</div>
+<figure class="hero"><img src="assets/photos/lot3-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">boundary of record and section A–B</span></div><figcaption>boundary of record and section A–B</figcaption></figure>
 
-<h3>Aerial imagery — USGS NAIP, public domain</h3>
-<div class="shots">
-  <div class="shot"><img src="assets/photos/lot3-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">recorded boundary and the A–B section line</span></div></div>
-  <div class="shot"><img src="assets/photos/lot3-2.jpg" alt="The water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The water frontage at B</span><span class="s">close range, 30 cm imagery</span></div></div>
-  <div class="shot"><img src="assets/photos/lot3-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined, streets and water</span></div></div>
-</div>
+<div class="cols2" style="gap:5mm;"><dl class="facts"><dt>Legal</dt><dd>Block 1, Lot 29 · 1.30 ac of record</dd><dt>Situs of record</dt><dd>HIGHWAY 35</dd><dt>Deed · plat · restrictions</dt><dd>V268P248 · 17/219 · 84-29/885</dd><dt>Dimensions</dt><dd>bbox 370 × 354 ft · county polygon 1.166 ac</dd><dt>Flood</dt><dd>Zone AE · panel 48039C0420K, 30 Dec 2020</dd><dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 2,477 ft off the parcel</dd></dl><dl class="facts"><dt>Ground (LiDAR)</dt><dd>26 ft at the parcel (a 26 ft contour runs 3 ft from the centroid)</dd><dt>Soil</dt><dd><b>Pledger clay</b> — vertisol, hydrologic group D</dd><dt>Water</dt><dd>The <b>same 12.6-acre pond</b> as Lot 2, 59 ft off, with about twice the frontage.</dd><dt>Highway</dt><dd>0.10 mi (about 530 ft) south of State Highway 35</dd><dt>Jurisdiction</dt><dd>Unincorporated · no city limits or ETJ</dd></dl></div>
+
+<div class="shots"><figure class="shot"><img src="assets/photos/lot3-2.jpg" alt="Water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Water frontage at B</span><span class="s">close range</span></div><figcaption>close range</figcaption></figure><figure class="shot"><img src="assets/photos/lot3-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined</span></div><figcaption>the parcel outlined</figcaption></figure></div>
+
 <div class="linkrow">
   <a class="lnk g" href="https://www.google.com/maps/search/?api=1&query=29.144419,-95.543456">Open in Google Maps</a>
   <a class="lnk" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=29.144419,-95.543456">Google Street View</a>
@@ -768,24 +685,15 @@ appraisal district's mapping polygon and is for orientation only; it is not a su
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID 186219</a>
   
 </div>
-<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
-the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
-and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
-rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
-appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
-  <div class="note green" style="margin-top:1mm;">
-    <span class="lbl">Best for</span>Value, on every measure that can be checked. It is the only lot priced below the county's own appraisal, the cheapest per acre by 11%, the second largest, and it is waterfront after all.
-  </div>
-  <div class="note amber" style="margin-top:1mm;">
-    <span class="lbl">Watch</span>Section 16 is governed by a different recorded restriction instrument (84-29/885, 1984) from Sections 1 and 2, so the ACC rules are not necessarily the same ones quoted for the other lots. No street number has been assigned, so confirm the listing actually refers to PID 186219.
-  </div>
+  <div class="note green" style="margin-top:0;"><span class="lbl">Best for</span>Value, on every measure that can be checked. It is the only lot priced below the county's own appraisal, the cheapest per acre by 11%, the second largest, and it is waterfront after all.</div>
+  <div class="note amber" style="margin-top:0;"><span class="lbl">Watch</span>Section 16 is governed by a different recorded restriction instrument (84-29/885, 1984) from Sections 1 and 2, so the ACC rules are not necessarily the same ones quoted for the other lots. No street number has been assigned, so confirm the listing actually refers to PID 186219.</div>
 </div>
 <div class="note green" style="margin-bottom:0;">
   <span class="lbl">Verdict on this lot</span>On the verified record this is the pick of the four. Confirm the identity first.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">8 · Lot 3 — Lot 29 Broken Arrow Trail &nbsp;·&nbsp; <b>Page 10 of 34</b></span></div></section><section class="sheet" id="lot4"><span class="smark" aria-hidden="true">[[S:lot4]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">8 · Lot 3 — Lot 29 Broken Arrow Trail &nbsp;·&nbsp; <b>Page 10 of 34</b></span></div></section><section class="sheet" id="lot4"><span class="smark" aria-hidden="true">[[S:lot4]]</span>
 <div class="lothead">
   <div>
     <div class="id">Lot 4 of 4 · PID 183332 · 1533-0132-000</div>
@@ -800,35 +708,12 @@ appraisal district's mapping polygon and is for orientation only; it is not a su
   </div>
 </div>
 
-<div class="cols2c">
-  <div>
-    <div class="map"><span class="maplbl noprint">Live Google Maps satellite — 750 Wagon Wheel Trail</span><iframe src="https://maps.google.com/maps?q=29.130575,-95.541987&z=18&t=k&hl=en&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Live Google Maps satellite — 750 Wagon Wheel Trail"></iframe><div class="mapfall"><b>750 Wagon Wheel Trail — live satellite map.</b> Interactive in the browser version; this is a printed copy.<br>Parcel centroid <b>29.130575, -95.541987</b> · PID 183332 · BAR X RANCH (A0038 J B BAILEY) LOT 132 ACRES 1.<br><span class='xs'>Open: google.com/maps/search/?api=1&amp;query=29.130575,-95.541987</span></div></div>
-  </div>
-  <div>
-    <dl class="facts">
-      <dt>Legal</dt><dd>BAR X RANCH (A0038 J B BAILEY) LOT 132 ACRES 1.</dd>
-      <dt>Situs of record</dt><dd>750 WAGON WHEEL TRAIL</dd>
-      <dt>Deed reference</dt><dd>V1729P804</dd>
-      <dt>Plat / restrictions</dt><dd>16/104 (9 Jun 1980) · restrictions 1515/679 (+ drainage easements 1712/500)</dd>
-      <dt>Dimensions</dt><dd>Bounding box 479 × 123 ft; county polygon computes 0.955 ac</dd>
-      <dt>Flood</dt><dd>Zone AE, SFHA · FIRM panel 48039C0420K eff. 30 Dec 2020</dd>
-      <dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 1,492 ft from the parcel</dd>
-      <dt>Ground (LiDAR)</dt><dd>24 ft at the parcel (a 24 ft contour passes within 1 ft of the centroid); 23–30 ft across the surrounding 600 ft.</dd>
-      <dt>Water body</dt><dd><b>Flag Pond — a 101.5-acre lake</b>, by far the largest water body here, and confirmed by name in the USGS hydrography at <b>14 ft</b> from the boundary. 8 of 17 vertices sit within 11 ft of both the mapped pond extent and the Flag Lake Levee embankment (NID TX06298). Note the aerial: the <em>visible</em> shoreline lies further out than the mapped pool boundary.</dd>
-      <dt>Highway</dt><dd>1.03 mi south of State Highway 35 — Quietest of the four by a wide margin — a mile off the highway.</dd>
-      <dt>School district</dt><dd>Columbia-Brazoria ISD</dd>
-      <dt>Jurisdiction</dt><dd>Unincorporated county · no city limits, no ETJ</dd>
-      <dt>Windstorm</dt><dd>TDI Inland I — 120 mph 3-second gust</dd>
-    </dl>
-  </div>
-</div>
+<figure class="hero"><img src="assets/photos/lot4-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">boundary of record and section A–B</span></div><figcaption>boundary of record and section A–B</figcaption></figure>
 
-<h3>Aerial imagery — USGS NAIP, public domain</h3>
-<div class="shots">
-  <div class="shot"><img src="assets/photos/lot4-1.jpg" alt="The parcel" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The parcel</span><span class="s">recorded boundary and the A–B section line</span></div></div>
-  <div class="shot"><img src="assets/photos/lot4-2.jpg" alt="The water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">The water frontage at B</span><span class="s">close range, 30 cm imagery</span></div></div>
-  <div class="shot"><img src="assets/photos/lot4-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined, streets and water</span></div></div>
-</div>
+<div class="cols2" style="gap:5mm;"><dl class="facts"><dt>Legal</dt><dd>Lot 132 · 1.00 ac of record</dd><dt>Situs of record</dt><dd>750 WAGON WHEEL TRAIL</dd><dt>Deed · plat · restrictions</dt><dd>V1729P804 · 16/104 · 1515/679</dd><dt>Dimensions</dt><dd>bbox 479 × 123 ft · county polygon 0.955 ac</dd><dt>Flood</dt><dd>Zone AE · panel 48039C0420K, 30 Dec 2020</dd><dt>Nearest BFE line</dt><dd><b>28.0 ft NAVD88</b>, 1,492 ft off the parcel</dd></dl><dl class="facts"><dt>Ground (LiDAR)</dt><dd>24 ft at the parcel (a 24 ft contour passes within 1 ft of the centroid)</dd><dt>Soil</dt><dd><b>Pledger clay</b> — vertisol, hydrologic group D</dd><dt>Water</dt><dd><b>Flag Pond, 101.5 ac</b> — named in USGS hydrography 14 ft off, plus the levee.</dd><dt>Highway</dt><dd>1.03 mi south of State Highway 35</dd><dt>Jurisdiction</dt><dd>Unincorporated · no city limits or ETJ</dd></dl></div>
+
+<div class="shots"><figure class="shot"><img src="assets/photos/lot4-2.jpg" alt="Water frontage at B" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Water frontage at B</span><span class="s">close range</span></div><figcaption>close range</figcaption></figure><figure class="shot"><img src="assets/photos/lot4-3.jpg" alt="Neighbourhood context" onload="this.parentNode.querySelector('.ph').style.display='none'"><div class="ph"><span class="t">Neighbourhood context</span><span class="s">the parcel outlined</span></div><figcaption>the parcel outlined</figcaption></figure></div>
+
 <div class="linkrow">
   <a class="lnk g" href="https://www.google.com/maps/search/?api=1&query=29.130575,-95.541987">Open in Google Maps</a>
   <a class="lnk" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=29.130575,-95.541987">Google Street View</a>
@@ -836,24 +721,15 @@ appraisal district's mapping polygon and is for orientation only; it is not a su
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID 183332</a>
   <a class="lnk" href="https://www.realtor.com/realestateandhomes-detail/750-Wagon-Wheel-Trl_Angleton_TX_77515_M88761-47581">Realtor.com listing</a>
 </div>
-<p class="xs">Imagery is <b>USGS NAIP aerial photography at 30 cm</b>, in the public domain, with
-the recorded parcel boundary and the A–B section line drawn on. Listing photographs on Zillow, Redfin
-and Realtor.com are licensed to those platforms and to the listing brokerage, so they are linked above
-rather than reproduced — use the buttons for ground-level views. The boundary overlay comes from the
-appraisal district's mapping polygon and is for orientation only; it is not a survey.</p>
 
 <div class="cols2">
-  <div class="note teal" style="margin-top:1mm;">
-    <span class="lbl">Best for</span>The view and the water. If the point of the exercise is a lake house, this is the only lot that delivers a 101-acre lake rather than a 13-acre pond.
-  </div>
-  <div class="note amber" style="margin-top:1mm;">
-    <span class="lbl">Watch</span>Two things. It is 1.00 acre of record — <b>not</b> the 1.27 acres quoted from LoopNet — which makes it the most expensive land per acre in the portfolio by 28% over Lot 3. And the boundary is 11 ft from a levee embankment that impounds a 101-acre lake; the National Inventory of Dams carries no hazard-potential classification and no condition rating for it.
-  </div>
+  <div class="note teal" style="margin-top:0;"><span class="lbl">Best for</span>The view and the water. If the point of the exercise is a lake house, this is the only lot that delivers a 101-acre lake rather than a 13-acre pond.</div>
+  <div class="note amber" style="margin-top:0;"><span class="lbl">Watch</span>Two things. It is 1.00 acre of record — <b>not</b> the 1.27 acres quoted from LoopNet — which makes it the most expensive land per acre in the portfolio by 28% over Lot 3. And the boundary is 11 ft from a levee embankment that impounds a 101-acre lake; the National Inventory of Dams carries no hazard-potential classification and no condition rating for it.</div>
 </div>
 <div class="note blue" style="margin-bottom:0;">
   <span class="lbl">Verdict on this lot</span>Best lot to live on, worst lot to buy on price. The dam needs answering first.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">9 · Lot 4 — 750 Wagon Wheel Trail &nbsp;·&nbsp; <b>Page 11 of 34</b></span></div></section><section class="sheet" id="flood"><span class="smark" aria-hidden="true">[[S:flood]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">9 · Lot 4 — 750 Wagon Wheel Trail &nbsp;·&nbsp; <b>Page 11 of 34</b></span></div></section><section class="sheet" id="flood"><span class="smark" aria-hidden="true">[[S:flood]]</span>
 <h2><span class="n">10 ·</span> Flood — the finding that changes the build</h2>
 <p class="lead">All four lots are in a mapped Special Flood Hazard Area. That was never in doubt. What
 both earlier editions got wrong is the elevation arithmetic, and it goes the wrong way.</p>
@@ -931,7 +807,7 @@ both earlier editions got wrong is the elevation arithmetic, and it goes the wro
 <p class="sm"><b>One correction carried forward:</b> the county's 24-inch freeboard was adopted by
 Commissioners Court in <b>May 2005</b>, not raised after Hurricane Harvey in 2017. The original
 portfolio's causal story was twelve years out.</p>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">10 · Flood &nbsp;·&nbsp; <b>Page 12 of 34</b></span></div></section><section class="sheet" id="terrain"><span class="smark" aria-hidden="true">[[S:terrain]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">10 · Flood &nbsp;·&nbsp; <b>Page 12 of 34</b></span></div></section><section class="sheet" id="terrain"><span class="smark" aria-hidden="true">[[S:terrain]]</span>
 <h2><span class="n">11 ·</span> Terrain, slope and how the drawings were made</h2>
 <p class="lead">The next four pages give each lot a true-scale plan with the county's 1-foot LiDAR
 contours, and a longitudinal section cut along the dotted A–B line from the roadside boundary to the
@@ -987,7 +863,7 @@ lakeside boundary.</p>
   interval. It is drawn, exaggerated by a factor of tens of thousands, purely so you can see that it
   has been checked. It is correctly ignored everywhere else in this document.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">11 · Terrain method &nbsp;·&nbsp; <b>Page 13 of 34</b></span></div></section><section class="sheet" id="terrain1"><span class="smark" aria-hidden="true">[[S:terrain1]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">11 · Terrain method &nbsp;·&nbsp; <b>Page 13 of 34</b></span></div></section><section class="sheet" id="terrain1"><span class="smark" aria-hidden="true">[[S:terrain1]]</span>
 <h2><span class="n">12 ·</span> Terrain — Lot 1, 1127 Saddle Horn Bend</h2>
 <p class="sm" style="margin-bottom:2mm;">Plan and section at a true horizontal scale of
 <b>1:2000</b>. Contours are the county's 1 ft LiDAR product; the profile is USGS 3DEP 1 m DEM.
@@ -999,7 +875,7 @@ Section A–B runs from the Saddle Horn Bend frontage (A) to the water boundary 
   <div class="note teal" style="margin:0;"><span class="lbl">What the ground does</span>The section runs 562 ft from the Saddle Horn Bend frontage out to the Mill Bayou edge. The lot is a wedge: narrow at the road, wide at the water. Ground sits at 24–26 ft across the buildable middle, then drops <b>3.7 ft in the last 8 m</b> to the bayou at 21.2 ft — an <b>8.4° bank</b>. There is a second, sharper dip right at the road: 1.7 ft in 8 m at 3.9°, which is the roadside drainage ditch, not landform. Everything between is within a foot and a half of level.</div>
   <div class="note amber" style="margin:0;"><span class="lbl">What it means for building</span>The pad problem is visible here. The highest natural point anywhere on the transect is 26.0 ft, and the finished floor has to reach 30 ft. That is a <b>4 ft lift at the very best spot</b>, and 5–6 ft anywhere you would actually want to sit the house.</div>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">12 · Terrain — Lot 1 &nbsp;·&nbsp; <b>Page 14 of 34</b></span></div></section><section class="sheet" id="terrain2"><span class="smark" aria-hidden="true">[[S:terrain2]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">12 · Terrain — Lot 1 &nbsp;·&nbsp; <b>Page 14 of 34</b></span></div></section><section class="sheet" id="terrain2"><span class="smark" aria-hidden="true">[[S:terrain2]]</span>
 <h2><span class="n">13 ·</span> Terrain — Lot 2, 336 Wagon Wheel Trail W</h2>
 <p class="sm" style="margin-bottom:2mm;">Plan and section at a true horizontal scale of
 <b>1:1250</b>. Contours are the county's 1 ft LiDAR product; the profile is USGS 3DEP 1 m DEM.
@@ -1011,7 +887,7 @@ Section A–B runs from the Wagon Wheel Trl frontage (A) to the water boundary (
   <div class="note teal" style="margin:0;"><span class="lbl">What the ground does</span>The section runs 412 ft from Wagon Wheel Trail to the pond. This is the driest profile of the four: the ground rises off the road to <b>29.1 ft</b> — the highest natural elevation measured on any of the four lots — holds a broad, genuinely level plateau across the middle of the lot, then falls away at <b>8.8°</b> over the last few metres to the water at 21.2 ft.</div>
   <div class="note green" style="margin:0;"><span class="lbl">What it means for building</span>At 29.1 ft the plateau is <b>within a foot of the 30 ft requirement</b>. That is the single most valuable physical fact in this portfolio: a foot of fill instead of five or six, on a lot that also happens to be the cheapest.</div>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">13 · Terrain — Lot 2 &nbsp;·&nbsp; <b>Page 15 of 34</b></span></div></section><section class="sheet" id="terrain3"><span class="smark" aria-hidden="true">[[S:terrain3]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">13 · Terrain — Lot 2 &nbsp;·&nbsp; <b>Page 15 of 34</b></span></div></section><section class="sheet" id="terrain3"><span class="smark" aria-hidden="true">[[S:terrain3]]</span>
 <h2><span class="n">14 ·</span> Terrain — Lot 3, Lot 29 Broken Arrow Trail</h2>
 <p class="sm" style="margin-bottom:2mm;">Plan and section at a true horizontal scale of
 <b>1:2000</b>. Contours are the county's 1 ft LiDAR product; the profile is USGS 3DEP 1 m DEM.
@@ -1023,7 +899,7 @@ Section A–B runs from the Broken Arrow Trl frontage (A) to the water boundary 
   <div class="note teal" style="margin:0;"><span class="lbl">What the ground does</span>The section runs 453 ft from Broken Arrow Trail to the pond. The plateau is real and broad at 26–27 ft, with the high point at 26.9 ft. The lakeside bank is the <b>steepest of the four at 11.6°</b> — 4.1 ft of drop in 6 m — and there is another 8.2° cut at the road, again the ditch.</div>
   <div class="note amber" style="margin:0;"><span class="lbl">What it means for building</span>Good, level building ground at 26–27 ft, needing about 3–4 ft of fill. The steep bank at B matters for the TCEQ 75 ft absorption setback and for erosion, and the ground it is cut into is Pledger clay.</div>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">14 · Terrain — Lot 3 &nbsp;·&nbsp; <b>Page 16 of 34</b></span></div></section><section class="sheet" id="terrain4"><span class="smark" aria-hidden="true">[[S:terrain4]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">14 · Terrain — Lot 3 &nbsp;·&nbsp; <b>Page 16 of 34</b></span></div></section><section class="sheet" id="terrain4"><span class="smark" aria-hidden="true">[[S:terrain4]]</span>
 <h2><span class="n">15 ·</span> Terrain — Lot 4, 750 Wagon Wheel Trail</h2>
 <p class="sm" style="margin-bottom:2mm;">Plan and section at a true horizontal scale of
 <b>1:1250</b>. Contours are the county's 1 ft LiDAR product; the profile is USGS 3DEP 1 m DEM.
@@ -1035,7 +911,7 @@ Section A–B runs from the Wagon Wheel Trl frontage (A) to the water boundary (
   <div class="note teal" style="margin:0;"><span class="lbl">What the ground does</span>The section runs 568 ft from Wagon Wheel Trail to Flag Pond, and it is the one profile that behaves backwards: the ground <b>rises</b> toward the water, from 23.1 ft near the road to <b>30.7 ft</b> at the far boundary, on a sustained <b>8.5°</b> climb.</div>
   <div class="note red" style="margin:0;"><span class="lbl">What it means for building</span>That rise is not a hill. It is the <b>Flag Lake Levee embankment</b>. The 101-acre pond is impounded <em>above</em> the level of the buildable part of the lot — the interior sits at 23–24 ft, the lowest of the four, while the crest beside it reaches 30.7 ft. You would be building in the shadow of a structure the National Inventory of Dams carries with no hazard classification and no condition rating.</div>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">15 · Terrain — Lot 4 &nbsp;·&nbsp; <b>Page 17 of 34</b></span></div></section><section class="sheet" id="soil"><span class="smark" aria-hidden="true">[[S:soil]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">15 · Terrain — Lot 4 &nbsp;·&nbsp; <b>Page 17 of 34</b></span></div></section><section class="sheet" id="soil"><span class="smark" aria-hidden="true">[[S:soil]]</span>
 <h2><span class="n">16 ·</span> Soil — the one thing that decides all three of your problems</h2>
 <p class="lead">Soil settles your garden, your septic system and your foundation at the same time, and
 the four lots do not share it. The USDA soil survey splits them cleanly down the middle.</p>
@@ -1084,7 +960,7 @@ the four lots do not share it. The USDA soil survey splits them cleanly down the
   shortlisted lot before you close. It costs $350–$600 and it is the highest-value money in this
   entire project.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">16 · Soil &nbsp;·&nbsp; <b>Page 18 of 34</b></span></div></section><section class="sheet" id="restrictions"><span class="smark" aria-hidden="true">[[S:restrictions]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">16 · Soil &nbsp;·&nbsp; <b>Page 18 of 34</b></span></div></section><section class="sheet" id="restrictions"><span class="smark" aria-hidden="true">[[S:restrictions]]</span>
 <h2><span class="n">17 ·</span> Deed restrictions and buildability</h2>
 <p>The recorded Bar X Ranch declaration of restrictions has now been read rather than paraphrased.
 Several figures repeated by the earlier editions are not in it, and several provisions that matter a
@@ -1113,7 +989,7 @@ great deal to your plans are.</p>
   acreage a few miles further out will let you keep ducks and will not give you any of that. That is
   the real choice in front of you, and it is not a choice this document can make for you.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">17 · Restrictions &nbsp;·&nbsp; <b>Page 19 of 34</b></span></div></section><section class="sheet" id="septic"><span class="smark" aria-hidden="true">[[S:septic]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">17 · Restrictions &nbsp;·&nbsp; <b>Page 19 of 34</b></span></div></section><section class="sheet" id="septic"><span class="smark" aria-hidden="true">[[S:septic]]</span>
 <h2><span class="n">18 ·</span> Septic (OSSF) — sized against the regulation, per soil</h2>
 <p>Every house here is on a private well and an on-site sewage facility. This is where the original
 portfolio was most wrong, and where §16's soil finding now produces two different answers.</p>
@@ -1135,7 +1011,7 @@ portfolio was most wrong, and where §16's soil finding now produces two differe
   garden. On <b>Lot 2 at 187 ft wide</b> and on <b>Lot 4 at 123 ft wide</b> this is the test that
   decides whether the lot works at all. Lot 1 at 1.95 acres is the only one where it is not close.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">18 · Septic &nbsp;·&nbsp; <b>Page 20 of 34</b></span></div></section><section class="sheet" id="cost"><span class="smark" aria-hidden="true">[[S:cost]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">18 · Septic &nbsp;·&nbsp; <b>Page 20 of 34</b></span></div></section><section class="sheet" id="cost"><span class="smark" aria-hidden="true">[[S:cost]]</span>
 <h2><span class="n">19 ·</span> Cost to build — rebuilt with the pad and the soil in it</h2>
 <p>The second edition carried fill at $0–$8,000 and treated it as optional. §10 and §11 show it is
 mandatory on every lot, at 2–6 ft. That single line, plus the vertisol foundation upcharge on Lots 3
@@ -1152,7 +1028,7 @@ are lot-specific, and all three can be resolved for under $1,000 and three phone
   the electric extension <b>$25,000</b>. Choosing the lot on its asking price, rather than on its soil
   and its elevation, is optimising the smallest of the five numbers.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">19 · Cost &nbsp;·&nbsp; <b>Page 21 of 34</b></span></div></section><section class="sheet" id="carry"><span class="smark" aria-hidden="true">[[S:carry]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">19 · Cost &nbsp;·&nbsp; <b>Page 21 of 34</b></span></div></section><section class="sheet" id="carry"><span class="smark" aria-hidden="true">[[S:carry]]</span>
 <h2><span class="n">20 ·</span> Annual carrying cost — with the tax model corrected</h2>
 <p>The second edition's tax model included an Angleton-Danbury hospital district levy and an Angleton
 drainage district levy. Checked parcel by parcel against the county's taxing-district layers,
@@ -1177,7 +1053,7 @@ drainage district levy. Checked parcel by parcel against the county's taxing-dis
 <p class="xs" style="margin-bottom:0;">POA dues and the mowing charge come from listing copy for other
 Bar X Ranch lots, not from the association. Confirm both, and the transfer fee, on a POA resale
 certificate. §17 shows the mowing charge is grounded in §3.13 of the recorded restrictions.</p>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">20 · Carrying cost &nbsp;·&nbsp; <b>Page 22 of 34</b></span></div></section><section class="sheet" id="wind"><span class="smark" aria-hidden="true">[[S:wind]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">20 · Carrying cost &nbsp;·&nbsp; <b>Page 22 of 34</b></span></div></section><section class="sheet" id="wind"><span class="smark" aria-hidden="true">[[S:wind]]</span>
 <h2><span class="n">21 ·</span> Wind, storm and insurance</h2>
 <p class="lead">You asked about safety from storms. On the coast this is two separate questions —
 what the building code makes you build, and what the insurance costs — and the answers are better
@@ -1202,7 +1078,7 @@ than you might fear for an address 28 miles from the Gulf.</p>
   carries a FEMA fee and a heavier burden of proof. Plan on carrying flood insurance permanently.
   Windstorm cover is unaffected by any of this.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">21 · Wind &amp; insurance &nbsp;·&nbsp; <b>Page 23 of 34</b></span></div></section><section class="sheet" id="climate"><span class="smark" aria-hidden="true">[[S:climate]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">21 · Wind &amp; insurance &nbsp;·&nbsp; <b>Page 23 of 34</b></span></div></section><section class="sheet" id="climate"><span class="smark" aria-hidden="true">[[S:climate]]</span>
 <h2><span class="n">22 ·</span> Living here — the weather, in degrees Celsius</h2>
 <p class="lead">A humid subtropical Gulf coast climate: long, hot, wet summers, short mild winters,
 almost no frost, and a 320-day growing season that is the single best thing about gardening here.</p>
@@ -1252,7 +1128,7 @@ almost no frost, and a 320-day growing season that is the single best thing abou
   climate; Brazoria County runs a mosquito-control programme, and you will use it.
   <b>Hurricane season</b> runs June to November, and the practical consequence for a gardener is that
   anything tall or trellised needs to come down or be strapped when a storm is named.
-</div><div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">22 · Climate &nbsp;·&nbsp; <b>Page 24 of 34</b></span></div></section><section class="sheet" id="hazards"><span class="smark" aria-hidden="true">[[S:hazards]]</span>
+</div><div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">22 · Climate &nbsp;·&nbsp; <b>Page 24 of 34</b></span></div></section><section class="sheet" id="hazards"><span class="smark" aria-hidden="true">[[S:hazards]]</span>
 <h2><span class="n">23 ·</span> Living here — natural hazards, ranked by the federal index</h2>
 <p>You asked specifically about flood, storm and fire. FEMA's National Risk Index scores every US
 county on eighteen hazards. This is Brazoria County, December 2025 edition.</p>
@@ -1300,7 +1176,7 @@ county on eighteen hazards. This is Brazoria County, December 2025 edition.</p>
   Dam (TX01759), which NID does rate, as low hazard potential. A county-level index will never tell you
   this; ask TCEQ Dam Safety.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">23 · Hazards &nbsp;·&nbsp; <b>Page 25 of 34</b></span></div></section><section class="sheet" id="services"><span class="smark" aria-hidden="true">[[S:services]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">23 · Hazards &nbsp;·&nbsp; <b>Page 25 of 34</b></span></div></section><section class="sheet" id="services"><span class="smark" aria-hidden="true">[[S:services]]</span>
 <h2><span class="n">24 ·</span> Living here — services, shopping, school and hospital</h2>
 <p class="lead">Bar X Ranch is rural but not remote. The honest summary: <b>nothing is far, and nothing
 is close.</b> Almost every daily errand is a 12–20 minute drive, there is no walkable anything, and a
@@ -1314,7 +1190,7 @@ second car is not optional.</p>
   the Brazoria Community Library is <b>2.9 miles</b> away, easily the closest public building of any
   kind.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">24 · Services &nbsp;·&nbsp; <b>Page 26 of 34</b></span></div></section><section class="sheet" id="services2"><span class="smark" aria-hidden="true">[[S:services2]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">24 · Services &nbsp;·&nbsp; <b>Page 26 of 34</b></span></div></section><section class="sheet" id="services2"><span class="smark" aria-hidden="true">[[S:services2]]</span>
 <h2><span class="n">25 ·</span> Living here — schools, shopping and going out</h2>
 <table class="compact"><thead><tr><th>Schools — Columbia-Brazoria ISD</th><th class="n">Miles</th><th class="n">Drive min</th><th>Note</th></tr></thead><tbody><tr><td>West Columbia Elementary</td><td class="n">7.0</td><td class="n">14</td><td></td></tr><tr><td>Columbia High School</td><td class="n">7.1</td><td class="n">14</td><td></td></tr><tr><td>Wild Peach Elementary</td><td class="n">12.3</td><td class="n">23</td><td></td></tr><tr><td>West Brazos Junior High</td><td class="n">13.8</td><td class="n">24</td><td></td></tr><tr><td>Brazosport College, Lake Jackson</td><td class="n">16.5</td><td class="n">27</td><td>nearest college (approx.)</td></tr></tbody></table><table class="compact"><thead><tr><th>Shopping, dining, going out</th><th class="n">Miles</th><th class="n">Drive min</th><th>Note</th></tr></thead><tbody><tr><td>Margarita Jones / Republic BBQ, West Columbia</td><td class="n">6.5</td><td class="n">12</td><td>nearest sit-down restaurants</td></tr><tr><td>Elroy Floyd's / Damifino</td><td class="n">8.8</td><td class="n">16</td><td>nearest bars</td></tr><tr><td>Cooter Browns Country Club, Brazoria</td><td class="n">8.9</td><td class="n">23</td><td>nearest live-music venue</td></tr><tr><td>AMC Classic Brazos 14 cinema</td><td class="n">15.6</td><td class="n">26</td><td>nearest cinema</td></tr><tr><td>Brazos Mall, Lake Jackson</td><td class="n">15.6</td><td class="n">26</td><td>nearest enclosed mall</td></tr><tr><td>Wayside Pub, Lake Jackson</td><td class="n">16.4</td><td class="n">26</td><td></td></tr><tr><td>Pearland Town Center</td><td class="n">36.3</td><td class="n">49</td><td>first large-format retail</td></tr><tr><td>The Strand / downtown Galveston</td><td class="n">60.0</td><td class="n">92</td><td>nightlife district (approx.)</td></tr><tr><td>Downtown Houston</td><td class="n">50.6</td><td class="n">67</td><td>full metropolitan nightlife</td></tr></tbody></table>
 <div class="cols2">
@@ -1337,7 +1213,7 @@ second car is not optional.</p>
     weakest column in the whole assessment.</p>
   </div>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">25 · Schools &amp; going out &nbsp;·&nbsp; <b>Page 27 of 34</b></span></div></section><section class="sheet" id="leisure"><span class="smark" aria-hidden="true">[[S:leisure]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">25 · Schools &amp; going out &nbsp;·&nbsp; <b>Page 27 of 34</b></span></div></section><section class="sheet" id="leisure"><span class="smark" aria-hidden="true">[[S:leisure]]</span>
 <h2><span class="n">26 ·</span> Living here — coast, resorts, amusements and the outdoors</h2>
 <table class="compact"><thead><tr><th>Coast, resorts and amusements</th><th class="n">Miles</th><th class="n">Drive min</th><th>Note</th></tr></thead><tbody><tr><td>The Wilderness Golf Course</td><td class="n">17.0</td><td class="n">28</td><td>nearest golf</td></tr><tr><td>Sea Center Texas, Lake Jackson</td><td class="n">18.4</td><td class="n">29</td><td>aquarium + hatchery, free</td></tr><tr><td>San Bernard National Wildlife Refuge</td><td class="n">19.1</td><td class="n">41</td><td></td></tr><tr><td>Surfside Beach</td><td class="n">28.3</td><td class="n">42</td><td>nearest Gulf beach</td></tr><tr><td>Brazos Bend State Park</td><td class="n">31.0</td><td class="n">51</td><td></td></tr><tr><td>Space Center Houston</td><td class="n">44.9</td><td class="n">72</td><td></td></tr><tr><td>Kemah Boardwalk</td><td class="n">51.0</td><td class="n">81</td><td></td></tr><tr><td>Moody Gardens, Galveston</td><td class="n">59.4</td><td class="n">92</td><td></td></tr><tr><td>San Luis Resort, Galveston</td><td class="n">59.0</td><td class="n">91</td><td>nearest full resort hotel</td></tr><tr><td>Galveston Pleasure Pier / Schlitterbahn waterpark</td><td class="n">60.2</td><td class="n">91</td><td>Schlitterbahn is seasonal</td></tr><tr><td>Galveston Island seawall</td><td class="n">61.2</td><td class="n">93</td><td></td></tr></tbody></table>
 <div class="cols2">
@@ -1376,7 +1252,7 @@ second car is not optional.</p>
   water's edge. Feral hogs will find a vegetable garden, and raptors, raccoons and coyotes are exactly
   why the poultry question in §17 would have needed a well-built run anyway.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">26 · Coast &amp; outdoors &nbsp;·&nbsp; <b>Page 28 of 34</b></span></div></section><section class="sheet" id="community"><span class="smark" aria-hidden="true">[[S:community]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">26 · Coast &amp; outdoors &nbsp;·&nbsp; <b>Page 28 of 34</b></span></div></section><section class="sheet" id="community"><span class="smark" aria-hidden="true">[[S:community]]</span>
 <h2><span class="n">27 ·</span> Living here — the neighbourhood, and the Indian community</h2>
 <p class="lead">You asked for a good, developed neighbourhood. On the census evidence this is a
 markedly affluent, stable, almost entirely owner-occupied rural neighbourhood — and one with
@@ -1422,7 +1298,7 @@ essentially no Indian community in it.</p>
   Budget <b>two hours to IAH</b> in practice; the 95-minute figure is free-flowing traffic, and the
   route crosses Houston's southern suburbs.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">27 · Neighbourhood &nbsp;·&nbsp; <b>Page 29 of 34</b></span></div></section><section class="sheet" id="amenities"><span class="smark" aria-hidden="true">[[S:amenities]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">27 · Neighbourhood &nbsp;·&nbsp; <b>Page 29 of 34</b></span></div></section><section class="sheet" id="amenities"><span class="smark" aria-hidden="true">[[S:amenities]]</span>
 <h2><span class="n">28 ·</span> Community amenities, the lakes and fishing</h2>
 <p>The POA amenity base is the main thing your $400 a year buys, and it is better than the original
 portfolio described.</p>
@@ -1468,7 +1344,7 @@ portfolio described.</p>
   Lot 3 with roughly twice the frontage of Lot 2. <b>Lot 4</b> fronts <b>Flag Pond, 101.5 acres</b>,
   and the levee that impounds it. Only Lot 4 is on what most people would call a lake.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">28 · Amenities &amp; fishing &nbsp;·&nbsp; <b>Page 30 of 34</b></span></div></section><section class="sheet" id="scorecard"><span class="smark" aria-hidden="true">[[S:scorecard]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">28 · Amenities &amp; fishing &nbsp;·&nbsp; <b>Page 30 of 34</b></span></div></section><section class="sheet" id="scorecard"><span class="smark" aria-hidden="true">[[S:scorecard]]</span>
 <h2><span class="n">29 ·</span> Scorecard against your brief</h2>
 <p>Eighteen tests, weighted to what you said matters: gardening, hobby farming, quick access to
 amenities, a good and developed neighbourhood, scenery and nature, and safety from flood and storm.
@@ -1500,7 +1376,7 @@ Green is good, amber is a compromise, red is a problem.</p>
   headroom, and accept the smaller garden. <b>Do not buy Lots 3 or 4</b> — the Pledger clay costs you
   more in septic and foundation than you save on land, and Lot 4's dam is an unquantified risk.</p>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">29 · Scorecard &nbsp;·&nbsp; <b>Page 31 of 34</b></span></div></section><section class="sheet" id="corrections"><span class="smark" aria-hidden="true">[[S:corrections]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">29 · Scorecard &nbsp;·&nbsp; <b>Page 31 of 34</b></span></div></section><section class="sheet" id="corrections"><span class="smark" aria-hidden="true">[[S:corrections]]</span>
 <h2><span class="n">30 ·</span> What changed, edition by edition</h2>
 <p>The original generated portfolio, the v2 rebuild, and this edition. Only the items where the answer
 actually moved are listed.</p>
@@ -1508,7 +1384,7 @@ actually moved are listed.</p>
 <p class="xs" style="margin-bottom:0;">The full claim-by-claim audit of the original document remains
 in <a href="docs/AUDIT.md">docs/AUDIT.md</a>. The evidence trail for everything new in this edition,
 including the exact service queries, is in <a href="docs/EVIDENCE.md">docs/EVIDENCE.md</a>.</p>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">30 · Corrections &nbsp;·&nbsp; <b>Page 32 of 34</b></span></div></section><section class="sheet" id="next"><span class="smark" aria-hidden="true">[[S:next]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">30 · Corrections &nbsp;·&nbsp; <b>Page 32 of 34</b></span></div></section><section class="sheet" id="next"><span class="smark" aria-hidden="true">[[S:next]]</span>
 <h2><span class="n">31 ·</span> What to do next, in this order</h2>
 <p class="lead">Nine of these cost almost nothing and between them they resolve every remaining
 material unknown. Do them before you make an offer, not after.</p>
@@ -1557,7 +1433,7 @@ material unknown. Do them before you make an offer, not after.</p>
   under $700 between them and would change the recommendation in this document if any of them came back
   differently.
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">31 · Next steps &nbsp;·&nbsp; <b>Page 33 of 34</b></span></div></section><section class="sheet" id="sources"><span class="smark" aria-hidden="true">[[S:sources]]</span>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">31 · Next steps &nbsp;·&nbsp; <b>Page 33 of 34</b></span></div></section><section class="sheet" id="sources"><span class="smark" aria-hidden="true">[[S:sources]]</span>
 <h2><span class="n">Sources, limitations and sign-off</span></h2>
 <h3>Primary sources used in this edition</h3>
 <table class="compact">
@@ -1630,7 +1506,7 @@ current school attendance zones and campus performance.</p>
   Subject parcels: PID 183667, 183367, 186219, 183332 — Bar X Ranch Sections 1, 2 and 16,
   unincorporated Brazoria County, Angleton, Texas 77515.</div>
 </div>
-<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> v3.0 · prepared for Mohsin Chowdhury · 11 September 2026</span><span class="pg">Sources &amp; sign-off &nbsp;·&nbsp; <b>Page 34 of 34</b></span></div></section>
+<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>&nbsp; v3.0 &nbsp;·&nbsp; Mohsin Chowdhury</span><span class="pg">Sources &amp; sign-off &nbsp;·&nbsp; <b>Page 34 of 34</b></span></div></section>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function(){

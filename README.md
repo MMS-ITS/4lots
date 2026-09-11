@@ -17,6 +17,7 @@ there.
 | [`tools/build_artifact.py`](tools/build_artifact.py) | Builds `index.html`. All figures baked in as literals. |
 | [`tools/terrain.py`](tools/terrain.py) | Rebuilds `data/terrain.json` from the county and USGS elevation services |
 | [`tools/terrain_svg.py`](tools/terrain_svg.py) | Renders the true-scale plans and terrain sections |
+| [`tools/aerials.py`](tools/aerials.py) | Builds the twelve lot aerials from USGS NAIP |
 | [`tools/paginate.py`](tools/paginate.py) | Two-pass pagination — measures the real print, then fixes every page number and verifies it |
 | [`docs/EVIDENCE.md`](docs/EVIDENCE.md) | Every v3 finding with the exact query that produced it |
 | [`docs/AUDIT.md`](docs/AUDIT.md) | Claim-by-claim audit of the original generated portfolio |
@@ -57,12 +58,23 @@ there.
 ## Rebuilding
 
 ```
+pip install Pillow pypdf
+
+python3 tools/aerials.py          # writes the twelve lot aerials
 python3 tools/build_artifact.py   # writes index.html
 python3 tools/paginate.py         # measures the print and corrects every page number
 python3 tools/terrain.py          # only needed to refresh the elevation data
 ```
 
-`paginate.py` needs headless Chrome and `pypdf`. No API keys are required anywhere.
+`paginate.py` needs headless Chrome. No API keys are required anywhere.
+
+### A note on image resolution
+
+USGS NAIP is **30 cm** ground sample distance, and nothing sharper is published for this area —
+Esri World Imagery tops out near 26 cm here and serves empty tiles above zoom 19. The aerials are
+therefore sampled at a fixed **0.15 m/px**, a 2× oversample of the source, which is the honest
+ceiling: asking the server for 0.06 m/px, as a first attempt did, only interpolated the same 30 cm
+data five times over and looked soft. Each image states its own m/px in the corner.
 
 ## Status
 
