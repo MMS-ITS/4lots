@@ -1,0 +1,350 @@
+{
+ "basis": {
+  "ffe_ft": 30.0,
+  "slab_ft": 0.5,
+  "strip_ft": 0.5,
+  "pad_ft": [
+   69.0,
+   82.0
+  ],
+  "side_slope": "3:1",
+  "fill_rate_usd_per_cy": [
+   16.0,
+   30.0
+  ],
+  "note": "pad top at FFE minus slab; fill measured from the stripped surface"
+ },
+ "lots": {
+  "lot1": {
+   "lot": 1,
+   "name": "1127 Saddle Horn Bend",
+   "grid_points": 325,
+   "ground_min_ft": 24.17,
+   "ground_max_ft": 26.75,
+   "ground_mean_ft": 25.03,
+   "pad_ground_ft": 25.26,
+   "pad_top_ft": 29.5,
+   "lift_ft": 4.24,
+   "fill_height_ft": 4.74,
+   "fill_cy": 1416,
+   "toe_ft": [
+    97,
+    110
+   ],
+   "lot_bbox_ft": [
+    316,
+    460
+   ],
+   "pad_fits": true,
+   "narrow_dim_ft": 316,
+   "need_narrow_ft": 113,
+   "spare_ft": 203,
+   "water_standoff_m": 42.8,
+   "clear_to_boundary_m": 6.4,
+   "pier_relevant": true,
+   "items": [
+    [
+     "Strip and stockpile topsoil under the pad",
+     1912,
+     3825
+    ],
+    [
+     "Imported select fill, placed and compacted in lifts",
+     22661,
+     42490
+    ],
+    [
+     "Topsoil and turf the side slopes",
+     623,
+     1360
+    ],
+    [
+     "Geotechnical investigation and report",
+     2500,
+     5000
+    ],
+    [
+     "Engineered pad and drainage plan",
+     1500,
+     4000
+    ],
+    [
+     "Compaction density testing",
+     1200,
+     3000
+    ],
+    [
+     "Erosion and sediment control",
+     600,
+     1500
+    ],
+    [
+     "Drainage works so runoff is not pushed onto the road or a neighbour",
+     1000,
+     4000
+    ],
+    [
+     "County fill and grading permit",
+     0,
+     80
+    ]
+   ],
+   "total_lo": 31997,
+   "total_hi": 65255,
+   "pier_alt_lo": 79040,
+   "pier_alt_hi": 133760
+  },
+  "lot2": {
+   "lot": 2,
+   "name": "336 Wagon Wheel Trail W",
+   "grid_points": 141,
+   "ground_min_ft": 24.91,
+   "ground_max_ft": 29.42,
+   "ground_mean_ft": 28.13,
+   "pad_ground_ft": 28.83,
+   "pad_top_ft": 29.5,
+   "lift_ft": 0.67,
+   "fill_height_ft": 1.17,
+   "fill_cy": 268,
+   "toe_ft": [
+    76,
+    89
+   ],
+   "lot_bbox_ft": [
+    424,
+    187
+   ],
+   "pad_fits": true,
+   "narrow_dim_ft": 187,
+   "need_narrow_ft": 92,
+   "spare_ft": 95,
+   "water_standoff_m": 55.4,
+   "clear_to_boundary_m": 6.1,
+   "pier_relevant": false,
+   "items": [
+    [
+     "Strip and stockpile topsoil under the pad",
+     1202,
+     2405
+    ],
+    [
+     "Imported select fill, placed and compacted in lifts",
+     4283,
+     8031
+    ],
+    [
+     "Topsoil and turf the side slopes",
+     135,
+     295
+    ],
+    [
+     "Geotechnical investigation and report",
+     2500,
+     5000
+    ],
+    [
+     "Engineered pad and drainage plan",
+     1500,
+     4000
+    ],
+    [
+     "Compaction density testing",
+     1200,
+     3000
+    ],
+    [
+     "Erosion and sediment control",
+     600,
+     1500
+    ],
+    [
+     "Drainage works so runoff is not pushed onto the road or a neighbour",
+     1000,
+     4000
+    ],
+    [
+     "County fill and grading permit",
+     0,
+     80
+    ]
+   ],
+   "total_lo": 12421,
+   "total_hi": 28311,
+   "pier_alt_lo": 79040,
+   "pier_alt_hi": 133760
+  },
+  "lot3": {
+   "lot": 3,
+   "name": "Lot 29 Broken Arrow Trail",
+   "grid_points": 190,
+   "ground_min_ft": 23.42,
+   "ground_max_ft": 27.23,
+   "ground_mean_ft": 26.15,
+   "pad_ground_ft": 26.49,
+   "pad_top_ft": 29.5,
+   "lift_ft": 3.01,
+   "fill_height_ft": 3.51,
+   "fill_cy": 963,
+   "toe_ft": [
+    90,
+    103
+   ],
+   "lot_bbox_ft": [
+    370,
+    354
+   ],
+   "pad_fits": true,
+   "narrow_dim_ft": 354,
+   "need_narrow_ft": 106,
+   "spare_ft": 248,
+   "water_standoff_m": 35.1,
+   "clear_to_boundary_m": 6.4,
+   "pier_relevant": true,
+   "items": [
+    [
+     "Strip and stockpile topsoil under the pad",
+     1651,
+     3302
+    ],
+    [
+     "Imported select fill, placed and compacted in lifts",
+     15403,
+     28880
+    ],
+    [
+     "Topsoil and turf the side slopes",
+     443,
+     967
+    ],
+    [
+     "Geotechnical investigation and report",
+     2500,
+     5000
+    ],
+    [
+     "Engineered pad and drainage plan",
+     1500,
+     4000
+    ],
+    [
+     "Compaction density testing",
+     1200,
+     3000
+    ],
+    [
+     "Erosion and sediment control",
+     600,
+     1500
+    ],
+    [
+     "Drainage works so runoff is not pushed onto the road or a neighbour",
+     1000,
+     4000
+    ],
+    [
+     "County fill and grading permit",
+     0,
+     80
+    ]
+   ],
+   "total_lo": 24297,
+   "total_hi": 50729,
+   "pier_alt_lo": 79040,
+   "pier_alt_hi": 133760
+  },
+  "lot4": {
+   "lot": 4,
+   "name": "750 Wagon Wheel Trail",
+   "grid_points": 151,
+   "ground_min_ft": 23.39,
+   "ground_max_ft": 30.54,
+   "ground_mean_ft": 24.65,
+   "pad_ground_ft": 25.68,
+   "pad_top_ft": 29.5,
+   "lift_ft": 3.82,
+   "fill_height_ft": 4.32,
+   "fill_cy": 1255,
+   "toe_ft": [
+    95,
+    108
+   ],
+   "lot_bbox_ft": [
+    479,
+    123
+   ],
+   "pad_fits": true,
+   "narrow_dim_ft": 123,
+   "need_narrow_ft": 111,
+   "spare_ft": 12,
+   "water_standoff_m": 31.0,
+   "clear_to_boundary_m": 7.3,
+   "pier_relevant": true,
+   "items": [
+    [
+     "Strip and stockpile topsoil under the pad",
+     1822,
+     3643
+    ],
+    [
+     "Imported select fill, placed and compacted in lifts",
+     20082,
+     37654
+    ],
+    [
+     "Topsoil and turf the side slopes",
+     561,
+     1224
+    ],
+    [
+     "Geotechnical investigation and report",
+     2500,
+     5000
+    ],
+    [
+     "Engineered pad and drainage plan",
+     1500,
+     4000
+    ],
+    [
+     "Compaction density testing",
+     1200,
+     3000
+    ],
+    [
+     "Erosion and sediment control",
+     600,
+     1500
+    ],
+    [
+     "Drainage works so runoff is not pushed onto the road or a neighbour",
+     1000,
+     4000
+    ],
+    [
+     "County fill and grading permit",
+     0,
+     80
+    ]
+   ],
+   "total_lo": 29264,
+   "total_hi": 60101,
+   "pier_alt_lo": 79040,
+   "pier_alt_hi": 133760,
+   "off_embankment": {
+    "standoff_m": 60,
+    "pad_ground_ft": 24.33,
+    "lift_ft": 5.17,
+    "fill_cy": 1808,
+    "toe_ft": [
+     103,
+     116
+    ],
+    "need_narrow_ft": 119,
+    "total_lo": 38630,
+    "total_hi": 77762
+   }
+  }
+ },
+ "pier_crossover_lift_ft": 9.3,
+ "pier_mid_usd": 106400
+}

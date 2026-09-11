@@ -301,12 +301,111 @@ beach **Surfside 28.3 mi / 42 min** (not the 20 min claimed originally) · neare
 42.9 mi / 62 min · **nearest international airport Houston Hobby 49.5 mi / 71 min**; IAH 70.4 mi /
 95 min.
 
+## 14. Fill and the pad (§20)
+
+Computed by `tools/fill.py`. Design basis: finished floor **30.0 ft** (28 ft BFE + 24 in county
+freeboard), pad top **29.5 ft** for a 6-inch slab, topsoil stripped **0.5 ft**, pad **69 × 82 ft**
+for a ~3,040 sq ft house and garage plus a 10 ft working margin, **3:1** side slopes.
+
+Ground is sampled from the USGS 3DEP 1 m DEM on a 5 m grid inside each recorded boundary
+(`getSamples`, multipoint, bilinear). The pad is placed to minimise fill subject to its slope toe
+fitting inside the boundary and staying **30 m clear of mapped water** — without that constraint the
+optimiser puts the Lot 4 pad on the crest of the Flag Lake levee, which is not a foundation.
+
+Volume is the exact prismatoid for planar side slopes:
+
+```
+V = W·L·h + s·h²·(W + L) + (4/3)·s²·h³
+```
+
+Plan area × depth understates a deep pad materially: the slope wedge grows with h² and the corners
+with h³. Rates: fill **$16–$30** per compacted cubic yard placed (haul is most of the spread),
+stripping $1.60–$3.20/sy, slope finishing $1.10–$2.40/sy, geotechnical $2,500–$5,000, pad and
+drainage design $1,500–$4,000, density testing $1,200–$3,000, erosion control $600–$1,500, drainage
+works $1,000–$4,000, permit $0–$80. These are planning figures, not quotations.
+
+A pier-and-beam or stem-wall alternative at $26–$44/sq ft of floor area (~$106,000 mid-case here)
+only becomes competitive at about **9.3 ft** of lift, so a fill pad is correct on all four lots.
+
+### Lot 1 — 1127 Saddle Horn Bend
+
+Ground at the chosen pad **25.26 ft** · pad top 29.5 ft · lift **4.24 ft** · fill from stripped surface 4.74 ft · **1,416 cu yd** · toe 97 × 110 ft (lot narrow dimension 316 ft, needs 113 ft, +203 ft spare)
+
+| Item | Low | High |
+|---|---:|---:|
+| Strip and stockpile topsoil under the pad | $1,912 | $3,825 |
+| Imported select fill, placed and compacted in lifts | $22,661 | $42,490 |
+| Topsoil and turf the side slopes | $623 | $1,360 |
+| Geotechnical investigation and report | $2,500 | $5,000 |
+| Engineered pad and drainage plan | $1,500 | $4,000 |
+| Compaction density testing | $1,200 | $3,000 |
+| Erosion and sediment control | $600 | $1,500 |
+| Drainage works so runoff is not pushed onto the road or a neighbour | $1,000 | $4,000 |
+| County fill and grading permit | $0 | $80 |
+| **Total** | **$31,997** | **$65,255** |
+
+### Lot 2 — 336 Wagon Wheel Trail W
+
+Ground at the chosen pad **28.83 ft** · pad top 29.5 ft · lift **0.67 ft** · fill from stripped surface 1.17 ft · **268 cu yd** · toe 76 × 89 ft (lot narrow dimension 187 ft, needs 92 ft, +95 ft spare)
+
+| Item | Low | High |
+|---|---:|---:|
+| Strip and stockpile topsoil under the pad | $1,202 | $2,405 |
+| Imported select fill, placed and compacted in lifts | $4,283 | $8,031 |
+| Topsoil and turf the side slopes | $135 | $295 |
+| Geotechnical investigation and report | $2,500 | $5,000 |
+| Engineered pad and drainage plan | $1,500 | $4,000 |
+| Compaction density testing | $1,200 | $3,000 |
+| Erosion and sediment control | $600 | $1,500 |
+| Drainage works so runoff is not pushed onto the road or a neighbour | $1,000 | $4,000 |
+| County fill and grading permit | $0 | $80 |
+| **Total** | **$12,421** | **$28,311** |
+
+### Lot 3 — Lot 29 Broken Arrow Trail
+
+Ground at the chosen pad **26.49 ft** · pad top 29.5 ft · lift **3.01 ft** · fill from stripped surface 3.51 ft · **963 cu yd** · toe 90 × 103 ft (lot narrow dimension 354 ft, needs 106 ft, +248 ft spare)
+
+| Item | Low | High |
+|---|---:|---:|
+| Strip and stockpile topsoil under the pad | $1,651 | $3,302 |
+| Imported select fill, placed and compacted in lifts | $15,403 | $28,880 |
+| Topsoil and turf the side slopes | $443 | $967 |
+| Geotechnical investigation and report | $2,500 | $5,000 |
+| Engineered pad and drainage plan | $1,500 | $4,000 |
+| Compaction density testing | $1,200 | $3,000 |
+| Erosion and sediment control | $600 | $1,500 |
+| Drainage works so runoff is not pushed onto the road or a neighbour | $1,000 | $4,000 |
+| County fill and grading permit | $0 | $80 |
+| **Total** | **$24,297** | **$50,729** |
+
+### Lot 4 — 750 Wagon Wheel Trail
+
+Ground at the chosen pad **25.68 ft** · pad top 29.5 ft · lift **3.82 ft** · fill from stripped surface 4.32 ft · **1,255 cu yd** · toe 95 × 108 ft (lot narrow dimension 123 ft, needs 111 ft, +12 ft spare)
+
+| Item | Low | High |
+|---|---:|---:|
+| Strip and stockpile topsoil under the pad | $1,822 | $3,643 |
+| Imported select fill, placed and compacted in lifts | $20,082 | $37,654 |
+| Topsoil and turf the side slopes | $561 | $1,224 |
+| Geotechnical investigation and report | $2,500 | $5,000 |
+| Engineered pad and drainage plan | $1,500 | $4,000 |
+| Compaction density testing | $1,200 | $3,000 |
+| Erosion and sediment control | $600 | $1,500 |
+| Drainage works so runoff is not pushed onto the road or a neighbour | $1,000 | $4,000 |
+| County fill and grading permit | $0 | $80 |
+| **Total** | **$29,264** | **$60,101** |
+
+**Taken fully clear of the levee embankment (60 m standoff):** ground 24.33 ft, lift 5.17 ft, 1,808 cu yd, **$38,630 – $77,762**, and the pad then needs 119 ft of width on a 123 ft lot.
+
+
 ---
 
 ## Reproducing all of it
 
 ```
 python3 tools/terrain.py         # rebuilds data/terrain.json from the county and USGS services
+python3 tools/fill.py            # rebuilds data/fill.json — the pad and fill costing
+python3 tools/aerials.py         # rebuilds the twelve lot aerials from USGS NAIP
 python3 tools/build_artifact.py  # rebuilds index.html
 python3 tools/paginate.py        # measures the print, fixes page numbers, verifies them
 ```
