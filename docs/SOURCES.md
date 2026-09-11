@@ -56,3 +56,43 @@ These appear in the original document and could **not** be confirmed from any so
 - `brazoriacountytx.gov` serves an Akamai `403 Access Denied` to automated requests. County documents were retrieved from the county's own Revize CDN (`builder1.revize.com/revize/brazoriacountytx/...`), which serves the identical published PDFs.
 - TCEQ Chapter 285 was read from Llano County's republished copy of the full chapter because the Justia and TCEQ table figures are served as image-only or certificate-blocked PDFs. Table content was cross-checked against the Bandera County OSSF technical packet, which independently reproduces the §285.91(2) tank-volume bands.
 - Tax rates were extracted from the county's 18-page Truth-in-Taxation PDF by reading each page's entity block in order; the Columbia-Brazoria ISD and Angleton-district figures were confirmed by locating them within their own page blocks rather than by positional pairing.
+
+---
+
+# Additions for v3.0 — retrieved 11 September 2026
+
+The v3.0 edition added machine-retrieved evidence from open government services. Each item below is
+documented with its exact query in [`EVIDENCE.md`](EVIDENCE.md).
+
+| # | Source | Used for | Link |
+|---|---|---|---|
+| S20 | **Brazoria County public ArcGIS** — `general/Parcels` (BCAD parcel data), `general/Floodplain`, `general/LiDAR` (1 ft contours), `general/Taxing_Entities`, `general/Legal_and_Development`, `general/Roads`, `general/Community_Features` | Parcel IDs, legal descriptions, acreage of record, appraised values, deed references; FEMA zone, FIRM panel and published BFE lines per parcel; natural ground elevation; school, hospital, drainage, college, MUD, ESD, city-limit and ETJ membership; recorded plats and restriction references; street centrelines | [service root](https://arcgis-web.brazoriacountytx.gov/arcgis/rest/services/general) |
+| S21 | **USGS 3DEP** 1 m digital elevation model, `getSamples` | The A–B terrain profiles and slope angles in §12–15 | [3DEPElevation ImageServer](https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer) |
+| S22 | **USDA NRCS SSURGO** via Soil Data Access | Soil series, texture, organic matter, pH, permeability, shrink-swell, drainage class, hydrologic group and farmland class per parcel | [Soil Data Access](https://sdmdataaccess.sc.egov.usda.gov/) |
+| S23 | **Bar X Ranch POA** — recorded declaration of restrictions, Deed Vol. 1679 Pg. 695 | Permitted structures, the livestock and horse clauses, dwelling size, minimum lot area, orientation, fences, roofing, nuisance, lot maintenance, septic and drainage, committee powers | [barxranch.org](https://www.barxranch.org/) |
+| S24 | **TDI** — Brazoria County designated catastrophe area: community list and written description of the Inland I / Inland II dividing line | The 120 mph Inland I determination for all four lots | [TDI Brazoria County](https://www.tdi.texas.gov/wind/maps/brazoria.html) |
+| S25 | **FEMA National Risk Index**, December 2025 edition, Brazoria County | Hazard ratings for flood, hurricane, tornado, lightning, wildfire, heat and the rest (§23) | [NRI](https://hazards.fema.gov/nri/) |
+| S26 | **US Census Bureau ACS 2024 5-year estimates**, census tract 6625 | Population, age, income, home value, tenure, race, Hispanic origin and Asian Indian population (§27) | via [Census Reporter](https://censusreporter.org/) |
+| S27 | **ERA5 reanalysis**, daily 1991–2020 at the parcels | Monthly climate normals in Celsius, rainfall, heat-day counts, frost dates and growing-season length (§22) | [Open-Meteo archive](https://open-meteo.com/) |
+| S28 | **OpenStreetMap** (Overpass) and **OSRM** | Water-body geometry for the waterfront measurement; nearest-amenity searches; road distances and drive times (§24–27) | [Overpass](https://overpass-api.de/) · [OSRM](https://router.project-osrm.org/) |
+| S29 | **National Inventory of Dams** | Flag Lake Levee TX06298 beside Lot 4, and Bar X Development Dam TX01759 upstream of Lot 1 | NID records |
+
+## Closed in v3.0
+
+These were on the "not verified" list above and are now established — see `EVIDENCE.md`:
+BCAD account numbers, legal descriptions and coordinates for all four lots · acreage of Lot 2 and
+Lot 4 · whether Lot 2 and Lot 3 are waterfront · the FIRM panel · natural ground elevation ·
+the section number for each lot and the recorded restriction instrument for each section · the
+"1,800 sq ft minimum" claim (the instrument says 1,100) · the "ACC Rev 2" single-instrument
+assumption (there are three) · Brazoria County hospital, drainage and college district membership ·
+soil class inference · the TDI windstorm zone.
+
+## Still not verified after v3.0
+
+Site-specific BFE in writing for any lot · the TCEQ soil class from a site evaluation · distance to
+three-phase power at each lot · the operative recorded restriction instrument for each specific lot
+(only a same-era Bar X declaration was read) · POA dues, mowing and transfer fees from a resale
+certificate · ESD 1 and 2 tax rates · why no ESD polygon returned for Lot 2 · Angleton Levee
+accreditation status · Flag Lake Levee hazard class and condition · Brazoria County CRS class ·
+whether the POA permits poultry in practice · broadband availability at the addresses · current
+school attendance zones and campus performance · whether the "Lot 29" listing refers to PID 186219.

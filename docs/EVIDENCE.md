@@ -1,0 +1,283 @@
+# Evidence register — v3.0
+
+Everything established for the first time in v3.0, with the exact query that produced it, so a
+reviewer can re-run it and disagree. Retrieved **11 September 2026**.
+
+Source content is paraphrased and summarised rather than quoted at length, except for short
+quotations from the recorded deed restrictions, where the exact wording is the finding.
+
+---
+
+## 1. The parcel record
+
+Brazoria County publishes its GIS as an open ArcGIS service. Note that `brazoriacountytx.gov`
+returns an Akamai `403` to automated requests, but `arcgis-web.brazoriacountytx.gov` does not.
+
+```
+POST https://arcgis-web.brazoriacountytx.gov/arcgis/rest/services/general/Parcels/MapServer/1/query
+  where=situs_street LIKE '%SADDLE HORN%' AND situs_num='1127'
+  outFields=PID,geo_id,SITUS,LEGALTYPE,legal_desc,legal_acreage,Land_Acreage,tract_or_lot,
+            appraised_val,abs_subdv_desc,DOCUMENT,CITYCODE_NAME
+  returnGeometry=true&outSR=4326&f=json
+```
+
+Queries must be sent by **POST**; a polygon geometry in a GET query string exceeds the IIS URL
+limit and returns a bare `404`.
+
+| Lot | Query used | PID | geo ID | Acres of record | Appraised | Deed |
+|---|---|---|---|---|---|---|
+| 1127 Saddle Horn Bend | `situs_street LIKE '%SADDLE HORN%' AND situs_num='1127'` | 183667 | 1534-0084-000 | 1.95 | $65,030 | 2008-031507 |
+| 336 Wagon Wheel Trl W | `situs_street LIKE '%WAGON WHEEL%' AND situs_num='336'` | 183367 | 1533-0167-000 | 1.00 | $36,000 | V1523P212 |
+| Lot 29 Broken Arrow Trl | `legal_desc LIKE 'BAR X RANCH SEC 16%' AND tract_or_lot LIKE '29%'` | 186219 | 1549-0029-000 | **1.30** | $51,870 | V268P248 |
+| 750 Wagon Wheel Trl | `situs_street LIKE '%WAGON WHEEL%' AND situs_num='750'` | 183332 | 1533-0132-000 | **1.00** | $50,000 | V1729P804 |
+
+Lot 29 could not be found by street name: no street number is assigned to it and its situs of
+record is `HIGHWAY 35`. It was located by section and lot number instead. **Confirm the listing
+refers to PID 186219** before relying on any of it.
+
+Owner-of-record names are returned by the same query and are deliberately not reproduced in the
+artifact or here.
+
+Geometry for all four is committed as [`data/parcels.geojson`](../data/parcels.geojson).
+
+## 2. Flood — panel, zone and published BFE
+
+Service: `general/Floodplain/MapServer`, layers `9` (Floodplain 2020), `11` (FEMA BFE 2020),
+`12` (FEMA FirmPanels 2020). Parcel polygon posted as the query geometry.
+
+- **FIRM panel `48039C0420K`**, effective **30 December 2020**, for all four parcels. Both earlier
+  editions cited `48039C0605K`; that is wrong.
+- **Zone AE, `SFHA_TF = T`**, on all four, with **`STATIC_BFE = -9999`** — i.e. no static BFE is
+  published for the polygon, so the BFE varies across it and must be read from the profile. This is
+  precisely why a single assumed BFE was never safe.
+- **Nearest published BFE line reads 28.0 ft NAVD88 at every one of the four lots** (1,010 ft away
+  at Lot 2; 1,492 ft at Lot 4; 1,594 ft at Lot 1; 2,477 ft at Lot 3), with a 29.0 ft line further
+  upstream. Not the 24 ft assumed by v1 and v2.
+
+A published BFE line 1,000–2,500 ft away is strong evidence, **not** a determination. Only the
+county floodplain administrator can issue one.
+
+## 3. Natural ground elevation
+
+Two independent datasets, which agree to about a foot:
+
+- **County LiDAR**, `general/LiDAR/MapServer/0`, field `CONTOUR`, **1-foot interval**, queried by
+  parcel envelope plus a 45 m halo.
+- **USGS 3DEP 1 m DEM**, `getSamples` along the A–B transect, ~1 m spacing, metres converted at
+  1 ft = 0.3048 m.
+
+```
+POST https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/getSamples
+  geometry={"paths":[[[lon1,lat1],[lon2,lat2]]],"spatialReference":{"wkid":4326}}
+  geometryType=esriGeometryPolyline&sampleCount=180
+  returnFirstValueOnly=true&interpolation=RSP_BilinearInterpolation&f=json
+```
+
+| Lot | Contours crossing the parcel | Plateau (3DEP) | Transect min–max | Steepest bank |
+|---|---|---|---|---|
+| 1 | 24, 25, 26 ft | 24–26 ft | 21.25–26.03 ft | −8.36° (14.7%) over 7.7 m |
+| 2 | 25, 26, 27, 28 ft | 27–29 ft | 21.16–29.12 ft | −8.80° (15.5%) over 7.2 m |
+| 3 | 23, 24, 25, 26 ft | 26–27 ft | 21.20–26.91 ft | −11.57° (20.5%) over 6.1 m |
+| 4 | 23–30 ft (all eight) | 23–24 ft | 23.14–30.70 ft | **+8.47%** rising to the levee crest |
+
+The "28–30 ft natural ground" repeated by both earlier editions is not supported. Ground at the
+parcels is **24–28 ft**, so the 30 ft finished-floor target sits **2–6 ft above existing grade**.
+
+Lot 4's profile rises toward the water because the transect climbs the **Flag Lake Levee**. The
+101-acre pond is impounded above the buildable part of that lot.
+
+## 4. Waterfront status
+
+Measured as the distance from every recorded parcel-boundary vertex to the nearest mapped water
+body (OpenStreetMap `natural=water`, `waterway=*`), counting how many vertices fall within 60 ft.
+
+| Lot | Water body | Vertices within 60 ft | Verdict |
+|---|---|---|---|
+| 1 | Mill Bayou + a 13.0 ac impounded widening | 19 of 40 | Waterfront, ~half the perimeter |
+| 2 | unnamed 12.6 ac pond | 4 of 12 | Waterfront, short frontage |
+| 3 | the **same** 12.6 ac pond | 7 of 13 | **Waterfront** — both earlier editions said interior |
+| 4 | **Flag Pond, 101.5 ac** + Flag Lake Levee | 8 of 17, at 11 ft | Waterfront on the main lake |
+
+All four are waterfront. OSM water geometry is not authoritative for a boundary; the plat is.
+
+## 5. Dams
+
+- **Flag Lake Levee**, National Inventory of Dams **TX06298**, 11 ft from the Lot 4 boundary.
+  Published NID data carries **no hazard-potential classification and no condition assessment**.
+- **Bar X Development Dam**, NID **TX01759**, on a Mill Bayou tributary upstream of Lot 1. NID rates
+  it low hazard potential, moderate risk.
+
+Confirm both with TCEQ Dam Safety.
+
+## 6. Soil
+
+USDA NRCS **SSURGO** via Soil Data Access, major component of the map unit at each parcel centroid.
+
+```
+POST https://sdmdataaccess.sc.egov.usda.gov/Tabular/post.rest
+{"format":"JSON+COLUMNNAME","query":
+ "SELECT c.compname,c.drainagecl,c.runoff,c.hydgrp,mu.farmlndcl,ch.hzname,ch.hzdept_r,ch.hzdepb_r,
+         ch.sandtotal_r,ch.silttotal_r,ch.claytotal_r,ch.om_r,ch.ksat_r,ch.awc_r,ch.lep_r,ch.ph1to1h2o_r
+  FROM mapunit mu JOIN component c ON c.mukey=mu.mukey JOIN chorizon ch ON ch.cokey=c.cokey
+  WHERE mu.mukey IN (SELECT * FROM SDA_Get_Mukey_from_intersection_with_WktWgs84('point(LON LAT)'))
+    AND c.majcompflag='Yes' ORDER BY ch.hzdept_r"}
+```
+
+| | Lots 1 & 2 — **Asa silty clay loam** | Lots 3 & 4 — **Pledger clay** |
+|---|---|---|
+| Taxonomy | Fluventic Hapludoll (mollisol) | Typic Hapludert (**vertisol**) |
+| Clay / silt / sand, topsoil | 36.5 / 49.0 / 14.5 % | **69.5** / 28.9 / 1.6 % |
+| Organic matter | 3.07 % | 6.5 % |
+| pH (1:1 H₂O) | 6.8 | 7.0 |
+| Drainage class | **Well drained** | Moderately well drained |
+| Surface runoff | **Negligible** | **High** |
+| Hydrologic group | **B** | **D** |
+| Saturated conductivity `ksat_r` | **9.0 µm/s** | **0.21 µm/s** |
+| Linear extensibility `lep_r` | **4.5** | **19** |
+| Available water capacity | 0.18–0.20 | 0.14 |
+| Farmland class | All areas prime farmland | All areas prime farmland |
+
+Consequences drawn in §16 and §18 of the artifact: a 43× permeability difference drives the TCEQ
+soil class and therefore the septic system type; a linear extensibility of 19 is a high-movement
+vertisol and drives the foundation design.
+
+SSURGO is mapped at about 1:24,000 and reports the *predominant* soil of a map unit (85% component
+share here). It is not a site-specific soil evaluation and does not set the TCEQ class on the permit.
+
+## 7. Jurisdiction, taxing districts and school district
+
+Service: `general/Taxing_Entities/MapServer`, layers 0, 1, 4, 5, 6, 8, 9, 11; and
+`general/Legal_and_Development/MapServer/3` for the recorded subdivision.
+
+- **School district: Columbia-Brazoria ISD** for all four parcels — not Angleton ISD.
+- **No hospital district** reaches any of the four. The county contains only the Angleton-Danbury and
+  Sweeny hospital districts and the parcels fall in neither. The v2 tax model wrongly included
+  Angleton-Danbury at 0.074685 per $100.
+- **No junior-college district** (the county has Alvin and Brazosport; neither reaches these lots).
+- **Drainage: county-wide only** (`NAME='Brazoria County', DISTRICT=0`), not the Angleton Drainage
+  District, so v2's 0.052816 per $100 also comes out.
+- **No MUD, no city limits** on any of the four.
+- **Lot 2 alone sits inside the Baileys Prairie ETJ.** The other three answer only to the county.
+- Emergency services: ESD1 and ESD2 returned for Lots 1, 3 and 4; **no ESD polygon was returned for
+  Lot 2**, which is more likely a gap in the layer than a gap in coverage — confirm.
+
+Recorded subdivision instruments, from the Subdivisions layer:
+
+| Lot | Subdivision | Plat | Restrictions |
+|---|---|---|---|
+| 2, 4 | Bar-X Ranch #1 | 16/104, 9 Jun 1980 | 1515/679, plus drainage easements 1712/500 |
+| 1 | Bar-X Ranch #2 | 16/119, 17 Sep 1980 | 1532/471 |
+| 3 | Bar-X Ranch #16 | 17/219, 23 Jul 1984 | 84-29/885 |
+
+**Three different recorded instruments**, so the single "ACC Rev 2" cited by earlier editions as
+governing all four lots cannot be correct.
+
+## 8. Deed restrictions
+
+Read from the recorded Bar X Ranch declaration of restrictions published by the POA
+(`barxranch.org`), Deed Vol. **1679**, Pg. **695**, executed 1982.
+
+- **§3.01** — only *one single-family dwelling, one garage and one horse barn* (max 30 × 25 ft) may
+  stand on a lot; anything else needs prior written committee approval.
+- **§3.15** — *"No livestock of any kind other than house pets of reasonable kind and number may be
+  kept on any Lot."* Horses are the sole express exception: 1 per 32,670 sq ft, 2 per 42,000 sq ft,
+  one more per additional 21,880 sq ft.
+- **§3.03** — minimum dwelling **1,100 sq ft** of living area (1,400 sq ft above two storeys). The
+  "1,800 sq ft minimum" repeated by earlier editions is **not** in this instrument.
+- **§3.06** — no building on a lot under 21,880 sq ft; no resubdivision without approval.
+- **§3.05** — the front of a lot is the boundary with the *shortest* dimension abutting a street.
+- **§3.12** — a lot with a horse barn must be fenced; all fences need written approval.
+- **§3.04** — roofing limited to wood shingle, built-up tar and gravel, or asphalt shingle ≥340 lb
+  per square.
+- **§3.07** — no noxious or offensive activity; exterior display or discharge of firearms forbidden.
+- **§3.13** — owners must keep grass cut and fences painted, or the association does it and bills
+  them. This is the origin of the $125 vacant-lot mowing charge.
+- **§3.14 / §3.16** — no septic discharge to road ditches; drainage of streets, lots or ditches may
+  not be impaired. Directly relevant to placing a 2–6 ft pad.
+- **§4.05** — committee powers passed to the POA 15 years after the instrument.
+
+> **This instrument is not one of the three that govern these lots.** It is a Bar X Ranch declaration
+> of the same era and form. The provisions above are very likely substantially what applies, but the
+> operative instrument for the specific lot (1515/679, 1532/471 or 84-29/885) must be pulled from the
+> County Clerk, and the poultry question put to the POA in writing.
+
+## 9. Windstorm zone
+
+Texas Department of Insurance, Brazoria County designated-catastrophe-area page: community list and
+the written description of the dividing line.
+
+- **Inland II — 110 mph** 3-second gust: includes Bailey's Prairie, West Columbia, Holiday Lakes.
+- **Inland I — 120 mph**: includes Angleton, Brazoria, Lake Jackson.
+- **Seaward — 130 mph**: Quintana, Surfside Beach.
+- The Inland I / Inland II dividing line runs **northeasterly along State Highway 35**, then north
+  along FM 521, then northeasterly along FM 523.
+
+Measured against the county street centrelines, **all four lots lie south (seaward) of SH 35** — at
+0.09 mi (Lot 1), 0.10 mi (Lot 3), 0.37 mi (Lot 2) and 1.03 mi (Lot 4) — which places all four in
+**Inland I, 120 mph**. Lots 1 and 3 are within 530 ft of the line, so confirm against TDI's own map.
+
+The same measurement is the basis for the highway-noise comparison in the artifact.
+
+## 10. Hazards
+
+FEMA **National Risk Index**, December 2025 edition, Brazoria County (FIPS 48039), read from the
+NRI counties feature service. The direct CSV download on `hazards.fema.gov` is Akamai-blocked.
+
+Composite **Relatively Moderate** (score 93.64); expected annual loss $161.5 m; social vulnerability
+Relatively Low; community resilience **Very High**.
+
+Relatively High: riverine flooding (1.86/yr, $78.2 m), hurricane (0.22/yr, $43.6 m), tornado
+(1.11/yr, $20.9 m), lightning (70/yr), ice storm.
+Relatively Moderate: coastal flooding, strong wind, heat wave, cold wave, drought.
+Relatively Low: hail, **wildfire (0.004/yr)**.
+Very Low: earthquake, landslide, winter weather.
+
+## 11. Climate
+
+ERA5 reanalysis, daily 1991–2020, at 29.1392 N 95.4655 W, aggregated in metric.
+
+Annual mean 21.7 °C · annual rainfall 1,177 mm · wettest year 2,024 mm, driest 488 mm ·
+51 days/yr ≥32.2 °C, 8 ≥35 °C, 0.5 ≥38 °C · 30-year extremes −6.0 °C and 41.0 °C ·
+air frost in 18 of 30 years, mean 1.9 frost days · mean last spring frost 2 Feb, first autumn frost
+19 Dec, **frost-free season ~320 days**.
+
+Monthly normals are tabulated in §22 of the artifact.
+
+## 12. Demographics
+
+US Census Bureau **ACS 2024 five-year estimates** (2020–2024) for **census tract 6625**, which
+contains all four lots, retrieved via the Census Reporter API (`api.census.gov` requires a key).
+
+Tract: population 3,452 · median age 42.3 · median household income **$116,550** · median owner-
+occupied value $384,100 · **96.9% owner-occupied** · White alone 76.4%, Black 6.2%, **Asian alone
+0.2% (7 people)**, two or more races 16.7%, Hispanic 29.6% · **no Asian Indian population reported**.
+
+Brazoria County: population 391,255 · median household income $97,993 · **Asian Indian alone or in
+combination 6,414 (1.6%)**.
+
+## 13. Distances
+
+Road distances and drive times from OSRM (`router.project-osrm.org`), origin the portfolio centroid
+29.13918 N 95.54651 W. Destinations located by OpenStreetMap Overpass ("nearest X of type Y")
+rather than by guessing street addresses, or by the county's own schools and airports layers.
+
+Selected results, all in §24–27: nearest supermarket **H-E-B West Columbia 6.7 mi / 13 min** (closer
+than Angleton) · nearest hospital + ER **UTMB Angleton-Danbury 11.3 mi / 20 min** · nearest Gulf
+beach **Surfside 28.3 mi / 42 min** (not the 20 min claimed originally) · nearest Indian restaurant
+35.5 mi / 48 min · **Sri Meenakshi Temple, Pearland 39.5 mi / 58 min** · nearest South Asian grocery
+42.9 mi / 62 min · **nearest international airport Houston Hobby 49.5 mi / 71 min**; IAH 70.4 mi /
+95 min.
+
+---
+
+## Reproducing all of it
+
+```
+python3 tools/terrain.py         # rebuilds data/terrain.json from the county and USGS services
+python3 tools/build_artifact.py  # rebuilds index.html
+python3 tools/paginate.py        # measures the print, fixes page numbers, verifies them
+```
+
+`tools/terrain.py` needs network access to `arcgis-web.brazoriacountytx.gov`,
+`elevation.nationalmap.gov` and an Overpass mirror. `tools/paginate.py` needs headless Chrome and
+`pypdf`. Neither needs an API key.
