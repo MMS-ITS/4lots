@@ -500,3 +500,34 @@ The parcel is **actively listed** (Zillow zpid 305175997), confirmed by the clie
 automated requests, including through a real headless browser. Every price-dependent figure for this
 lot is therefore marked *pending* in the artifact rather than estimated. The county appraisal of
 $53,280 is the only value anchor held for it.
+
+
+---
+
+## 14. The satellite plate (added v4.0)
+
+`tools/satmap.py` composes the full-page plate at Plate 1.
+
+```
+GET https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
+    z = 18, 330 tiles, stitched and then reduced to 2,400 px wide
+```
+
+- Extent chosen to contain every recorded parcel boundary plus 70 mercator-metre padding, then grown
+  to the printable page aspect (0.715) about the parcel centre.
+- Ground resolution of the finished plate **0.82 m per pixel**; 2,400 px across 180 mm is about
+  340 dpi.
+- Parcel boundaries are the same recorded polygons as `data/parcels.geojson`, drawn with a white
+  under-stroke so they read against both water and grass.
+- Pins mark each parcel centroid. Name tags carry the listing name, PID and acreage of record, and are
+  placed with leader lines because Lots 4 and 5 are only about 85 ft apart and their pins would
+  otherwise collide.
+- `World_Imagery/MapServer` reports `capabilities` without `Export Map`, so a single `export` request
+  is not available on that service and tiles must be stitched. Tiles are cached under `.tilecache/`
+  (git-ignored) so the plate can be re-rendered without refetching.
+
+**Why not Google.** The plate deliberately does not use Google's satellite tiles. The Static Maps API
+requires a licensed key, and the Google Maps terms prohibit capturing or redistributing tile imagery
+in a document of this kind. Esri World Imagery is the basemap the artifact's own interactive boundary
+map already uses, is licensed for this purpose, and gives comparable high-resolution aerial coverage.
+The live Google satellite view is still reachable from the per-lot map links in §6–§10.

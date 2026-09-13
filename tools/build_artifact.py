@@ -378,6 +378,17 @@ hr.r{border:0; border-top:.6pt solid var(--line); margin:4mm 0;}
 .cf.e{background:var(--blue-w); color:var(--blue); border-color:rgba(28,59,168,.22);}
 .cf.n{background:var(--violet-w); color:var(--violet); border-color:rgba(91,33,166,.22);}
 .na{color:var(--faint); font-style:italic;}
+/* ---------------- full-page satellite plate ---------------- */
+.plate{margin:2.5mm 0 0; text-align:center;}
+.plate img{display:block; margin:0 auto; height:233mm; width:auto; max-width:100%;
+  border:0.6pt solid var(--line2);}
+.platelg{display:flex; gap:2mm; margin:2.6mm 0 0; align-items:stretch;}
+.platelg .it{flex:1; display:flex; gap:1.6mm; align-items:flex-start; font-size:7.4pt;
+  line-height:1.2; border-top:2.2pt solid var(--line2); padding-top:1.2mm;}
+.platelg .it b{display:block; font-size:8pt;}
+.platelg .it span.x{color:var(--muted);}
+.platelg .n{flex:0 0 4.6mm; height:4.6mm; border-radius:50%; color:#fff; font-weight:700;
+  font-size:7.2pt; text-align:center; line-height:4.6mm;}
 .fp{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:8.2pt;
   background:var(--wash); border:1px solid var(--line); border-radius:1mm; padding:0 1mm;
   color:var(--ink); white-space:nowrap;}
@@ -1125,6 +1136,33 @@ its record. Boundaries are for orientation only and are not a survey.</p>
   <tbody>""" + ''.join(pins) + """</tbody>
 </table>
 """, "5 · Combined map", "map")
+
+# =========================================================================== Plate 1 — satellite
+_PCOL = {1: '#0f766e', 2: '#1c3ba8', 3: '#15602f', 4: '#a91f14', 5: '#5b21a6'}
+_plate_lg = ''.join(
+    '<div class="it"><div class="n" style="background:%s;">%d</div><div><b>%s</b>'
+    '<span class="x">PID %s · %.2f ac</span></div></div>'
+    % (_PCOL[LOTS[k]['lot']], LOTS[k]['lot'], LOTS[k]['short'],
+       LOTS[k]['pid'], LOTS[k]['acres_of_record'])
+    for k in ORDER)
+
+add("""
+<h2><span class="n">Plate 1 ·</span> Satellite view — all five lots</h2>
+<div class="plate">
+  <img src="assets/satellite/all-lots-satellite.jpg"
+       alt="High-resolution satellite view of all five Bar X Ranch lots with numbered pins,
+            name tags and recorded boundaries">
+</div>
+<div class="platelg">%s</div>
+<p class="xs" style="margin:2mm 0 0;">Recorded parcel boundaries from the Brazoria County ArcGIS
+parcel service, drawn over Esri World Imagery at 0.8 m per pixel and composed at 2,400 px for print.
+North is up; scale bar and north arrow are on the plate. <b>A note on the basemap:</b> Google's
+satellite tiles cannot be reproduced in a printed document — the Static Maps API requires a licensed
+key and its terms forbid tile capture — so this plate uses <b>Esri World Imagery</b>, the same
+basemap the interactive boundary map on the previous page already draws from, and comparable
+high-resolution aerial coverage. The live Google satellite view remains one click away from the
+per-lot links in §6–§10.</p>
+""" % _plate_lg, "Plate 1 &middot; Satellite view", "plate")
 
 
 # =========================================================================== 8-11. lot pages
