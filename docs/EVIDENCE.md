@@ -605,3 +605,65 @@ Each lot heading in §6–§10 links to Zillow. Lot 5 has a resolved listing pag
 (`homedetails/…305175997_zpid/`). The other four use Zillow's address-search form
 (`/homes/<address>_rb/`) built from the **marketed** address rather than the situs of record — Lot 3's
 situs of record is `HIGHWAY 35`, which would produce a useless search.
+
+
+---
+
+## 16. The Lot 5 asking price (resolved v4.0)
+
+Zillow returns `403` to plain automated requests and serves a PerimeterX "press and hold" human
+challenge to a headless browser, so the price could not be retrieved when the parcel was first added.
+It was obtained on **13 September 2026** by requesting the listing with a mobile Safari user agent,
+which is served the full server-rendered page:
+
+```
+GET https://www.zillow.com/homedetails/808-Wagon-Wheel-Trl-Angleton-TX-77515/305175997_zpid/
+    User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) …Version/17.5 Mobile Safari
+```
+
+The figure is taken from the page's own `<meta name="description">`, which is unambiguous as to which
+parcel it describes, and corroborated by the single `"price"` value in the embedded state and by the
+`"streetAddress"` field:
+
+- **Asking price $100,000**
+- **MLS #84275418**
+- **1.07 acres** — matches the county acreage of record exactly
+- Listed as vacant land, 18 photos
+
+Care was taken not to read a price out of a "similar homes" block: the only `"price"` key in the
+document is `100000`, and the only `"streetAddress"` is `808 Wagon Wheel Trl`.
+
+### What the price does to the comparison
+
+| Lot | Asking | Acres of record | $/acre | vs BCAD appraisal |
+|---|---:|---:|---:|---:|
+| 1127 Saddle Horn Bend | $82,500 | 1.95 | $42,308 | +26.9% |
+| 336 Wagon Wheel Trail W | $45,000 | 1.00 | $45,000 | +25.0% |
+| **Lot 29 Broken Arrow Trail** | $49,000 | 1.30 | **$37,692** | **−5.5%** |
+| 750 Wagon Wheel Trail | $58,000 | 1.00 | $58,000 | +16.0% |
+| **808 Wagon Wheel Trail** | **$100,000** | 1.07 | **$93,458** | **+87.7%** |
+| Portfolio | $334,500 | 6.32 | $52,927 | +30.6% |
+
+Lot 5 is **2.5× Lot 3 per acre**, 61% above its immediate neighbour Lot 4, and carries the largest
+premium over appraised value of the five by a factor of three — on the only parcel where the building
+pad does not fit.
+
+### Cost to build-ready, recomputed
+
+Defined as asking price + the calculated pad at mid-case + the $20,000 vertisol foundation upcharge on
+the Pledger clay lots. Septic and the electric service run are excluded because neither is yet
+lot-resolved.
+
+| Lot | Land | Pad (mid) | Foundation | Build-ready |
+|---|---:|---:|---:|---:|
+| 336 Wagon Wheel Trail W | $45,000 | $20,366 | — | **$65k** |
+| Lot 29 Broken Arrow Trail | $49,000 | $37,513 | $20,000 | **$107k** |
+| 750 Wagon Wheel Trail | $58,000 | $44,682 | $20,000 | **$123k** |
+| 1127 Saddle Horn Bend | $82,500 | $48,626 | — | **$131k** |
+| **808 Wagon Wheel Trail** | $100,000 | $53,173 | $20,000 | **$173k** |
+
+The basis is confirmed by the artifact's own statement of a **$66,000 gap** between Lots 1 and 2
+($131,126 − $65,366 = $65,760). Applying it across all five exposed two stale hand-maintained figures:
+Lots 3 and 4 had been carrying **$109k** and **$139k** against actual **$107k** and **$123k**. The
+scorecard price, price-per-acre, premium, build-ready and green/amber/red tally rows are now all
+computed at build time so they cannot drift again.

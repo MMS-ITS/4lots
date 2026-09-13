@@ -559,7 +559,7 @@
    "properties": {
     "lot": 5,
     "listing_name": "808 Wagon Wheel Trail",
-    "asking_price_usd": null,
+    "asking_price_usd": 100000,
     "pid": 183331,
     "geo_id": "1533-0131-000",
     "situs_of_record": "808 WAGON WHEEL TRAIL",
@@ -598,8 +598,9 @@
       "m": 6
      }
     ],
-    "listing_status": "active \u2014 Zillow zpid 305175997; asking price not yet obtained",
-    "listing_url": "https://www.zillow.com/homedetails/808-Wagon-Wheel-Trl-Angleton-TX-77515/305175997_zpid/"
+    "listing_status": "active \u2014 Zillow zpid 305175997, MLS 84275418, listed as vacant land",
+    "listing_url": "https://www.zillow.com/homedetails/808-Wagon-Wheel-Trl-Angleton-TX-77515/305175997_zpid/",
+    "mls_number": "84275418"
    },
    "geometry": {
     "type": "Polygon",

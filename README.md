@@ -4,14 +4,14 @@ Independent feasibility review of five vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v4.0, 13 September 2026, prepared for Mohsin Chowdhury.** 50 pages, paginated, five lots.
+**Current edition: v4.0, 13 September 2026, prepared for Mohsin Chowdhury.** 51 pages, paginated, five lots.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v4.0)** — 50 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf) | **Rendered PDF of the current edition** — A4, 50 pages, true scale. |
+| [`index.html`](index.html) | **The artifact (v4.0)** — 51 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf) | **Rendered PDF of the current edition** — A4, 51 pages, true scale. |
 | [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined five-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
@@ -38,12 +38,23 @@ there.
 | **336 Wagon Wheel Trail W** | 183367 | 1.00 | **$45,000** | $36,000 | Asa silty clay loam | **0.7 ft** | **$20,400** |
 | Lot 29 Broken Arrow Trail | 186219 | 1.30 | $49,000 | $51,870 | Pledger clay | 3.0 ft | $37,500 |
 | 750 Wagon Wheel Trail | 183332 | 1.00 | $58,000 | $50,000 | Pledger clay | 3.8–5.2 ft | $44,700–58,200 |
-| 808 Wagon Wheel Trail | 183331 | 1.07 | *listed, price to confirm* | $53,280 | Pledger clay | 4.7 ft | $53,200 — **pad does not fit** |
+| 808 Wagon Wheel Trail | 183331 | 1.07 | **$100,000** | $53,280 | Pledger clay | 4.7 ft | $53,200 — **pad does not fit** |
 
-Cost to reach build-ready (land + pad + septic + foundation): **Lot 2 ~$65k**, Lot 3 ~$109k,
-Lot 1 ~$131k, Lot 4 ~$139k.
+Cost to reach build-ready (asking price + calculated pad at mid-case + the $20k vertisol foundation
+upcharge on the clay lots): **Lot 2 ~$65k**, Lot 3 ~$107k, Lot 4 ~$123k, Lot 1 ~$131k,
+**Lot 5 ~$173k**. Portfolio: $334,500 asking across 6.32 ac, +30.6% over the $256,180 appraised.
 
 ## What v4.0 changed
+
+- **808 Wagon Wheel is asking $100,000** (MLS 84275418) — resolved from the listing. That is
+  **$93,458 per acre**: 2.5× Lot 3, 61% above its own neighbour Lot 4, and **+87.7% over the county's
+  appraisal**, the largest premium of the five by a factor of three. Combined with the pad that does not
+  fit, the deepest lift and the worst soil, the verdict on Lot 5 is to **rule it out**. It scores
+  4 green / 2 amber / 14 red — the weakest of the five.
+- **The scorecard price, price-per-acre, premium and cost-to-build-ready rows, and the green/amber/red
+  tally, are now computed at build time** rather than maintained by hand. Doing so exposed two more
+  drifted figures: cost-to-build-ready for Lots 3 and 4 had been carrying $109k and $139k against
+  actual $107k and $123k.
 
 - **Water regime and stocking, per lot.** Mill Bayou is classified **intermittent** in the National
   Hydrography Dataset (FCode 46003), so it does not flow year-round: expect low or no flow **late May to
