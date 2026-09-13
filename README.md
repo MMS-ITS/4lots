@@ -4,14 +4,14 @@ Independent feasibility review of four vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v3.5, 11 September 2026, prepared for Mohsin Chowdhury.** 36 pages, paginated.
+**Current edition: v3.5, 11 September 2026, prepared for Mohsin Chowdhury.** 37 pages, paginated.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v3.5)** — 36 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf`](Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf) | **Rendered PDF of the current edition** — A4, 36 pages, true scale. |
+| [`index.html`](index.html) | **The artifact (v3.5)** — 37 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf`](Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf) | **Rendered PDF of the current edition** — A4, 37 pages, true scale. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
 | [`data/fill.json`](data/fill.json) | Pad geometry, fill volumes and costs per lot |
@@ -41,9 +41,18 @@ Lot 1 ~$131k, Lot 4 ~$139k.
 
 ## What v3.5 changed
 
-- **Appendix A · Engagement brief** added as the closing page — a traceability record of the
-  requirements that produced the document and the section that answers each, including the one
-  requirement that remains partly open (a second document to compare against was never supplied).
+- **Appendix A · Engagement brief** added as the closing pages (36–37) — a traceability record of the
+  requirements that produced the document and the section that answers each. Structured as
+  **A.1** the original brief as raised (subject properties, the three core questions, information
+  requested, deliverables), **A.2** the later instruction to audit and rebuild the first attempt, and
+  **A.3** delivery.
+- **Appendix A records what is still open, rather than implying completeness.** Four request-letter
+  deliverables and a rewritten set of county e-mail drafts are marked *outstanding*; the BFE diagram is
+  marked *superseded* because its three premise figures no longer hold; and the FIRM panel extraction is
+  *partly delivered* against the corrected panel 48039C0420K.
+- **A note on where the original premise moved** — the FIRM panel, the published BFE, "zoning 0140" and
+  the freeboard arithmetic were all framed on figures the county record has since contradicted. The
+  brief is recorded as asked, with the corrections stated alongside so the change is visible.
 - Version now flows from a single constant into the title, every footer and the print
   running-header, instead of being hard-coded in the stylesheet.
 
