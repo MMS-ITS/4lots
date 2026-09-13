@@ -2468,11 +2468,126 @@ current school attendance zones and campus performance.</p>
 add("""
 <h2><span class="n">Appendix A · Engagement brief — what was asked, and where it is answered</span></h2>
 <p class="sm">The requirements that produced this document, recorded so the artifact can be checked
-against the instruction. Each row points to the section that discharges it. Two session messages are
-excluded because neither bears on scope: one session-control instruction, and one question about where
-the output files were located.</p>
+against the instruction rather than taken on trust. <b>A.1</b> is the original brief as raised;
+<b>A.2</b> is the later instruction to audit and rebuild the first attempt at answering it;
+<b>A.3</b> covers delivery. Two session messages are excluded because neither bears on scope: one
+session-control instruction, and one question about where the output files were located.</p>
 
-<h3>A.1 · The analytical brief</h3>
+<h3>A.1 · The brief as raised</h3>
+
+<h4>Subject properties</h4>
+<p class="sm">Opened on <b>750 Wagon Wheel Trl</b>, then expanded to four lots, all in the Bar X Ranch
+subdivision, Angleton, Texas 77515. Acreages below are as they were stated at the time; the acreage of
+record for each parcel is established in &sect;3.</p>
+<table class="compact">
+  <thead><tr><th style="width:52mm;">Lot as raised</th><th>As stated then</th><th style="width:30mm;">Now identified</th></tr></thead>
+  <tbody>
+    <tr><td>1127 Saddle Horn Bnd Lot 84</td><td>1.95 AC, waterfront</td><td>PID 183667 &mdash; &sect;3</td></tr>
+    <tr><td>750 Wagon Wheel Trl</td><td>1.0&ndash;1.27 AC</td><td>PID 183367 &mdash; &sect;3</td></tr>
+    <tr><td>336 Wagon Wheel Trl W</td><td>1.0 AC, Lot 167, waterfront</td><td>PID 186219 &mdash; &sect;3</td></tr>
+    <tr><td>LOT 29 Broken Arrow Trl</td><td>Bar X Ranch Sec 16</td><td>PID 183332 &mdash; &sect;3</td></tr>
+  </tbody>
+</table>
+
+<h4>The three core questions, and the answers this edition reaches</h4>
+<table class="compact">
+  <thead><tr><th style="width:52mm;">Question as asked</th><th>Answer</th><th style="width:22mm;">Where</th></tr></thead>
+  <tbody>
+    <tr><td><b>Can I build a five-bedroom home on these lots?</b></td>
+      <td><b>Yes, on any of the four</b> &mdash; but not at grade. Every lot needs an engineered pad of
+      2&ndash;6 ft to clear the freeboard standard, and the septic system, not the house, is what
+      governs how much of each lot is usable. Cost to reach build-ready separates the lots by about
+      $74,000.</td>
+      <td>&sect;18&ndash;&sect;20</td></tr>
+    <tr><td><b>Can I fish there as a hobby?</b></td>
+      <td><b>Yes.</b> Two stocked POA lakes with pier and boat ramp on site, plus public water nearby.
+      The licence and bag-limit position was misstated in the original and is corrected.</td>
+      <td>&sect;27, &sect;29</td></tr>
+    <tr><td><b>Can I have no flood risk at all &mdash; is zero achievable?</b>
+      <span class="cf n">direct answer</span></td>
+      <td><b>No. Not on any of these four lots, and not by any means available to a buyer.</b> All four
+      sit in a mapped Special Flood Hazard Area behind a non-accredited levee. Elevating above the base
+      flood elevation reduces depth and can remove the insurance mandate, but it does not remove the
+      mapping, the pluvial ponding risk on flat clay, or the surge and levee exposure. Zero flood risk
+      was not achievable here, and the original document's implication that it nearly was is the single
+      claim this review most firmly rejects.</td>
+      <td>&sect;1, &sect;10, &sect;24</td></tr>
+  </tbody>
+</table>
+
+<h4>Information requested</h4>
+<table class="compact">
+  <thead><tr><th style="width:38mm;">Area</th><th>Asked for</th><th style="width:24mm;">Answered in</th></tr></thead>
+  <tbody>
+    <tr><td><b>Property records &amp; subdivision</b></td>
+      <td>Official records, lot dimensions, ownership, tax, subdivision context; POA fees, deed
+      restrictions and ACC guidelines</td><td>&sect;3, &sect;4, &sect;17, &sect;21</td></tr>
+    <tr><td><b>Flood risk &amp; BFE</b></td>
+      <td>FEMA zone determination; flood history for Angleton and Brazoria County; a reasoned
+      no-risk assessment; height of the land above BFE; the exact BFE per lot; the FIRM panel and the
+      FIS profile for the governing watercourse</td>
+      <td>&sect;10&ndash;&sect;15, &sect;24</td></tr>
+    <tr><td><b>Buildability for five bedrooms</b></td>
+      <td>Land-use position, utilities (well and septic), POA and county requirements, septic sizing
+      for 5BR, garage, exterior materials, permit fees, elevation certificate and the freeboard
+      standard</td><td>&sect;16&ndash;&sect;20, &sect;25</td></tr>
+    <tr><td><b>Fishing</b></td>
+      <td>On-site POA amenities, species stocked, lake rules, licence position; off-site options
+      including the Bastrop Bayou public pier, the Brazos River and Surfside</td>
+      <td>&sect;27, &sect;29</td></tr>
+    <tr><td><b>Verification</b></td>
+      <td>&ldquo;Do as much as possible to verify&rdquo;</td>
+      <td><a href="docs/SOURCES.md">SOURCES.md</a>, <a href="docs/EVIDENCE.md">EVIDENCE.md</a></td></tr>
+  </tbody>
+</table>
+
+<h4>Deliverables requested &mdash; and their status</h4>
+<table class="compact">
+  <thead><tr><th style="width:60mm;">Deliverable</th><th style="width:24mm;">Status</th><th>Note</th></tr></thead>
+  <tbody>
+    <tr><td>Comprehensive feasibility report with sources</td>
+      <td><b>Delivered</b></td><td>This document, with a full source register and an evidence log.</td></tr>
+    <tr><td>Colourful single-PDF portfolio covering all four lots</td>
+      <td><b>Delivered</b></td><td>Rendered to A4 at true scale; supersedes the original generated artifact.</td></tr>
+    <tr><td>BFE diagram &mdash; ground ~28 ft vs BFE ~24 ft vs finished floor 26 ft</td>
+      <td><b>Superseded</b> <span class="cf n">premise moved</span></td>
+      <td>Those three numbers no longer hold, so drawing them would mislead. Replaced by measured
+      per-lot terrain profiles and a calculated flood-headroom and fill figure for each lot.</td></tr>
+    <tr><td>FIRM panel image and BFE extraction</td>
+      <td><b>Partly delivered</b></td>
+      <td>Zone, panel and the nearest published BFE line were pulled per parcel from the county service
+      &mdash; but the panel is <b>48039C0420K</b>, not the 48039C0605K named in the request, so the
+      FIS profile to read is not the one originally identified. No panel image is embedded.</td></tr>
+    <tr><td>Draft e-mail to the county floodplain administrator requesting an official BFE
+      determination letter</td>
+      <td><b>Outstanding</b></td>
+      <td>The original artifact carried four drafts, but three of the four were truncated mid-sentence
+      and one had no addressee. They were removed in the rebuild rather than reproduced broken, and
+      have not yet been rewritten. The contact route is in &sect;32.</td></tr>
+    <tr><td>PDF request letter for 750 Wagon Wheel Trl</td>
+      <td><b>Outstanding</b></td><td rowspan="2">Not yet produced as separate documents. These are
+      straightforward to generate once the four drafts above are rewritten against the corrected panel
+      and the per-parcel legal descriptions in &sect;3.</td></tr>
+    <tr><td>Three further individual BFE request PDFs (1127, 336, Lot 29), plus a combined four-lot
+      letters PDF</td>
+      <td><b>Outstanding</b></td></tr>
+  </tbody>
+</table>
+
+<div class="note amber">
+  <span class="lbl">Where the premise of the original request has since moved</span>
+  Four items in the brief were framed on figures that the county record has since contradicted. They
+  are recorded above as asked, not as corrected, so the change is visible:
+  <b>the FIRM panel</b> is 48039C0420K, not 48039C0605K &mdash; which also changes which FIS profile
+  governs; <b>the nearest published BFE</b> is 28 ft NAVD88, not ~24 ft, and county LiDAR puts natural
+  ground at 24&ndash;28 ft, so the land is not 4 ft clear of the base flood and a pad is mandatory;
+  <b>&ldquo;zoning 0140&rdquo;</b> is a county appraisal land-use code, not zoning &mdash; there is no
+  county zoning here and the recorded deed restrictions govern; and <b>the freeboard standard</b> is a
+  single requirement of 24 inches above BFE, which <i>is</i> the two feet, not 24 inches plus a further
+  two feet.
+</div>
+
+<h3>A.2 · The review brief &mdash; auditing the first attempt</h3>
 <table class="compact">
   <thead><tr><th style="width:22mm;">Requirement</th><th>How it was discharged</th><th style="width:26mm;">Where</th></tr></thead>
   <tbody>
@@ -2527,7 +2642,7 @@ the output files were located.</p>
   </tbody>
 </table>
 
-<h3>A.2 · Delivery requirements</h3>
+<h3>A.3 · Delivery requirements</h3>
 <table class="compact">
   <thead><tr><th style="width:22mm;">Requirement</th><th>Status</th></tr></thead>
   <tbody>
@@ -2545,9 +2660,11 @@ the output files were located.</p>
 
 <div class="note teal">
   <span class="lbl">How to read this appendix</span>
-  It is a traceability record, not a summary of findings. Where a row says <span class="cf u">partly
-  open</span>, the requirement could not be fully discharged from the material available, and the
-  reason is stated. The substantive conclusions are in §1–§4 and the scorecard at §30.
+  It is a traceability record, not a summary of findings. Where a row is marked <b>outstanding</b>,
+  <b>partly delivered</b> or <span class="cf u">partly open</span>, the requirement has not been fully
+  discharged and the reason is stated rather than left implied — four request-letter deliverables and a
+  rewritten set of county e-mail drafts remain open at this edition. The substantive conclusions are in
+  §1–§4 and the scorecard at §30.
 </div>
 """, "Appendix A &middot; Engagement brief", "brief")
 
