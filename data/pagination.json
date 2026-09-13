@@ -1,5 +1,5 @@
 {
- "total_pages": 35,
+ "total_pages": 36,
  "sheets": {
   "cover": {
    "start": 1,
@@ -140,6 +140,10 @@
   "sources": {
    "start": 35,
    "end": 35
+  },
+  "brief": {
+   "start": 36,
+   "end": 36
   }
  }
 }

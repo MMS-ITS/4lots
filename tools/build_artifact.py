@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Build index.html — the Bar X Ranch 4-lot feasibility portfolio, v3.0.
+"""Build index.html — the Bar X Ranch 4-lot feasibility portfolio.
+
+Version is set by the VERSION constant below and flows into the title, every sheet
+footer and the print running-header; do not hard-code it in the CSS or the copy.
 
 Emits a paginated A4 artifact with running page numbers. All figures are baked in
 as literals so the build is reproducible from the repository alone; the parcel
@@ -20,7 +23,7 @@ OUT = os.path.join(ROOT, 'index.html')
 
 PREPARED_FOR = "Mohsin Chowdhury"
 PREPARED_ON = "11 September 2026"
-VERSION = "3.0"
+VERSION = "3.5"
 
 # --------------------------------------------------------------------------- data
 gj = json.load(open(GEOJSON))
@@ -457,7 +460,7 @@ figure.shot figcaption,figure.hero figcaption{display:none;}
   @page{
     size:A4; margin:13mm 15mm 14mm;
     @bottom-left{
-      content:"Bar X Ranch — Four-Lot Feasibility Portfolio v3.0 · prepared for Mohsin Chowdhury · 11 September 2026";
+      content:"Bar X Ranch — Four-Lot Feasibility Portfolio v@@V@@ · prepared for @@FOR@@ · @@ON@@";
       font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
       font-size:7.2pt; color:#86959b; vertical-align:top; padding-top:3mm;
     }
@@ -2455,11 +2458,98 @@ current school attendance zones and campus performance.</p>
   <div class="on">on <b>{PREPARED_ON}</b></div>
   <hr class="r" style="margin:4mm 0;">
   <div class="sm">Bar X Ranch — Four-Lot Feasibility Portfolio · version {VERSION} ·
-  @@N@@ pages · supersedes v2.0 of 10 September 2026 and the original generated portfolio.<br>
+  @@N@@ pages · supersedes v3.0 and v2.0 of 10 September 2026, and the original generated portfolio.<br>
   Subject parcels: PID 183667, 183367, 186219, 183332 — Bar X Ranch Sections 1, 2 and 16,
   unincorporated Brazoria County, Angleton, Texas 77515.</div>
 </div>
 """, "Sources &amp; sign-off", "sources")
+
+# =========================================================================== A. engagement brief
+add("""
+<h2><span class="n">Appendix A · Engagement brief — what was asked, and where it is answered</span></h2>
+<p class="sm">The requirements that produced this document, recorded so the artifact can be checked
+against the instruction. Each row points to the section that discharges it. Two session messages are
+excluded because neither bears on scope: one session-control instruction, and one question about where
+the output files were located.</p>
+
+<h3>A.1 · The analytical brief</h3>
+<table class="compact">
+  <thead><tr><th style="width:22mm;">Requirement</th><th>How it was discharged</th><th style="width:26mm;">Where</th></tr></thead>
+  <tbody>
+    <tr><td><b>Read and understand it</b></td>
+      <td>The generated portfolio was read in full, including both elevation diagrams, the cost
+      schedule and all four county e-mail drafts.</td>
+      <td>Basis of this edition</td></tr>
+    <tr><td><b>Find inconsistencies</b></td>
+      <td>Internal contradictions identified: per-acre pricing computed on two different acreage
+      bases; a soft-cost total that does not equal its own line items; a fill allowance that
+      contradicts the stated ground and floor elevations; two diagrams drawing the finished floor
+      below natural grade; fill and a LOMA recommended together though they are mutually exclusive;
+      dues stated for one lot and omitted for three; three of four e-mail drafts truncated mid
+      sentence; and "AD/AE" used to mean both a flood zone and a study cross-section.</td>
+      <td>§31 · <a href="docs/AUDIT.md">AUDIT §2</a></td></tr>
+    <tr><td><b>Challenge the verdict</b></td>
+      <td>The original "all four buildable, cost minimal" verdict is rejected on five grounds: the
+      document neutralises its own flood warning; its conclusion depends on selecting the bottom of a
+      2.7 ft BFE range without saying why; one generic flood analysis is presented as four
+      lot-specific ones; the waterfront lots it recommends are the <i>weakest</i> for this build once
+      slope to water and TCEQ separation distances are applied; and no ranked recommendation is ever
+      issued. This edition takes a position and names a lot.</td>
+      <td>§1–§4 · §30 · <a href="docs/AUDIT.md">AUDIT §1</a></td></tr>
+    <tr><td><b>Compare the documents</b> <span class="cf u">partly open</span></td>
+      <td>Only one document was supplied, so the artifact's own sections were compared against each
+      other and against primary sources — which is where several of the contradictions surfaced.
+      <b>Still open:</b> a second document — an appraisal, survey, seller's disclosure or the POA
+      resale certificate — would extend this materially.</td>
+      <td><a href="docs/AUDIT.md">AUDIT preamble</a></td></tr>
+    <tr><td><b>Say what is missing</b></td>
+      <td>Absent from the original and supplied here: the house construction cost; windstorm insurance
+      and the WPI-8 obligation; property tax and the taxing districts; POA dues, mowing and transfer
+      fees; the septic system installation itself; water treatment; survey; driveway culvert; electric
+      service extension; propane; TCEQ separation distances; parcel identifiers; the school district;
+      soil classification; terrain and flood headroom per lot; and what living there is actually
+      like.</td>
+      <td>§16–§29 · <a href="docs/AUDIT.md">AUDIT §4</a></td></tr>
+    <tr><td><b>Correct what is missing</b></td>
+      <td>Corrected against primary sources rather than assertion: the county parcel, floodplain,
+      LiDAR and taxing services; USGS 3DEP; NRCS SSURGO; the recorded declaration of restrictions;
+      TCEQ OSSF rules; the county fee schedule and freeboard standard; FEMA; TDI and TWIA; TPWD;
+      and the Census. Every figure carries a provenance mark.</td>
+      <td>§31 · <a href="docs/SOURCES.md">SOURCES.md</a> · <a href="docs/EVIDENCE.md">EVIDENCE.md</a></td></tr>
+    <tr><td><b>Refine the presentation</b></td>
+      <td>Rebuilt from a generated single-page application into a paginated A4 report with true-scale
+      drawings. Removed the working notes left in the body, the styling debug string, the raw
+      data-feed artefacts, the blank map, the title block printing over a diagram, and five
+      repetitions of an identical badge row. Added numbered pages, a contents list with page
+      references, provenance marking on every material figure, sourced citations, a disclaimer and a
+      sign-off.</td>
+      <td>This edition · <a href="docs/AUDIT.md">AUDIT §5</a></td></tr>
+  </tbody>
+</table>
+
+<h3>A.2 · Delivery requirements</h3>
+<table class="compact">
+  <thead><tr><th style="width:22mm;">Requirement</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><b>Render to a real PDF</b></td>
+      <td><b>Done</b> — printed from this HTML to A4 at true scale.</td></tr>
+    <tr><td><b>Commit the PDF alongside</b></td>
+      <td><b>Done</b> — committed next to the HTML source, with the superseded editions and the
+      original generated portfolio retained for comparison.</td></tr>
+    <tr><td><b>Merge it to the main branch</b></td>
+      <td><b>Done</b> — merged by pull request.</td></tr>
+    <tr><td><b>Append this brief as a reference,<br>excluding the irrelevant items</b></td>
+      <td><b>Done</b> — this appendix. Two out-of-scope session messages excluded, as noted above.</td></tr>
+  </tbody>
+</table>
+
+<div class="note teal">
+  <span class="lbl">How to read this appendix</span>
+  It is a traceability record, not a summary of findings. Where a row says <span class="cf u">partly
+  open</span>, the requirement could not be fully discharged from the material available, and the
+  reason is stated. The substantive conclusions are in §1–§4 and the scorecard at §30.
+</div>
+""", "Appendix A &middot; Engagement brief", "brief")
 
 # =========================================================================== render
 # Real printed page numbers come from data/pagination.json, written by tools/paginate.py
@@ -2563,6 +2653,9 @@ out.append("""
 doc = ''.join(out)
 doc = doc.replace('%%ALL%%', gmap_all()).replace('%%AREA%%', GMAP_AREA)
 doc = doc.replace('@@N@@', str(TOTAL_PAGES))
+doc = (doc.replace('@@V@@', VERSION)
+          .replace('@@FOR@@', PREPARED_FOR)
+          .replace('@@ON@@', PREPARED_ON))
 with open(OUT, 'w') as fh:
     fh.write(doc)
 print("wrote %s — %d sheets, %d printed pages, %.0f kB"

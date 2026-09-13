@@ -4,13 +4,14 @@ Independent feasibility review of four vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v3.0, 11 September 2026, prepared for Mohsin Chowdhury.** 35 pages, paginated.
+**Current edition: v3.5, 11 September 2026, prepared for Mohsin Chowdhury.** 36 pages, paginated.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v3.0)** — 34 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`index.html`](index.html) | **The artifact (v3.5)** — 36 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf`](Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf) | **Rendered PDF of the current edition** — A4, 36 pages, true scale. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
 | [`data/fill.json`](data/fill.json) | Pad geometry, fill volumes and costs per lot |
@@ -37,6 +38,14 @@ there.
 
 Cost to reach build-ready (land + pad + septic + foundation): **Lot 2 ~$65k**, Lot 3 ~$109k,
 Lot 1 ~$131k, Lot 4 ~$139k.
+
+## What v3.5 changed
+
+- **Appendix A · Engagement brief** added as the closing page — a traceability record of the
+  requirements that produced the document and the section that answers each, including the one
+  requirement that remains partly open (a second document to compare against was never supplied).
+- Version now flows from a single constant into the title, every footer and the print
+  running-header, instead of being hard-coded in the stylesheet.
 
 ## What v3.0 changed
 
