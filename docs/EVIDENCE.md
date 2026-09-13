@@ -413,3 +413,90 @@ python3 tools/paginate.py        # measures the print, fixes page numbers, verif
 `tools/terrain.py` needs network access to `arcgis-web.brazoriacountytx.gov`,
 `elevation.nationalmap.gov` and an Overpass mirror. `tools/paginate.py` needs headless Chrome and
 `pypdf`. Neither needs an API key.
+
+
+---
+
+## 13. The fifth lot — 808 Wagon Wheel Trail (added v4.0)
+
+Retrieved **13 September 2026**, by the same queries and services as the original four.
+
+### Parcel record
+
+```
+POST https://arcgis-web.brazoriacountytx.gov/arcgis/rest/services/general/Parcels/MapServer/1/query
+  where=situs_street LIKE '%WAGON WHEEL%' AND situs_num='808'
+```
+
+| Field | Value |
+|---|---|
+| PID | **183331** |
+| geo ID | 1533-0131-000 |
+| Situs of record | 808 WAGON WHEEL TRAIL |
+| Legal description | BAR X RANCH (A0038 J B BAILEY) **LOT 131** ACRES 1.07 |
+| Acreage of record | **1.07** |
+| County GIS polygon | **0.964** ac — 11% below the acreage of record |
+| Bounding box | **490 × 110 ft** — the narrowest of the five |
+| BCAD appraised | **$53,280** |
+| Deed | 2007-000505 |
+| CITYCODE_NAME | *null* — unincorporated, no city or ETJ |
+
+**It is Lot 4's immediate neighbour.** 750 Wagon Wheel is Lot 132, PID 183332; this is Lot 131,
+PID 183331. Their centroids are about **85 ft apart** on the same Flag Pond shoreline, which is why
+the terrain, soil and hazard readings are nearly identical.
+
+### Flood
+
+Same services and layers as §2. Zone polygon, panel and BFE line all queried with the parcel polygon.
+
+- **Zone AE**, `SFHA_TF = T`, `STATIC_BFE = -9999` — no static BFE published, as on the other four.
+- **FIRM panel 48039C0420K**, `EFF_DATE` 1609286400000 ms = **30 December 2020**.
+- **Nearest published BFE line 28.0 ft NAVD88, 1,336 ft** from the boundary — between Lot 2 (1,010 ft)
+  and Lot 4 (1,492 ft).
+
+### Water
+
+| Dataset | Nearest | Reading |
+|---|---|---|
+| NHD Waterbody | **18.8 ft — named Flag Pond, 101.8 ac** | Confirmed on the main lake |
+| NHD Flowline | 94.1 ft, unnamed | — |
+| OSM | Flag Pond and **Flag Lake Levee** both at 21 ft | Levee adjacency confirmed |
+
+**6 of the 11 recorded boundary vertices** fall within 60 ft of the mapped pool.
+
+### Terrain and pad
+
+`tools/terrain.py` and `tools/fill.py`, unchanged, re-run across all five parcels.
+
+- Transect **477.5 ft**, road to water. Relief **6.76 ft**, from **23.33 ft to 30.08 ft**.
+- Contours crossing the parcel: 23, 24, 25, 26, 27, 28, 29 ft.
+- Steepest run **4.46 ft in 8.1 m — 9.57°, 16.9%**, the steepest measured anywhere in this study, and
+  it is the levee embankment rather than buildable ground.
+- DEM grid ground **23.55–30.09 ft**, mean **24.6 ft**. Best pad ground clear of the levee **24.81 ft**.
+- Lift to a 29.5 ft pad top: **4.69 ft** — the deepest of the five. Fill **1,603 cu yd**,
+  **$35,148 – $71,198**.
+- **Pad geometry fails: needs 116 ft of width on a 110 ft lot, short by 6 ft.** The only lot of the
+  five where the pad does not fit.
+
+### Soil
+
+USDA SSURGO via Soil Data Access, same query as §6, at the parcel centroid.
+
+**Pledger** — moderately well drained, runoff **High**, hydrologic group **D**, all areas prime
+farmland. Topsoil 0–44 in: **69.5% clay**, 28.9% silt, 1.6% sand, 6.5% organic matter, ksat
+0.21 µm/s, pH 7.0. Subsoil 44–133 in: **73.1% clay**. Identical to Lots 3 and 4.
+
+### Jurisdiction and taxing districts
+
+`general/Taxing_Entities/MapServer`, point query at the centroid: **Brazoria County**,
+**Emergency Services District 1 and 2**, **Columbia-Brazoria ISD**. No city, no ETJ, no hospital
+district, no drainage district, no MUD — the same position as Lots 1, 3 and 4, and unlike Lot 2,
+which sits inside the Baileys Prairie ETJ.
+
+### Asking price — outstanding
+
+The parcel is **actively listed** (Zillow zpid 305175997), confirmed by the client. The asking price
+**could not be retrieved**: Zillow, Redfin, Homes.com and HAR all return bot-protection responses to
+automated requests, including through a real headless browser. Every price-dependent figure for this
+lot is therefore marked *pending* in the artifact rather than estimated. The county appraisal of
+$53,280 is the only value anchor held for it.

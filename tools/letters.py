@@ -101,6 +101,27 @@ EXTRA = {
          "The restrictions of record for this section reference drainage easements at 1712/500. Please "
          "confirm whether any mapped drainage easement crosses this parcel."),
     ],
+    5: [
+        ("Building envelope on a very narrow parcel",
+         "The parcel measures roughly 490 ft by 110 ft. Against the pad footprint our study assumes, "
+         "the narrow dimension is about 6 ft short of what a compliant pad with graded side slopes "
+         "would need. Please confirm the applicable front, side and rear building lines of record, and "
+         "whether the county will accept retaining structures or certified steeper side slopes to "
+         "bring a pad within the lot width."),
+        ("Flag Lake Levee and Flag Pond",
+         "Flag Pond lies about 21 ft from this parcel and the Flag Lake Levee, a structure carried in "
+         "the National Inventory of Dams, at about the same distance. Please confirm the levee's "
+         "accreditation status and whether the mapping for this parcel relies on it, its hazard "
+         "classification and condition rating, whether the parcel lies within a dam-failure "
+         "inundation area, and any easement or construction restriction attaching to it."),
+        ("Acreage of record against the county polygon",
+         "The legal description reads 1.07 acres but the county's own parcel polygon computes to about "
+         "0.964 acre, a difference of roughly 11 per cent. Please confirm which figure the county "
+         "treats as controlling for permitting and for any setback calculation."),
+        ("Recorded drainage easements",
+         "The restrictions of record for this section reference drainage easements at 1712/500. Please "
+         "confirm whether any mapped drainage easement crosses this parcel."),
+    ],
 }
 
 # The ten questions every letter asks, in the order they matter for a purchase decision.
@@ -279,7 +300,7 @@ def letter_html(p, f, single=True):
   <div class="foot">
     Parcel figures are drawn from the Brazoria County Appraisal District record, the county public GIS
     services and the USGS 3DEP elevation model, as compiled in the four-lot feasibility portfolio
-    v3.5. They are stated for correction, not as assertions of fact.
+    v4.0. They are stated for correction, not as assertions of fact.
   </div>
 </div>""" % {
         'who': PREPARED_FOR,
@@ -301,8 +322,8 @@ def letter_html(p, f, single=True):
         'gmin': f['ground_min_ft'], 'gmax': f['ground_max_ft'], 'gmean': f['ground_mean_ft'],
         'wtxt': wtxt, 'ffe': FFE_FT, 'fb': FREEBOARD_IN, 'lift': f['lift_ft'],
         'qs': qs,
-        'note': ('<div class="note">This is one of four parcels I am evaluating in Bar X Ranch. '
-                 'A combined request covering all four is available if the office would prefer to '
+        'note': ('<div class="note">This is one of five parcels I am evaluating in Bar X Ranch. '
+                 'A combined request covering all five is available if the office would prefer to '
                  'answer them together.</div>') if single else '',
     }
 
@@ -424,7 +445,7 @@ def main():
         emails.append(email_text(p, f))
 
     print('combined')
-    comb = 'BFE-Request-All-Four-Lots.pdf'
+    comb = 'BFE-Request-All-Five-Lots.pdf'
     cover = """
 <div class="letter">
   <div class="hd">
@@ -434,29 +455,29 @@ def main():
   <div class="to"><div class="of">The Floodplain Administrator</div>
     %s<br>%s<br>%s<br>%s<br>%s &nbsp;/&nbsp; %s</div>
   <div class="subj">Request for written Base Flood Elevation determinations &mdash;
-    four parcels in Bar X Ranch, Angleton</div>
+    five parcels in Bar X Ranch, Angleton</div>
   <p>Dear Floodplain Administrator,</p>
-  <p>I am evaluating four vacant parcels in Bar X Ranch for the construction of a single-family
+  <p>I am evaluating five vacant parcels in Bar X Ranch for the construction of a single-family
   residence, and expect to purchase one of them. I should be grateful for a written determination of
   the base flood elevation applying to each, together with confirmation of the points set out in the
   individual letters that follow.</p>
-  <p>The four parcels are:</p>
+  <p>The five parcels are:</p>
   <table class="rec">
     <tr><th>Parcel</th><td><b>PID</b> &middot; legal description &middot; acreage of record</td></tr>
     %s
   </table>
   <p>Each parcel is covered by its own letter overleaf, because the questions differ between them &mdash;
-  one adjoins Mill Bayou, one sits beside Flag Pond and the Flag Lake Levee, one has an apparent
-  discrepancy in its address of record, and one stands appreciably higher than the rest. The ten
-  questions common to all four are repeated in each letter so that any one of them can be answered on
-  its own.</p>
-  <p>If it is easier for the office to answer all four together in a single reply, that would suit me
+  one adjoins Mill Bayou, two sit beside Flag Pond and the Flag Lake Levee, one has an apparent
+  discrepancy in its address of record, one stands appreciably higher than the rest, and on one the
+  parcel width appears too narrow for a compliant building pad. The ten questions common to all five
+  are repeated in each letter so that any one of them can be answered on its own.</p>
+  <p>If it is easier for the office to answer all five together in a single reply, that would suit me
   well. If a fee or a formal application is required, please tell me the amount and the form and I will
   submit it promptly.</p>
   <p>Thank you for your assistance.</p>
   <div class="sig"><p>Yours faithfully,</p><hr class="rule"><div><b>%s</b></div></div>
   <div class="foot">Compiled from the Brazoria County Appraisal District record, the county public GIS
-  services and the USGS 3DEP elevation model &mdash; four-lot feasibility portfolio v3.5. Figures are
+  services and the USGS 3DEP elevation model &mdash; five-lot feasibility portfolio v4.0. Figures are
   stated for correction, not as assertions of fact.</div>
 </div>""" % (
         PREPARED_FOR, SENDER['addr1'], SENDER['addr2'], SENDER['tel'], SENDER['email'],
@@ -472,7 +493,7 @@ def main():
 
     md = ['# Draft e-mails — Brazoria County Floodplain & 911 Administration',
           '',
-          'Four requests for a written base flood elevation determination, one per parcel. Plain text,',
+          'Five requests for a written base flood elevation determination, one per parcel. Plain text,',
           'ready to send as they stand.',
           '',
           '- **To:** Brazoria County %s, %s, %s' % (COUNTY['office'].replace('&amp;', '&'),
