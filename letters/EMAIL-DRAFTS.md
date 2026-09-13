@@ -1,6 +1,6 @@
 # Draft e-mails — Brazoria County Floodplain & 911 Administration
 
-Four requests for a written base flood elevation determination, one per parcel. Plain text,
+Five requests for a written base flood elevation determination, one per parcel. Plain text,
 ready to send as they stand.
 
 - **To:** Brazoria County Floodplain & 911 Administration, 451 North Velasco, Suite 210, Angleton, Texas 77515
@@ -399,6 +399,119 @@ Could you please confirm:
       spare width. Please confirm the applicable front, side and rear building
       lines of record so the envelope can be tested before purchase.
   13. Recorded drainage easements
+      The restrictions of record for this section reference drainage easements
+      at 1712/500. Please confirm whether any mapped drainage easement crosses
+      this parcel.
+
+If a fee or a formal application is needed for a written determination, please tell me
+the amount and the form and I will submit it promptly.
+
+I am writing from out of state, so a reply to this address is most helpful; I am also
+reachable on (702) 582-5724 during Pacific business hours.
+
+With thanks,
+Mohsin Chowdhury
+3731 Bright Aquarius Lane, Henderson, Nevada 89052
+(702) 582-5724 · mms221@gmail.com
+```
+
+---
+
+## Lot 5 — 808 Wagon Wheel Trail
+
+```text
+Subject: BFE determination request — 808 Wagon Wheel Trail (PID 183331), Bar X Ranch, Angleton
+To: Brazoria County Floodplain & 911 Administration
+
+Dear Floodplain Administrator,
+
+I am evaluating the vacant parcel below for a single-family residence and would be
+grateful for a written determination of the base flood elevation that applies to it.
+I am not yet under contract; I am trying to establish the regulatory position before
+committing to a purchase or a design.
+
+  Marketed as       808 Wagon Wheel Trail, Angleton, TX 77515
+  Situs of record   808 WAGON WHEEL TRAIL
+  Account / PID     183331  (GEO ID 1533-0131-000)
+  Legal             BAR X RANCH (A0038 J B BAILEY) LOT 131 ACRES 1.07
+  Acreage of record 1.07 acres
+  Subdivision       Bar-X Ranch #1, plat 16/104 (9 Jun 1980)
+  Centroid          29.130342, -95.541850
+
+My present understanding, which I would be glad to have corrected:
+
+  - Zone AE, FIRM panel 48039C0420K effective 30 December 2020
+  - Nearest published BFE 28.0 ft NAVD88, about 1,336 ft from the parcel
+  - Natural ground about 23.6-30.1 ft NAVD88 (LiDAR / USGS 1 m DEM)
+  - Assumed finished floor 30.0 ft NAVD88 = BFE + 24 in freeboard
+  - Implied pad lift about 4.7 ft
+
+Could you please confirm:
+
+   1. Written base flood elevation
+      The base flood elevation the county applies to this parcel, in feet
+      NAVD88, and the source used to derive it — the Flood Insurance Study
+      profile and cross-section, or the published BFE line, with the method of
+      interpolation if one is used.
+   2. Regulatory floodway
+      Whether any part of the parcel lies within the regulatory floodway as
+      opposed to the flood fringe.
+   3. Minimum finished-floor elevation
+      Confirmation of the minimum finished-floor elevation the county will
+      require. Our understanding is the base flood elevation plus 24 inches of
+      freeboard, being a single requirement of 24 inches rather than 24 inches
+      in addition to a further two feet. Please correct that if it is wrong,
+      and state any additional local standard that applies.
+   4. Levee status relied upon
+      The accreditation status of the Angleton Levee as relied upon in the
+      current mapping, and whether any Letter of Map Revision, physical map
+      revision or preliminary FIRM is pending that would change the zone or
+      the base flood elevation for this parcel.
+   5. Fill, no-rise and drainage
+      Whether raising a building pad on this parcel requires a no-rise
+      certification, compensatory storage, or a drainage review, and
+      confirmation that a Fill and Grading permit is required in addition to
+      the development permit.
+   6. Map amendment on natural grade
+      Whether the county considers this parcel a candidate for a Letter of Map
+      Amendment on natural grade, and confirmation that placing fill under the
+      structure would instead require a Letter of Map Revision based on fill.
+   7. Permit route and fees
+      Confirmation that a single combined Development and Building Permit
+      applies, the fee basis for a single-family residence in a flood zone,
+      and that all contractors must hold county IRC registration before the
+      permit issues.
+   8. Elevation certificate
+      At what stage an elevation certificate is required, and the form the
+      county accepts.
+   9. Jurisdiction
+      Confirmation that this parcel is in unincorporated Brazoria County and
+      not within the city limits or extraterritorial jurisdiction of Angleton,
+      so that the county is the permitting authority.
+  10. Substantial-damage and repetitive-loss history
+      Any record the county holds of flooding, substantial damage or
+      repetitive loss affecting this parcel or its immediate street.
+  11. Building envelope on a very narrow parcel
+      The parcel measures roughly 490 ft by 110 ft. Against the pad footprint
+      our study assumes, the narrow dimension is about 6 ft short of what a
+      compliant pad with graded side slopes would need. Please confirm the
+      applicable front, side and rear building lines of record, and whether
+      the county will accept retaining structures or certified steeper side
+      slopes to bring a pad within the lot width.
+  12. Flag Lake Levee and Flag Pond
+      Flag Pond lies about 21 ft from this parcel and the Flag Lake Levee, a
+      structure carried in the National Inventory of Dams, at about the same
+      distance. Please confirm the levee's accreditation status and whether
+      the mapping for this parcel relies on it, its hazard classification and
+      condition rating, whether the parcel lies within a dam-failure
+      inundation area, and any easement or construction restriction attaching
+      to it.
+  13. Acreage of record against the county polygon
+      The legal description reads 1.07 acres but the county's own parcel
+      polygon computes to about 0.964 acre, a difference of roughly 11 per
+      cent. Please confirm which figure the county treats as controlling for
+      permitting and for any setback calculation.
+  14. Recorded drainage easements
       The restrictions of record for this section reference drainage easements
       at 1712/500. Please confirm whether any mapped drainage easement crosses
       this parcel.

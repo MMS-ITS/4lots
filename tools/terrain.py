@@ -29,7 +29,8 @@ DEM = "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/Imag
 M_PER_FT = 0.3048
 R_EARTH = 6371008.8
 
-STREET = {'lot1': 'SADDLE HORN', 'lot2': 'WAGON WHEEL', 'lot3': 'BROKEN ARROW', 'lot4': 'WAGON WHEEL'}
+STREET = {'lot1': 'SADDLE HORN', 'lot2': 'WAGON WHEEL', 'lot3': 'BROKEN ARROW', 'lot4': 'WAGON WHEEL',
+          'lot5': 'WAGON WHEEL'}
 
 
 def post(url, params, timeout=180, tries=4):

@@ -552,6 +552,110 @@
      ]
     ]
    }
+  },
+  {
+   "type": "Feature",
+   "id": "lot5",
+   "properties": {
+    "lot": 5,
+    "listing_name": "808 Wagon Wheel Trail",
+    "asking_price_usd": null,
+    "pid": 183331,
+    "geo_id": "1533-0131-000",
+    "situs_of_record": "808 WAGON WHEEL TRAIL",
+    "legal_description": "BAR X RANCH (A0038 J B BAILEY) LOT 131 ACRES 1.07",
+    "acres_of_record": 1.07,
+    "gis_polygon_acres": 0.964,
+    "bbox_ft": [
+     490,
+     110
+    ],
+    "bcad_appraised_usd": 53280,
+    "deed_reference": "2007-000505",
+    "subdivision": "Bar-X Ranch #1",
+    "plat": "16/104 (9 Jun 1980)",
+    "recorded_restrictions": "1515/679 (+ drainage easements 1712/500)",
+    "centroid": [
+     29.130342,
+     -95.54185
+    ],
+    "fema_zone_2020": "AE",
+    "firm_panel": "48039C0420K",
+    "firm_effective": "30 Dec 2020",
+    "nearest_published_bfe_ft_navd88": 28.0,
+    "nearest_bfe_line_ft_away": 1336,
+    "nearest_water": [
+     {
+      "name": "Flag Pond",
+      "type": "water",
+      "ft": 21,
+      "m": 6
+     },
+     {
+      "name": "Flag Lake Levee",
+      "type": "dam",
+      "ft": 21,
+      "m": 6
+     }
+    ],
+    "listing_status": "active \u2014 Zillow zpid 305175997; asking price not yet obtained",
+    "listing_url": "https://www.zillow.com/homedetails/808-Wagon-Wheel-Trl-Angleton-TX-77515/305175997_zpid/"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -95.541137,
+       29.1301943
+      ],
+      [
+       -95.5425736,
+       29.1302473
+      ],
+      [
+       -95.5426698,
+       29.1302509
+      ],
+      [
+       -95.5426681,
+       29.1303051
+      ],
+      [
+       -95.5426679,
+       29.1303321
+      ],
+      [
+       -95.5426699,
+       29.1304133
+      ],
+      [
+       -95.5426702,
+       29.130429
+      ],
+      [
+       -95.5411888,
+       29.1304955
+      ],
+      [
+       -95.5411475,
+       29.1302753
+      ],
+      [
+       -95.5411438,
+       29.1302483
+      ],
+      [
+       -95.5411399,
+       29.1302213
+      ],
+      [
+       -95.541137,
+       29.1301943
+      ]
+     ]
+    ]
+   }
   }
  ]
 }

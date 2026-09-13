@@ -1,18 +1,18 @@
-# Bar X Ranch — 4-Lot Feasibility Portfolio
+# Bar X Ranch — 5-Lot Feasibility Portfolio
 
-Independent feasibility review of four vacant lots in Bar X Ranch, unincorporated Brazoria County,
+Independent feasibility review of five vacant lots in Bar X Ranch, unincorporated Brazoria County,
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v3.5, 11 September 2026, prepared for Mohsin Chowdhury.** 43 pages, paginated.
+**Current edition: v4.0, 13 September 2026, prepared for Mohsin Chowdhury.** 47 pages, paginated, five lots.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v3.5)** — 43 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf`](Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf) | **Rendered PDF of the current edition** — A4, 43 pages, true scale. |
-| [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined four-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
+| [`index.html`](index.html) | **The artifact (v4.0)** — 47 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf) | **Rendered PDF of the current edition** — A4, 47 pages, true scale. |
+| [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined five-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
 | [`data/fill.json`](data/fill.json) | Pad geometry, fill volumes and costs per lot |
@@ -37,9 +37,28 @@ there.
 | **336 Wagon Wheel Trail W** | 183367 | 1.00 | **$45,000** | $36,000 | Asa silty clay loam | **0.7 ft** | **$20,400** |
 | Lot 29 Broken Arrow Trail | 186219 | 1.30 | $49,000 | $51,870 | Pledger clay | 3.0 ft | $37,500 |
 | 750 Wagon Wheel Trail | 183332 | 1.00 | $58,000 | $50,000 | Pledger clay | 3.8–5.2 ft | $44,700–58,200 |
+| 808 Wagon Wheel Trail | 183331 | 1.07 | *listed, price to confirm* | $53,280 | Pledger clay | 4.7 ft | $53,200 — **pad does not fit** |
 
 Cost to reach build-ready (land + pad + septic + foundation): **Lot 2 ~$65k**, Lot 3 ~$109k,
 Lot 1 ~$131k, Lot 4 ~$139k.
+
+## What v4.0 changed
+
+- **808 Wagon Wheel Trail added as a fifth lot** (PID 183331, Lot 131, 1.07 ac of record), taken through
+  the full pipeline: parcel record, flood zone and panel, nearest published BFE, 1 ft LiDAR contours and a
+  USGS 3DEP terrain section, SSURGO soil, pad and fill cost, aerials, scorecard, carrying cost, and its
+  own county BFE request letter and e-mail draft.
+- **It is Lot 4's immediate neighbour** — Lot 131 beside Lot 132, about 85 ft apart on the same Flag Pond
+  shoreline — which is why their terrain profiles and hazards read almost identically.
+- **The building pad does not fit.** At 490 × 110 ft the parcel is the narrowest in the study and the pad
+  plus its graded side slopes needs 116 ft against the 110 ft available. It is the only lot of the five
+  where the geometry fails outright rather than merely running tight, and it also needs the deepest lift
+  (4.69 ft) and the most fill (1,603 cu yd).
+- **Asking price is outstanding.** The parcel is actively listed (Zillow zpid 305175997) but every listing
+  portal blocks automated retrieval, so price-dependent cells are marked *pending* rather than estimated.
+- **The scorecard tallies are now computed from the data** instead of being maintained by hand — which
+  revealed the v3.5 totals had drifted and were wrong.
+- Sections renumbered: lots are §6–§10, terrain §13–§17, and everything from Soil onward shifts by two.
 
 ## What v3.5 changed
 

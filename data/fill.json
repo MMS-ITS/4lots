@@ -39,7 +39,7 @@
    "narrow_dim_ft": 316,
    "need_narrow_ft": 113,
    "spare_ft": 203,
-   "water_standoff_m": 42.8,
+   "water_standoff_m": 42.9,
    "clear_to_boundary_m": 6.4,
    "pier_relevant": true,
    "items": [
@@ -197,7 +197,7 @@
    "narrow_dim_ft": 354,
    "need_narrow_ft": 106,
    "spare_ft": 248,
-   "water_standoff_m": 35.1,
+   "water_standoff_m": 35.0,
    "clear_to_boundary_m": 6.4,
    "pier_relevant": true,
    "items": [
@@ -343,6 +343,85 @@
     "total_lo": 38630,
     "total_hi": 77762
    }
+  },
+  "lot5": {
+   "lot": 5,
+   "name": "808 Wagon Wheel Trail",
+   "grid_points": 152,
+   "ground_min_ft": 23.55,
+   "ground_max_ft": 30.09,
+   "ground_mean_ft": 24.6,
+   "pad_ground_ft": 24.81,
+   "pad_top_ft": 29.5,
+   "lift_ft": 4.69,
+   "fill_height_ft": 5.19,
+   "fill_cy": 1603,
+   "toe_ft": [
+    100,
+    113
+   ],
+   "lot_bbox_ft": [
+    490,
+    110
+   ],
+   "pad_fits": false,
+   "narrow_dim_ft": 110,
+   "need_narrow_ft": 116,
+   "spare_ft": -6,
+   "water_standoff_m": 33.6,
+   "clear_to_boundary_m": 10.4,
+   "pier_relevant": true,
+   "items": [
+    [
+     "Strip and stockpile topsoil under the pad",
+     2015,
+     4029
+    ],
+    [
+     "Imported select fill, placed and compacted in lifts",
+     25640,
+     48075
+    ],
+    [
+     "Topsoil and turf the side slopes",
+     694,
+     1513
+    ],
+    [
+     "Geotechnical investigation and report",
+     2500,
+     5000
+    ],
+    [
+     "Engineered pad and drainage plan",
+     1500,
+     4000
+    ],
+    [
+     "Compaction density testing",
+     1200,
+     3000
+    ],
+    [
+     "Erosion and sediment control",
+     600,
+     1500
+    ],
+    [
+     "Drainage works so runoff is not pushed onto the road or a neighbour",
+     1000,
+     4000
+    ],
+    [
+     "County fill and grading permit",
+     0,
+     80
+    ]
+   ],
+   "total_lo": 35148,
+   "total_hi": 71198,
+   "pier_alt_lo": 79040,
+   "pier_alt_hi": 133760
   }
  },
  "pier_crossover_lift_ft": 9.3,
