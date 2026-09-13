@@ -4,19 +4,23 @@ Independent feasibility review of four vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v3.0, 11 September 2026, prepared for Mohsin Chowdhury.** 34 pages, paginated.
+**Current edition: v3.5, 11 September 2026, prepared for Mohsin Chowdhury.** 36 pages, paginated.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v3.0)** — 34 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`index.html`](index.html) | **The artifact (v3.5)** — 36 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf`](Bar-X-Ranch-4-Lot-Feasibility-v3.5.pdf) | **Rendered PDF of the current edition** — A4, 36 pages, true scale. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
+| [`data/fill.json`](data/fill.json) | Pad geometry, fill volumes and costs per lot |
 | [`data/pagination.json`](data/pagination.json) | Measured page numbers, written by `tools/paginate.py` |
 | [`tools/build_artifact.py`](tools/build_artifact.py) | Builds `index.html`. All figures baked in as literals. |
 | [`tools/terrain.py`](tools/terrain.py) | Rebuilds `data/terrain.json` from the county and USGS elevation services |
 | [`tools/terrain_svg.py`](tools/terrain_svg.py) | Renders the true-scale plans and terrain sections |
+| [`tools/aerials.py`](tools/aerials.py) | Builds the twelve lot aerials from USGS NAIP |
+| [`tools/fill.py`](tools/fill.py) | Costs the flood-headroom pad on each lot from a DEM grid |
 | [`tools/paginate.py`](tools/paginate.py) | Two-pass pagination — measures the real print, then fixes every page number and verifies it |
 | [`docs/EVIDENCE.md`](docs/EVIDENCE.md) | Every v3 finding with the exact query that produced it |
 | [`docs/AUDIT.md`](docs/AUDIT.md) | Claim-by-claim audit of the original generated portfolio |
@@ -25,12 +29,23 @@ there.
 
 ## The four lots
 
-| Lot | PID | Acres of record | Asking | County appraised | Soil |
-|---|---|---|---|---|---|
-| 1127 Saddle Horn Bend | 183667 | 1.95 | $82,500 | $65,030 | Asa silty clay loam |
-| 336 Wagon Wheel Trail W | 183367 | 1.00 | $45,000 | $36,000 | Asa silty clay loam |
-| Lot 29 Broken Arrow Trail | 186219 | 1.30 | $49,000 | $51,870 | Pledger clay |
-| 750 Wagon Wheel Trail | 183332 | 1.00 | $58,000 | $50,000 | Pledger clay |
+| Lot | PID | Acres of record | Asking | County appraised | Soil | Fill to 30 ft | Pad cost (mid) |
+|---|---|---|---|---|---|---|---|
+| 1127 Saddle Horn Bend | 183667 | 1.95 | $82,500 | $65,030 | Asa silty clay loam | 4.2 ft | $48,600 |
+| **336 Wagon Wheel Trail W** | 183367 | 1.00 | **$45,000** | $36,000 | Asa silty clay loam | **0.7 ft** | **$20,400** |
+| Lot 29 Broken Arrow Trail | 186219 | 1.30 | $49,000 | $51,870 | Pledger clay | 3.0 ft | $37,500 |
+| 750 Wagon Wheel Trail | 183332 | 1.00 | $58,000 | $50,000 | Pledger clay | 3.8–5.2 ft | $44,700–58,200 |
+
+Cost to reach build-ready (land + pad + septic + foundation): **Lot 2 ~$65k**, Lot 3 ~$109k,
+Lot 1 ~$131k, Lot 4 ~$139k.
+
+## What v3.5 changed
+
+- **Appendix A · Engagement brief** added as the closing page — a traceability record of the
+  requirements that produced the document and the section that answers each, including the one
+  requirement that remains partly open (a second document to compare against was never supplied).
+- Version now flows from a single constant into the title, every footer and the print
+  running-header, instead of being hard-coded in the stylesheet.
 
 ## What v3.0 changed
 
@@ -51,18 +66,34 @@ there.
 - **Lot 4 abuts the Flag Lake Levee** (NID TX06298), which impounds a 101-acre lake above the
   buildable part of that lot and carries no published hazard classification.
 - **Tax model corrected** — these parcels are in no hospital, drainage or junior-college district.
+- **The pad is now calculated, not estimated** (§20). Fill to reach the 30 ft floor ranges from
+  **0.7 ft / 268 cu yd / ~$20,400 on Lot 2** to **5.2 ft / 1,808 cu yd / ~$58,200 on Lot 4**. That
+  $38,000 spread, plus the soil difference, is what decides the recommendation — and it moved the
+  answer from Lot 1 to **Lot 2**.
 - Added true-scale plans and terrain sections per lot, and a livability chapter covering climate in
   Celsius, hazards, services, schools, distances, demographics, the Indian community and airports.
 
 ## Rebuilding
 
 ```
+pip install Pillow pypdf
+
+python3 tools/aerials.py          # writes the twelve lot aerials
+python3 tools/fill.py             # costs the pad on each lot
 python3 tools/build_artifact.py   # writes index.html
 python3 tools/paginate.py         # measures the print and corrects every page number
 python3 tools/terrain.py          # only needed to refresh the elevation data
 ```
 
-`paginate.py` needs headless Chrome and `pypdf`. No API keys are required anywhere.
+`paginate.py` needs headless Chrome. No API keys are required anywhere.
+
+### A note on image resolution
+
+USGS NAIP is **30 cm** ground sample distance, and nothing sharper is published for this area —
+Esri World Imagery tops out near 26 cm here and serves empty tiles above zoom 19. The aerials are
+therefore sampled at a fixed **0.15 m/px**, a 2× oversample of the source, which is the honest
+ceiling: asking the server for 0.06 m/px, as a first attempt did, only interpolated the same 30 cm
+data five times over and looked soft. Each image states its own m/px in the corner.
 
 ## Status
 

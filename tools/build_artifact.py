@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Build index.html — the Bar X Ranch 4-lot feasibility portfolio, v3.0.
+"""Build index.html — the Bar X Ranch 4-lot feasibility portfolio.
+
+Version is set by the VERSION constant below and flows into the title, every sheet
+footer and the print running-header; do not hard-code it in the CSS or the copy.
 
 Emits a paginated A4 artifact with running page numbers. All figures are baked in
 as literals so the build is reproducible from the repository alone; the parcel
@@ -20,7 +23,7 @@ OUT = os.path.join(ROOT, 'index.html')
 
 PREPARED_FOR = "Mohsin Chowdhury"
 PREPARED_ON = "11 September 2026"
-VERSION = "3.0"
+VERSION = "3.5"
 
 # --------------------------------------------------------------------------- data
 gj = json.load(open(GEOJSON))
@@ -33,9 +36,12 @@ EXTRA = {
     'lot1': dict(
         short="1127 Saddle Horn Bend",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — Mill Bayou'), ('q', 'Largest — 1.95 ac')],
-        water="Mill Bayou. 19 of the 40 recorded boundary vertices lie within 60 ft of a "
-              "13.0-acre mapped water body; the Mill Bayou centreline is 112 ft off the boundary.",
-        frontage="Roughly half the perimeter is water frontage — the most of the four.",
+        water="<b>Mill Bayou — a tree-lined stream corridor, not open water.</b> The bayou "
+              "flowline runs 66 ft off the boundary and 19 of the 40 recorded vertices lie within "
+              "60 ft of the mapped channel corridor. But the nearest NHD <em>waterbody</em> is "
+              "<b>395 ft</b> away: aerial imagery shows a wooded channel, not a pond.",
+        frontage="Roughly half the perimeter backs onto the bayou corridor — the longest water "
+                 "boundary of the four, but the least open water.",
         ground="24–25 ft at the parcel; 18–30 ft across the surrounding 600 ft "
                "(the 18 ft readings are the bayou channel itself).",
         sh35="0.09 mi (about 480 ft) south of State Highway 35",
@@ -90,9 +96,11 @@ EXTRA = {
     'lot4': dict(
         short="750 Wagon Wheel Trail",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — Flag Lake'), ('red', 'Abuts a dam'), ('q', 'Dearest / acre')],
-        water="Flag Pond — a 101.5-acre lake, by far the largest water body in the study area. "
-              "8 of 17 boundary vertices lie within 11 ft of both the pond and the Flag Lake "
-              "Levee embankment (National Inventory of Dams ID TX06298).",
+        water="<b>Flag Pond — a 101.5-acre lake</b>, by far the largest water body here, and "
+              "confirmed by name in the USGS hydrography at <b>14 ft</b> from the boundary. 8 of 17 "
+              "vertices sit within 11 ft of both the mapped pond extent and the Flag Lake Levee "
+              "embankment (NID TX06298). Note the aerial: the <em>visible</em> shoreline lies "
+              "further out than the mapped pool boundary.",
         frontage="Genuine big-lake frontage. This is the only one of the four on the main lake.",
         ground="24 ft at the parcel (a 24 ft contour passes within 1 ft of the centroid); "
                "23–30 ft across the surrounding 600 ft.",
@@ -108,8 +116,15 @@ EXTRA = {
         verdict="Best lot to live on, worst lot to buy on price. The dam needs answering first.",
     ),
 }
+WATER_SHORT = {
+    'lot1': "<b>Mill Bayou</b> — a tree-lined stream corridor. Nearest mapped waterbody 395 ft.",
+    'lot2': "Unnamed <b>12.6-acre pond</b>, 41 ft off the boundary. Shortest frontage of the four.",
+    'lot3': "The <b>same 12.6-acre pond</b> as Lot 2, 59 ft off, with about twice the frontage.",
+    'lot4': "<b>Flag Pond, 101.5 ac</b> — named in USGS hydrography 14 ft off, plus the levee.",
+}
 for k, v in EXTRA.items():
     LOTS[k].update(v)
+    LOTS[k]['water_short'] = WATER_SHORT[k]
 
 # ------------------------------------------------------------------ climate (Celsius)
 # ERA5 reanalysis at 29.139 N, 95.547 W, daily 1991-2020, aggregated to monthly means.
@@ -275,6 +290,8 @@ a{color:var(--teal); text-decoration:none; border-bottom:.5pt solid rgba(15,118,
   font-size:7.4pt; letter-spacing:.02em; color:var(--faint);
 }
 .foot b{color:var(--muted); font-weight:600;}
+.foot span:first-child{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+                       margin-right:6mm;}
 .foot .pg{white-space:nowrap;}
 
 /* ---------------- type ---------------- */
@@ -368,7 +385,9 @@ table.compact{font-size:7.7pt;} table.compact th,table.compact td{padding:.9mm 1
 .badge.etj{background:var(--violet-w); color:var(--violet);}
 .badge.red{background:var(--red-w); color:var(--red);}
 .cols2{display:grid; grid-template-columns:1fr 1fr; gap:4mm;}
-.cols2c{display:grid; grid-template-columns:1.15fr 1fr; gap:4mm;}
+.cols2c{display:grid; grid-template-columns:1.15fr 1fr; gap:4mm; align-items:stretch;}
+.cols2c > div{display:flex; flex-direction:column;}
+.cols2c > div > .map{flex:1 1 auto; min-height:66mm;}
 dl.facts{display:grid; grid-template-columns:30mm 1fr; gap:.6mm 2.6mm; margin:0; font-size:8.1pt;}
 dl.facts dt{color:var(--faint); text-transform:uppercase; letter-spacing:.05em; font-size:7.2pt; padding-top:.5mm;}
 dl.facts dd{margin:0;}
@@ -384,10 +403,12 @@ dl.facts dd{margin:0;}
         padding:.9mm 2mm; border-bottom-right-radius:1.2mm; z-index:2;}
 .mapfall{display:none; padding:4mm; font-size:8.4pt; color:var(--muted);}
 .mapfall b{color:var(--ink);}
-.shots{display:grid; grid-template-columns:repeat(3,1fr); gap:2mm; margin:2.5mm 0;}
-.shot{position:relative; aspect-ratio:4/3; border:.6pt solid var(--line2); border-radius:1.2mm;
-      overflow:hidden; background:var(--wash);}
-.shot img{width:100%; height:100%; object-fit:cover; display:block;}
+.shots{display:grid; grid-template-columns:1fr 1fr; gap:3mm; margin:2mm 0;}
+figure.shot,figure.hero{position:relative; margin:0; border:.6pt solid var(--line2);
+      border-radius:1.2mm; overflow:hidden; background:var(--wash);}
+figure.hero{margin:0 0 2.5mm;}
+figure.shot img,figure.hero img{width:100%; height:auto; display:block;}
+figure.shot figcaption,figure.hero figcaption{display:none;}
 .shot .ph{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center;
           align-items:center; text-align:center; padding:2mm; gap:1mm;
           background:repeating-linear-gradient(45deg,#f2f6f6,#f2f6f6 3mm,#eaf0f0 3mm,#eaf0f0 6mm);}
@@ -439,7 +460,7 @@ dl.facts dd{margin:0;}
   @page{
     size:A4; margin:13mm 15mm 14mm;
     @bottom-left{
-      content:"Bar X Ranch — Four-Lot Feasibility Portfolio v3.0 · prepared for Mohsin Chowdhury · 11 September 2026";
+      content:"Bar X Ranch — Four-Lot Feasibility Portfolio v@@V@@ · prepared for @@FOR@@ · @@ON@@";
       font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
       font-size:7.2pt; color:#86959b; vertical-align:top; padding-top:3mm;
     }
@@ -522,11 +543,12 @@ def map_fallback(p):
             % (p['short'], lat, lon, p['pid'], p['legal_description'], lat, lon))
 
 
-def shot(lot_n, i, title, sub):
-    return ('<div class="shot"><img src="assets/photos/lot%d-%d.jpg" alt="%s" '
+def shot(lot_n, i, title, sub, cls='shot'):
+    return ('<figure class="%s"><img src="assets/photos/lot%d-%d.jpg" alt="%s" '
             'onload="this.parentNode.querySelector(\'.ph\').style.display=\'none\'">'
-            '<div class="ph"><span class="t">%s</span><span class="s">%s</span></div></div>'
-            % (lot_n, i, title, title, sub))
+            '<div class="ph"><span class="t">%s</span><span class="s">%s</span></div>'
+            '<figcaption>%s</figcaption></figure>'
+            % (cls, lot_n, i, title, title, sub, sub))
 
 
 def bar(label, value, pct, cls=''):
@@ -588,7 +610,7 @@ buildability, cost, flood and windstorm exposure, and what it is actually like t
   description, acreage of record, appraised value, deed reference — and checked against the county's
   own flood, LiDAR elevation, taxing-district and subdivision layers, the USDA soil survey, and the
   recorded deed restrictions. This edition adds <b>true-scale plans and terrain sections</b> for each
-  lot (§11–15) and a chapter on <b>what living here is actually like</b> (§22–27). Nineteen open
+  lot (§11–15) and a chapter on <b>what living here is actually like</b> (§23–27). Nineteen open
   questions are closed, and <b>four conclusions change</b>: the FIRM panel, the governing base flood
   elevation, which lot is the best buy, and whether you can keep poultry.
 </div>
@@ -599,8 +621,8 @@ buildability, cost, flood and windstorm exposure, and what it is actually like t
   <dt>Version</dt><dd>{VERSION} — supersedes v2.0 (10 Sep 2026) and the original generated portfolio</dd>
   <dt>Subject</dt><dd>PID 183667 · 183367 · 186219 · 183332 — Bar X Ranch Sections 1, 2 and 16</dd>
   <dt>Asking price</dt><dd>$234,500 for 5.25 acres of record across four lots</dd>
-  <dt>Basis</dt><dd>Primary regulation, Brazoria County public GIS, FEMA, TCEQ, TDI, TWIA,
-      US Census ACS 2024, ERA5 climate reanalysis</dd>
+  <dt>Basis</dt><dd>Primary regulation, Brazoria County public GIS, FEMA, TCEQ, TDI, TWIA, USDA soil
+      survey, USGS 3DEP and hydrography, US Census ACS 2024, ERA5 climate reanalysis</dd>
   <dt>Status</dt><dd>Desktop study. No survey, no soil test, no written county flood determination.</dd>
 </dl>
 
@@ -614,11 +636,12 @@ buildability, cost, flood and windstorm exposure, and what it is actually like t
     an option on any of the four. See §10.
   </div>
   <div class="note red" style="margin:0;">
-    <span class="lbl">The finding that changed the answer</span>
+    <span class="lbl">The findings that changed the answer</span>
     Two of the four lots sit on <b>Pledger clay</b> — a 70% clay shrink-swell vertisol, hydrologic
-    group D — and two on <b>Asa silty clay loam</b>, a well-drained prime-farmland loam. For a
-    gardener who is also pouring a foundation and a septic field, that single difference outweighs
-    every price gap in the portfolio. See §16.
+    group D — and two on <b>Asa silty clay loam</b>, a well-drained prime-farmland loam (§16). And the
+    pad, now <b>calculated per lot</b> rather than estimated, ranges from <b>$20,400 on Lot 2 to
+    $58,200 on Lot 4</b> at mid-case (§20). Together those outweigh every asking-price gap in the
+    portfolio.
   </div>
 </div>
 <div class="note violet" style="margin-top:3mm;">
@@ -692,39 +715,51 @@ Two findings in this edition decide it, and neither was in any earlier version.<
 </div>
 
 <div class="note green">
-  <span class="lbl">If you buy here anyway, buy Lot 1 — 1127 Saddle Horn Bend</span>
-  It is the only lot that delivers your three physical requirements together: <b>1.95 acres</b> of room
-  (double the next largest), <b>Asa silty clay loam</b> — a well-drained prime-farmland loam that is
-  genuinely good garden soil — and <b>roughly half its perimeter fronting Mill Bayou</b> for the
-  scenery and wildlife. You pay for it: $82,500, a 26.9% premium over the county appraisal, and the
-  deepest pad of the four.
+  <span class="lbl">If you buy here anyway, buy Lot 2 — 336 Wagon Wheel Trail W</span>
+  <p>It sits on <b>Asa silty clay loam</b>, the better of the two soils and genuinely good garden
+  ground; its best building spot is at <b>28.8 ft</b>, the highest in the portfolio, so it needs a lift
+  of <b>eight inches</b> where the others need three to five feet; and it is the <b>cheapest lot at
+  $45,000</b>.</p>
+  <p style="margin-bottom:0;">Getting Lot 2 to build-ready — land, pad, septic and foundation — costs
+  about <b>$65,000</b>. The same exercise is <b>$109,000 on Lot 3, $131,000 on Lot 1 and $139,000 on
+  Lot 4</b>. What you give up is room: 1.00 acre of record, 187 ft wide, and the shortest water
+  frontage of the four.</p>
+</div>
+
+<div class="note blue">
+  <span class="lbl">This is a change from the previous edition, and here is why</span>
+  v3.0 recommended Lot 1 on space and soil. Calculating the pad properly (&sect;20) rather than
+  carrying a generic $12k–$45k range put a <b>$66,000 gap</b> between the two on cost-to-build-ready.
+  Lot 1 remains the better lot to <em>live</em> on — 1.95 acres and bayou frontage against 1.00 acre and
+  a pond corner. The question is now explicit: <b>is the extra 0.95 acre and the bayou worth about
+  $66,000 to you?</b> If yes, buy Lot 1 and this document supports it. If you hesitate, buy Lot 2.
 </div>
 
 <table class="compact">
-  <caption>Scored against your brief. Soil from USDA SSURGO, ground from county LiDAR, both new in
-  this edition.</caption>
+  <caption>Scored against your brief. Soil from USDA SSURGO; ground and fill from a DEM grid
+  inside each boundary (&sect;20).</caption>
   <thead><tr><th>Rank</th><th>Lot</th><th>Garden soil</th><th>Room</th><th>Scenery</th>
   <th>Flood headroom</th><th>Build risk</th><th class="n">Price</th></tr></thead>
   <tbody>
     <tr class="hi"><td><span class="rank g">1</span></td>
-      <td><b>1127 Saddle Horn Bend</b><br><span class="xs">1.95 ac · PID 183667</span></td>
-      <td><b>Asa loam</b> — well drained, prime</td><td><b>1.95 ac</b></td>
-      <td><b>Mill Bayou, ~half the perimeter</b></td><td>24–25 ft — needs 5–6 ft of fill</td>
-      <td>Low shrink-swell</td><td class="n">$82,500</td></tr>
-    <tr><td><span class="rank">2</span></td>
       <td><b>336 Wagon Wheel Trl W</b><br><span class="xs">1.00 ac · PID 183367</span></td>
       <td><b>Asa loam</b> — well drained, prime</td><td>1.00 ac (0.87 by polygon)</td>
-      <td>Short frontage on a 12.6 ac pond</td><td><b>28 ft — only ~2 ft of fill</b></td>
+      <td>Short frontage on a 12.6 ac pond</td><td><b>28.8 ft — 0.7 ft of fill</b></td>
       <td>Low shrink-swell</td><td class="n"><b>$45,000</b></td></tr>
+    <tr><td><span class="rank">2</span></td>
+      <td><b>1127 Saddle Horn Bend</b><br><span class="xs">1.95 ac · PID 183667</span></td>
+      <td><b>Asa loam</b> — well drained, prime</td><td><b>1.95 ac</b></td>
+      <td><b>Mill Bayou, ~half the perimeter</b></td><td>25.3 ft — 4.2 ft of fill</td>
+      <td>Low shrink-swell</td><td class="n">$82,500</td></tr>
     <tr><td><span class="rank a">3</span></td>
       <td><b>Lot 29 Broken Arrow Trl</b><br><span class="xs">1.30 ac · PID 186219</span></td>
       <td class="bad">Pledger clay — 70% clay</td><td>1.30 ac</td>
-      <td>Good frontage, 12.6 ac pond</td><td>26 ft — 4 ft of fill</td>
+      <td>Good frontage, 12.6 ac pond</td><td>26.5 ft — 3.0 ft of fill</td>
       <td><b>Vertisol — high movement</b></td><td class="n">$49,000</td></tr>
     <tr><td><span class="rank r">4</span></td>
       <td><b>750 Wagon Wheel Trl</b><br><span class="xs">1.00 ac · PID 183332</span></td>
       <td class="bad">Pledger clay — 73% clay</td><td>1.00 ac</td>
-      <td><b>Flag Lake, 101 acres</b></td><td>24 ft — 6 ft of fill</td>
+      <td><b>Flag Lake, 101 acres</b></td><td>24.3 ft — up to 5.2 ft of fill</td>
       <td><b>Vertisol + abuts a dam</b></td><td class="n">$58,000</td></tr>
   </tbody>
 </table>
@@ -741,13 +776,13 @@ Two findings in this edition decide it, and neither was in any earlier version.<
     septic and the foundation, and you garden on it for the next thirty years. See §13.</p>
   </div>
   <div class="note blue" style="margin-top:0;">
-    <span class="lbl">The case for taking Lot 2 instead</span>
-    <p>If the budget is the binding constraint, Lot 2 is the value play <em>within</em> the good soil:
-    the same Asa loam, the <b>highest natural ground in the portfolio at 28 ft</b> — so ~2 ft of fill
-    instead of 5–6 — and it costs $37,500 less than Lot 1.</p>
-    <p style="margin-bottom:0;">What you give up is room and outlook: 1.00 acre of record that the
-    county's own polygon computes at <b>0.872</b>, only 187 ft wide, and the shortest water frontage of
-    the four. For a keen gardener that is the difference between a vegetable plot and an orchard.</p>
+    <span class="lbl">The case for paying up for Lot 1</span>
+    <p>You garden. Lot 1 is <b>1.95 acres</b> against Lot 2's 1.00, on the same excellent Asa loam,
+    with mature trees and roughly half its perimeter on Mill Bayou. That is the difference between a
+    vegetable plot and an orchard, and it is the one thing on this list you cannot buy later.</p>
+    <p style="margin-bottom:0;">The bill for that: <b>$37,500 more land and about $28,000 more pad</b>.
+    It is also the closest of the four to State Highway 35, at 480 ft, though 1.95 treed acres absorb a
+    good deal of that.</p>
   </div>
 </div>
 
@@ -768,7 +803,7 @@ add("""
     <div class="d">5.25 ac of record <span class="cf n">was &ldquo;~4.95&rdquo;</span></div></div>
   <div class="kpi bad"><div class="k">County appraised value</div><div class="v">$202,900</div>
     <div class="d">asking a <b>+15.6%</b> premium """ + CF['v'] + """</div></div>
-  <div class="kpi flag"><div class="k">All-in, one lot built</div><div class="v">$505k–905k</div>
+  <div class="kpi flag"><div class="k">All-in, one lot built</div><div class="v">$505k–980k</div>
     <div class="d">land + site + 5BR house """ + CF['e'] + """</div></div>
   <div class="kpi flag"><div class="k">Annual carry, four vacant lots</div><div class="v">$4.7–5.5k</div>
     <div class="d">tax + POA + mowing <span class="cf n">rates corrected</span></div></div>
@@ -1026,11 +1061,45 @@ its record. Boundaries are for orientation only and are not a survey.</p>
 
 # =========================================================================== 8-11. lot pages
 LOT_SEC = {'lot1': 6, 'lot2': 7, 'lot3': 8, 'lot4': 9}
+
+
+def facts_pairs(p, k):
+    return [
+        ('Legal', '%s · %.2f ac of record' % (lot_label(p['legal_description']),
+                                              p['acres_of_record'])),
+        ('Situs of record', p['situs_of_record'] or '&mdash; none assigned &mdash;'),
+        ('Deed · plat · restrictions', '%s · %s · %s'
+         % (p['deed_reference'], p['plat'].split(' (')[0], p['recorded_restrictions'].split(' (')[0])),
+        ('Dimensions', 'bbox %d × %d ft · county polygon %.3f ac'
+         % (p['bbox_ft'][0], p['bbox_ft'][1], p['gis_polygon_acres'])),
+        ('Flood', 'Zone %s · panel %s, 30 Dec 2020'
+         % (p['fema_zone_2020'], p['firm_panel'])),
+        ('Nearest BFE line', '<b>%s ft NAVD88</b>, %s ft off the parcel'
+         % (p['nearest_published_bfe_ft_navd88'], format(p['nearest_bfe_line_ft_away'], ','))),
+        ('Ground (LiDAR)', p['ground'].split(';')[0]),
+        ('Soil', ('<b>Asa silty clay loam</b> — well drained, prime farmland'
+                  if k in ('lot1', 'lot2') else
+                  '<b>Pledger clay</b> — vertisol, hydrologic group D')),
+        ('Water', p['water_short']),
+        ('Highway', p['sh35']),
+        ('Jurisdiction', ('Unincorporated · <b>Baileys Prairie ETJ</b>'
+                          if k == 'lot2' else 'Unincorporated · no city limits or ETJ')),
+    ]
+
+
 for k in ORDER:
     p = LOTS[k]
     ppa = p['asking_price_usd'] / p['acres_of_record']
     prem = 100 * (p['asking_price_usd'] / p['bcad_appraised_usd'] - 1)
     badges = ''.join('<span class="badge %s">%s</span>' % (c, t) for c, t in p['badges'])
+    pairs = facts_pairs(p, k)
+    half = (len(pairs) + 1) // 2
+
+    def dl(items):
+        return ('<dl class="facts">'
+                + ''.join('<dt>%s</dt><dd>%s</dd>' % (a, b) for a, b in items)
+                + '</dl>')
+
     add("""
 <div class="lothead">
   <div>
@@ -1046,35 +1115,12 @@ for k in ORDER:
   </div>
 </div>
 
-<div class="cols2c">
-  <div>
-    %s
-  </div>
-  <div>
-    <dl class="facts">
-      <dt>Legal</dt><dd>%s</dd>
-      <dt>Situs of record</dt><dd>%s</dd>
-      <dt>Deed reference</dt><dd>%s</dd>
-      <dt>Plat / restrictions</dt><dd>%s · restrictions %s</dd>
-      <dt>Dimensions</dt><dd>Bounding box %d × %d ft; county polygon computes %.3f ac</dd>
-      <dt>Flood</dt><dd>Zone %s, SFHA · FIRM panel %s eff. %s</dd>
-      <dt>Nearest BFE line</dt><dd><b>%s ft NAVD88</b>, %s ft from the parcel</dd>
-      <dt>Ground (LiDAR)</dt><dd>%s</dd>
-      <dt>Water body</dt><dd>%s</dd>
-      <dt>Highway</dt><dd>%s</dd>
-      <dt>School district</dt><dd>Columbia-Brazoria ISD</dd>
-      <dt>Jurisdiction</dt><dd>%s</dd>
-      <dt>Windstorm</dt><dd>TDI Inland I — 120 mph 3-second gust</dd>
-    </dl>
-  </div>
-</div>
+%s
 
-<h3>Listing photography and street imagery</h3>
-<div class="shots">
-  %s
-  %s
-  %s
-</div>
+<div class="cols2" style="gap:5mm;">%s%s</div>
+
+<div class="shots">%s%s</div>
+
 <div class="linkrow">
   <a class="lnk g" href="%s">Open in Google Maps</a>
   <a class="lnk" href="%s">Google Street View</a>
@@ -1082,19 +1128,10 @@ for k in ORDER:
   <a class="lnk" href="https://esearch.brazoriacad.org/">BCAD record — PID %s</a>
   %s
 </div>
-<p class="xs">Listing photographs on Zillow, Redfin and Realtor.com are licensed to those
-platforms and to the listing brokerage, so they are linked rather than reproduced. To place the
-waterfront photographs inline, download them from the listing pages above and save them into
-<code>assets/photos/</code> as <code>lot%d-1.jpg</code>, <code>lot%d-2.jpg</code> and
-<code>lot%d-3.jpg</code> — the frames above will pick them up automatically on reload.</p>
 
 <div class="cols2">
-  <div class="note %s" style="margin-top:1mm;">
-    <span class="lbl">Best for</span>%s
-  </div>
-  <div class="note amber" style="margin-top:1mm;">
-    <span class="lbl">Watch</span>%s
-  </div>
+  <div class="note %s" style="margin-top:0;"><span class="lbl">Best for</span>%s</div>
+  <div class="note amber" style="margin-top:0;"><span class="lbl">Watch</span>%s</div>
 </div>
 <div class="note %s" style="margin-bottom:0;">
   <span class="lbl">Verdict on this lot</span>%s
@@ -1106,23 +1143,10 @@ waterfront photographs inline, download them from the listing pages above and sa
         badges,
         format(p['asking_price_usd'], ','), format(round(ppa), ','), p['acres_of_record'],
         ('#15602f' if prem < 0 else '#a91f14'), prem,
-        mapbox('Live Google Maps satellite — %s' % p['short'], gmap_lot(p),
-               map_fallback(p), cls='map'),
-        p['legal_description'],
-        p['situs_of_record'] if p['situs_of_record'].strip() else '— none assigned —',
-        p['deed_reference'],
-        p['plat'], p['recorded_restrictions'],
-        p['bbox_ft'][0], p['bbox_ft'][1], p['gis_polygon_acres'],
-        p['fema_zone_2020'], p['firm_panel'], p['firm_effective'],
-        p['nearest_published_bfe_ft_navd88'], format(p['nearest_bfe_line_ft_away'], ','),
-        p['ground'],
-        p['water'],
-        p['sh35'] + ' — ' + p['noise'],
-        ('Unincorporated county · <b>inside the Baileys Prairie ETJ</b>'
-         if k == 'lot2' else 'Unincorporated county · no city limits, no ETJ'),
-        shot(p['lot'], 1, 'Waterfront view', 'Save as assets/photos/lot%d-1.jpg' % p['lot']),
-        shot(p['lot'], 2, 'Lot / frontage', 'Save as assets/photos/lot%d-2.jpg' % p['lot']),
-        shot(p['lot'], 3, 'Street / access', 'Save as assets/photos/lot%d-3.jpg' % p['lot']),
+        shot(p['lot'], 1, 'The parcel', 'boundary of record and section A–B', cls='hero'),
+        dl(pairs[:half]), dl(pairs[half:]),
+        shot(p['lot'], 2, 'Water frontage at B', 'close range'),
+        shot(p['lot'], 3, 'Neighbourhood context', 'the parcel outlined'),
         gmap_link(p), gsv_link(p), zillow_link(p['short']), p['pid'],
         ('<a class="lnk" href="https://www.realtor.com/realestateandhomes-detail/'
          '750-Wagon-Wheel-Trl_Angleton_TX_77515_M88761-47581">Realtor.com listing</a>'
@@ -1130,11 +1154,11 @@ waterfront photographs inline, download them from the listing pages above and sa
          '<a class="lnk" href="https://www.loopnet.com/property/'
          '1127-saddle-horn-bnd-angleton-tx-77515/48039-15340084000/">LoopNet listing</a>'
          if k == 'lot1' else ''),
-        p['lot'], p['lot'], p['lot'],
         ('green' if k in ('lot3',) else 'teal'), p['best'],
         p['watch'],
         ('green' if k == 'lot3' else 'blue'), p['verdict'],
     ), "%d · Lot %d — %s" % (LOT_SEC[k], p['lot'], p['short']), k)
+
 
 # =========================================================================== 12. flood
 add("""
@@ -1158,19 +1182,20 @@ both earlier editions got wrong is the elevation arithmetic, and it goes the wro
 </div>
 
 <table class="compact">
-  <caption>Per-lot elevation arithmetic. Requirement = 28 ft BFE + 24 in county freeboard = 30 ft.
+  <caption>Per-lot elevation arithmetic at the <b>optimum pad location</b> on each lot, from a
+  5 m DEM grid inside each boundary. Requirement = 28 ft BFE + 24 in freeboard = 30 ft. Costed in §20.
   """ + CF['n'] + """</caption>
   <thead><tr><th>Lot</th><th class="n">Nearest published BFE</th><th class="n">Ground at parcel (LiDAR)</th>
   <th class="n">Required finished floor</th><th class="n">Fill / stem wall needed</th><th>Consequence</th></tr></thead>
   <tbody>
-    <tr><td>1127 Saddle Horn Bend</td><td class="n">28 ft</td><td class="n">24–25 ft</td><td class="n">30 ft</td>
-      <td class="n"><b>5–6 ft</b></td><td>Largest lift of the four. Engineered pad or piers, not a slab on grade.</td></tr>
-    <tr><td>336 Wagon Wheel Trl W</td><td class="n">28 ft</td><td class="n">28 ft</td><td class="n">30 ft</td>
-      <td class="n"><b>2 ft</b></td><td>Smallest lift. The best ground in the portfolio.</td></tr>
-    <tr><td>Lot 29 Broken Arrow Trl</td><td class="n">28 ft</td><td class="n">26 ft</td><td class="n">30 ft</td>
-      <td class="n"><b>4 ft</b></td><td>Middling. Budget a real pad.</td></tr>
-    <tr><td>750 Wagon Wheel Trl</td><td class="n">28 ft</td><td class="n">24 ft</td><td class="n">30 ft</td>
-      <td class="n"><b>6 ft</b></td><td>Largest lift, and it abuts a levee. See below.</td></tr>
+    <tr><td>1127 Saddle Horn Bend</td><td class="n">28 ft</td><td class="n">25.3 ft</td><td class="n">30 ft</td>
+      <td class="n"><b>4.2 ft</b></td><td>1,416 cy of fill. Room to build the pad and its slopes easily.</td></tr>
+    <tr class="hi"><td>336 Wagon Wheel Trl W</td><td class="n">28 ft</td><td class="n"><b>28.8 ft</b></td><td class="n">30 ft</td>
+      <td class="n"><b>0.7 ft</b></td><td>268 cy. Practically at grade — the standout of the four.</td></tr>
+    <tr><td>Lot 29 Broken Arrow Trl</td><td class="n">28 ft</td><td class="n">26.5 ft</td><td class="n">30 ft</td>
+      <td class="n"><b>3.0 ft</b></td><td>963 cy. Straightforward.</td></tr>
+    <tr><td>750 Wagon Wheel Trl</td><td class="n">28 ft</td><td class="n">24.3–25.7 ft</td><td class="n">30 ft</td>
+      <td class="n"><b>3.8–5.2 ft</b></td><td>1,255–1,808 cy, and the pad barely fits the width. See §20.</td></tr>
   </tbody>
 </table>
 
@@ -1179,8 +1204,9 @@ both earlier editions got wrong is the elevation arithmetic, and it goes the wro
     <span class="lbl">What this does to the cost model</span>
     <p>The second edition carried engineered pad and fill at <b>$0–$8,000</b>, treating it as
     optional. On these figures it is not optional on any lot, and a 4–6 ft lift under a
-    2,400–2,800 sq ft house is a different item altogether. §14 carries it at
-    <b>$12,000–$45,000</b>.</p>
+    2,400–2,800 sq ft house is a different item altogether.</p>
+    <p><b>§20 prices this per lot: $12,400 to $77,800.</b> It is the third largest line in the
+    whole project after the house and the land.</p>
     <p style="margin-bottom:0;">It also all but forecloses the LOMA. A Letter of Map Amendment
     requires naturally high ground; placing fill converts the application into a LOMR-F, which
     carries a FEMA review fee and a far heavier evidential burden.</p>
@@ -1224,6 +1250,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import terrain_svg                                                    # noqa: E402
 
 TERRAIN = json.load(open(os.path.join(ROOT, 'data', 'terrain.json')))
+FILL = json.load(open(os.path.join(ROOT, 'data', 'fill.json')))
 
 TER_NOTE = {
     'lot1': ("The section runs 562 ft from the Saddle Horn Bend frontage out to the Mill Bayou "
@@ -1299,15 +1326,15 @@ lakeside boundary.</p>
 <h3>The four lots compared on terrain</h3>
 """ + table(
     ['Lot', '~Section A–B', '~Ground on the buildable plateau', '~Highest', '~Lowest',
-     '~Relief', '~Steepest bank', '~Fill to reach 30 ft'],
+     '~Relief', '~Steepest bank', '~Fill at the best pad (§20)'],
     [['1127 Saddle Horn Bend', '562 ft', '24–26 ft', '26.0 ft', '21.2 ft', '4.8 ft',
-      '8.4° (15%)', '<b>4–6 ft</b>'],
+      '8.4° (15%)', '<b>4.2 ft</b>'],
      (['336 Wagon Wheel Trl W', '412 ft', '<b>27–29 ft</b>', '<b>29.1 ft</b>', '21.2 ft', '8.0 ft',
-       '8.8° (16%)', '<b>~2 ft</b>'], 'hi'),
+       '8.8° (16%)', '<b>0.7 ft</b>'], 'hi'),
      ['Lot 29 Broken Arrow Trl', '453 ft', '26–27 ft', '26.9 ft', '21.2 ft', '5.7 ft',
-      '<b>11.6° (20%)</b>', '3–4 ft'],
+      '<b>11.6° (20%)</b>', '3.0 ft'],
      ['750 Wagon Wheel Trl', '568 ft', '23–24 ft', '30.7 ft <span class="xs">(levee crest)</span>',
-      '23.1 ft', '7.6 ft', '8.5° (15%)', '<b>6–7 ft</b>']],
+      '23.1 ft', '7.6 ft', '8.5° (15%)', '<b>3.8–5.2 ft</b>']],
     caption='Plateau figures are the range across the level central part of each transect — the part '
             'you would actually build on. ' + CF['n'], cls='compact') + """
 
@@ -1524,7 +1551,7 @@ portfolio was most wrong, and where §16's soil finding now produces two differe
             [['5 bedrooms, dwelling under 4,500 sq ft, no water-saving devices', '450',
               'Both flows fall in the 351–500 gpd band &rarr; <b>1,250 gal</b> minimum ' + CF['v']],
              ['Same, with water-saving devices', '360', '']],
-            caption='30 TAC §285.91 Table III and §285.91(2)') + table(
+            caption='30 TAC §295.91 Table III and §295.91(2)') + table(
     ['TCEQ soil class', '~Loading rate R<sub>a</sub>', '~Absorptive area at Q = 450',
      'Which lots', 'System that results'],
     [(['<b>Class III</b> — clay loam', '0.20 gal/sf/day', '<b>~2,250 sq ft</b>',
@@ -1554,7 +1581,7 @@ portfolio was most wrong, and where §16's soil finding now produces two differe
              ['Lake or pond, at normal pool', 'Soil absorption / unlined evapotranspiration bed', '75 ft'],
              ['Lake or pond, at normal pool', 'Surface (spray) application', '50 ft'],
              ['Property line', 'Spray field', '10 ft (and no spray across a line)']],
-            caption='30 TAC §285.91 Table X — these are what make a narrow waterfront lot hard '
+            caption='30 TAC §295.91 Table X — these are what make a narrow waterfront lot hard '
                     + CF['v'], cls='compact') + """
 <div class="note amber" style="margin-bottom:0;">
   <span class="lbl">Test this on paper before you bid</span>
@@ -1590,12 +1617,13 @@ and 4, is most of the change here.</p>
      ['Electric service extension', '$0', '$25,000', '<b>Get this quoted per lot</b>'],
      ['Propane tank and set', '$1,000', '$3,000', 'No natural gas here'],
      ['Clearing and grubbing', '$1,500', '$6,000', ''],
-     (['<b>Engineered pad / imported fill, 2–6 ft</b>', '$12,000', '$45,000',
-       '<b>Was $0–$8,000. Lot 2 at the low end, Lots 1 and 4 at the high end.</b>'], 'hi'),
+     (['<b>Engineered pad and imported fill</b>', '$12,400', '$77,800',
+       '<b>Calculated per lot in §20.</b> Lot 2 $12.4–28.3k; Lot 3 $24.3–50.7k; '
+       'Lot 1 $32.0–65.3k; Lot 4 $29.3–77.8k'], 'hi'),
      (['<b>Vertisol foundation upcharge</b>', '$0', '$20,000',
        '<b>Lots 3 and 4 only</b> — post-tensioned or piered for LEP 19'], 'hi'),
      ["POA architectural review, transfer and resale certificate", '$500', '$750', ''],
-     (['Pre-construction subtotal', '<b>~$38,000</b>', '<b>~$165,000</b>',
+     (['Pre-construction subtotal', '<b>~$38,000</b>', '<b>~$198,000</b>',
        '<span class="strike">v1: $11–17k</span> &rarr; <span class="fix">v2: $26–108k</span>'], 'tot')],
     caption='One lot, a 2,400–2,800 sq ft five-bedroom house. ' + CF['e'], cls='compact') + """
 <p class="sm">Central planning case <b>$60,000–$95,000</b>. The three variables that decide where you
@@ -1603,22 +1631,134 @@ land are, in order: <b>soil class</b>, <b>depth of fill</b>, and <b>distance to 
 are lot-specific, and all three can be resolved for under $1,000 and three phone calls.</p>
 """ + table(['Component', '~Low', '~High'],
             [['Land, one lot', '$45,000', '$82,500'],
-             ['Pre-construction, above', '$38,000', '$165,000'],
+             ['Pre-construction, above', '$38,000', '$198,000'],
              ['House, 2,400–2,800 sq ft at $175–$250/sq ft ' + CF['e'], '$420,000', '$700,000'],
-             (['<b>All-in, one lot built</b>', '<b>~$505,000</b>', '<b>~$950,000</b>'], 'tot')],
+             (['<b>All-in, one lot built</b>', '<b>~$505,000</b>', '<b>~$980,000</b>'], 'tot')],
             caption='All-in cost of putting a family into a house on one of these lots') + """
 <div class="note blue" style="margin-bottom:0;">
   <span class="lbl">Put the lot price in proportion</span>
-  The whole spread between the cheapest and dearest lot is <b>$37,500</b>. The spread on the septic
-  system alone is <b>$17,000</b>, on the pad <b>$33,000</b>, on the foundation <b>$20,000</b> and on
-  the electric extension <b>$25,000</b>. Choosing the lot on its asking price, rather than on its soil
-  and its elevation, is optimising the smallest of the five numbers.
+  The whole spread between the cheapest and dearest lot is <b>$37,500</b>. The spread on the
+  <b>pad alone is $28,000</b> between Lot 2 and Lot 4 at mid-case (§20), on the septic <b>$17,000</b>,
+  on the foundation <b>$20,000</b>, and on the electric extension <b>$25,000</b>. Choosing the lot on
+  its asking price, rather than on its soil and its elevation, optimises the smallest of the five.
 </div>
 """, "19 · Cost", "cost")
 
-# =========================================================================== 20. carry
+# =========================================================================== 20. fill
+F = FILL['lots']
+frows = []
+for k in ORDER:
+    p = LOTS[k]
+    f = F[k]
+    mid = int(round((f['total_lo'] + f['total_hi']) / 2 / 100) * 100)
+    row = ['<b>%s</b>' % p['short'],
+           '%.1f ft' % f['pad_ground_ft'],
+           '<b>%.1f ft</b>' % f['lift_ft'],
+           format(f['fill_cy'], ','),
+           '%d &times; %d ft' % tuple(f['toe_ft']),
+           '$%s &ndash; $%s' % (format(f['total_lo'], ','), format(f['total_hi'], ',')),
+           '<b>$%s</b>' % format(mid, ',')]
+    frows.append((row, 'hi') if k == 'lot2' else row)
+f4 = F['lot4']['off_embankment']
+
 add("""
-<h2><span class="n">20 ·</span> Annual carrying cost — with the tax model corrected</h2>
+<h2><span class="n">20 &middot;</span> The pad &mdash; what the flood headroom actually costs</h2>
+<p class="lead">&sect;10 established that the finished floor must reach 30 ft and that no lot is high
+enough to build at grade. This prices that, lot by lot, from the measured ground.</p>
+
+<div class="note teal">
+  <span class="lbl">How the number is built</span>
+  A 5-metre grid of ground elevations was sampled from the USGS 3DEP 1 m DEM <b>inside each recorded
+  boundary</b> (141&ndash;325 points per lot). The pad goes where it costs least, subject to its side
+  slopes fitting inside the boundary and staying <b>30 m clear of mapped water</b> &mdash; which keeps
+  the house off the bank and, on Lot 4, off the Flag Lake levee. Pad top is <b>29.5 ft</b>, half a foot
+  below the floor for a 6-inch slab; fill is measured from the stripped surface. Volumes are the exact
+  frustum with <b>3:1 side slopes</b>, because plan area &times; depth understates a deep pad badly
+  &mdash; the slope wedge grows with the square of the lift and the corners with the cube.
+</div>
+""" + table(
+    ['Lot', '~Ground at the pad', '~Lift required', '~Fill (cu yd)', '~Pad + slope toe',
+     '~Cost range', '~Mid-case'],
+    frows,
+    caption='Pad top 29.5 ft &middot; 69 &times; 82 ft pad for a ~3,040 sq ft house and garage plus a '
+            '10 ft working margin &middot; 3:1 slopes &middot; fill at $16&ndash;$30 per compacted '
+            'cubic yard placed. ' + CF['e'] + ' ' + CF['n']) + """
+
+<div class="cols2">
+  <div class="note green" style="margin-top:0;">
+    <span class="lbl">Lot 2 is the finding here</span>
+    <p style="margin-bottom:0;">Its best pad sits on ground at <b>28.8 ft</b>, so it needs a lift of
+    <b>eight inches</b> and <b>268 cubic yards</b>. Every other lot needs three to five feet and a
+    thousand to eighteen hundred yards. Mid-case that is <b>$20,400 against $37,500 to $58,200</b>
+    &mdash; a saving of $17,000 to $38,000 before a brick is laid, on the lot that is also the cheapest
+    to buy and sits on the better of the two soils.</p>
+  </div>
+  <div class="note red" style="margin-top:0;">
+    <span class="lbl">Lot 4 has a width problem as well as a fill problem</span>
+    <p>The only ground on Lot 4 high enough to save fill is the <b>flank of the levee embankment</b>,
+    and a geotechnical engineer is unlikely to let you found a house there. Taken fully clear of the
+    embankment the pad sits on <b>%.1f ft</b>, the lift rises to <b>%.1f ft</b>, <b>%s cubic
+    yards</b>, and the cost to <b>$%s &ndash; $%s</b>.</p>
+    <p style="margin-bottom:0;">Worse, that pad plus its 3:1 slopes needs <b>%d ft of width on a lot
+    only %d ft wide</b>. Four feet spare. In practice: a retaining wall, steeper engineered slopes, or
+    a smaller house.</p>
+  </div>
+</div>
+
+<h3>What sits inside those figures &mdash; Lot 1 as the worked example</h3>
+""" % (f4['pad_ground_ft'], f4['lift_ft'], format(f4['fill_cy'], ','),
+       format(f4['total_lo'], ','), format(f4['total_hi'], ','),
+       f4['need_narrow_ft'], F['lot4']['narrow_dim_ft'])
+  + table(['Group', 'Contents', '~Low', '~High'],
+          [['<b>Earthworks</b>', 'Strip and stockpile topsoil, imported select fill placed and '
+            'compacted in lifts, topsoil and turf to the slopes',
+            '$%s' % format(sum(i[1] for i in F['lot1']['items'][:3]), ','),
+            '$%s' % format(sum(i[2] for i in F['lot1']['items'][:3]), ',')],
+           ['<b>Engineering</b>', 'Geotechnical borings and report, engineered pad and drainage '
+            'plan, compaction density testing',
+            '$%s' % format(sum(i[1] for i in F['lot1']['items'][3:6]), ','),
+            '$%s' % format(sum(i[2] for i in F['lot1']['items'][3:6]), ',')],
+           ['<b>Compliance</b>', 'Erosion and sediment control, drainage works so runoff is not '
+            'pushed onto the road or a neighbour, county fill and grading permit',
+            '$%s' % format(sum(i[1] for i in F['lot1']['items'][6:]), ','),
+            '$%s' % format(sum(i[2] for i in F['lot1']['items'][6:]), ',')],
+           (['<b>Pad package, Lot 1</b>', '',
+             '<b>$%s</b>' % format(F['lot1']['total_lo'], ','),
+             '<b>$%s</b>' % format(F['lot1']['total_hi'], ',')], 'tot')],
+          cls='compact',
+          caption='The same nine line items are priced on every lot &mdash; only the quantities move '
+                  'with the lift. Itemised in <a href="docs/EVIDENCE.md">docs/EVIDENCE.md</a>. '
+                  'Gulf Coast planning rates, not quotations.') + """
+<div class="note blue">
+  <span class="lbl">Why not elevate the house on piers instead</span>
+  It is the standard coastal-Texas alternative, and here it is the wrong answer. Pier-and-beam or a
+  stem wall runs roughly <b>$26&ndash;$44 per square foot</b> of floor area &mdash; about
+  <b>$106,000</b> mid-case on a 3,040 sq ft footprint &mdash; and that is nearly flat with height. A
+  fill pad only becomes as expensive at about <b>%s ft of lift</b>. None of these four is close, so
+  <b>fill is correct on all four</b>. Revisit it only if a written BFE comes back above about 31 ft.
+</div>
+
+<div class="note amber" style="margin-bottom:0;">
+  <span class="lbl">What moves these numbers</span>
+  <ul class="t" style="margin-bottom:0;">
+    <li><b>The written BFE.</b> Every extra foot adds roughly <b>350&ndash;450 cubic yards</b> and
+        <b>$8,000&ndash;$14,000</b> per pad. A BFE of 29 ft rather than 28 ft would cost more than the
+        entire land-price gap between Lot 2 and Lot 3.</li>
+    <li><b>Haul distance.</b> The $16&ndash;$30 per yard spread is mostly haul. Local bank sand is the
+        low end, imported select clay-sand with a long haul the high end. Two phone calls to pits
+        narrow this more than any other input in the whole study.</li>
+    <li><b>House size and slopes.</b> 2,400 sq ft instead of 3,040 takes about 15%% off every figure;
+        flatter 4:1 slopes cost about 20%% more fill and do not fit on Lot 4 at all.</li>
+    <li><b>Drainage.</b> The restrictions forbid impairing drainage of streets, lots or ditches
+        (&sect;17), so the $1,000&ndash;$4,000 line is not optional.</li>
+  </ul>
+</div>
+""" % FILL['pier_crossover_lift_ft'], "20 &middot; The pad &amp; fill", "fill")
+
+
+# =========================================================================== 21. carry
+add("""
+<h2><span class="n">21 ·</span> Annual carrying cost — with the tax model corrected</h2>
 <p>The second edition's tax model included an Angleton-Danbury hospital district levy and an Angleton
 drainage district levy. Checked parcel by parcel against the county's taxing-district layers,
 <b>these lots are in neither</b> — nor in any junior-college district or MUD.</p>
@@ -1666,11 +1806,11 @@ drainage district levy. Checked parcel by parcel against the county's taxing-dis
 <p class="xs" style="margin-bottom:0;">POA dues and the mowing charge come from listing copy for other
 Bar X Ranch lots, not from the association. Confirm both, and the transfer fee, on a POA resale
 certificate. §17 shows the mowing charge is grounded in §3.13 of the recorded restrictions.</p>
-""", "20 · Carrying cost", "carry")
+""", "21 · Carrying cost", "carry")
 
-# =========================================================================== 21. wind
+# =========================================================================== 22. wind
 add("""
-<h2><span class="n">21 ·</span> Wind, storm and insurance</h2>
+<h2><span class="n">22 ·</span> Wind, storm and insurance</h2>
 <p class="lead">You asked about safety from storms. On the coast this is two separate questions —
 what the building code makes you build, and what the insurance costs — and the answers are better
 than you might fear for an address 28 miles from the Gulf.</p>
@@ -1715,10 +1855,10 @@ than you might fear for an address 28 miles from the Gulf.</p>
   carries a FEMA fee and a heavier burden of proof. Plan on carrying flood insurance permanently.
   Windstorm cover is unaffected by any of this.
 </div>
-""", "21 · Wind &amp; insurance", "wind")
+""", "22 · Wind &amp; insurance", "wind")
 
 
-# =========================================================================== 22. climate
+# =========================================================================== 23. climate
 crows = []
 for mo, hc, lc, rain, hf, lf in CLIMATE:
     peak = 'hi' if mo in ('Jul', 'Aug') else ''
@@ -1728,7 +1868,7 @@ for mo, hc, lc, rain, hf, lf in CLIMATE:
 crows.append((['<b>Year</b>', '<b>25.4</b>', '<b>17.9</b>', '<b>21.7</b>',
                '<b>1,177</b>', '<b>78 / 64</b>'], 'tot'))
 add("""
-<h2><span class="n">22 ·</span> Living here — the weather, in degrees Celsius</h2>
+<h2><span class="n">23 ·</span> Living here — the weather, in degrees Celsius</h2>
 <p class="lead">A humid subtropical Gulf coast climate: long, hot, wet summers, short mild winters,
 almost no frost, and a 320-day growing season that is the single best thing about gardening here.</p>
 """ + table(
@@ -1782,9 +1922,9 @@ almost no frost, and a 320-day growing season that is the single best thing abou
   climate; Brazoria County runs a mosquito-control programme, and you will use it.
   <b>Hurricane season</b> runs June to November, and the practical consequence for a gardener is that
   anything tall or trellised needs to come down or be strapped when a storm is named.
-""" + '</div>', "22 · Climate", "climate")
+""" + '</div>', "23 · Climate", "climate")
 
-# =========================================================================== 23. hazards
+# =========================================================================== 24. hazards
 hrows = []
 COL = {'Relatively High': 'r', 'Relatively Moderate': 'a', 'Relatively Low': 'g', 'Very Low': 'g'}
 for code, label, rating, freq, eal in NRI:
@@ -1794,7 +1934,7 @@ for code, label, rating, freq, eal in NRI:
     hrows.append(([label, badge, freq, eal], 'hi' if code in ('IFLD', 'HRCN', 'WFIR') else ''))
 hrows = [(r[0], r[1]) if r[1] else r[0] for r in hrows]
 add("""
-<h2><span class="n">23 ·</span> Living here — natural hazards, ranked by the federal index</h2>
+<h2><span class="n">24 ·</span> Living here — natural hazards, ranked by the federal index</h2>
 <p>You asked specifically about flood, storm and fire. FEMA's National Risk Index scores every US
 county on eighteen hazards. This is Brazoria County, December 2025 edition.</p>
 """ + table(['Hazard', 'County risk rating', '~Annualised frequency', '~County expected annual loss'],
@@ -1845,9 +1985,9 @@ county on eighteen hazards. This is Brazoria County, December 2025 edition.</p>
   Dam (TX01759), which NID does rate, as low hazard potential. A county-level index will never tell you
   this; ask TCEQ Dam Safety.
 </div>
-""", "23 · Hazards", "hazards")
+""", "24 · Hazards", "hazards")
 
-# =========================================================================== 24. services
+# =========================================================================== 25. services
 def dist_table(groups):
     out = ''
     for g in groups:
@@ -1859,7 +1999,7 @@ def dist_table(groups):
 
 
 add("""
-<h2><span class="n">24 ·</span> Living here — services, shopping, school and hospital</h2>
+<h2><span class="n">25 ·</span> Living here — services, shopping, school and hospital</h2>
 <p class="lead">Bar X Ranch is rural but not remote. The honest summary: <b>nothing is far, and nothing
 is close.</b> Almost every daily errand is a 12–20 minute drive, there is no walkable anything, and a
 second car is not optional.</p>
@@ -1872,10 +2012,10 @@ second car is not optional.</p>
   the Brazoria Community Library is <b>2.9 miles</b> away, easily the closest public building of any
   kind.
 </div>
-""", "24 · Services", "services")
+""", "25 · Services", "services")
 
 add("""
-<h2><span class="n">25 ·</span> Living here — schools, shopping and going out</h2>
+<h2><span class="n">26 ·</span> Living here — schools, shopping and going out</h2>
 """ + dist_table(['Schools — Columbia-Brazoria ISD', 'Shopping, dining, going out']) + """
 <div class="cols2">
   <div class="note amber" style="margin-top:0;">
@@ -1897,10 +2037,10 @@ add("""
     weakest column in the whole assessment.</p>
   </div>
 </div>
-""", "25 · Schools &amp; going out", "services2")
+""", "26 · Schools &amp; going out", "services2")
 
 add("""
-<h2><span class="n">26 ·</span> Living here — coast, resorts, amusements and the outdoors</h2>
+<h2><span class="n">27 ·</span> Living here — coast, resorts, amusements and the outdoors</h2>
 """ + dist_table(['Coast, resorts and amusements']) + """
 <div class="cols2">
   <div>
@@ -1938,12 +2078,12 @@ add("""
   water's edge. Feral hogs will find a vegetable garden, and raptors, raccoons and coyotes are exactly
   why the poultry question in §17 would have needed a well-built run anyway.
 </div>
-""", "26 · Coast &amp; outdoors", "leisure")
+""", "27 · Coast &amp; outdoors", "leisure")
 
 
-# =========================================================================== 27. community
+# =========================================================================== 28. community
 add("""
-<h2><span class="n">27 ·</span> Living here — the neighbourhood, and the Indian community</h2>
+<h2><span class="n">28 ·</span> Living here — the neighbourhood, and the Indian community</h2>
 <p class="lead">You asked for a good, developed neighbourhood. On the census evidence this is a
 markedly affluent, stable, almost entirely owner-occupied rural neighbourhood — and one with
 essentially no Indian community in it.</p>
@@ -1996,11 +2136,11 @@ essentially no Indian community in it.</p>
   Budget <b>two hours to IAH</b> in practice; the 95-minute figure is free-flowing traffic, and the
   route crosses Houston's southern suburbs.
 </div>
-""", "27 · Neighbourhood", "community")
+""", "28 · Neighbourhood", "community")
 
-# =========================================================================== 28. amenities
+# =========================================================================== 29. amenities
 add("""
-<h2><span class="n">28 ·</span> Community amenities, the lakes and fishing</h2>
+<h2><span class="n">29 ·</span> Community amenities, the lakes and fishing</h2>
 <p>The POA amenity base is the main thing your $400 a year buys, and it is better than the original
 portfolio described.</p>
 <div class="cols2">
@@ -2045,9 +2185,9 @@ portfolio described.</p>
   Lot 3 with roughly twice the frontage of Lot 2. <b>Lot 4</b> fronts <b>Flag Pond, 101.5 acres</b>,
   and the levee that impounds it. Only Lot 4 is on what most people would call a lake.
 </div>
-""", "28 · Amenities &amp; fishing", "amenities")
+""", "29 · Amenities &amp; fishing", "amenities")
 
-# =========================================================================== 29. scorecard
+# =========================================================================== 30. scorecard
 def score_row(label, vals, weightnote=''):
     cells = []
     for v, cls in vals:
@@ -2066,8 +2206,12 @@ SCORE = [
      [('Barred', 'r'), ('Barred', 'r'), ('Barred', 'r'), ('Barred', 'r')]),
     ('Hobby farming — horses', '§3.15 formula on lot area',
      [('3 horses', 'g'), ('2 horses', 'a'), ('2 horses', 'a'), ('2 horses', 'a')]),
-    ('Flood headroom', 'natural ground vs the 30 ft floor — §11',
-     [('4–6 ft fill', 'a'), ('~2 ft fill', 'g'), ('3–4 ft fill', 'a'), ('6–7 ft fill', 'r')]),
+    ('Flood headroom', 'lift needed at the best pad — §20',
+     [('4.2 ft', 'a'), ('<b>0.7 ft</b>', 'g'), ('3.0 ft', 'a'), ('3.8–5.2 ft', 'r')]),
+    ('Cost of the pad', 'mid-case, calculated — §20',
+     [('$48.6k', 'a'), ('<b>$20.4k</b>', 'g'), ('$37.5k', 'a'), ('$44.7–58.2k', 'r')]),
+    ('Land + pad + septic + foundation', 'the real cost of getting to build-ready',
+     [('$131k', 'a'), ('<b>$65k</b>', 'g'), ('$109k', 'a'), ('$139k', 'r')]),
     ('Rain ponding on the lot', 'hydrologic group',
      [('Group B', 'g'), ('Group B', 'g'), ('Group D', 'r'), ('Group D', 'r')]),
     ('Storm exposure', 'all four TDI Inland I, 120 mph',
@@ -2100,7 +2244,7 @@ SCORE = [
      [('+26.9%', 'r'), ('+25.0%', 'r'), ('−5.5%', 'g'), ('+16.0%', 'a')]),
 ]
 add("""
-<h2><span class="n">29 ·</span> Scorecard against your brief</h2>
+<h2><span class="n">30 ·</span> Scorecard against your brief</h2>
 <p>Eighteen tests, weighted to what you said matters: gardening, hobby farming, quick access to
 amenities, a good and developed neighbourhood, scenery and nature, and safety from flood and storm.
 Green is good, amber is a compromise, red is a problem.</p>
@@ -2113,30 +2257,29 @@ Green is good, amber is a compromise, red is a problem.</p>
   <tbody>
 """ + ''.join(score_row(l, v, n) for l, n, v in SCORE) + """
     <tr class="tot"><td>Green / amber / red</td>
-      <td class="n">9 / 3 / 3</td><td class="n">8 / 5 / 3</td>
-      <td class="n">3 / 5 / 7</td><td class="n">3 / 3 / 9</td></tr>
+      <td class="n">9 / 6 / 3</td><td class="n">11 / 5 / 3</td>
+      <td class="n">3 / 7 / 8</td><td class="n">3 / 3 / 12</td></tr>
   </tbody>
 </table>
 <div class="note green" style="margin-bottom:0;">
-  <span class="lbl">Conclusion — buy Lot 1, 1127 Saddle Horn Bend, at a negotiated price</span>
-  <p>It carries the most greens and, more importantly, the right ones. It is the only lot that combines
-  <b>good garden soil</b> with <b>room to use it</b> and <b>real scenery</b> — and soil and space are
-  the two things you cannot buy later. Its weaknesses are all things money or design can fix: a 4–6 ft
-  pad, and highway noise that a treed 1.95-acre lot and a house set back from the frontage will
-  substantially absorb.</p>
-  <p style="margin-bottom:0;"><b>Open at $65,000 — the county's appraised value — and be willing to go
-  to about $72,000.</b> At $82,500 you are paying a 26.9% premium to the county's own number on a lot
-  that also needs the second-deepest pad in the portfolio. If the seller will not move below roughly
-  $75,000, take <b>Lot 2 at $45,000</b> instead: the same excellent soil and three feet more flood
-  headroom, and accept the smaller garden. <b>Do not buy Lots 3 or 4</b> — the Pledger clay costs you
-  more in septic and foundation than you save on land, and Lot 4's dam is an unquantified risk.</p>
+  <span class="lbl">Conclusion</span>
+  <p><b>Buy Lot 2, 336 Wagon Wheel Trail W, at $45,000</b>, unless the extra acre on Lot 1 is worth
+  about $66,000 to you. Lot 2 has the better soil, by far the least fill, the lowest price, and the
+  lowest total cost to reach build-ready of the four. Its weakness is size, and only you can price
+  that.</p>
+  <p><b>If you want the acreage, buy Lot 1 and open at $65,000</b> — the county's appraised value —
+  going to about $72,000. At the $82,500 ask you are paying a 26.9% premium to the county's own number
+  on a lot that also needs 1,416 cubic yards of fill.</p>
+  <p style="margin-bottom:0;"><b>Do not buy Lots 3 or 4.</b> The Pledger clay costs more in septic and
+  foundation than the land saves; Lot 4 needs the deepest pad, barely has the width for it, and abuts
+  a dam with no published hazard rating.</p>
 </div>
-""", "29 · Scorecard", "scorecard")
+""", "30 · Scorecard", "scorecard")
 
 
-# =========================================================================== 30. corrections
+# =========================================================================== 31. corrections
 add("""
-<h2><span class="n">30 ·</span> What changed, edition by edition</h2>
+<h2><span class="n">31 ·</span> What changed, edition by edition</h2>
 <p>The original generated portfolio, the v2 rebuild, and this edition. Only the items where the answer
 actually moved are listed.</p>
 """ + table(
@@ -2191,11 +2334,11 @@ actually moved are listed.</p>
 <p class="xs" style="margin-bottom:0;">The full claim-by-claim audit of the original document remains
 in <a href="docs/AUDIT.md">docs/AUDIT.md</a>. The evidence trail for everything new in this edition,
 including the exact service queries, is in <a href="docs/EVIDENCE.md">docs/EVIDENCE.md</a>.</p>
-""", "30 · Corrections", "corrections")
+""", "31 · Corrections", "corrections")
 
-# =========================================================================== 31. due diligence
+# =========================================================================== 32. due diligence
 add("""
-<h2><span class="n">31 ·</span> What to do next, in this order</h2>
+<h2><span class="n">32 ·</span> What to do next, in this order</h2>
 <p class="lead">Nine of these cost almost nothing and between them they resolve every remaining
 material unknown. Do them before you make an offer, not after.</p>
 <ol class="steps" style="font-size:9.6pt;">
@@ -2226,7 +2369,7 @@ material unknown. Do them before you make an offer, not after.</p>
   <li><b>Confirm the school attendance zone</b> for the specific lot with Columbia-Brazoria ISD, and
       confirm broadband availability at the address with the providers. Neither can be settled from a
       desk, and both shape daily life. <span class="xs">Free.</span></li>
-  <li><b>Confirm the TDI windstorm zone</b> for the parcel against TDI's own Brazoria County map. §21
+  <li><b>Confirm the TDI windstorm zone</b> for the parcel against TDI's own Brazoria County map. §22
       places all four in Inland I, but the dividing line follows SH 35 and Lots 1 and 3 are within 530
       ft of it. <span class="xs">Free.</span></li>
   <li><b>Order a boundary and topographic survey</b> on the lot you intend to buy, then test a real
@@ -2243,7 +2386,7 @@ material unknown. Do them before you make an offer, not after.</p>
   under $700 between them and would change the recommendation in this document if any of them came back
   differently.
 </div>
-""", "31 · Next steps", "next")
+""", "32 · Next steps", "next")
 
 # =========================================================================== 32. sources & sign-off
 add(f"""
@@ -2262,21 +2405,21 @@ add(f"""
       <td>Soil series, texture, permeability, shrink-swell, drainage class, hydrologic group (§16)</td></tr>
     <tr><td><b>Bar X Ranch declaration of restrictions</b> as recorded (Deed Vol. 1679, Pg. 695)</td>
       <td>Permitted structures, livestock, dwelling size, fences, setbacks, lot maintenance (§17)</td></tr>
-    <tr><td><b>30 TAC §285.91</b> (TCEQ OSSF)</td><td>Wastewater flow, tank sizing, loading rates,
+    <tr><td><b>30 TAC §295.91</b> (TCEQ OSSF)</td><td>Wastewater flow, tank sizing, loading rates,
       separation distances (§18)</td></tr>
     <tr><td><b>Brazoria County</b> building permit fee schedule, permit application, floodplain
       administration</td><td>Permit cost, the 24-inch freeboard standard, contact route</td></tr>
     <tr><td><b>FEMA</b> — National Risk Index (Dec 2025), LOMA/LOMR-F guidance, FIS 48039CV001A</td>
-      <td>Hazard ratings (§23), map-amendment routes, study effective date</td></tr>
+      <td>Hazard ratings (§24), map-amendment routes, study effective date</td></tr>
     <tr><td><b>Texas Department of Insurance</b> — windstorm zone map and community list for Brazoria
-      County</td><td>Inland I 120 mph determination, WPI-8 obligation (§21)</td></tr>
-    <tr><td><b>TWIA</b> — published rates and liability report</td><td>Windstorm premium (§21)</td></tr>
+      County</td><td>Inland I 120 mph determination, WPI-8 obligation (§22)</td></tr>
+    <tr><td><b>TWIA</b> — published rates and liability report</td><td>Windstorm premium (§22)</td></tr>
     <tr><td><b>TPWD</b> — private-water fishing exemption, freshwater bag and length limits</td>
-      <td>Correcting the fishing claims (§28)</td></tr>
+      <td>Correcting the fishing claims (§29)</td></tr>
     <tr><td><b>US Census Bureau</b> — ACS 2024 five-year estimates, tract 6625</td>
-      <td>Demographics, income, tenure, Indian population (§27)</td></tr>
+      <td>Demographics, income, tenure, Indian population (§28)</td></tr>
     <tr><td><b>ERA5 reanalysis</b>, daily 1991–2020 at the parcels</td>
-      <td>Climate normals in Celsius, frost dates, growing season (§22)</td></tr>
+      <td>Climate normals in Celsius, frost dates, growing season (§23)</td></tr>
     <tr><td><b>OpenStreetMap</b> and <b>OSRM</b>; <b>National Inventory of Dams</b></td>
       <td>Water-body geometry and frontage measurement, road distances and drive times, dam records</td></tr>
   </tbody>
@@ -2301,7 +2444,7 @@ current school attendance zones and campus performance.</p>
   open government data. It is <b>not</b> a survey, an engineering or geotechnical opinion, a flood
   determination, an elevation certificate, insurance advice, legal advice, tax advice or an appraisal,
   and it is not a substitute for the licensed professionals and the written county determinations named
-  in §31. No lot has been visited, surveyed or soil-tested. Elevations derive from remote-sensing models
+  in §32. No lot has been visited, surveyed or soil-tested. Elevations derive from remote-sensing models
   and are indicative only. Figures marked <span class="cf e">estimate</span> are planning ranges;
   figures marked <span class="cf u">unverified</span> derive from third-party listing copy or a
   superseded edition. Prices, tax rates, insurance premiums and listing status change without notice.
@@ -2315,11 +2458,98 @@ current school attendance zones and campus performance.</p>
   <div class="on">on <b>{PREPARED_ON}</b></div>
   <hr class="r" style="margin:4mm 0;">
   <div class="sm">Bar X Ranch — Four-Lot Feasibility Portfolio · version {VERSION} ·
-  @@N@@ pages · supersedes v2.0 of 10 September 2026 and the original generated portfolio.<br>
+  @@N@@ pages · supersedes v3.0 and v2.0 of 10 September 2026, and the original generated portfolio.<br>
   Subject parcels: PID 183667, 183367, 186219, 183332 — Bar X Ranch Sections 1, 2 and 16,
   unincorporated Brazoria County, Angleton, Texas 77515.</div>
 </div>
 """, "Sources &amp; sign-off", "sources")
+
+# =========================================================================== A. engagement brief
+add("""
+<h2><span class="n">Appendix A · Engagement brief — what was asked, and where it is answered</span></h2>
+<p class="sm">The requirements that produced this document, recorded so the artifact can be checked
+against the instruction. Each row points to the section that discharges it. Two session messages are
+excluded because neither bears on scope: one session-control instruction, and one question about where
+the output files were located.</p>
+
+<h3>A.1 · The analytical brief</h3>
+<table class="compact">
+  <thead><tr><th style="width:22mm;">Requirement</th><th>How it was discharged</th><th style="width:26mm;">Where</th></tr></thead>
+  <tbody>
+    <tr><td><b>Read and understand it</b></td>
+      <td>The generated portfolio was read in full, including both elevation diagrams, the cost
+      schedule and all four county e-mail drafts.</td>
+      <td>Basis of this edition</td></tr>
+    <tr><td><b>Find inconsistencies</b></td>
+      <td>Internal contradictions identified: per-acre pricing computed on two different acreage
+      bases; a soft-cost total that does not equal its own line items; a fill allowance that
+      contradicts the stated ground and floor elevations; two diagrams drawing the finished floor
+      below natural grade; fill and a LOMA recommended together though they are mutually exclusive;
+      dues stated for one lot and omitted for three; three of four e-mail drafts truncated mid
+      sentence; and "AD/AE" used to mean both a flood zone and a study cross-section.</td>
+      <td>§31 · <a href="docs/AUDIT.md">AUDIT §2</a></td></tr>
+    <tr><td><b>Challenge the verdict</b></td>
+      <td>The original "all four buildable, cost minimal" verdict is rejected on five grounds: the
+      document neutralises its own flood warning; its conclusion depends on selecting the bottom of a
+      2.7 ft BFE range without saying why; one generic flood analysis is presented as four
+      lot-specific ones; the waterfront lots it recommends are the <i>weakest</i> for this build once
+      slope to water and TCEQ separation distances are applied; and no ranked recommendation is ever
+      issued. This edition takes a position and names a lot.</td>
+      <td>§1–§4 · §30 · <a href="docs/AUDIT.md">AUDIT §1</a></td></tr>
+    <tr><td><b>Compare the documents</b> <span class="cf u">partly open</span></td>
+      <td>Only one document was supplied, so the artifact's own sections were compared against each
+      other and against primary sources — which is where several of the contradictions surfaced.
+      <b>Still open:</b> a second document — an appraisal, survey, seller's disclosure or the POA
+      resale certificate — would extend this materially.</td>
+      <td><a href="docs/AUDIT.md">AUDIT preamble</a></td></tr>
+    <tr><td><b>Say what is missing</b></td>
+      <td>Absent from the original and supplied here: the house construction cost; windstorm insurance
+      and the WPI-8 obligation; property tax and the taxing districts; POA dues, mowing and transfer
+      fees; the septic system installation itself; water treatment; survey; driveway culvert; electric
+      service extension; propane; TCEQ separation distances; parcel identifiers; the school district;
+      soil classification; terrain and flood headroom per lot; and what living there is actually
+      like.</td>
+      <td>§16–§29 · <a href="docs/AUDIT.md">AUDIT §4</a></td></tr>
+    <tr><td><b>Correct what is missing</b></td>
+      <td>Corrected against primary sources rather than assertion: the county parcel, floodplain,
+      LiDAR and taxing services; USGS 3DEP; NRCS SSURGO; the recorded declaration of restrictions;
+      TCEQ OSSF rules; the county fee schedule and freeboard standard; FEMA; TDI and TWIA; TPWD;
+      and the Census. Every figure carries a provenance mark.</td>
+      <td>§31 · <a href="docs/SOURCES.md">SOURCES.md</a> · <a href="docs/EVIDENCE.md">EVIDENCE.md</a></td></tr>
+    <tr><td><b>Refine the presentation</b></td>
+      <td>Rebuilt from a generated single-page application into a paginated A4 report with true-scale
+      drawings. Removed the working notes left in the body, the styling debug string, the raw
+      data-feed artefacts, the blank map, the title block printing over a diagram, and five
+      repetitions of an identical badge row. Added numbered pages, a contents list with page
+      references, provenance marking on every material figure, sourced citations, a disclaimer and a
+      sign-off.</td>
+      <td>This edition · <a href="docs/AUDIT.md">AUDIT §5</a></td></tr>
+  </tbody>
+</table>
+
+<h3>A.2 · Delivery requirements</h3>
+<table class="compact">
+  <thead><tr><th style="width:22mm;">Requirement</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><b>Render to a real PDF</b></td>
+      <td><b>Done</b> — printed from this HTML to A4 at true scale.</td></tr>
+    <tr><td><b>Commit the PDF alongside</b></td>
+      <td><b>Done</b> — committed next to the HTML source, with the superseded editions and the
+      original generated portfolio retained for comparison.</td></tr>
+    <tr><td><b>Merge it to the main branch</b></td>
+      <td><b>Done</b> — merged by pull request.</td></tr>
+    <tr><td><b>Append this brief as a reference,<br>excluding the irrelevant items</b></td>
+      <td><b>Done</b> — this appendix. Two out-of-scope session messages excluded, as noted above.</td></tr>
+  </tbody>
+</table>
+
+<div class="note teal">
+  <span class="lbl">How to read this appendix</span>
+  It is a traceability record, not a summary of findings. Where a row says <span class="cf u">partly
+  open</span>, the requirement could not be fully discharged from the material available, and the
+  reason is stated. The substantive conclusions are in §1–§4 and the scorecard at §30.
+</div>
+""", "Appendix A &middot; Engagement brief", "brief")
 
 # =========================================================================== render
 # Real printed page numbers come from data/pagination.json, written by tools/paginate.py
@@ -2369,10 +2599,10 @@ for i, (anchor, foot, html) in enumerate(SHEETS, start=1):
     out.append('<section class="sheet"%s>' % (' id="%s"' % anchor if anchor else ''))
     out.append('<span class="smark" aria-hidden="true">[[S:%s]]</span>' % (anchor or i))
     out.append(html)
-    out.append('<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b> '
-               'v%s · prepared for %s · %s</span>'
+    out.append('<div class="foot"><span><b>Bar X Ranch — Four-Lot Feasibility Portfolio</b>'
+               '&nbsp; v%s &nbsp;·&nbsp; %s</span>'
                '<span class="pg">%s &nbsp;·&nbsp; %s</span></div>'
-               % (VERSION, PREPARED_FOR, PREPARED_ON, foot, pg))
+               % (VERSION, PREPARED_FOR, foot, pg))
     out.append('</section>')
 
 out.append("""
@@ -2423,6 +2653,9 @@ out.append("""
 doc = ''.join(out)
 doc = doc.replace('%%ALL%%', gmap_all()).replace('%%AREA%%', GMAP_AREA)
 doc = doc.replace('@@N@@', str(TOTAL_PAGES))
+doc = (doc.replace('@@V@@', VERSION)
+          .replace('@@FOR@@', PREPARED_FOR)
+          .replace('@@ON@@', PREPARED_ON))
 with open(OUT, 'w') as fh:
     fh.write(doc)
 print("wrote %s — %d sheets, %d printed pages, %.0f kB"
