@@ -531,3 +531,77 @@ requires a licensed key, and the Google Maps terms prohibit capturing or redistr
 in a document of this kind. Esri World Imagery is the basemap the artifact's own interactive boundary
 map already uses, is licensed for this purpose, and gives comparable high-resolution aerial coverage.
 The live Google satellite view is still reachable from the per-lot map links in §6–§10.
+
+
+---
+
+## 15. Water regime and stocking (added v4.0)
+
+### Is Mill Bayou perennial?
+
+No. The National Hydrography Dataset carries a flow-regime code on every flowline. Queried per parcel
+against `nhd/MapServer/6` (*Flowline — Large Scale*; note the fields are **lower-case**, `fcode` not
+`FCODE`, which is why a first pass returned nulls):
+
+| Lot | Nearest flowline | Distance | FCode | Meaning |
+|---|---|---|---|---|
+| 1 | **Mill Bayou** | 184 ft | **46003** | **Stream/River — intermittent** |
+| 1 | Mill Bayou | 107 ft | 55800 | Artificial path — the routing line *through* the impounded widening |
+| 2 | unnamed | 72 ft | 55800 | Artificial path through the 12.6-ac pond |
+| 2 | unnamed | 1,297 ft | 46003 | Intermittent |
+| 3 | unnamed | 90 ft | 55800 | Artificial path through the same pond |
+| 3 | unnamed | 1,072 ft | 46003 | Intermittent |
+| 4 | unnamed | 167 ft | **33600** | **Canal/ditch** — artificial drainage |
+| 5 | unnamed | 94 ft | **33600** | **Canal/ditch** — artificial drainage |
+
+The distinction that matters: an FCode 46003 reach carries water only part of the year, while an
+impounded pond with an artificial path routed through it holds water. **Only Lot 1 fronts a seasonal
+watercourse.** Lots 2–5 front dammed water, and what is closest to Lots 4 and 5 is drainage
+infrastructure rather than an amenity.
+
+### Which months
+
+There is **no gauge on Mill Bayou**. USGS site queries over a box around the parcels return eleven
+stream sites, but the three coastal-prairie candidates — `08078080` Bastrop Bayou at CR 288,
+`08079000` Oyster Ck nr Angleton, `08117210` Buffalo Camp Bayou — hold **no monthly discharge
+statistics**, so the dry window cannot be read from a record and has to be derived.
+
+Rainfall is not the driver: it is nearly aseasonal here, and the driest month (February, 79 mm) is not
+the dry-channel month. The driver is evaporative demand. Thornthwaite potential evapotranspiration
+computed from this document's own ERA5 1991–2020 monthly normals (heat index I = 113.3, a = 2.513,
+corrected for 29° N daylight):
+
+| Month | Rain mm | PET mm | Balance |
+|---|---:|---:|---:|
+| Jan–Apr | 96 avg | 47 avg | **+43 avg** |
+| May | 89 | 137 | **−48** |
+| Jun | 107 | 176 | **−69** |
+| **Jul** | 90 | 193 | **−103** |
+| **Aug** | 98 | 188 | **−90** |
+| Sep | 121 | 140 | −19 |
+| Oct–Dec | 104 avg | 55 avg | **+49 avg** |
+
+Annual balance **−9 mm** — essentially break-even, which is why the channel recovers every winter.
+**Deficit months are May to September, with July and August running roughly double rainfall.** That is
+the window in which an intermittent reach becomes isolated pools or a dry bed. Stated as an inference
+from the water balance, not as a gauged measurement.
+
+### Is anything stocked?
+
+- **Mill Bayou does not appear in TPWD's stocked water-body list.** The alphabetical list at
+  `fishboat/fish/management/stocking/fishstock_water.phtml` contains no Mill Bayou; the bayous it does
+  list are Adams, Cow, McKinney, Pine Island and Taylor. Flag Pond is absent too.
+- **Bastrop Bayou** *is* a listed TPWD water body, `WB_code=2424`. Its stocking report reads
+  **"No stockings took place this year."**
+- TPWD stocks public lakes, ponds and saltwater bays. An intermittent bayou inside a private
+  deed-restricted subdivision is none of those.
+- The stocked water in Bar X Ranch is the **POA's own two lakes**, stocked by the association — which
+  is consistent with the private-water position in §31: no state licence, and no state bag or size
+  limits.
+
+### Zillow links
+
+Each lot heading in §6–§10 links to Zillow. Lot 5 has a resolved listing page
+(`homedetails/…305175997_zpid/`). The other four use Zillow's address-search form
+(`/homes/<address>_rb/`) built from the **marketed** address rather than the situs of record — Lot 3's
+situs of record is `HIGHWAY 35`, which would produce a useless search.

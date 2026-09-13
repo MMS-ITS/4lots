@@ -39,6 +39,8 @@ ORDER = ['lot1', 'lot2', 'lot3', 'lot4', 'lot5']
 # Per-lot narrative facts established by the desktop verification pass.
 EXTRA = {
     'lot1': dict(
+        regime='<b>Seasonal.</b> Mill Bayou is classified <b>intermittent</b> in the national hydrography (NHD FCode 46003) &mdash; it does not flow year-round. Expect low or no flow <b>late May to September</b>, worst in <b>July and August</b>. The water nearer the boundary is the <b>impounded</b> 13-acre widening, which holds through the dry window though the level drops.',
+        stocked="<b>No.</b> Mill Bayou does not appear in TPWD's stocked water-body list, and it is not public water TPWD stocks. In an intermittent reach the fishery is whatever survives the isolated summer pools.",
         short="1127 Saddle Horn Bend",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — Mill Bayou'), ('q', 'Largest — 1.95 ac')],
         water="<b>Mill Bayou — a tree-lined stream corridor, not open water.</b> The bayou "
@@ -60,6 +62,8 @@ EXTRA = {
         verdict="Buy this one if the plan is a large house and you will pay for the pad.",
     ),
     'lot2': dict(
+        regime='<b>Impounded, so it holds.</b> The 12.6-acre pond is a dammed water body, not a flowing reach &mdash; NHD routes an artificial path through it. It retains water through the summer deficit. The nearest free-flowing channel is intermittent and 1,297 ft away.',
+        stocked='<b>Not by the state.</b> The POA stocks its own two lakes; this pond is not a TPWD water.',
         short="336 Wagon Wheel Trail W",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront'), ('q', 'Lowest price'), ('etj', 'Baileys Prairie ETJ')],
         water="An unnamed 12.6-acre mapped water body. 4 of 12 boundary vertices lie within 60 ft "
@@ -78,6 +82,8 @@ EXTRA = {
         verdict="Cheapest entry and the best ground, but prove the footprint fits before you bid.",
     ),
     'lot3': dict(
+        regime='<b>Impounded, so it holds.</b> Same dammed 12.6-acre pond as Lot 2, and the same behaviour. Nearest intermittent channel 1,072 ft off.',
+        stocked='<b>Not by the state.</b> As Lot 2 &mdash; POA water, not a TPWD stocked water body.',
         short="Lot 29 Broken Arrow Trail",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — reclassified'), ('q', 'Best value'), ('q', '1.30 ac')],
         water="The same unnamed 12.6-acre water body as Lot 2. 7 of 13 boundary vertices lie "
@@ -99,6 +105,8 @@ EXTRA = {
         verdict="On the verified record this is the pick of the five. Confirm the identity first.",
     ),
     'lot4': dict(
+        regime='<b>Impounded, so it holds.</b> Flag Pond is retained by the Flag Lake Levee and keeps water year-round. Note what is 167 ft away, though: a <b>canal/ditch</b> (NHD FCode 33600), artificial drainage that is normally dry between rain events.',
+        stocked="<b>Not by the state.</b> Flag Pond is not in TPWD's stocking list. Any stocking is the POA's, on POA terms.",
         short="750 Wagon Wheel Trail",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — Flag Lake'), ('red', 'Abuts a dam'), ('q', 'Dearest / acre')],
         water="<b>Flag Pond — a 101.5-acre lake</b>, by far the largest water body here, and "
@@ -121,6 +129,8 @@ EXTRA = {
         verdict="Best lot to live on, worst lot to buy on price. The dam needs answering first.",
     ),
     'lot5': dict(
+        regime='<b>Impounded, so it holds.</b> Flag Pond again, same levee, same year-round pool. The feature 94 ft off the boundary is the same <b>canal/ditch</b> as Lot 4 &mdash; drainage infrastructure, dry between rain events, not an amenity.',
+        stocked='<b>Not by the state.</b> As Lot 4 &mdash; Flag Pond carries no TPWD stocking record.',
         short="808 Wagon Wheel Trail",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — Flag Lake'), ('red', 'Pad does not fit'),
                 ('red', 'Abuts a dam'), ('q', 'Price to confirm')],
@@ -378,6 +388,13 @@ hr.r{border:0; border-top:.6pt solid var(--line); margin:4mm 0;}
 .cf.e{background:var(--blue-w); color:var(--blue); border-color:rgba(28,59,168,.22);}
 .cf.n{background:var(--violet-w); color:var(--violet); border-color:rgba(91,33,166,.22);}
 .na{color:var(--faint); font-style:italic;}
+/* lot heading linked to its Zillow listing */
+a.zl{color:inherit; text-decoration:none;}
+a.zl:hover{text-decoration:underline;}
+.zm{display:inline-block; vertical-align:0.28em; margin-left:2.4mm; padding:0.3mm 1.4mm;
+  font-size:6.6pt; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--teal); background:var(--teal-w); border:0.5pt solid rgba(15,118,110,.35);
+  border-radius:1mm; white-space:nowrap;}
 /* ---------------- full-page satellite plate ---------------- */
 .plate{margin:2.5mm 0 0; text-align:center;}
 .plate img{display:block; margin:0 auto; height:233mm; width:auto; max-width:100%;
@@ -1187,6 +1204,8 @@ def facts_pairs(p, k):
                   if k in ('lot1', 'lot2') else
                   '<b>Pledger clay</b> — vertisol, hydrologic group D')),
         ('Water', p['water_short']),
+        ('Water regime', p['regime']),
+        ('Stocked?', p['stocked']),
         ('Highway', p['sh35']),
         ('Jurisdiction', ('Unincorporated · <b>Baileys Prairie ETJ</b>'
                           if k == 'lot2' else 'Unincorporated · no city limits or ETJ')),
@@ -1223,7 +1242,7 @@ for k in ORDER:
 <div class="lothead">
   <div>
     <div class="id">Lot %d of 5 · PID %s · %s</div>
-    <h2>%s</h2>
+    <h2><a class="zl" href="%s">%s<span class="zm">Zillow &rsaquo;</span></a></h2>
     <div class="addr">Angleton, TX 77515 · %s · %s</div>
     <div class="badges">%s</div>
   </div>
@@ -1253,7 +1272,7 @@ for k in ORDER:
 </div>
 """ % (
         p['lot'], p['pid'], p['geo_id'],
-        p['short'],
+        p.get('listing_url') or zillow_link(p['listing_name']), p['short'],
         p['subdivision'], lot_label(p['legal_description']),
         badges,
         price_block,
@@ -2322,6 +2341,53 @@ portfolio described.</p>
   Lot 3 with roughly twice the frontage of Lot 2. <b>Lot 4</b> fronts <b>Flag Pond, 101.5 acres</b>,
   and the levee that impounds it. Only Lot 4 is on what most people would call a lake.
 </div>
+
+<h3>When the bayou runs dry, and what is actually stocked</h3>
+<p><b>Mill Bayou is an intermittent stream.</b> The National Hydrography Dataset classifies the named
+reach beside Lot 1 as <span class="fp">FCode 46003 — Stream/River, Intermittent</span>: by definition it
+carries water only part of the year. The reaches nearer Lots 2–5 are different things again — an
+<b>artificial path</b> through an impounded pond on Lots 2 and 3, and a <b>canal/ditch</b>
+(<span class="fp">FCode 33600</span>) 94–167 ft from Lots 4 and 5.</p>
+<p>No gauge exists on Mill Bayou, and the nearby coastal-prairie gauges hold no discharge record, so
+the dry window has to be derived rather than read off. Rainfall here is <b>not</b> strongly seasonal —
+the driest month, February, still averages 79 mm. What drives a coastal-prairie channel dry is
+<b>evaporation exceeding rainfall</b>. Thornthwaite potential evapotranspiration on this document's own
+ERA5 normals gives:</p>
+""" + table(
+    ['Month', '~Rain (mm)', '~PET (mm)', '~Balance', 'Channel'],
+    [['May', '89', '137', '<b>−48</b>', 'drying'],
+     ['June', '107', '176', '<b>−69</b>', 'low / no flow'],
+     ['<b>July</b>', '90', '193', '<b>−103</b>', '<b>driest — pools only</b>'],
+     ['August', '98', '188', '<b>−90</b>', '<b>driest — pools only</b>'],
+     ['September', '121', '140', '−19', 'recovering'],
+     (['October – April', '96 avg', '50 avg', '<b>+38 avg</b>', 'flowing'], 'tot')],
+    caption='Thornthwaite PET from ERA5 1991–2020 monthly normals at the parcels; heat index '
+            'I = 113.3, a = 2.513, corrected for 29° N daylight. Annual balance is −9 mm — '
+            'essentially break-even, which is why the channel recovers each winter.',
+    cls='compact') + """
+<div class="cols2">
+  <div class="note amber" style="margin-top:0;">
+    <span class="lbl">Expect no flow late May to September</span>
+    <p style="margin-bottom:0;">Worst in <b>July and August</b>, when evaporation runs roughly double
+    rainfall. In those months an intermittent reach becomes a chain of isolated pools, or a dry bed.
+    <b>Only Lot 1 is exposed to this</b> — its nearest open water is the impounded widening, which
+    holds, but the flowing bayou behind it does not. The ponds on Lots 2–5 are <b>dammed</b> and keep
+    water year-round, though levels fall.</p>
+  </div>
+  <div class="note red" style="margin-top:0;">
+    <span class="lbl">Nothing here is state-stocked</span>
+    <p style="margin-bottom:0;"><b>Mill Bayou does not appear in TPWD's stocked water-body list</b>, and
+    neither does Flag Pond. Even <b>Bastrop Bayou</b>, the named receiving watercourse and a listed TPWD
+    water body, reports <b>&ldquo;no stockings took place this year.&rdquo;</b> TPWD stocks public lakes,
+    ponds and bays; an intermittent bayou behind a private subdivision is none of those. The stocked
+    water here is the <b>POA's own two lakes</b>, stocked by the association on its terms — which is
+    also why no state licence or bag limit applies to them (§31 above).</p>
+  </div>
+</div>
+<p class="xs" style="margin:2.4mm 0 0;">What this means for the fishing brief: buy Lot 2, 3, 4 or 5 and
+you have water outside the window all year. Buy Lot 1 for the bayou and you are buying a feature that
+is a wooded channel for roughly four months of the summer. The POA lakes are the fishery in every case;
+the bayou is scenery.</p>
 """, "31 · Amenities &amp; fishing", "amenities")
 
 # =========================================================================== 30. scorecard

@@ -4,14 +4,14 @@ Independent feasibility review of five vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v4.0, 13 September 2026, prepared for Mohsin Chowdhury.** 48 pages, paginated, five lots.
+**Current edition: v4.0, 13 September 2026, prepared for Mohsin Chowdhury.** 50 pages, paginated, five lots.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v4.0)** — 48 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf) | **Rendered PDF of the current edition** — A4, 48 pages, true scale. |
+| [`index.html`](index.html) | **The artifact (v4.0)** — 50 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf) | **Rendered PDF of the current edition** — A4, 50 pages, true scale. |
 | [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined five-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
@@ -44,6 +44,17 @@ Cost to reach build-ready (land + pad + septic + foundation): **Lot 2 ~$65k**, L
 Lot 1 ~$131k, Lot 4 ~$139k.
 
 ## What v4.0 changed
+
+- **Water regime and stocking, per lot.** Mill Bayou is classified **intermittent** in the National
+  Hydrography Dataset (FCode 46003), so it does not flow year-round: expect low or no flow **late May to
+  September, worst in July and August**, derived from a Thornthwaite water balance on the artifact's own
+  ERA5 normals (July runs −103 mm). **Only Lot 1 fronts that seasonal channel** — Lots 2–5 front
+  *impounded* water that holds through the summer, and what is nearest Lots 4 and 5 is a **canal/ditch**,
+  drainage infrastructure rather than an amenity. **Nothing here is state-stocked:** neither Mill Bayou
+  nor Flag Pond appears in TPWD's stocked water-body list, and Bastrop Bayou itself reports no stockings
+  this year. The fishery is the POA's own two lakes.
+- **Every lot heading now links to Zillow** — Lot 5 to its resolved listing page, the other four to a
+  Zillow address search built from the marketed address.
 
 - **Plate 1 · Satellite view** — a full page (page 8) showing all five parcels on high-resolution
   satellite imagery with recorded boundaries, numbered stamp pins, name tags with PID and acreage, a
