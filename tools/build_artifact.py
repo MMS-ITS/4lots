@@ -339,6 +339,9 @@ hr.r{border:0; border-top:.6pt solid var(--line); margin:4mm 0;}
 .cf.u{background:var(--amber-w); color:var(--amber); border-color:rgba(168,86,10,.25);}
 .cf.e{background:var(--blue-w); color:var(--blue); border-color:rgba(28,59,168,.22);}
 .cf.n{background:var(--violet-w); color:var(--violet); border-color:rgba(91,33,166,.22);}
+.fp{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:8.2pt;
+  background:var(--wash); border:1px solid var(--line); border-radius:1mm; padding:0 1mm;
+  color:var(--ink); white-space:nowrap;}
 
 /* ---------------- tables ---------------- */
 table{width:100%; border-collapse:collapse; margin:2mm 0; font-size:8.2pt;}
@@ -2560,17 +2563,19 @@ record for each parcel is established in &sect;3.</p>
       FIS profile to read is not the one originally identified. No panel image is embedded.</td></tr>
     <tr><td>Draft e-mail to the county floodplain administrator requesting an official BFE
       determination letter</td>
-      <td><b>Outstanding</b></td>
-      <td>The original artifact carried four drafts, but three of the four were truncated mid-sentence
-      and one had no addressee. They were removed in the rebuild rather than reproduced broken, and
-      have not yet been rewritten. The contact route is in &sect;32.</td></tr>
+      <td><b>Delivered</b></td>
+      <td>Four drafts, one per parcel, rewritten from scratch against the corrected panel and the
+      per-parcel record. The original artifact's drafts were truncated and one had no addressee; these
+      replace them. Plain text in <span class="fp">letters/EMAIL-DRAFTS.md</span>; the questions are
+      set out in Appendix B.</td></tr>
     <tr><td>PDF request letter for 750 Wagon Wheel Trl</td>
-      <td><b>Outstanding</b></td><td rowspan="2">Not yet produced as separate documents. These are
-      straightforward to generate once the four drafts above are rewritten against the corrected panel
-      and the per-parcel legal descriptions in &sect;3.</td></tr>
+      <td><b>Delivered</b></td><td rowspan="2">Five PDFs in <span class="fp">letters/</span> &mdash; one
+      formal A4 letter per parcel, plus a combined document carrying a covering letter and all four.
+      Each is generated from the parcel record and the terrain model, so they cannot drift from this
+      report. See Appendix B.</td></tr>
     <tr><td>Three further individual BFE request PDFs (1127, 336, Lot 29), plus a combined four-lot
       letters PDF</td>
-      <td><b>Outstanding</b></td></tr>
+      <td><b>Delivered</b></td></tr>
   </tbody>
 </table>
 
@@ -2660,13 +2665,120 @@ record for each parcel is established in &sect;3.</p>
 
 <div class="note teal">
   <span class="lbl">How to read this appendix</span>
-  It is a traceability record, not a summary of findings. Where a row is marked <b>outstanding</b>,
-  <b>partly delivered</b> or <span class="cf u">partly open</span>, the requirement has not been fully
-  discharged and the reason is stated rather than left implied — four request-letter deliverables and a
-  rewritten set of county e-mail drafts remain open at this edition. The substantive conclusions are in
-  §1–§4 and the scorecard at §30.
+  It is a traceability record, not a summary of findings. Where a row is marked <b>partly delivered</b>
+  or <span class="cf u">partly open</span>, the requirement has not been fully discharged and the reason
+  is stated rather than left implied. Two remain: no FIRM panel image is embedded, and no second
+  document was ever supplied to compare this one against. Everything else asked for has now been
+  produced. The substantive conclusions are in §1–§4 and the scorecard at §30.
 </div>
 """, "Appendix A &middot; Engagement brief", "brief")
+
+# =========================================================================== B. correspondence
+add("""
+<h2><span class="n">Appendix B · County correspondence — what to send, and what to ask</span></h2>
+<p class="sm">Nothing in this report substitutes for the county stating the governing elevation in
+writing. These are the requests that obtain it: one per parcel, because the questions differ between
+them. Every figure quoted in them is read from the parcel record and the terrain model, so the
+correspondence cannot drift out of step with this document.</p>
+
+<h3>B.1 · The documents</h3>
+<table class="compact">
+  <thead><tr><th style="width:74mm;">File</th><th>What it is</th></tr></thead>
+  <tbody>
+    <tr><td><span class="fp">letters/BFE-Request-1127-Saddle-Horn-Bend.pdf</span></td>
+      <td rowspan="4">A formal A4 request letter for a single parcel, identifying it by PID, GEO ID,
+      legal description, plat and centroid, stating the flood and terrain position as understood for
+      correction, and asking the questions in B.2 and B.3. Three pages each. Send one, or send the
+      combined document.</td></tr>
+    <tr><td><span class="fp">letters/BFE-Request-336-Wagon-Wheel-Trail-W.pdf</span></td></tr>
+    <tr><td><span class="fp">letters/BFE-Request-Lot-29-Broken-Arrow-Trail.pdf</span></td></tr>
+    <tr><td><span class="fp">letters/BFE-Request-750-Wagon-Wheel-Trail.pdf</span></td></tr>
+    <tr><td><span class="fp">letters/BFE-Request-All-Four-Lots.pdf</span></td>
+      <td>A covering letter explaining that one of the four will be purchased, a summary table of all
+      four parcels, then all four letters in sequence. Fourteen pages. Use this if the office would
+      rather answer once.</td></tr>
+    <tr><td><span class="fp">letters/EMAIL-DRAFTS.md</span></td>
+      <td>The same four requests as plain-text e-mails with subject lines, ready to paste. Replace the
+      bracketed contact placeholders before sending.</td></tr>
+    <tr><td><span class="fp">tools/letters.py</span></td>
+      <td>Regenerates all of the above from the parcel and terrain data.</td></tr>
+  </tbody>
+</table>
+<p class="sm"><b>Where to send it.</b> The Floodplain Administrator, Brazoria County Floodplain &amp; 911
+Administration, 451 North Velasco, Suite 210, Angleton, Texas 77515 &mdash; (979) 864-1295 or
+(281) 756-1295. The same office administers floodplain determinations, the combined
+development/building permit and 911 addressing, which is why the addressing question in B.3 goes here
+rather than elsewhere.</p>
+
+<h3>B.2 · The ten questions asked for every parcel</h3>
+<table class="compact">
+  <thead><tr><th style="width:44mm;">Question</th><th>Why it decides something</th></tr></thead>
+  <tbody>
+    <tr><td><b>1 · Written base flood elevation</b></td>
+      <td>The whole cost model turns on it. Ask for the source too &mdash; FIS profile and
+      cross-section, or the published BFE line &mdash; and the interpolation method, since the nearest
+      published line lies 1,010&ndash;2,477 ft away depending on the parcel.</td></tr>
+    <tr><td><b>2 · Regulatory floodway</b></td>
+      <td>Floodway, as against flood fringe, would restrict or prevent fill and change the answer
+      entirely.</td></tr>
+    <tr><td><b>3 · Minimum finished-floor elevation</b></td>
+      <td>Confirms the 24-inch freeboard is a single requirement, not 24 inches on top of a further two
+      feet &mdash; the arithmetic the original brief had wrong.</td></tr>
+    <tr><td><b>4 · Levee status relied upon</b></td>
+      <td>The Zone AE mapping rests on the Angleton Levee being non-accredited. Accreditation, or a
+      pending map revision, moves the zone and the premium.</td></tr>
+    <tr><td><b>5 · Fill, no-rise and drainage</b></td>
+      <td>Every parcel needs a pad. Whether that triggers no-rise certification, compensatory storage
+      or drainage review is a cost and a programme risk.</td></tr>
+    <tr><td><b>6 · Map amendment on natural grade</b></td>
+      <td>A LOMA is only available on natural grade. Placing fill forces a LOMR-F instead, which is a
+      different application with a FEMA fee.</td></tr>
+    <tr><td><b>7 · Permit route and fees</b></td>
+      <td>Confirms the single combined permit, the residential fee basis, and that contractors must hold
+      IRC registration before it issues.</td></tr>
+    <tr><td><b>8 · Elevation certificate</b></td>
+      <td>When it is required and in what form.</td></tr>
+    <tr><td><b>9 · Jurisdiction</b></td>
+      <td>A 77515 mailing address does not establish that the parcel is unincorporated. If it is inside
+      Angleton, the city permits instead and the standards differ.</td></tr>
+    <tr><td><b>10 · Damage and loss history</b></td>
+      <td>Any record of flooding, substantial damage or repetitive loss on the parcel or its street.</td></tr>
+  </tbody>
+</table>
+
+<h3>B.3 · What each letter asks in addition</h3>
+<table class="compact">
+  <thead><tr><th style="width:44mm;">Parcel</th><th>Additional questions</th></tr></thead>
+  <tbody>
+    <tr><td><b>1127 Saddle Horn Bend</b><br><span class="sm">PID 183667</span></td>
+      <td>Which flooding source governs, given Mill Bayou at about 112 ft, unnamed water at about 38 ft,
+      and the nearest published BFE line 1,594 ft away; and any setback, fill restriction or easement on
+      the water-facing portion.</td></tr>
+    <tr><td><b>336 Wagon Wheel Trail W</b><br><span class="sm">PID 183367</span></td>
+      <td>Whether a pad of only about 0.7 ft is acceptable and what evidence of existing grade the county
+      requires &mdash; this parcel has the highest natural ground of the four; and whether a recorded
+      drainage easement crosses it.</td></tr>
+    <tr><td><b>Lot 29 Broken Arrow Trail</b><br><span class="sm">PID 186219</span></td>
+      <td>The correct address of record, since the situs of record reads HIGHWAY 35 while the parcel is
+      marketed as Broken Arrow Trail; and how the BFE is derived at 2,477 ft from the nearest published
+      line, the greatest separation of the four.</td></tr>
+    <tr><td><b>750 Wagon Wheel Trail</b><br><span class="sm">PID 183332</span></td>
+      <td>The Flag Lake Levee at about 11 ft &mdash; accreditation status, hazard classification and
+      condition, whether the parcel sits in a dam-failure inundation area, and any easement or
+      construction restriction; the building lines of record, since the narrow dimension leaves roughly
+      12 ft of spare width against the assumed pad; and any recorded drainage easement.</td></tr>
+  </tbody>
+</table>
+
+<div class="note amber">
+  <span class="lbl">Send these before you make an offer, not after</span>
+  A written determination costs nothing but time, and it settles the one number &mdash; the governing
+  base flood elevation &mdash; on which the pad, the foundation, the insurance and roughly $74,000 of
+  difference between these four parcels all depend. The letters deliberately state our figures as
+  provisional and invite correction, because the object is to be told the right number rather than to
+  have ours confirmed.
+</div>
+""", "Appendix B &middot; County correspondence", "letters")
 
 # =========================================================================== render
 # Real printed page numbers come from data/pagination.json, written by tools/paginate.py
