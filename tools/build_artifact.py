@@ -133,7 +133,7 @@ EXTRA = {
         stocked='<b>Not by the state.</b> As Lot 4 &mdash; Flag Pond carries no TPWD stocking record.',
         short="808 Wagon Wheel Trail",
         badges=[('ae', 'Zone AE'), ('wf', 'Waterfront — Flag Lake'), ('red', 'Pad does not fit'),
-                ('red', 'Abuts a dam'), ('q', 'Price to confirm')],
+                ('red', 'Abuts a dam'), ('red', 'Dearest / acre — by 61%')],
         water="<b>Flag Pond — the same 101.8-acre lake as Lot 4</b>, named in the USGS hydrography "
               "<b>19 ft</b> from the boundary, with 6 of the 11 recorded vertices inside 60 ft of the "
               "mapped pool. The <b>Flag Lake Levee</b> embankment (NID TX06298) is 21 ft off. This "
@@ -144,23 +144,24 @@ EXTRA = {
                "readings being the levee embankment rather than buildable ground.",
         sh35="1.03 mi south of State Highway 35 — effectively identical to Lot 4",
         noise="Quiet. A mile off the highway, tied with Lot 4 as the most sheltered from road noise.",
-        best="Frontage on the same 101-acre lake as Lot 4, with <b>0.07 more acre of record</b> and a "
-             "county appraisal of <b>$53,280</b> against Lot 4's $50,000. It is actively listed, so "
-             "the comparison that matters is asking price against Lot 4's $58,000 — and on the "
-             "physical evidence below this parcel is the weaker of the two neighbours, so it needs to "
-             "be cheaper, not merely competitive.",
-        watch="<b>The asking price is not yet in this study</b> — the parcel is actively listed "
-              "(Zillow zpid 305175997) but the listing portals block automated retrieval, so every "
-              "price-dependent figure for this lot is marked pending rather than guessed. "
+        best="Frontage on the same 101-acre lake as Lot 4, with 0.07 more acre of record, and the "
+             "quietest position in the study alongside its neighbour. That is the whole of the case "
+             "for it, and at the asking price it is not enough &mdash; see the verdict.",
+        watch="<b>$100,000 is $93,458 an acre</b> (MLS 84275418) — <b>2.5× Lot 3</b>, 61% above its own "
+              "neighbour Lot 4, and <b>+87.7% over the county's appraisal of $53,280</b>, the largest "
+              "premium of the five by a factor of three. "
               "<b>And the building pad does not fit.</b> At 490 ft × 110 ft this is the narrowest parcel "
               "in the study, and the pad geometry needs 116 ft of width against the 110 ft available "
               "— it fails by 6 ft, the only lot of the five to fail outright. It also needs the "
               "deepest lift of any lot at 4.69 ft, sits on <b>Pledger clay</b> at 69.5% clay, is 21 ft "
               "from a levee impounding a 101-acre lake with no published hazard class, and its "
               "acreage of record (1.07) exceeds the county's own polygon (0.964) by 11%.",
-        verdict="Do not pursue on these numbers unless the width problem is engineered away. "
-                "Retaining walls or steeper certified side slopes, or a deliberately narrow footprint, "
-                "would have to come before any offer.",
+        verdict="<b>Rule this one out.</b> It is the dearest land per acre in the study by 61%, carries "
+                "the largest premium over appraised value by a factor of three, needs the deepest lift, "
+                "sits on the worst soil, abuts an unrated levee &mdash; and is the only parcel where the "
+                "pad does not fit at all. Its lake frontage is available next door on Lot 4 for $42,000 "
+                "less. There is no version of this brief in which Lot 5 is the right purchase at "
+                "$100,000; on cost-to-build-ready it is <b>$108,000 worse than Lot 2</b>.",
     ),
 }
 WATER_SHORT = {
@@ -698,7 +699,7 @@ buildability, cost, flood and windstorm exposure, and what it is actually like t
   <dt>Date</dt><dd>{PREPARED_ON}</dd>
   <dt>Version</dt><dd>{VERSION} — supersedes v2.0 (10 Sep 2026) and the original generated portfolio</dd>
   <dt>Subject</dt><dd>PID 183667 · 183367 · 186219 · 183332 — Bar X Ranch Sections 1, 2 and 16</dd>
-  <dt>Asking price</dt><dd>$234,500 for 5.25 acres across the four priced lots; Lot 5 listed, price to confirm</dd>
+  <dt>Asking price</dt><dd>$334,500 for 6.32 acres of record across all five lots</dd>
   <dt>Basis</dt><dd>Primary regulation, Brazoria County public GIS, FEMA, TCEQ, TDI, TWIA, USDA soil
       survey, USGS 3DEP and hydrography, US Census ACS 2024, ERA5 climate reanalysis</dd>
   <dt>Status</dt><dd>Desktop study. No survey, no soil test, no written county flood determination.</dd>
@@ -863,10 +864,7 @@ Two findings in this edition decide it, and neither was in any earlier version.<
 </div>
 
 <div class="note teal" style="margin-bottom:0;">
-  <span class="lbl">And do not buy the set</span>
-  The four priced lots cost <b>$4,650–$5,520 a year</b> to hold and return nothing — $14,000–$16,500 over
-  a three-year window, on a portfolio already asking 15.6% above the county's appraised value. The
-  build needs one lot; the other three add carry, not capability.
+  <span class="lbl">And do not buy the set</span> Five vacant lots cost <b>$5,850–$6,360 a year</b> to hold and return nothing — $17,500–$19,100 over a three-year window, on a portfolio already asking 30.6% above the county's appraised value. The build needs one lot; the other four add carry, not capability.
 </div>
 """, "1 · Verdict", "verdict")
 
@@ -875,13 +873,13 @@ Two findings in this edition decide it, and neither was in any earlier version.<
 add("""
 <h2><span class="n">2 ·</span> Portfolio snapshot</h2>
 <div class="kpis">
-  <div class="kpi"><div class="k">Land, the four priced lots</div><div class="v">$234,500</div>
-    <div class="d">5.25 ac of record <span class="cf n">was &ldquo;~4.95&rdquo;</span></div></div>
-  <div class="kpi bad"><div class="k">County appraised value</div><div class="v">$202,900</div>
-    <div class="d">asking a <b>+15.6%</b> premium """ + CF['v'] + """</div></div>
+  <div class="kpi"><div class="k">Land, all five lots</div><div class="v">$334,500</div>
+    <div class="d">6.32 ac of record · $52,927 per acre</div></div>
+  <div class="kpi bad"><div class="k">County appraised value</div><div class="v">$256,180</div>
+    <div class="d">asking a <b>+30.6%</b> premium """ + CF['v'] + """</div></div>
   <div class="kpi flag"><div class="k">All-in, one lot built</div><div class="v">$505k–980k</div>
     <div class="d">land + site + 5BR house """ + CF['e'] + """</div></div>
-  <div class="kpi flag"><div class="k">Annual carry, four priced lots</div><div class="v">$4.7–5.5k</div>
+  <div class="kpi flag"><div class="k">Annual carry, five vacant lots</div><div class="v">$5.9–6.4k</div>
     <div class="d">tax + POA + mowing <span class="cf n">rates corrected</span></div></div>
 </div>
 
@@ -904,7 +902,7 @@ add("""
   + bar('Pre-construction / site works', '$26k–108k', 16, 'a')
   + bar('The house itself, 2,400–2,800 sq ft', '$420k–700k', 100, 'g')
   + bar('Insurance, first year once built', '$5k–9.5k', 2, 'r')
-  + bar('Annual carry while vacant, ×4', '$4.7k–5.5k', 1, 'r') + """
+  + bar('Annual carry while vacant, ×5', '$5.9k–6.4k', 1, 'r') + """
 </div>
 <p class="sm">Land is <b>9–16%</b> of the all-in cost of putting a family into a house here. That is
 the single most important proportion in this document: the lot choice matters far less to the budget
@@ -998,7 +996,7 @@ the section numbers and the value question.</p>
         the "ACC Rev 2" quoted as a single controlling document across all five lots cannot be
         right. The minimum-square-footage and garage rules must be read per section.</li>
     <li><b>Lot 2 alone sits inside the Baileys Prairie extraterritorial jurisdiction.</b> Baileys
-        Prairie subdivision regulation reaches it; the other three answer only to the county.</li>
+        Prairie subdivision regulation reaches it; the other four answer only to the county.</li>
   </ul>
 </div>
 
@@ -1092,7 +1090,7 @@ per acre, and price against the appraisal the county already publishes for each 
 
 <div class="note blue">
   <span class="lbl">How to use this at the negotiating table</span>
-  The four priced lots' appraisals total <b>$202,900</b> against a $234,500 ask. The county's appraisal is
+  The five appraisals total <b>$256,180</b> against a $334,500 ask — a <b>+30.6%</b> premium. The county's appraisal is
   the number the seller pays tax on and the number that will be quoted back at them. On Lots 1, 2 and
   4 there is a documented $31,600 of daylight to argue about. On Lot 29 there is none — the seller is
   already under the county's number, which is a further reason to treat it as the pick rather than to
@@ -1779,7 +1777,7 @@ are lot-specific, and all three can be resolved for under $1,000 and three phone
             caption='All-in cost of putting a family into a house on one of these lots') + """
 <div class="note blue" style="margin-bottom:0;">
   <span class="lbl">Put the lot price in proportion</span>
-  The whole spread between the cheapest and dearest lot is <b>$37,500</b>. The spread on the
+  The whole spread between the cheapest and dearest lot is <b>$55,000</b>. The spread on the
   <b>pad alone is $28,000</b> between Lot 2 and Lot 4 at mid-case (§22), on the septic <b>$17,000</b>,
   on the foundation <b>$20,000</b>, and on the electric extension <b>$25,000</b>. Choosing the lot on
   its asking price, rather than on its soil and its elevation, optimises the smallest of the five.
@@ -1934,21 +1932,21 @@ drainage district levy. Checked parcel by parcel against the county's taxing-dis
      (['<b>Effective combined rate</b>', '<b>1.2578% – 1.4578%</b>', ''], 'tot')],
     cls='compact', caption='Brazoria County Truth-in-Taxation five-year summary, cross-checked '
                            'against the county taxing-district GIS layers') + table(
-    ['Item', 'Basis', '~The four priced lots', '~One lot (1127 Saddle Horn Bend)'],
+    ['Item', 'Basis', '~All five lots', '~One lot (1127 Saddle Horn Bend)'],
     [['Property tax, on the current appraised value',
-      '1.26–1.46% of $202,900 / $65,030', '$2,552–$2,958', '$818–$948'],
+      '1.26–1.46% of $256,180 / $65,030', '$3,223–$3,735', '$818–$948'],
      ['Property tax, once reappraised to what you pay',
-      '1.26–1.46% of $234,500 / $82,500', '$2,950–$3,418', '$1,038–$1,203'],
-     ['POA dues', '$400 per lot per year ' + CF['u'], '$1,600', '$400'],
-     ['Vacant-lot mowing charge', '$125 per lot per year ' + CF['u'], '$500', '$125'],
-     (['<b>Total annual carry while vacant</b>', '', '<b>$4,650–$5,520</b>',
+      '1.26–1.46% of $334,500 / $82,500', '$4,208–$4,876', '$1,038–$1,203'],
+     ['POA dues', '$400 per lot per year ' + CF['u'], '$2,000', '$400'],
+     ['Vacant-lot mowing charge', '$125 per lot per year ' + CF['u'], '$625', '$125'],
+     (['<b>Total annual carry while vacant</b>', '', '<b>$5,848–$6,360</b>',
        '<b>$1,350–$1,730</b>'], 'tot')],
     caption='Texas reappraises on sale, so plan on the higher tax line from year two') + """
 <div class="cols2">
   <div class="note amber" style="margin-top:0;">
-    <span class="lbl">The drag on the four priced lots</span>
-    <p style="margin-bottom:0;">$4,650–$5,520 a year is <b>2.0–2.4% of the $234,500 land basis</b>,
-    every year, on land that produces nothing. Over three years, $14,000–$16,500. <b>Lot 5 adds roughly $1,195–$1,300 a year</b> on its appraised value plus dues, so holding all five runs about <b>$5,850–$6,800</b>. Add the 15.6%
+    <span class="lbl">The drag on five lots</span>
+    <p style="margin-bottom:0;">$5,848–$6,360 a year is <b>1.7–1.9% of the $334,500 land basis</b>,
+    every year, on land that produces nothing. Over three years, $17,500–$19,100. Add the 30.6%
     premium over appraised value and the multi-lot investment case needs Bar X Ranch land to
     appreciate roughly <b>4–5% a year just to break even</b>.</p>
   </div>
@@ -2400,6 +2398,25 @@ def score_row(label, vals, weightnote=''):
                                                                      ''.join(cells))
 
 
+# Scorecard rows that must follow the data rather than be maintained by hand.
+_BUILD_READY, _PRICE_ROW, _PPA_ROW, _PREM_ROW = [], [], [], []
+for _k in ORDER:
+    _p = LOTS[_k]
+    _ask = _p['asking_price_usd']
+    _mid = (FILL['lots'][_k]['total_lo'] + FILL['lots'][_k]['total_hi']) / 2
+    _up = 0 if _k in ('lot1', 'lot2') else 20000
+    _br = _ask + _mid + _up
+    _ppa = _ask / _p['acres_of_record']
+    _prem = 100 * (_ask / _p['bcad_appraised_usd'] - 1)
+    _BUILD_READY.append(('$%dk' % round(_br / 1000),
+                         'g' if _br < 80000 else 'a' if _br < 135000 else 'r'))
+    _PRICE_ROW.append(('$%s' % format(_ask, ','),
+                       'g' if _ask <= 49000 else 'a' if _ask <= 58000 else 'r'))
+    _PPA_ROW.append(('$%s' % format(round(_ppa), ','),
+                     'g' if _ppa < 43000 else 'a' if _ppa < 60000 else 'r'))
+    _PREM_ROW.append((('<b>%+.1f%%</b>' if abs(_prem) > 60 else '%+.1f%%') % _prem,
+                      'g' if _prem < 0 else 'a' if _prem < 20 else 'r'))
+
 SCORE = [
     ('Garden soil', 'Asa loam vs Pledger clay — §18',
      [('Excellent', 'g'), ('Excellent', 'g'), ('Poor', 'r'), ('Poor', 'r'), ('Poor', 'r')]),
@@ -2413,8 +2430,10 @@ SCORE = [
      [('4.2 ft', 'a'), ('<b>0.7 ft</b>', 'g'), ('3.0 ft', 'a'), ('3.8–5.2 ft', 'r'), ('<b>4.7 ft</b>', 'r')]),
     ('Cost of the pad', 'mid-case, calculated — §22',
      [('$48.6k', 'a'), ('<b>$20.4k</b>', 'g'), ('$37.5k', 'a'), ('$44.7–58.2k', 'r'), ('$53.2k', 'r')]),
-    ('Land + pad + septic + foundation', 'the real cost of getting to build-ready',
-     [('$131k', 'a'), ('<b>$65k</b>', 'g'), ('$109k', 'a'), ('$139k', 'r'), ('pending price', '')]),
+    ('Land + pad + vertisol foundation', 'the reproducible part of cost-to-build-ready — '
+     'asking price, calculated pad at mid-case, and the $20k upcharge on the clay lots. '
+     'Septic and the electric run are not yet lot-resolved, so they are excluded.',
+     _BUILD_READY),
     ('Rain ponding on the lot', 'hydrologic group',
      [('Group B', 'g'), ('Group B', 'g'), ('Group D', 'r'), ('Group D', 'r'), ('Group D', 'r')]),
     ('Storm exposure', 'all five TDI Inland I, 120 mph',
@@ -2441,14 +2460,13 @@ SCORE = [
     ('Jurisdiction', 'county only, or also a city ETJ',
      [('County only', 'g'), ('Baileys Prairie ETJ', 'a'), ('County only', 'g'),
       ('County only', 'g'), ('County only', 'g')]),
-    ('Price', 'asking',
-     [('$82,500', 'r'), ('$45,000', 'g'), ('$49,000', 'g'), ('$58,000', 'a'), ('to confirm', '')]),
-    ('Value against county appraisal', 'premium or discount',
-     [('+26.9%', 'r'), ('+25.0%', 'r'), ('−5.5%', 'g'), ('+16.0%', 'a'), ('pending price', '')]),
+    ('Price', 'asking', _PRICE_ROW),
+    ('Price per acre of record', 'asking ÷ acres of record', _PPA_ROW),
+    ('Value against county appraisal', 'premium or discount', _PREM_ROW),
 ]
 add("""
 <h2><span class="n">32 ·</span> Scorecard against your brief</h2>
-<p>Twenty tests, weighted to what you said matters: gardening, hobby farming, quick access to
+<p>Twenty-one tests, weighted to what you said matters: gardening, hobby farming, quick access to
 amenities, a good and developed neighbourhood, scenery and nature, and safety from flood and storm.
 Green is good, amber is a compromise, red is a problem.</p>
 <table class="compact">
@@ -2461,7 +2479,7 @@ Green is good, amber is a compromise, red is a problem.</p>
   <tbody>
 """ + ''.join(score_row(l, v, n) for l, n, v in SCORE) + """
     <tr class="tot"><td>Green / amber / red</td>
-      <td class="n">10 / 3 / 4</td><td class="n">9 / 4 / 4</td><td class="n">4 / 7 / 6</td><td class="n">4 / 4 / 11</td><td class="n">4 / 2 / 10</td></tr>
+      @@TALLY@@</tr>
   </tbody>
 </table>
 <div class="note green" style="margin-bottom:0;">
@@ -2516,12 +2534,11 @@ actually moved are listed.</p>
      ['14', '<span class="strike">No tax at all</span>',
       'County + CBISD + hospital + drainage districts',
       '<b>County + CBISD + ESD only</b> — no hospital, drainage or college district'],
-     ['15', '<span class="strike">Carry not modelled</span>', '$5,050–$5,750/yr on four lots',
-      '<b>$4,650–$5,520/yr</b>, and $1,350–$1,730 on one'],
+     ['15', '<span class="strike">Carry not modelled</span>', '$5,050–$5,750/yr on four lots', '<b>$5,848–$6,360/yr</b> on five, $1,350–$1,730 on one'],
      ['16', '<span class="strike">Windstorm omitted</span>', 'TWIA average $2,541; WPI-8 required',
       '<b>TDI Inland I, 120 mph</b> — the zone boundary follows SH 35'],
      ['17', '<span class="strike">Jurisdiction unstated</span>', 'Unincorporated county',
-      '<b>Lot 2 is inside the Baileys Prairie ETJ</b>; the other three are not'],
+      '<b>Lot 2 is inside the Baileys Prairie ETJ</b>; the other four are not'],
      ['18', '<span class="strike">Surfside 20 min</span>', '~30 min', '<b>42 min</b> by road'],
      ['19', '<span class="strike">10 catfish/day as state law</span>',
       'Shown to be impossible as state law', 'Confirmed a POA house rule at most'],
@@ -3155,6 +3172,14 @@ out.append("""
 doc = ''.join(out)
 doc = doc.replace('%%ALL%%', gmap_all()).replace('%%AREA%%', GMAP_AREA)
 doc = doc.replace('@@N@@', str(TOTAL_PAGES))
+_TALLY = ''.join(
+    '<td class="n">%d / %d / %d</td>'
+    % (sum(1 for _, _, v in SCORE if v[i][1] == 'g'),
+       sum(1 for _, _, v in SCORE if v[i][1] == 'a'),
+       sum(1 for _, _, v in SCORE if v[i][1] == 'r'))
+    for i in range(len(SCORE[0][2])))
+doc = doc.replace('@@TALLY@@', _TALLY)
+
 doc = (doc.replace('@@V@@', VERSION)
           .replace('@@FOR@@', PREPARED_FOR)
           .replace('@@ON@@', PREPARED_ON))
