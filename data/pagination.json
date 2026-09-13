@@ -1,5 +1,5 @@
 {
- "total_pages": 37,
+ "total_pages": 38,
  "sheets": {
   "cover": {
    "start": 1,
@@ -144,6 +144,10 @@
   "brief": {
    "start": 36,
    "end": 37
+  },
+  "letters": {
+   "start": 38,
+   "end": 38
   }
  }
 }
