@@ -4,14 +4,14 @@ Independent feasibility review of five vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v4.0, 13 September 2026, prepared for Mohsin Chowdhury.** 47 pages, paginated, five lots.
+**Current edition: v4.0, 13 September 2026, prepared for Mohsin Chowdhury.** 48 pages, paginated, five lots.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v4.0)** — 47 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf) | **Rendered PDF of the current edition** — A4, 47 pages, true scale. |
+| [`index.html`](index.html) | **The artifact (v4.0)** — 48 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf) | **Rendered PDF of the current edition** — A4, 48 pages, true scale. |
 | [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined five-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
@@ -22,6 +22,7 @@ there.
 | [`tools/terrain_svg.py`](tools/terrain_svg.py) | Renders the true-scale plans and terrain sections |
 | [`tools/aerials.py`](tools/aerials.py) | Builds the twelve lot aerials from USGS NAIP |
 | [`tools/fill.py`](tools/fill.py) | Costs the flood-headroom pad on each lot from a DEM grid |
+| [`tools/satmap.py`](tools/satmap.py) | Composes the full-page satellite plate — stitches Esri World Imagery tiles, draws boundaries, pins and name tags |
 | [`tools/letters.py`](tools/letters.py) | Generates the `letters/` PDFs and e-mail drafts from the parcel and terrain data |
 | [`tools/paginate.py`](tools/paginate.py) | Two-pass pagination — measures the real print, then fixes every page number and verifies it |
 | [`docs/EVIDENCE.md`](docs/EVIDENCE.md) | Every v3 finding with the exact query that produced it |
@@ -43,6 +44,11 @@ Cost to reach build-ready (land + pad + septic + foundation): **Lot 2 ~$65k**, L
 Lot 1 ~$131k, Lot 4 ~$139k.
 
 ## What v4.0 changed
+
+- **Plate 1 · Satellite view** — a full page (page 8) showing all five parcels on high-resolution
+  satellite imagery with recorded boundaries, numbered stamp pins, name tags with PID and acreage, a
+  scale bar and a north arrow. Built by `tools/satmap.py` from Esri World Imagery at 0.8 m/px,
+  composed at 2,400 px for print.
 
 - **808 Wagon Wheel Trail added as a fifth lot** (PID 183331, Lot 131, 1.07 ac of record), taken through
   the full pipeline: parcel record, flood zone and panel, nearest published BFE, 1 ft LiDAR contours and a
