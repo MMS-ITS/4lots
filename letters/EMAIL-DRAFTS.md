@@ -1,8 +1,7 @@
 # Draft e-mails — Brazoria County Floodplain & 911 Administration
 
 Four requests for a written base flood elevation determination, one per parcel. Plain text,
-ready to paste. Replace the bracketed placeholders with your own contact details before
-sending.
+ready to send as they stand.
 
 - **To:** Brazoria County Floodplain & 911 Administration, 451 North Velasco, Suite 210, Angleton, Texas 77515
 - **Telephone:** (979) 864-1295 or (281) 756-1295
@@ -100,12 +99,15 @@ Could you please confirm:
       permitted within it.
 
 If a fee or a formal application is needed for a written determination, please tell me
-the amount and the form and I will submit it promptly. Happy to receive the response
-by e-mail.
+the amount and the form and I will submit it promptly.
+
+I am writing from out of state, so a reply to this address is most helpful; I am also
+reachable on (702) 582-5724 during Pacific business hours.
 
 With thanks,
 Mohsin Chowdhury
-[your telephone] · [your e-mail address]
+3731 Bright Aquarius Lane, Henderson, Nevada 89052
+(702) 582-5724 · mms221@gmail.com
 ```
 
 ---
@@ -197,12 +199,15 @@ Could you please confirm:
       of fill.
 
 If a fee or a formal application is needed for a written determination, please tell me
-the amount and the form and I will submit it promptly. Happy to receive the response
-by e-mail.
+the amount and the form and I will submit it promptly.
+
+I am writing from out of state, so a reply to this address is most helpful; I am also
+reachable on (702) 582-5724 during Pacific business hours.
 
 With thanks,
 Mohsin Chowdhury
-[your telephone] · [your e-mail address]
+3731 Bright Aquarius Lane, Henderson, Nevada 89052
+(702) 582-5724 · mms221@gmail.com
 ```
 
 ---
@@ -293,12 +298,15 @@ Could you please confirm:
       derived at this distance.
 
 If a fee or a formal application is needed for a written determination, please tell me
-the amount and the form and I will submit it promptly. Happy to receive the response
-by e-mail.
+the amount and the form and I will submit it promptly.
+
+I am writing from out of state, so a reply to this address is most helpful; I am also
+reachable on (702) 582-5724 during Pacific business hours.
 
 With thanks,
 Mohsin Chowdhury
-[your telephone] · [your e-mail address]
+3731 Bright Aquarius Lane, Henderson, Nevada 89052
+(702) 582-5724 · mms221@gmail.com
 ```
 
 ---
@@ -396,11 +404,14 @@ Could you please confirm:
       this parcel.
 
 If a fee or a formal application is needed for a written determination, please tell me
-the amount and the form and I will submit it promptly. Happy to receive the response
-by e-mail.
+the amount and the form and I will submit it promptly.
+
+I am writing from out of state, so a reply to this address is most helpful; I am also
+reachable on (702) 582-5724 during Pacific business hours.
 
 With thanks,
 Mohsin Chowdhury
-[your telephone] · [your e-mail address]
+3731 Bright Aquarius Lane, Henderson, Nevada 89052
+(702) 582-5724 · mms221@gmail.com
 ```
 

@@ -23,6 +23,15 @@ CHROME = '/usr/local/bin/chrome'
 PREPARED_FOR = "Mohsin Chowdhury"
 DATED = "13 September 2026"
 
+# The sender block, as it prints on every letter and signs off every e-mail.
+SENDER = {
+    'name': PREPARED_FOR,
+    'addr1': '3731 Bright Aquarius Lane',
+    'addr2': 'Henderson, Nevada 89052',
+    'tel': '(702) 582-5724',
+    'email': 'mms221@gmail.com',
+}
+
 # The county office that issues both the floodplain determination and the building permit.
 COUNTY = {
     'office': 'Floodplain &amp; 911 Administration',
@@ -143,7 +152,6 @@ body{margin:0; font:10.5pt/1.5 Georgia,"Times New Roman",serif; color:#16262c;}
     border-bottom:2px solid #16262c; padding-bottom:4mm; margin-bottom:6mm;}
 .from{font-size:9pt; line-height:1.45;}
 .from .nm{font-weight:700; font-size:11.5pt; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,sans-serif;}
-.ph{color:#8d9a9f;}
 .ref{text-align:right; font-size:8.4pt; color:#54666d; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,sans-serif;}
 .ref b{color:#16262c;}
 .to{font-size:10pt; line-height:1.45; margin-bottom:5mm;}
@@ -171,11 +179,6 @@ ol.q b{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,sans-serif; font-si
 """
 
 
-def ph(t):
-    """A grey fill-in placeholder."""
-    return '<span class="ph">[%s]</span>' % t
-
-
 def letter_html(p, f, single=True):
     lot = p['lot']
     extra = EXTRA.get(lot, [])
@@ -194,7 +197,7 @@ def letter_html(p, f, single=True):
   <div class="hd">
     <div class="from">
       <div class="nm">%(who)s</div>
-      %(addr)s<br>%(tel)s<br>%(email)s
+      %(addr1)s<br>%(addr2)s<br>%(tel)s<br>%(email)s
     </div>
     <div class="ref">
       <b>%(dated)s</b><br>
@@ -257,8 +260,11 @@ def letter_html(p, f, single=True):
 
   <p>If any of the figures above is wrong, I would be glad to be corrected &mdash; establishing the
   right numbers now is the object of the exercise. If a fee or a formal application is required for a
-  written determination, please tell me the amount and the form to use and I will submit it promptly. I
-  am happy to receive the response by e-mail.</p>
+  written determination, please tell me the amount and the form to use and I will submit it promptly.</p>
+
+  <p>I am writing from out of state, so a reply by e-mail to <b>%(email)s</b> would be most helpful, and
+  I am reachable on %(tel)s during Pacific business hours. I am glad to telephone the office if that is
+  easier than writing.</p>
 
   <p>Thank you for your assistance.</p>
 
@@ -277,9 +283,8 @@ def letter_html(p, f, single=True):
   </div>
 </div>""" % {
         'who': PREPARED_FOR,
-        'addr': ph('your postal address'),
-        'tel': ph('your telephone'),
-        'email': ph('your e-mail address'),
+        'addr1': SENDER['addr1'], 'addr2': SENDER['addr2'],
+        'tel': SENDER['tel'], 'email': SENDER['email'],
         'dated': DATED,
         'lotn': lot,
         'office': COUNTY['office'], 'body': COUNTY['body'],
@@ -346,12 +351,15 @@ def email_text(p, f):
             lines.append('      %s' % ln)
     lines.append('')
     lines.append('If a fee or a formal application is needed for a written determination, please tell me')
-    lines.append('the amount and the form and I will submit it promptly. Happy to receive the response')
-    lines.append('by e-mail.')
+    lines.append('the amount and the form and I will submit it promptly.')
+    lines.append('')
+    lines.append('I am writing from out of state, so a reply to this address is most helpful; I am also')
+    lines.append('reachable on %s during Pacific business hours.' % SENDER['tel'])
     lines.append('')
     lines.append('With thanks,')
-    lines.append(PREPARED_FOR)
-    lines.append('[your telephone] · [your e-mail address]')
+    lines.append(SENDER['name'])
+    lines.append('%s, %s' % (SENDER['addr1'], SENDER['addr2']))
+    lines.append('%s · %s' % (SENDER['tel'], SENDER['email']))
     return '\n'.join(lines)
 
 
@@ -420,7 +428,7 @@ def main():
     cover = """
 <div class="letter">
   <div class="hd">
-    <div class="from"><div class="nm">%s</div>%s<br>%s<br>%s</div>
+    <div class="from"><div class="nm">%s</div>%s<br>%s<br>%s<br>%s</div>
     <div class="ref"><b>%s</b><br>Our ref: BFE/BARX-4<br>Four parcels</div>
   </div>
   <div class="to"><div class="of">The Floodplain Administrator</div>
@@ -451,7 +459,7 @@ def main():
   services and the USGS 3DEP elevation model &mdash; four-lot feasibility portfolio v3.5. Figures are
   stated for correction, not as assertions of fact.</div>
 </div>""" % (
-        PREPARED_FOR, ph('your postal address'), ph('your telephone'), ph('your e-mail address'),
+        PREPARED_FOR, SENDER['addr1'], SENDER['addr2'], SENDER['tel'], SENDER['email'],
         DATED,
         COUNTY['office'], COUNTY['body'], COUNTY['addr1'], COUNTY['addr2'],
         COUNTY['tel'], COUNTY['tel2'],
@@ -465,8 +473,7 @@ def main():
     md = ['# Draft e-mails — Brazoria County Floodplain & 911 Administration',
           '',
           'Four requests for a written base flood elevation determination, one per parcel. Plain text,',
-          'ready to paste. Replace the bracketed placeholders with your own contact details before',
-          'sending.',
+          'ready to send as they stand.',
           '',
           '- **To:** Brazoria County %s, %s, %s' % (COUNTY['office'].replace('&amp;', '&'),
                                                     COUNTY['addr1'], COUNTY['addr2']),
