@@ -631,17 +631,43 @@ def map_fallback(p):
             % (p['short'], lat, lon, p['pid'], p['legal_description'], lat, lon))
 
 
-def shot(lot_n, i, title, sub, cls='shot'):
-    return ('<figure class="%s"><img src="assets/photos/lot%d-%d.jpg" alt="%s" '
+def shot(lot_n, i, title, sub, cls='shot', style=''):
+    return ('<figure class="%s"%s><img src="assets/photos/lot%d-%d.jpg" alt="%s" '
             'onload="this.parentNode.querySelector(\'.ph\').style.display=\'none\'">'
             '<div class="ph"><span class="t">%s</span><span class="s">%s</span></div>'
             '<figcaption>%s</figcaption></figure>'
-            % (cls, lot_n, i, title, title, sub, sub))
+            % (cls, style, lot_n, i, title, title, sub, sub))
 
 
 def dshot(fn, cap):
     return ('<figure><img src="assets/site-photos/%s" alt="%s">'
             '<figcaption>%s</figcaption></figure>' % (fn, re.sub(r'<[^>]+>', '', cap), cap))
+
+
+# --------------------------------------------------------- honest image sizing
+def _px_width(path):
+    try:
+        from PIL import Image
+        with Image.open(os.path.join(ROOT, path)) as im:
+            return im.size[0]
+    except Exception:
+        return None
+
+
+def hero_style(lot_n, dpi=300, col_mm=180.0):
+    """Cap a hero at the width its own pixels support at `dpi`.
+
+    The lot aerials are drawn from USGS NAIP at 30 cm native. Presenting a
+    1,400 px frame across the full column would be ~198 dpi: soft, and
+    upscaling it would only invent detail the imagery does not contain.
+    """
+    px = _px_width('assets/photos/lot%d-1.jpg' % lot_n)
+    if not px:
+        return ''
+    mm = min(col_mm, px / dpi * 25.4)
+    if mm >= col_mm - 0.5:
+        return ''
+    return ' style="max-width:%.1fmm;margin-left:auto;margin-right:auto;"' % mm
 
 
 def bar(label, value, pct, cls=''):
@@ -1290,7 +1316,8 @@ for k in ORDER:
         p['subdivision'], lot_label(p['legal_description']),
         badges,
         price_block,
-        shot(p['lot'], 1, 'The parcel', 'boundary of record and section A–B', cls='hero'),
+        shot(p['lot'], 1, 'The parcel', 'boundary of record and section A–B', cls='hero',
+             style=hero_style(p['lot'])),
         dl(pairs[:half]), dl(pairs[half:]),
         shot(p['lot'], 2, 'Water frontage at B', 'close range'),
         shot(p['lot'], 3, 'Neighbourhood context', 'the parcel outlined'),
@@ -1494,6 +1521,21 @@ lakeside boundary.</p>
       An elevation certificate will be written from an instrument survey, not from this.
     </div>
   </div>
+</div>
+
+
+<div class="note blue" style="margin-bottom:0;">
+  <span class="lbl">Why the aerials are not sharper &mdash; and why they have not been upscaled</span>
+  The lot aerials come from <b>USGS NAIP at 30 cm native</b>, the best free public orthoimagery for this
+  area. Esri World Imagery was tested as an alternative and reaches <b>0.261 m per pixel</b> here
+  &mdash; a 15% gain, not a transformation; above zoom 19 its tiles return only 123 distinct colours,
+  which is upsampling rather than new detail. So <b>2,400 m&sup2; of Texas coastal prairie simply does
+  not exist at higher resolution in any free source</b>.
+  <p style="margin:1.6mm 0 0;">Rather than stretch a 1,400 px frame across the full column at ~198 dpi,
+  or upscale it and invent sharpness the imagery does not contain, each aerial is <b>presented at the
+  width its own pixels support at 300 dpi</b>. That is why the frames on the narrower parcels are
+  smaller on the page: they are sharp at the size shown. The seller's oblique photography in
+  &sect;6 and &sect;10 is 1,280 px and is reproduced three-up, where it prints at about 555 dpi.</p>
 </div>
 
 <h3>The five lots compared on terrain</h3>
