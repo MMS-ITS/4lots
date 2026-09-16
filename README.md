@@ -69,8 +69,10 @@ upcharge on the clay lots): **Lot 2 ~$65k**, Lot 3 ~$107k, Lot 4 ~$123k, Lot 1 ~
 
 - **Plate 1 · Satellite view** — a full page (page 8) showing all five parcels on high-resolution
   satellite imagery with recorded boundaries, numbered stamp pins, name tags with PID and acreage, a
-  scale bar and a north arrow. Built by `tools/satmap.py` from Esri World Imagery at 0.8 m/px,
-  composed at 2,400 px for print.
+  scale bar and a north arrow. Built by `tools/satmap.py` from **Esri World Imagery** (imagery © Esri,
+  Maxar, Earthstar Geographics) at 0.8 m/px, composed at 2,400 px — about 339 dpi at 180 mm. Esri is
+  the confirmed basemap for the plate: it is licensed for reproduction in a printed document and is the
+  same basemap the interactive boundary map already uses.
 
 - **808 Wagon Wheel Trail added as a fifth lot** (PID 183331, Lot 131, 1.07 ac of record), taken through
   the full pipeline: parcel record, flood zone and panel, nearest published BFE, 1 ft LiDAR contours and a
