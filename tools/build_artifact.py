@@ -1171,11 +1171,11 @@ add("""
 <div class="platelg">%s</div>
 <p class="xs" style="margin:2mm 0 0;">Recorded parcel boundaries from the Brazoria County ArcGIS
 parcel service, drawn over Esri World Imagery at 0.8 m per pixel and composed at 2,400 px for print.
-North is up; scale bar and north arrow are on the plate. <b>A note on the basemap:</b> Google's
-satellite tiles cannot be reproduced in a printed document — the Static Maps API requires a licensed
-key and its terms forbid tile capture — so this plate uses <b>Esri World Imagery</b>, the same
-basemap the interactive boundary map on the previous page already draws from, and comparable
-high-resolution aerial coverage. The live Google satellite view remains one click away from the
+North is up; scale bar and north arrow are on the plate. <b>Basemap:</b> <b>Esri World Imagery</b> —
+imagery © Esri, Maxar and Earthstar Geographics, reproduced under Esri's attribution terms, and the
+same basemap the interactive boundary map on the previous page draws from. It is licensed for
+reproduction in a document like this one, which is why it is used here in preference to a
+consumer mapping tile service. A live Google satellite view of each parcel is one click away from the
 per-lot links in §6–§10.</p>
 """ % _plate_lg, "Plate 1 &middot; Satellite view", "plate")
 
