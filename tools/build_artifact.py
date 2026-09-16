@@ -15,6 +15,7 @@ Written for: Mohsin Chowdhury.
 """
 import json
 import os
+import re
 import datetime
 import html as _html
 
@@ -27,8 +28,8 @@ GEOJSON = os.path.join(ROOT, 'data', 'parcels.geojson')
 OUT = os.path.join(ROOT, 'index.html')
 
 PREPARED_FOR = "Mohsin Chowdhury"
-PREPARED_ON = "13 September 2026"
-VERSION = "4.0"
+PREPARED_ON = "16 September 2026"
+VERSION = "4.1"
 
 # --------------------------------------------------------------------------- data
 gj = json.load(open(GEOJSON))
@@ -389,6 +390,13 @@ hr.r{border:0; border-top:.6pt solid var(--line); margin:4mm 0;}
 .cf.e{background:var(--blue-w); color:var(--blue); border-color:rgba(28,59,168,.22);}
 .cf.n{background:var(--violet-w); color:var(--violet); border-color:rgba(91,33,166,.22);}
 .na{color:var(--faint); font-style:italic;}
+/* aerial photography supplied by the seller */
+.dshots{display:grid; grid-template-columns:repeat(3,1fr); gap:2.2mm; margin:2.6mm 0 0;}
+.dshots.two{grid-template-columns:repeat(2,1fr);}
+.dshots figure{margin:0;}
+.dshots img{width:100%; height:auto; display:block; border:0.5pt solid var(--line2); border-radius:1mm;}
+.dshots figcaption{font-size:6.9pt; line-height:1.2; color:var(--muted); margin-top:0.9mm;}
+.amimg{width:100%; border:0.5pt solid var(--line2); border-radius:1mm; display:block;}
 /* lot heading linked to its Zillow listing */
 a.zl{color:inherit; text-decoration:none;}
 a.zl:hover{text-decoration:underline;}
@@ -631,6 +639,11 @@ def shot(lot_n, i, title, sub, cls='shot'):
             % (cls, lot_n, i, title, title, sub, sub))
 
 
+def dshot(fn, cap):
+    return ('<figure><img src="assets/site-photos/%s" alt="%s">'
+            '<figcaption>%s</figcaption></figure>' % (fn, re.sub(r'<[^>]+>', '', cap), cap))
+
+
 def bar(label, value, pct, cls=''):
     return ('<div class="bar"><span class="t">%s</span><span class="track">'
             '<span class="fill %s" style="width:%.1f%%"></span></span>'
@@ -678,7 +691,7 @@ CF = {'v': '<span class="cf v">verified</span>',
 
 # =========================================================================== 1. cover
 add(f"""
-<div class="kick">Independent feasibility review · fourth edition</div>
+<div class="kick">Independent feasibility review · fifth edition</div>
 <h1>Bar X Ranch<br>Five-Lot Feasibility Portfolio</h1>
 <p class="lead" style="margin-top:4mm;">Land acquisition and a five-bedroom build on five vacant lots in Bar X Ranch, unincorporated Brazoria County, Angleton, Texas 77515 — assessed for
 buildability, cost, flood and windstorm exposure, and what it is actually like to live there.</p>
@@ -1210,6 +1223,8 @@ def facts_pairs(p, k):
     ]
 
 
+_DPHOTOS = {'lot1': '<h3>Aerial photography &mdash; supplied by the seller</h3><div class="dshots">@@dshot:lot1-site-1.jpg|The parcel outlined, looking north-east. Narrow at the street, the full width to the water.@@@@dshot:lot1-site-2.jpg|Wider view. <b>State Highway 35</b> crosses the foreground and Mill Bayou wraps the lot in a meander.@@@@dshot:lot1-site-3.jpg|Overhead. Tree cover across most of the parcel; exposed bayou banks at low water.@@</div><p class="xs" style="margin:1.6mm 0 0;">The wedge is unmistakable here: a point of frontage at the street and the whole width of the lot given to the bayou. Note two things the survey data could not show. <b>The bayou is running low and its banks are exposed mud</b> &mdash; consistent with the intermittent classification in the water-regime row above. And <b>the lot is densely treed</b>, so the clearing allowance in &sect;21 belongs at the top of its range, and the tree cover constrains where a pad, a drainfield and its reserve can actually go.</p>', 'lot5': '<h3>Aerial photography &mdash; supplied by the seller</h3><div class="dshots">@@dshot:lot5-site-1.jpg|The parcel as marketed, labelled by the seller. Cleared, with Flag Lake beyond and built houses either side.@@@@dshot:lot5-site-2.jpg|Flag Lake from the south. The impounded pool sits above the surrounding pasture.@@@@dshot:lot5-site-3.jpg|The lake shore and the levee embankment that retains it.@@</div><p class="xs" style="margin:1.6mm 0 0;">Three things here matter to the numbers. <b>The parcel is already cleared and mown</b>, so the clearing allowance in &sect;21 sits at the bottom of its range. <b>Utility poles run the length of Wagon Wheel Trail at the frontage</b>, which makes the $0&ndash;$25,000 electric-extension range in &sect;21 a low-end number on this lot rather than an open question. And <b>both neighbouring parcels are built</b> &mdash; one house is new, on a visibly raised pad &mdash; which is the practical answer to the pad-geometry question below.</p>'}
+
 for k in ORDER:
     p = LOTS[k]
     _ask = p.get('asking_price_usd')
@@ -1261,6 +1276,7 @@ for k in ORDER:
   %s
 </div>
 
+%s
 <div class="cols2">
   <div class="note %s" style="margin-top:0;"><span class="lbl">Best for</span>%s</div>
   <div class="note amber" style="margin-top:0;"><span class="lbl">Watch</span>%s</div>
@@ -1285,6 +1301,7 @@ for k in ORDER:
          '<a class="lnk" href="https://www.loopnet.com/property/'
          '1127-saddle-horn-bnd-angleton-tx-77515/48039-15340084000/">LoopNet listing</a>'
          if k == 'lot1' else ''),
+        _DPHOTOS.get(k, ''),
         ('green' if k in ('lot3',) else 'teal'), p['best'],
         p['watch'],
         ('green' if k == 'lot3' else 'blue'), p['verdict'],
@@ -1851,8 +1868,7 @@ enough to build at grade. This prices that, lot by lot, from the measured ground
   narrower again. The best pad ground clear of the levee is <b>%.1f ft</b>, so the lift is
   <b>%.1f ft</b> &mdash; the deepest of the five &mdash; at <b>%s cubic yards</b> and
   <b>$%s &ndash; $%s</b>. The pad and its slopes then need <b>%d ft of width on a lot only %d ft
-  wide</b>: it is short by <b>%d ft</b>. Lot 5 is the only one of the five where the geometry fails
-  outright rather than merely running tight, and no amount of fill money fixes a width problem.
+  wide</b>: it is short by <b>%d ft</b>. Lot 5 is the only one of the five where the modelled geometry fails outright rather than merely running tight. <b>But the seller's own aerial photograph qualifies this</b> (&sect;10): both neighbouring parcels on the same street and the same width are <b>built</b>, one of them newly and on a visibly raised pad. So the constraint is real but evidently surmountable &mdash; by a smaller footprint, a retaining edge, or certified steeper side slopes than the 3:1 this model assumes. What it is not is a reason to assume the standard pad price.
   Retaining structures, certified steeper slopes or a deliberately narrow footprint would all have to
   be priced before an offer &mdash; which is one of the questions put to the county in Appendix B.</p>
 </div>
@@ -2336,8 +2352,52 @@ portfolio described.</p>
   This matters, because &ldquo;waterfront&rdquo; has meant four different things in this portfolio.
   <b>Lot 1</b> fronts <b>Mill Bayou</b> and an impounded 13.0-acre widening of it, along roughly half
   its perimeter. <b>Lots 2 and 3</b> front opposite parts of the <b>same unnamed 12.6-acre pond</b> —
-  Lot 3 with roughly twice the frontage of Lot 2. <b>Lot 4</b> fronts <b>Flag Pond, 101.5 acres</b>,
-  and the levee that impounds it. Only Lot 4 is on what most people would call a lake.
+  Lot 3 with roughly twice the frontage of Lot 2. <b>Lots 4 and 5</b> front <b>Flag Pond &mdash; called Flag Lake by the association</b> &mdash; at 101.5 acres, and the levee that impounds it. Only those two are on what most people would call a lake.
+</div>
+
+
+<h3>The POA amenity map &mdash; and what it corrects</h3>
+<div class="cols2" style="gap:4mm;">
+  <div><img class="amimg" src="assets/site-photos/amenity-map.jpg"
+       alt="Bar X Ranch POA amenity map showing Flag Lake, Eagle Lake and four amenity nodes"></div>
+  <div><img class="amimg" src="assets/site-photos/amenity-521-pool.jpg"
+       alt="The 521 Pool complex from the air"></div>
+</div>
+<p class="xs" style="margin:1.6mm 0 0;">Left: the association's own amenity map, supplied with the
+listing. Right: the 521 Pool complex.</p>
+<p>Three corrections follow from the map. <b>The two lakes have names</b> &mdash; <b>Flag Lake</b> and
+<b>Eagle Lake</b>, at opposite ends of the subdivision. What the USGS hydrography calls
+&ldquo;Flag Pond&rdquo;, and what this document calls Flag Pond throughout, is <b>Flag Lake</b> to the
+association and to anyone you speak to locally. <b>The amenities sit at four separate nodes, not
+two</b>, and <b>two of the three most useful carry conditions</b> no earlier edition recorded.</p>
+<table class="compact">
+  <thead><tr><th style="width:26mm;">Node</th><th style="width:26mm;">On</th><th>What is there</th>
+    <th style="width:34mm;">Conditions</th></tr></thead>
+  <tbody>
+    <tr><td><b>1 &middot; POA Office</b></td><td>Hwy 35, Saddlehorn Bend</td><td>Mail boxes</td>
+      <td>Year round</td></tr>
+    <tr class="hi"><td><b>2 &middot; Clubhouse</b></td><td><b>Flag Lake</b></td>
+      <td>Clubhouse, pavilion, picnic area, playground, park, <b>pool</b>, tennis courts,
+        <b>fishing pier, boat ramp</b></td>
+      <td><b>Clubhouse and pavilion by reservation</b>; rest year round</td></tr>
+    <tr class="hi"><td><b>3 &middot; Lakehouse</b></td><td><b>Eagle Lake</b></td>
+      <td>Lakehouse, pavilion, picnic area, playground, park, <b>fishing pier, boat ramp,
+        campground</b></td>
+      <td><b>Lakehouse, pavilion and campground by reservation</b></td></tr>
+    <tr><td><b>4 &middot; 521 Pool</b></td><td>Hwy 521, south-east</td>
+      <td>Pool, picnic area, playground, tennis courts, <b>pickleball</b>, basketball, mail boxes</td>
+      <td><b>Pool 1 March &ndash; 30 September only</b></td></tr>
+  </tbody>
+</table>
+<div class="note amber">
+  <span class="lbl">What this changes for the fishing brief</span>
+  <b>There are two fishing piers and two boat ramps, not one of each</b> &mdash; a pair on Flag Lake at
+  the Clubhouse and a pair on Eagle Lake at the Lakehouse. That is better than earlier editions
+  recorded. But note the conditions: the <b>521 pool is closed October to February</b>, and the
+  clubhouse, lakehouse, pavilions and campground all <b>require a reservation</b>, so they are not
+  facilities you can simply walk into. The piers, ramps, parks, playgrounds and the Clubhouse pool are
+  the year-round, no-booking ones. Confirm the reservation rules and any fees against the POA resale
+  certificate &mdash; they are association policy and can change.
 </div>
 
 <h3>When the bayou runs dry, and what is actually stocked</h3>
@@ -2677,7 +2737,7 @@ current school attendance zones and campus performance.</p>
   <div class="on">on <b>{PREPARED_ON}</b></div>
   <hr class="r" style="margin:4mm 0;">
   <div class="sm">Bar X Ranch — Five-Lot Feasibility Portfolio · version {VERSION} ·
-  @@N@@ pages · supersedes v3.5 and v3.0 of 11 September 2026, v2.0 of 10 September 2026, and the original generated portfolio.<br>
+  @@N@@ pages · supersedes v4.0 and v3.5, v3.0 of 11 September 2026, v2.0 of 10 September 2026, and the original generated portfolio.<br>
   Subject parcels: PID 183667, 183367, 186219, 183332 — Bar X Ranch Sections 1, 2 and 16,
   unincorporated Brazoria County, Angleton, Texas 77515.</div>
 </div>
@@ -3172,6 +3232,12 @@ out.append("""
 doc = ''.join(out)
 doc = doc.replace('%%ALL%%', gmap_all()).replace('%%AREA%%', GMAP_AREA)
 doc = doc.replace('@@N@@', str(TOTAL_PAGES))
+import re as _re2
+def _expand_dshot(m):
+    fn, cap = m.group(1), m.group(2)
+    return dshot(fn, cap)
+doc = _re2.sub(r'@@dshot:([^|]+)\|(.*?)@@', _expand_dshot, doc)
+
 _TALLY = ''.join(
     '<td class="n">%d / %d / %d</td>'
     % (sum(1 for _, _, v in SCORE if v[i][1] == 'g'),
