@@ -4,14 +4,14 @@ Independent feasibility review of five vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v4.1, 16 September 2026, prepared for Mohsin Chowdhury.** 54 pages, paginated, five lots.
+**Current edition: v4.1, 16 September 2026, prepared for Mohsin Chowdhury.** 55 pages, paginated, five lots.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v4.1)** — 54 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf) | **Rendered PDF of the current edition** — A4, 54 pages, true scale. |
+| [`index.html`](index.html) | **The artifact (v4.1)** — 55 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf) | **Rendered PDF of the current edition** — A4, 55 pages, true scale. |
 | [`assets/site-photos/`](assets/site-photos) | Seller-supplied aerial photography and the POA amenity map, from `MMS-ITS/HIghResolution` |
 | [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined five-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
@@ -46,6 +46,20 @@ upcharge on the clay lots): **Lot 2 ~$65k**, Lot 3 ~$107k, Lot 4 ~$123k, Lot 1 ~
 **Lot 5 ~$173k**. Portfolio: $334,500 asking across 6.32 ac, +30.6% over the $256,180 appraised.
 
 ## What v4.1 changed
+
+- **The county contact is now named.** All six letters and the five e-mail drafts are addressed to
+  **Joe K. Ripple, Floodplain Administrator**, with his **direct line (979) 864-1272** and the precise
+  location — 451 N Velasco, Suite 210, **Courthouse West Annex, 2nd floor**. The department publishes
+  **no e-mail address** (Engineering does, Floodplain does not), so the route is: telephone the direct
+  line, ask where to send a written request, then post or hand-deliver to Room 210.
+- **A permit blocker found on Lot 3.** The county will not accept an application **without a correct,
+  verified 911 address** — and Lot 3 has no street number of record, its situs reads `HIGHWAY 35`. That
+  makes addressing a prerequisite to permitting on that lot, not a tidy-up. The same sheet confirms
+  **Environmental Health must approve the septic first**, so the soil evaluation is the gating item, not
+  merely the cheapest thing to buy first.
+- **A possible fee increase flagged rather than assumed.** The 2015 schedule gives $75 + $0.04/sf; a
+  later county sheet shows **$100** for residential. The full document could not be retrieved past the
+  site's bot protection, so the range is widened and marked *confirm*.
 
 - **Seller-supplied aerial photography added**, from `MMS-ITS/HIghResolution`. Two lots could be
   identified from the images themselves: **Lot 5** carries a printed `808 Wagon Wheel Trail` label, and

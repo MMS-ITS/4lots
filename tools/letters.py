@@ -37,9 +37,11 @@ COUNTY = {
     'office': 'Floodplain &amp; 911 Administration',
     'body': 'Brazoria County',
     'addr1': '451 North Velasco, Suite 210',
-    'addr2': 'Angleton, Texas 77515',
+    'addr2': 'Courthouse West Annex, 2nd floor &middot; Angleton, Texas 77515',
     'tel': '(979) 864-1295',
     'tel2': '(281) 756-1295',
+    'admin': 'Joe K. Ripple, Floodplain Administrator',
+    'admin_tel': '(979) 864-1272',
 }
 
 # Standards the letters state as the applicant's understanding, for confirmation.
@@ -228,9 +230,9 @@ def letter_html(p, f, single=True):
   </div>
 
   <div class="to">
-    <div class="of">The Floodplain Administrator</div>
+    <div class="of">%(admin)s</div>
     %(office)s<br>%(body)s<br>%(a1)s<br>%(a2)s<br>
-    %(ctel)s &nbsp;/&nbsp; %(ctel2)s
+    Direct %(cadmin_tel)s &nbsp;&middot;&nbsp; department %(ctel)s / %(ctel2)s
   </div>
 
   <div class="subj">
@@ -311,6 +313,7 @@ def letter_html(p, f, single=True):
         'office': COUNTY['office'], 'body': COUNTY['body'],
         'a1': COUNTY['addr1'], 'a2': COUNTY['addr2'],
         'ctel': COUNTY['tel'], 'ctel2': COUNTY['tel2'],
+        'admin': COUNTY['admin'], 'cadmin_tel': COUNTY['admin_tel'],
         'name': p['listing_name'], 'situs': p['situs_of_record'],
         'pid': p['pid'], 'geo': p['geo_id'], 'legal': p['legal_description'],
         'acres': p['acres_of_record'], 'sub': p['subdivision'], 'plat': p['plat'],
@@ -335,7 +338,10 @@ def email_text(p, f):
     lines = []
     lines.append('Subject: BFE determination request — %s (PID %s), Bar X Ranch, Angleton'
                  % (p['listing_name'], p['pid']))
-    lines.append('To: Brazoria County Floodplain & 911 Administration')
+    lines.append('To: Joe K. Ripple, Floodplain Administrator')
+    lines.append('    Brazoria County Floodplain & 911 Administration')
+    lines.append('    451 N Velasco, Suite 210 (Courthouse West Annex, 2nd floor), Angleton TX 77515')
+    lines.append('    Direct (979) 864-1272 - department (979) 864-1295 / (281) 756-1295')
     lines.append('')
     lines.append('Dear Floodplain Administrator,')
     lines.append('')
@@ -452,8 +458,8 @@ def main():
     <div class="from"><div class="nm">%s</div>%s<br>%s<br>%s<br>%s</div>
     <div class="ref"><b>%s</b><br>Our ref: BFE/BARX-4<br>Four parcels</div>
   </div>
-  <div class="to"><div class="of">The Floodplain Administrator</div>
-    %s<br>%s<br>%s<br>%s<br>%s &nbsp;/&nbsp; %s</div>
+  <div class="to"><div class="of">%s</div>
+    %s<br>%s<br>%s<br>%s<br>Direct %s &nbsp;&middot;&nbsp; department %s / %s</div>
   <div class="subj">Request for written Base Flood Elevation determinations &mdash;
     five parcels in Bar X Ranch, Angleton</div>
   <p>Dear Floodplain Administrator,</p>
@@ -482,8 +488,8 @@ def main():
 </div>""" % (
         PREPARED_FOR, SENDER['addr1'], SENDER['addr2'], SENDER['tel'], SENDER['email'],
         DATED,
-        COUNTY['office'], COUNTY['body'], COUNTY['addr1'], COUNTY['addr2'],
-        COUNTY['tel'], COUNTY['tel2'],
+        COUNTY['admin'], COUNTY['office'], COUNTY['body'], COUNTY['addr1'], COUNTY['addr2'],
+        COUNTY['admin_tel'], COUNTY['tel'], COUNTY['tel2'],
         ''.join('<tr><th>%s</th><td><b>%s</b> &middot; %s &middot; %s ac</td></tr>'
                 % (p['listing_name'], p['pid'], p['legal_description'], p['acres_of_record'])
                 for p, _ in parcels),
