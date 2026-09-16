@@ -4,14 +4,14 @@ Independent feasibility review of five vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v4.1, 16 September 2026, prepared for Mohsin Chowdhury.** 52 pages, paginated, five lots.
+**Current edition: v4.1, 16 September 2026, prepared for Mohsin Chowdhury.** 54 pages, paginated, five lots.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v4.1)** — 52 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf) | **Rendered PDF of the current edition** — A4, 52 pages, true scale. |
+| [`index.html`](index.html) | **The artifact (v4.1)** — 54 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf) | **Rendered PDF of the current edition** — A4, 54 pages, true scale. |
 | [`assets/site-photos/`](assets/site-photos) | Seller-supplied aerial photography and the POA amenity map, from `MMS-ITS/HIghResolution` |
 | [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined five-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
@@ -64,8 +64,14 @@ upcharge on the clay lots): **Lot 2 ~$65k**, Lot 3 ~$107k, Lot 4 ~$123k, Lot 1 ~
   Lakehouse (Eagle Lake, with a **campground**) and 521 Pool. **Two fishing piers and two boat ramps**,
   one pair per lake. Conditions no earlier edition recorded: the **521 pool opens 1 March – 30
   September only**, and clubhouse, lakehouse, pavilions and campground all **require reservation**.
-- Visible corroboration of the Mill Bayou finding: the photographs show the channel at **low water with
-  exposed mud banks**.
+- **Mill Bayou context photography** added to the flood chapter: the channel's course with SH 35 in
+  frame, showing it at **low water with exposed banks** — visible corroboration of the intermittency
+  finding — and showing how close the highway really is to the northern lots.
+- **Two images are deliberately left unattributed.** With no GPS (WhatsApp strips EXIF) one cleared
+  parcel with a barn matches neither Lot 2 nor Lot 3 geometry closely enough to assert, and one
+  pond-front parcel is consistent with either. The second is reproduced as representative of the
+  subdivision's water frontage, explicitly not as a named parcel. Both resolve immediately if the
+  originals can be supplied with EXIF intact.
 
 ## What v4.0 changed
 

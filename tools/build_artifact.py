@@ -1389,6 +1389,20 @@ both earlier editions got wrong is the elevation arithmetic, and it goes the wro
 <p class="sm"><b>One correction carried forward:</b> the county's 24-inch freeboard was adopted by
 Commissioners Court in <b>May 2005</b>, not raised after Hurricane Harvey in 2017. The original
 portfolio's causal story was twelve years out.</p>
+
+<h3>Mill Bayou from the air &mdash; seller photography</h3>
+<div class="cols2" style="gap:3mm;">
+  <div><img class="amimg" src="assets/site-photos/context-mill-bayou.jpg"
+    alt="Mill Bayou meandering through the subdivision with State Highway 35 across the foreground"></div>
+  <div><img class="amimg" src="assets/site-photos/lot1-context-meander.jpg"
+    alt="The Mill Bayou meander at Saddlehorn Bend with State Highway 35 at the top left"></div>
+</div>
+<p class="xs" style="margin:1.6mm 0 0;">Left: Mill Bayou's course through the subdivision, with
+<b>State Highway 35</b> across the foreground and one of the association's lakes at the top left.
+Right: the meander at Saddlehorn Bend that Lot 1 sits inside. Two things these confirm that the
+mapping alone could not. <b>The channel is at low water with exposed banks</b> &mdash; consistent with
+the intermittent classification in &sect;31. And <b>the highway really is that close</b> to the
+northern lots: the 480 ft measured to Lot 1 is a distance you can see.</p>
 """, "11 · Flood", "flood")
 
 
@@ -2398,6 +2412,19 @@ two</b>, and <b>two of the three most useful carry conditions</b> no earlier edi
   facilities you can simply walk into. The piers, ramps, parks, playgrounds and the Clubhouse pool are
   the year-round, no-booking ones. Confirm the reservation rules and any fees against the POA resale
   certificate &mdash; they are association policy and can change.
+</div>
+
+
+<div class="cols2" style="gap:4mm; margin-top:3mm;">
+  <div><img class="amimg" src="assets/site-photos/poa-pond-shore.jpg"
+    alt="The shore of one of the Bar X Ranch ponds, looking across cleared pasture"></div>
+  <div><p class="xs" style="margin:0;">One of the association's ponds from the shore, on cleared
+  pasture of the kind Lots 2 and 3 sit on. <b>Which pond this is cannot be established from the
+  photograph</b> &mdash; the seller supplied no location data, WhatsApp stripped the EXIF, and the
+  reed-fringed shoreline here is common to all of them. It is reproduced as representative of the
+  water frontage on this subdivision rather than as a picture of any one parcel. Note the
+  <b>marshy, reed-grown margin</b>: that is the zone the TCEQ 75 ft absorption setback in &sect;20
+  measures back from, and it is not usable ground.</p></div>
 </div>
 
 <h3>When the bayou runs dry, and what is actually stocked</h3>

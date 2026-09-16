@@ -667,3 +667,68 @@ The basis is confirmed by the artifact's own statement of a **$66,000 gap** betw
 Lots 3 and 4 had been carrying **$109k** and **$139k** against actual **$107k** and **$123k**. The
 scorecard price, price-per-acre, premium, build-ready and green/amber/red tally rows are now all
 computed at build time so they cannot drift again.
+
+
+---
+
+## 17. The seller's aerial photography (added v4.1)
+
+Fourteen images, supplied via the repository `MMS-ITS/HIghResolution`. **They are not high-resolution
+files.** WhatsApp has re-compressed them: every one is capped at **1280 px wide**, 0.1–0.2 MB, and
+**all EXIF is stripped** — no capture date, no camera, and critically **no GPS**. At 1280 px a
+full-page reproduction would be about 180 dpi, so they are used at part-page size only. Originals
+transferred without WhatsApp would be 3–12 MP with GPS intact and would allow automatic placement.
+
+### Attribution — what could be established, and what could not
+
+With no GPS, each image had to be matched against the parcel geometry, the terrain model and the POA
+amenity map.
+
+| Image | Attributed to | Basis |
+|---|---|---|
+| `15.21.13 (7)` | **Lot 5 — 808 Wagon Wheel Trail** | Carries a **printed label** placed by the seller |
+| `15.21.13 (14)`, `(8)`, `15.21.14 (14)` | **Lot 1 — 1127 Saddle Horn Bend** | Red-outlined **wedge inside a Mill Bayou meander** beside SH 35 — matches the 316 × 460 ft bbox and the "narrow at the road, wide at the water" wedge in §13. Three angles, one outlined, one wide with the highway, one overhead |
+| `15.21.12 (1)` | **Lot 1 vicinity** | The same meander, houses and cul-de-sac as above |
+| `15.21.13 (10)`, `(13)` | **Flag Lake, Lot 4/5 shoreline** | Same lake and levee aspect as the labelled Lot 5 image |
+| `15.21.13 (9)` | **POA amenity map** | Titled artwork, not a photograph — see §18 |
+| `15.21.14 (8)` | **521 Pool complex** | Matches the amenity map's node 4 |
+| `15.21.12` | **Subdivision context** | Mill Bayou's course with SH 35 and a lake |
+| **`15.21.14 (12)`** | **Not attributed** | A cleared rectangular parcel with a metal barn at one corner, road one side, drainage channel the other. Geometry does not match Lot 2 (424 × 187 ft) or Lot 3 (370 × 354 ft) closely enough to assert, and the barn suggests it may be a neighbouring built property |
+| **`15.21.13`** | **Not attributed** | A cleared pond-front parcel. Consistent with Lot 2 **or** Lot 3, which front opposite sides of the same 12.6-acre pond, but the reed-fringed shoreline is common to all the ponds here. Reproduced in §31 as representative of the subdivision's water frontage, explicitly not as a picture of a named parcel |
+
+Two images are therefore deliberately left unassigned rather than guessed at. **If the originals can be
+supplied with EXIF intact, both resolve immediately from their GPS tags.**
+
+### What the photography changed
+
+1. **Lot 5 clearing cost** moves to the bottom of its range — the parcel is already cleared and mown.
+2. **Lot 5 electric service** moves to the low end of the $0–$25,000 range — utility poles run the
+   length of the Wagon Wheel Trail frontage. This was previously flagged as the single largest open
+   variable on any lot.
+3. **Lot 1 clearing cost** moves to the top of its range — the parcel is densely treed, and the canopy
+   also constrains where a pad, drainfield and reserve area can be sited.
+4. **The "pad does not fit" finding on Lot 5 is qualified.** The modelled geometry does fail — 116 ft
+   needed on 110 ft of width at 3:1 side slopes. But the photograph shows **both neighbouring parcels
+   built**, one newly and on a visibly raised pad. The constraint is real and evidently surmountable by
+   a smaller footprint, a retaining edge, or certified steeper slopes. It is now presented as something
+   to price rather than as a disqualification.
+5. **Mill Bayou's intermittency is visually corroborated** — the channel appears at low water with
+   exposed mud banks in every image that shows it.
+
+## 18. The POA amenity map (added v4.1)
+
+Supplied with the listing. It corrects the amenities position materially.
+
+| Earlier editions | The map |
+|---|---|
+| "two private lakes" | **Flag Lake** and **Eagle Lake**. "Flag Pond" is the USGS name for the former; the association and local usage say Flag Lake |
+| Two amenity clusters | **Four nodes** — POA Office (Hwy 35 at Saddlehorn Bend), Clubhouse (Flag Lake), Lakehouse (Eagle Lake), 521 Pool (Hwy 521) |
+| "pier, boat ramp" | **Two fishing piers and two boat ramps** — one pair on each lake |
+| — | A **campground** at the Lakehouse, unrecorded in any earlier edition |
+| — | **The 521 pool opens 1 March – 30 September only** |
+| — | **Clubhouse, lakehouse, pavilions and campground all require reservation** |
+
+The last two are usability constraints rather than trivia: they separate the facilities that can be
+walked into from those that must be booked. The year-round, no-booking facilities are the two piers,
+the two boat ramps, the parks, the playgrounds and the Clubhouse pool. Reservation rules and any
+associated fees are association policy and should be confirmed against the POA resale certificate.
