@@ -3,7 +3,7 @@
 Five requests for a written base flood elevation determination, one per parcel. Plain text,
 ready to send as they stand.
 
-- **To:** Brazoria County Floodplain & 911 Administration, 451 North Velasco, Suite 210, Angleton, Texas 77515
+- **To:** Brazoria County Floodplain & 911 Administration, 451 North Velasco, Suite 210, Courthouse West Annex, 2nd floor &middot; Angleton, Texas 77515
 - **Telephone:** (979) 864-1295 or (281) 756-1295
 - The same requests as formal letters, ready to print, are the PDFs in this folder.
 
@@ -16,7 +16,10 @@ drafts stay in step with the report. Regenerate them with `python3 tools/letters
 
 ```text
 Subject: BFE determination request — 1127 Saddle Horn Bend (PID 183667), Bar X Ranch, Angleton
-To: Brazoria County Floodplain & 911 Administration
+To: Joe K. Ripple, Floodplain Administrator
+    Brazoria County Floodplain & 911 Administration
+    451 N Velasco, Suite 210 (Courthouse West Annex, 2nd floor), Angleton TX 77515
+    Direct (979) 864-1272 - department (979) 864-1295 / (281) 756-1295
 
 Dear Floodplain Administrator,
 
@@ -116,7 +119,10 @@ Mohsin Chowdhury
 
 ```text
 Subject: BFE determination request — 336 Wagon Wheel Trail W (PID 183367), Bar X Ranch, Angleton
-To: Brazoria County Floodplain & 911 Administration
+To: Joe K. Ripple, Floodplain Administrator
+    Brazoria County Floodplain & 911 Administration
+    451 N Velasco, Suite 210 (Courthouse West Annex, 2nd floor), Angleton TX 77515
+    Direct (979) 864-1272 - department (979) 864-1295 / (281) 756-1295
 
 Dear Floodplain Administrator,
 
@@ -216,7 +222,10 @@ Mohsin Chowdhury
 
 ```text
 Subject: BFE determination request — Lot 29 Broken Arrow Trail (PID 186219), Bar X Ranch, Angleton
-To: Brazoria County Floodplain & 911 Administration
+To: Joe K. Ripple, Floodplain Administrator
+    Brazoria County Floodplain & 911 Administration
+    451 N Velasco, Suite 210 (Courthouse West Annex, 2nd floor), Angleton TX 77515
+    Direct (979) 864-1272 - department (979) 864-1295 / (281) 756-1295
 
 Dear Floodplain Administrator,
 
@@ -315,7 +324,10 @@ Mohsin Chowdhury
 
 ```text
 Subject: BFE determination request — 750 Wagon Wheel Trail (PID 183332), Bar X Ranch, Angleton
-To: Brazoria County Floodplain & 911 Administration
+To: Joe K. Ripple, Floodplain Administrator
+    Brazoria County Floodplain & 911 Administration
+    451 N Velasco, Suite 210 (Courthouse West Annex, 2nd floor), Angleton TX 77515
+    Direct (979) 864-1272 - department (979) 864-1295 / (281) 756-1295
 
 Dear Floodplain Administrator,
 
@@ -421,7 +433,10 @@ Mohsin Chowdhury
 
 ```text
 Subject: BFE determination request — 808 Wagon Wheel Trail (PID 183331), Bar X Ranch, Angleton
-To: Brazoria County Floodplain & 911 Administration
+To: Joe K. Ripple, Floodplain Administrator
+    Brazoria County Floodplain & 911 Administration
+    451 N Velasco, Suite 210 (Courthouse West Annex, 2nd floor), Angleton TX 77515
+    Direct (979) 864-1272 - department (979) 864-1295 / (281) 756-1295
 
 Dear Floodplain Administrator,
 
