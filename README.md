@@ -4,14 +4,15 @@ Independent feasibility review of five vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v4.0, 13 September 2026, prepared for Mohsin Chowdhury.** 51 pages, paginated, five lots.
+**Current edition: v4.1, 16 September 2026, prepared for Mohsin Chowdhury.** 52 pages, paginated, five lots.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v4.0)** — 51 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.0.pdf) | **Rendered PDF of the current edition** — A4, 51 pages, true scale. |
+| [`index.html`](index.html) | **The artifact (v4.1)** — 52 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf) | **Rendered PDF of the current edition** — A4, 52 pages, true scale. |
+| [`assets/site-photos/`](assets/site-photos) | Seller-supplied aerial photography and the POA amenity map, from `MMS-ITS/HIghResolution` |
 | [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined five-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
@@ -43,6 +44,28 @@ there.
 Cost to reach build-ready (asking price + calculated pad at mid-case + the $20k vertisol foundation
 upcharge on the clay lots): **Lot 2 ~$65k**, Lot 3 ~$107k, Lot 4 ~$123k, Lot 1 ~$131k,
 **Lot 5 ~$173k**. Portfolio: $334,500 asking across 6.32 ac, +30.6% over the $256,180 appraised.
+
+## What v4.1 changed
+
+- **Seller-supplied aerial photography added**, from `MMS-ITS/HIghResolution`. Two lots could be
+  identified from the images themselves: **Lot 5** carries a printed `808 Wagon Wheel Trail` label, and
+  **Lot 1** is identifiable from its red-outlined wedge on a Mill Bayou meander beside SH 35. Three
+  photographs are placed on each of those two lot pages.
+- **The photographs change three cost inputs.** Lot 5 is **already cleared and mown** (clearing at the
+  bottom of its range) and **utility poles run its frontage** (electric extension at the low end, not an
+  open question). Lot 1 is **densely treed** (clearing at the top of its range, and tree cover
+  constrains where the pad and drainfield can go).
+- **The "pad does not fit" finding on Lot 5 is qualified.** The photograph shows **both neighbouring
+  parcels built**, one newly and on a visibly raised pad. The modelled 3:1 geometry does fail on 110 ft
+  of width, but it is evidently surmountable in practice — by a smaller footprint, a retaining edge, or
+  certified steeper slopes. Stated as a constraint to price, not a disqualification.
+- **The POA amenity map corrects the amenities section.** The two lakes have names — **Flag Lake** and
+  **Eagle Lake** — and amenities sit at **four** nodes, not two: POA Office, Clubhouse (Flag Lake),
+  Lakehouse (Eagle Lake, with a **campground**) and 521 Pool. **Two fishing piers and two boat ramps**,
+  one pair per lake. Conditions no earlier edition recorded: the **521 pool opens 1 March – 30
+  September only**, and clubhouse, lakehouse, pavilions and campground all **require reservation**.
+- Visible corroboration of the Mill Bayou finding: the photographs show the channel at **low water with
+  exposed mud banks**.
 
 ## What v4.0 changed
 
