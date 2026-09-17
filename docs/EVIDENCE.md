@@ -732,3 +732,137 @@ The last two are usability constraints rather than trivia: they separate the fac
 walked into from those that must be booked. The year-round, no-booking facilities are the two piers,
 the two boat ramps, the parks, the playgrounds and the Clubhouse pool. Reservation rules and any
 associated fees are association policy and should be confirmed against the POA resale certificate.
+
+
+## 19. The 71-file photo upload — de-duplication and provenance (added v4.2)
+
+Seventy-one image files were supplied across the five listings (commit `af3fc7f`). Reduced to
+**42 distinct scenes**. Method and findings below; the reader-facing version is Appendix D.
+
+### Method
+
+Perceptual hashing, not checksums — almost none of the duplicates are byte-identical, because they
+differ in container format, JPEG quality and pixel dimensions. A checksum comparison finds nothing.
+
+1. Each image is reduced to greyscale at 17×16 and each pixel compared with its right-hand neighbour,
+   giving a **256-bit difference hash** (dHash).
+2. Two files are the same frame when the hashes differ by **≤ 22 bits** *and* aspect ratios agree
+   within **6%**. The aspect test prevents a genuine crop being discarded as a duplicate of its parent.
+3. Within each group the **genuine-resolution** file is kept, *not* the largest. See below.
+4. Frames differing **only** by the seller's annotation sit at ~15 bits — inside the threshold. These
+   were deliberately kept separate: an outlined frame and its unoutlined twin are the same photograph
+   but not the same evidence.
+
+### Composition of the 71 files
+
+| Lot | Distinct frames | App screenshots | POA map | Photographs | Marked/labelled | Reused elsewhere |
+|---|---|---|---|---|---|---|
+| 1 · 1127 Saddle Horn Bend | 10 | 0 | 1 | 9 | 5 | 3 |
+| 2 · 336 Wagon Wheel Trl W | 9 | **9** | 0 | **0** | 0 | 0 |
+| 3 · Lot 29 Broken Arrow Trl | 3 | 2 | 0 | 1 | **0** | 1 |
+| 4 · 750 Wagon Wheel Trl | 11 | 3 | 0 | 8 | 2 | 3 |
+| 5 · 808 Wagon Wheel Trl | 15 | 0 | 1 | 14 | 7 | 4 |
+| **All five** | **48** | **14** | 2 | **32** | **14** | **11** |
+
+### Finding 1 — filenames identify listings, not parcels
+
+**Eleven of the 48 frames were supplied under two or three different street addresses.** The decisive
+case: the Flag Lake frame (`flag-lake-1.jpg`) is filed under the **1127 Saddle Horn Bend** listing, and
+Lot 1's centroid is **1.28 mi** from Lot 5's, on the other side of the subdivision. The seller shot one
+set of drone passes and reused the attractive frames across every listing.
+
+What is *not* shared is the annotation. Outlined and labelled frames are folder-exclusive; where an
+annotated frame does pair with one under another address (2 cases, ~15–16 bits) the pair is the same
+base frame **with and without** the annotation. So the annotation is the attribution.
+
+Consequence: every photograph in the artifact is now labelled `boundary marked` or `area context`.
+
+Also resolved by this: `poa-pond-shore.jpg`, previously captioned as unattributable, appears **only**
+under 808 Wagon Wheel Trail, which points to Flag Lake by Lots 4–5 rather than the Lots 2–3 pond the
+old caption suggested. Stated as the likely reading, not proof — EXIF was stripped by WhatsApp.
+
+### Finding 2 — Lots 4 and 5 cannot be told apart in imagery
+
+Centroids **95 ft** apart; recorded footprints **479 × 123 ft** and **490 × 110 ft**. Near-identical
+long rectangles on the same street. Attribution of the outlined frames rests entirely on which listing
+the seller drew the outline for. Recorded in the artifact as a caution on the Lot 4 gallery.
+
+### Finding 3 — the highest-pixel-count files were the wrong ones
+
+Seventeen files were **exactly 7,680 or 16,000 px wide** — Real-ESRGAN 6× and 12× outputs over sources
+about **1,290 px** wide. Pixels the model invented, not detail the camera recorded. Rejecting them is
+consistent with this document's refusal to upscale the NAIP aerials (§22 tooling caps at 0.15 m/px).
+
+Nothing was lost. Gallery images print at **48 mm** tall (the ~2 inches asked for), needing ~620 px.
+The genuine originals supply **700–1,090 px** of height, so every placement prints at **328 dpi**. The
+upscales would have printed at ~3,000 dpi — six times finer than any printer resolves.
+
+### What was removed
+
+| Category | Files | Size | Reason |
+|---|---|---|---|
+| Redundant copies | 23 | 260.7 MB | Same frame as another file, at equal or lower genuine resolution |
+| AI upscales | 8 | 100.6 MB | Every one of these frames was already held at native resolution |
+| **Removed** | **31** | **361.3 MB** | 76% of the uploaded bulk |
+| **Retained** | **40** | **115.8 MB** | Moved to `uploads/lot1…lot5/`. **No AI-upscaled file remains.** |
+
+All 71 files remain recoverable from commit `af3fc7f`.
+
+### Verified, not corrected
+
+`amenity-521-pool.jpg` was checked against the POA amenity map legend before being re-captioned, and
+was **left as it stood**. The frame shows pickleball markings and a basketball pad but no pier and no
+boat ramp — matching the map's *521 Pool* node, not the *Clubhouse* node. The existing caption is right.
+
+## 20. Lot 3 aerials from record data (added v4.2)
+
+Lot 3's only supplied photograph carries no annotation and also appears in the Lot 1 upload, so it
+cannot identify the parcel. Rather than leave the lot unillustrated, `tools/lotmap.py` renders two
+aerials from primary sources:
+
+- **Imagery** — Esri World Imagery tiles, z18 (context, 2,600 ft across) and z19 (close, 1,100 ft).
+- **Boundary** — the recorded BCAD polygon from `data/parcels.geojson`. Not a hand-drawn outline.
+- **Street names** — Brazoria County 911 road centrelines,
+  `general/Parcels/MapServer/2`, field `Full_Name`. The county's spelling, not a basemap vendor's.
+
+Both print at 48 mm tall, 328 dpi.
+
+### Finding 4 — Lot 3's street frontage is about 10 ft
+
+Measured off the recorded polygon against the Broken Arrow Trail centreline: of 12 boundary edges,
+**exactly one lies within 70 ft of the road — and it is 10.0 ft long**, 44 ft from the centreline
+(consistent with a cul-de-sac bulb radius). The two long sides — **504.3 ft** along the water and
+**337.3 ft** on the south-west — converge to very nearly a point at the road.
+
+| Edge | Length | Distance to Broken Arrow Trail centreline |
+|---|---|---|
+| 9 | 504.3 ft | 268 ft |
+| 10 | **10.0 ft** | **44 ft** ← the entire frontage |
+| 11 | 337.3 ft | 206 ft |
+
+Driveway, water line, electric service and septic pump-out access all have to pass through that gap.
+It also offers a plausible explanation for the situs of record being the bare street name
+"HIGHWAY 35" with no house number — the 911-address blocker in §25.
+
+**Caveat carried into the artifact:** a digitised apex is where GIS polygons are least reliable, and
+the plat may show a wider platted frontage. The 10 ft is indicative, not surveyed. The qualitative
+finding — the lot meets its street at a corner — is robust and visible in the imagery.
+
+Lot 3's verdict was rewritten as a result: it still leads on price and land quality, but it is now the
+lot with the most to confirm rather than the safest buy, because the open questions are about the
+**ability to build at all** rather than the cost of building.
+
+### Finding 5 — "Buffalo Camp Bayou" is not the name NHD carries there
+
+Consumer mapping labels the channel on Lot 3's eastern boundary **Buffalo Camp Bayou**. It is a real
+Brazoria County watercourse, but the National Hydrography Dataset carries **no GNIS name** on the reach
+beside Lot 3 — `FCode 46003` (intermittent stream) plus an adjoining `FCode 55800` artificial path.
+
+Query: `nhd/MapServer/6`, `GNIS_NAME LIKE '%Buffalo Camp%'`, envelope
+`-95.62,29.08 → -95.44,29.22`. Three features returned, all `FCode 55800`, all named Buffalo Camp
+Bayou. Nearest vertex to Lot 3's centroid: **6,715 m = 22,032 ft (4.2 mi)**, by Buffalo Camp Bayou
+Reservoir.
+
+Practical consequence: a BFE request that asks about "Buffalo Camp Bayou" may not match the
+cross-section the floodplain administrator works from. Ask by parcel and PID, and ask the office to
+name the governing watercourse back to you.

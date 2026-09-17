@@ -4,15 +4,17 @@ Independent feasibility review of five vacant lots in Bar X Ranch, unincorporate
 Angleton, Texas 77515 — assessed for a five-bedroom build, and for what it is actually like to live
 there.
 
-**Current edition: v4.1, 16 September 2026, prepared for Mohsin Chowdhury.** 55 pages, paginated, five lots.
+**Current edition: v4.2, 17 September 2026, prepared for Mohsin Chowdhury.** 59 pages, paginated, five lots.
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| [`index.html`](index.html) | **The artifact (v4.1)** — 55 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
-| [`Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.1.pdf) | **Rendered PDF of the current edition** — A4, 55 pages, true scale. |
+| [`index.html`](index.html) | **The artifact (v4.2)** — 59 numbered A4 pages. Open in a browser; print to PDF at 100% for true-scale drawings. |
+| [`Bar-X-Ranch-5-Lot-Feasibility-v4.2.pdf`](Bar-X-Ranch-5-Lot-Feasibility-v4.2.pdf) | **Rendered PDF of the current edition** — A4, 59 pages, true scale. |
 | [`assets/site-photos/`](assets/site-photos) | Seller-supplied aerial photography and the POA amenity map, from `MMS-ITS/HIghResolution` |
+| [`assets/lot-photos/`](assets/lot-photos) | Gallery figures placed at 48 mm (~2 in) tall, 328 dpi — de-duplicated seller photographs, plus the Lot 3 aerials built from record data |
+| [`uploads/`](uploads) | The 40 retained files from the 71-file upload, by lot. 31 duplicates and AI upscales removed — see Appendix D |
 | [`letters/`](letters) | **County correspondence** — a formal BFE request letter per parcel, a combined five-lot letter, and the same requests as plain-text e-mail drafts. See Appendix B. |
 | [`data/parcels.geojson`](data/parcels.geojson) | The four parcels as recorded boundaries, from the county's BCAD parcel service |
 | [`data/terrain.json`](data/terrain.json) | 1 ft LiDAR contours, A–B transects and 1 m DEM elevation profiles per lot |
@@ -44,6 +46,36 @@ there.
 Cost to reach build-ready (asking price + calculated pad at mid-case + the $20k vertisol foundation
 upcharge on the clay lots): **Lot 2 ~$65k**, Lot 3 ~$107k, Lot 4 ~$123k, Lot 1 ~$131k,
 **Lot 5 ~$173k**. Portfolio: $334,500 asking across 6.32 ac, +30.6% over the $256,180 appraised.
+
+## What v4.2 changed
+
+- **The 71-file photo upload audited and de-duplicated.** It reduces to **42 distinct scenes**.
+  31 files (361 MB, 76% of the bulk) removed as redundant copies or AI upscales; 40 retained under
+  `uploads/`. **No AI-upscaled file remains in the repository.**
+- **The finding that changes how every photograph here should be read: filenames identify listings,
+  not parcels.** Eleven of 48 frames were supplied under two or three different addresses — a Flag Lake
+  frame is filed under 1127 Saddle Horn Bend, 1.3 mi away. The seller's *annotation* is listing-specific;
+  the scenery is not. Every photograph is now tagged `boundary marked` or `area context`.
+- **The biggest files were deliberately not used.** Seventeen were Real-ESRGAN 6×/12× upscales of
+  ~1,290 px sources. At the 48 mm printed height the genuine originals already give **328 dpi**; the
+  upscales would print at ~3,000 dpi of invented detail.
+- **Eight new photographs placed** — two each on Lots 1, 4 and 5 (Lot 4 gets its **first
+  boundary-marked photographs**), plus a fishing pier at dusk and Flag Lake in §31. The POA amenity map
+  was replaced with a higher-resolution copy (1,444 px over 1,280 px).
+- **Lot 2 has no photography at all** — all nine files under its address are phone screenshots of
+  Zillow, Apple Maps and Risk Factor. Stated plainly on the lot page rather than papered over.
+- **Lot 3 given two aerials built from record data** (`tools/lotmap.py`): the recorded BCAD polygon over
+  Esri World Imagery with Brazoria County 911 street names.
+- **New finding — Lot 3's street frontage is about 10 ft.** Its recorded polygon is a triangle whose
+  504 ft and 337 ft sides converge to very nearly a point on the Broken Arrow Trail cul-de-sac. Driveway
+  and every utility must pass through that gap. **Lot 3's verdict was rewritten**: still the best value,
+  but now the lot with the most to confirm, because the open questions are about the ability to build at
+  all rather than the cost of building.
+- **New finding — "Buffalo Camp Bayou" is not the name NHD carries at Lot 3.** The nearest reach the
+  federal hydrography names Buffalo Camp Bayou is **4.2 mi** away; the reach beside Lot 3 is unnamed
+  `FCode 46003`. Ask the county by parcel and PID, not by map label.
+- **`amenity-521-pool.jpg` checked and left alone** — pickleball markings and a basketball pad, no pier
+  or boat ramp, which matches the POA map's 521 Pool node. The existing caption was right.
 
 ## What v4.1 changed
 

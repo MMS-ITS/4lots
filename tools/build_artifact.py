@@ -28,8 +28,8 @@ GEOJSON = os.path.join(ROOT, 'data', 'parcels.geojson')
 OUT = os.path.join(ROOT, 'index.html')
 
 PREPARED_FOR = "Mohsin Chowdhury"
-PREPARED_ON = "16 September 2026"
-VERSION = "4.1"
+PREPARED_ON = "17 September 2026"
+VERSION = "4.2"
 
 # --------------------------------------------------------------------------- data
 gj = json.load(open(GEOJSON))
@@ -99,11 +99,22 @@ EXTRA = {
         best="Value, on every measure that can be checked. It is the only lot priced below the "
              "county's own appraisal, the cheapest per acre by 11%, the second largest, and it is "
              "waterfront after all.",
-        watch="Section 16 is governed by a different recorded restriction instrument (84-29/885, "
-              "1984) from Sections 1 and 2, so the ACC rules are not necessarily the same ones "
-              "quoted for the other lots. No street number has been assigned, so confirm the "
-              "listing actually refers to PID 186219.",
-        verdict="On the verified record this is the pick of the five. Confirm the identity first.",
+        watch="<b>The street frontage is about 10 ft.</b> The recorded polygon is a triangle whose "
+              "two long sides converge to very nearly a point at the Broken Arrow Trail cul-de-sac, "
+              "so the driveway and every utility have to pass through that one gap — see the aerials "
+              "and the note below. Section 16 is also governed by a different recorded restriction "
+              "instrument (84-29/885, 1984) from Sections 1 and 2, so the ACC rules are not "
+              "necessarily the ones quoted for the other lots. And no street number has been "
+              "assigned, so confirm the listing actually refers to PID 186219.",
+        verdict="<b>On price and land quality this is still the pick of the five</b> — the only lot "
+                "below county appraisal, the cheapest per acre, waterfront, and the second largest. "
+                "But it is now the lot with the most to confirm rather than the safest buy. Two "
+                "things have to come back clean before an offer: the <b>frontage dimension</b>, "
+                "because a 10 ft access point can constrain or even prevent a permit, and the "
+                "<b>911 address</b>, which the county will not issue a building permit without. "
+                "Both are answerable in a fortnight and neither costs much. Resolve them and it "
+                "leads the portfolio; leave them open and it is the riskiest of the five, because "
+                "the risk is on the ability to build at all rather than on the cost of building.",
     ),
     'lot4': dict(
         regime='<b>Impounded, so it holds.</b> Flag Pond is retained by the Flag Lake Levee and keeps water year-round. Note what is 167 ft away, though: a <b>canal/ditch</b> (NHD FCode 33600), artificial drainage that is normally dry between rain events.',
@@ -397,6 +408,17 @@ hr.r{border:0; border-top:.6pt solid var(--line); margin:4mm 0;}
 .dshots img{width:100%; height:auto; display:block; border:0.5pt solid var(--line2); border-radius:1mm;}
 .dshots figcaption{font-size:6.9pt; line-height:1.2; color:var(--muted); margin-top:0.9mm;}
 .amimg{width:100%; border:0.5pt solid var(--line2); border-radius:1mm; display:block;}
+/* ---- lot galleries: fixed ~2-inch (48 mm) image height, proportionate width ---- */
+.gal{display:flex; flex-wrap:wrap; gap:3mm; margin:2.6mm 0 0; align-items:flex-start;}
+.gal figure{margin:0;}
+.gal img{height:@@GALH@@mm; width:auto; display:block; border:0.5pt solid var(--line2);
+  border-radius:1mm;}
+.gal figcaption{font-size:6.9pt; line-height:1.2; color:var(--muted); margin-top:0.9mm;}
+.tag{display:inline-block; font-size:6.2pt; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; padding:.2mm 1.2mm; border-radius:.8mm; margin-right:1mm;
+  vertical-align:.3mm;}
+.tag.mk{background:var(--green-w); color:var(--green); border:.5pt solid rgba(21,96,47,.3);}
+.tag.cx{background:var(--amber-w); color:var(--amber); border:.5pt solid rgba(168,86,10,.3);}
 /* lot heading linked to its Zillow listing */
 a.zl{color:inherit; text-decoration:none;}
 a.zl:hover{text-decoration:underline;}
@@ -438,6 +460,7 @@ tbody tr:nth-child(even){background:var(--wash);}
 td.n,th.n{text-align:right; white-space:nowrap;}
 tr.tot td{font-weight:700; border-top:1.4pt solid var(--ink); background:#eaf0f0;}
 tr.hi td{background:var(--green-w);}
+tr.warn td{background:var(--amber-w);}
 .strike{color:var(--red); text-decoration:line-through;}
 .bad{color:var(--red); font-weight:600;}
 .fix{color:var(--green); font-weight:600;}
@@ -570,7 +593,7 @@ figure.shot figcaption,figure.hero figcaption{display:none;}
   a{color:var(--ink); border-bottom:0;}
   .shot .ph{background:#f6f8f8;}
   h2,h3{break-after:avoid; page-break-after:avoid;}
-  table,.note,.lot,.kpi,svg.dwg,.shots{break-inside:avoid; page-break-inside:avoid;}
+  table,.note,.lot,.kpi,svg.dwg,.shots,.gal,.gal figure,.dshots figure{break-inside:avoid; page-break-inside:avoid;}
   tr{break-inside:avoid;}
 }
 """
@@ -642,6 +665,50 @@ def shot(lot_n, i, title, sub, cls='shot', style=''):
 def dshot(fn, cap):
     return ('<figure><img src="assets/site-photos/%s" alt="%s">'
             '<figcaption>%s</figcaption></figure>' % (fn, re.sub(r'<[^>]+>', '', cap), cap))
+
+
+# ------------------------------------------------- lot galleries (~2 in / 48 mm high)
+# Every gallery image is generated from a genuine-resolution seller original at 620 px
+# tall, which prints at 328 dpi over 48 mm. Nothing here is AI-upscaled. `kind` records
+# whether the parcel shown can be identified from the frame itself:
+#   'mk' — the frame carries the seller's own drawn boundary or a printed address label
+#   'cx' — no annotation: area context only, not a picture of the parcel
+GAL_H_MM = 48.0          # ~2 inches, as asked for
+
+
+def _gal_mm(path, h_mm=GAL_H_MM):
+    """Printed width of a gallery image at the fixed gallery height.
+
+    The figure has to carry this as an explicit width. Without it the flex item
+    sizes to the *caption's* max-content width, which is far wider than the
+    picture, and two 72 mm images that ought to sit side by side wrap onto
+    separate rows instead.
+    """
+    try:
+        from PIL import Image
+        with Image.open(os.path.join(ROOT, path)) as im:
+            w, h = im.size
+        return round(h_mm * w / h, 1)
+    except Exception:
+        return None
+
+
+def gshot(fn, kind, cap):
+    lbl = ('<span class="tag mk">boundary marked</span>' if kind == 'mk'
+           else '<span class="tag cx">area context</span>')
+    src = 'assets/lot-photos/%s.jpg' % fn
+    mm = _gal_mm(src)
+    style = ' style="width:%smm"' % mm if mm else ''
+    return ('<figure%s><img src="%s" alt="%s">'
+            '<figcaption>%s%s</figcaption></figure>'
+            % (style, src, re.sub(r'<[^>]+>', '', cap), lbl, cap))
+
+
+def gallery(heading, items, note=''):
+    figs = ''.join(gshot(f, k, c) for f, k, c in items)
+    return ('<h3>%s</h3><div class="gal">%s</div>%s'
+            % (heading, figs,
+               ('<p class="xs" style="margin:1.6mm 0 0;">%s</p>' % note) if note else ''))
 
 
 # --------------------------------------------------------- honest image sizing
@@ -1251,6 +1318,93 @@ def facts_pairs(p, k):
 
 _DPHOTOS = {'lot1': '<h3>Aerial photography &mdash; supplied by the seller</h3><div class="dshots">@@dshot:lot1-site-1.jpg|The parcel outlined, looking north-east. Narrow at the street, the full width to the water.@@@@dshot:lot1-site-2.jpg|Wider view. <b>State Highway 35</b> crosses the foreground and Mill Bayou wraps the lot in a meander.@@@@dshot:lot1-site-3.jpg|Overhead. Tree cover across most of the parcel; exposed bayou banks at low water.@@</div><p class="xs" style="margin:1.6mm 0 0;">The wedge is unmistakable here: a point of frontage at the street and the whole width of the lot given to the bayou. Note two things the survey data could not show. <b>The bayou is running low and its banks are exposed mud</b> &mdash; consistent with the intermittent classification in the water-regime row above. And <b>the lot is densely treed</b>, so the clearing allowance in &sect;21 belongs at the top of its range, and the tree cover constrains where a pad, a drainfield and its reserve can actually go.</p>', 'lot5': '<h3>Aerial photography &mdash; supplied by the seller</h3><div class="dshots">@@dshot:lot5-site-1.jpg|The parcel as marketed, labelled by the seller. Cleared, with Flag Lake beyond and built houses either side.@@@@dshot:lot5-site-2.jpg|Flag Lake from the south. The impounded pool sits above the surrounding pasture.@@@@dshot:lot5-site-3.jpg|The lake shore and the levee embankment that retains it.@@</div><p class="xs" style="margin:1.6mm 0 0;">Three things here matter to the numbers. <b>The parcel is already cleared and mown</b>, so the clearing allowance in &sect;21 sits at the bottom of its range. <b>Utility poles run the length of Wagon Wheel Trail at the frontage</b>, which makes the $0&ndash;$25,000 electric-extension range in &sect;21 a low-end number on this lot rather than an open question. And <b>both neighbouring parcels are built</b> &mdash; one house is new, on a visibly raised pad &mdash; which is the practical answer to the pad-geometry question below.</p>'}
 
+# --------------------------------------------------------------------------------
+# Additional seller photography, de-duplicated from the 71-file upload (Appendix D).
+# Attribution rule applied throughout: a frame is treated as showing a named parcel
+# only where it carries the seller's own boundary outline or a printed address label.
+# Unannotated frames are captioned as area context, because 11 of the 48 unique
+# frames were supplied under two or three different listing addresses.
+_GAL = {
+    'lot1': gallery('More seller photography &mdash; the bayou and the highway', [
+        ('lot1-gal-1', 'cx', 'The bayou channel at close range from the north bank. Note the '
+         '<b>bare, undercut mud margin</b> above the waterline &mdash; the wetted width is well '
+         'below the channel width.'),
+        ('lot1-gal-2', 'cx', 'The approach along <b>State Highway 35</b>. The measured 480 ft from '
+         'Lot 1 to the carriageway is a distance you can see, and hear.'),
+    ], 'Neither frame carries the seller&rsquo;s boundary outline, so both are captioned as area '
+       'context rather than as pictures of Lot 84. The three outlined frames above are the ones '
+       'that fix the parcel.'),
+
+    'lot4': gallery('Aerial photography &mdash; supplied by the seller', [
+        ('lot4-gal-1', 'mk', 'The parcel outlined by the seller, short end to the water. The '
+         '<b>long narrow shape</b> matches the recorded 479 &times; 123 ft footprint.'),
+        ('lot4-gal-2', 'mk', 'The same outline from the north, with built houses on both flanks '
+         'and the impounded water across the foreground.'),
+    ], 'These are the <b>first boundary-marked photographs of Lot 4</b> in any edition. One caution, '
+       'and it is not a small one: <b>Lot 4 and Lot 5 are 95 ft apart</b> and their footprints are '
+       '479 &times; 123 ft and 490 &times; 110 ft &mdash; near-identical long rectangles on the same '
+       'street. Nothing in the imagery itself separates them. These two frames are attributed to '
+       'Lot 4 because the outline was drawn for the <b>750 Wagon Wheel Trail</b> listing and appears '
+       'under no other; that is the seller&rsquo;s attribution, not an independent one. Confirm the '
+       'boundary against the survey before you rely on it.'),
+
+    'lot5': gallery('More seller photography &mdash; the parcel as labelled', [
+        ('lot5-gal-1', 'mk', 'The parcel outlined at the frontage. <b>Utility poles run the length '
+         'of Wagon Wheel Trail</b> here, and the ground is mown.'),
+        ('lot5-gal-2', 'mk', 'The seller&rsquo;s own <b>&ldquo;808 Wagon Wheel Trail&rdquo;</b> '
+         'label and leader line, with Flag Lake behind and the new-built house alongside.'),
+    ], 'The printed address label is the strongest attribution available anywhere in this photo set '
+       '&mdash; it is the seller naming the parcel in the frame. Note that the outline in the left '
+       'frame and the labelled parcel in the right frame are consistent with one another, which is '
+       'what lets both be read as Lot 131.'),
+}
+
+# Lots 2 and 3: state plainly that there is no photography, rather than substituting
+# a neighbouring frame and letting the reader assume it is the parcel.
+_NOPHOTO = ('<h3>Photography &mdash; none available for this lot</h3>'
+            '<div class="note amber" style="margin-bottom:0;">'
+            '<span class="lbl">No photograph of this parcel exists in the material supplied</span>%s'
+            '</div>')
+_GAL['lot2'] = _NOPHOTO % (
+    ' The seller supplied <b>nine files under this address and not one is a photograph</b>. All nine '
+    'are screen captures of phone apps &mdash; the Zillow listing card, an Apple Maps pin and a Risk '
+    'Factor flood panel. They record what a website said about the lot, not what the lot looks like. '
+    '<b>Lot 2 is the only parcel in the portfolio with no ground or aerial photography at all</b>, '
+    'and the only visual evidence for it in this document is the NAIP aerial and the LiDAR terrain in '
+    '&sect;22. If you shortlist this lot, a site visit or a commissioned drone pass is not optional.')
+_GAL['lot3'] = gallery('The parcel from above &mdash; recorded boundary on current imagery', [
+    ('lot3-gal-1', 'mk', 'Position in the subdivision. The lot sits inside the bend of the '
+     'watercourse, off the <b>Broken Arrow Trail</b> cul-de-sac, with <b>SH 35</b> along the top.'),
+    ('lot3-gal-2', 'mk', 'The recorded 1.30-acre polygon. A <b>triangle</b>: two long sides meeting '
+     'at a point on the cul-de-sac bulb. Note the <b>ploughed centre</b> and the tree line along '
+     'the water.'),
+], 'These replace the &ldquo;no photography&rdquo; note earlier editions carried for this lot. They '
+   'are not seller marketing graphics: the outline is the <b>recorded BCAD polygon</b> plotted on '
+   'Esri World Imagery by <span class="fp">tools/lotmap.py</span>, and the street names are Brazoria '
+   'County&rsquo;s own 911 centreline data. The 1.30 acres shown is the acreage of record, which is '
+   'what corrected the original portfolio&rsquo;s &ldquo;~1.0 ac est.&rdquo; '
+   'The plan drawings above already carried this triangle; what plotting it on imagery adds is '
+   '<b>context and ground cover</b> &mdash; the ploughed centre, the tree line along the water, the '
+   'farm track across the south-west &mdash; and one measurement nobody had taken. See the note '
+   'below.')
+
+_GAL['lot3'] += (
+    '<div class="note red" style="margin-bottom:0;">'
+    '<span class="lbl">The frontage is a point, not a frontage</span>'
+    ' Measured off the recorded polygon, the boundary that lies against the Broken Arrow Trail '
+    'cul-de-sac bulb is <b>about 10 ft long</b>. The two long sides &mdash; 504 ft along the water '
+    'and 337 ft on the south-west &mdash; converge to very nearly a single point at the road. '
+    'Everything the lot needs has to pass through that gap: the driveway, the water line, the '
+    'electric service and the septic pump-out access. It also gives a plausible reason why the situs '
+    'of record is the bare street name <b>&ldquo;HIGHWAY 35&rdquo;</b> with no house number, which '
+    'is the 911-address blocker in &sect;25. '
+    '<b>Treat the 10 ft as indicative, not surveyed</b> &mdash; a digitised apex is exactly where '
+    'GIS polygons are least reliable, and the plat may show a wider platted frontage. But the '
+    'qualitative finding stands and is visible in the image: <b>this lot touches its street at a '
+    'corner.</b> Put the frontage dimension at the top of the survey instruction in &sect;34, and '
+    'ask the county whether it meets the minimum frontage for a building permit before you offer.'
+    '</div>')
+
 for k in ORDER:
     p = LOTS[k]
     _ask = p.get('asking_price_usd')
@@ -1328,7 +1482,7 @@ for k in ORDER:
          '<a class="lnk" href="https://www.loopnet.com/property/'
          '1127-saddle-horn-bnd-angleton-tx-77515/48039-15340084000/">LoopNet listing</a>'
          if k == 'lot1' else ''),
-        _DPHOTOS.get(k, ''),
+        _DPHOTOS.get(k, '') + _GAL.get(k, ''),
         ('green' if k in ('lot3',) else 'teal'), p['best'],
         p['watch'],
         ('green' if k == 'lot3' else 'blue'), p['verdict'],
@@ -2426,6 +2580,23 @@ portfolio described.</p>
   Lot 3 with roughly twice the frontage of Lot 2. <b>Lots 4 and 5</b> front <b>Flag Pond &mdash; called Flag Lake by the association</b> &mdash; at 101.5 acres, and the levee that impounds it. Only those two are on what most people would call a lake.
 </div>
 
+<div class="note amber">
+  <span class="lbl">A naming discrepancy on Lot 3&rsquo;s water, worth knowing before you ask about it</span>
+  Consumer mapping labels the channel along Lot 3&rsquo;s eastern boundary
+  <b>&ldquo;Buffalo Camp Bayou&rdquo;</b>. That is a real Brazoria County watercourse &mdash; but
+  <b>the federal hydrography does not carry the name there</b>. In the National Hydrography Dataset the
+  reach beside Lot 3 has <b>no GNIS name at all</b>: it is <span class="fp">FCode 46003</span>,
+  intermittent stream, alongside an <span class="fp">FCode 55800</span> artificial path through the
+  impounded water. The nearest reach NHD actually names Buffalo Camp Bayou is <b>4.2 miles</b> away,
+  by Buffalo Camp Bayou Reservoir. The label is a name applied further upstream than the official
+  dataset applies it.
+  <b>Why it matters practically:</b> when you write to the county for the base flood elevation
+  (&sect;25, Appendix B), asking about &ldquo;Buffalo Camp Bayou&rdquo; may not match the cross-section
+  the floodplain administrator works from. Ask by <b>parcel and PID</b>, and ask the office to name the
+  governing watercourse and cross-section back to you. Do not assume the map label is the regulatory
+  name.
+</div>
+
 
 <h3>The POA amenity map &mdash; and what it corrects</h3>
 <div class="cols2" style="gap:4mm;">
@@ -2475,13 +2646,19 @@ two</b>, and <b>two of the three most useful carry conditions</b> no earlier edi
 <div class="cols2" style="gap:4mm; margin-top:3mm;">
   <div><img class="amimg" src="assets/site-photos/poa-pond-shore.jpg"
     alt="The shore of one of the Bar X Ranch ponds, looking across cleared pasture"></div>
-  <div><p class="xs" style="margin:0;">One of the association's ponds from the shore, on cleared
-  pasture of the kind Lots 2 and 3 sit on. <b>Which pond this is cannot be established from the
-  photograph</b> &mdash; the seller supplied no location data, WhatsApp stripped the EXIF, and the
-  reed-fringed shoreline here is common to all of them. It is reproduced as representative of the
-  water frontage on this subdivision rather than as a picture of any one parcel. Note the
-  <b>marshy, reed-grown margin</b>: that is the zone the TCEQ 75 ft absorption setback in &sect;20
-  measures back from, and it is not usable ground.</p></div>
+  <div><p class="xs" style="margin:0;">Association water from the shore, across cleared pasture.
+  Earlier editions carried this frame as unattributable. The de-duplication in <b>Appendix D</b> narrows it:
+  the frame was supplied <b>only under the 808 Wagon Wheel Trail listing</b> and under no other, which
+  points to <b>Flag Lake beside Lots 4 and 5</b> rather than the Lots 2&ndash;3 pond this caption
+  previously suggested. That is provenance, not proof &mdash; there is still no location data, because
+  WhatsApp stripped the EXIF &mdash; so it is offered as the likely reading, not a certain one. Note
+  the <b>marshy, reed-grown margin</b> either way: that is the zone the TCEQ 75 ft absorption setback
+  in &sect;20 measures back from, and it is not usable ground.</p></div>
+</div>
+
+<div class="gal" style="margin-top:3mm;">
+@@gshot:assets/lot-photos/amenity-pier-dusk.jpg|cx|A <b>fishing pier at dusk</b> &mdash; one of the two the amenity map records. Which of the two is not established.@@
+@@gshot:assets/site-photos/flag-lake-1.jpg|cx|<b>Flag Lake</b> from the air at its full 101.5 acres. This frame was supplied under <b>three different addresses</b> &mdash; see <b>Appendix D</b>.@@
 </div>
 
 <h3>When the bayou runs dry, and what is actually stocked</h3>
@@ -2691,8 +2868,13 @@ actually moved are listed.</p>
      ['21', '<span class="strike">Cheapest waterfront framing</span>',
       'Ranked 1127 Saddle Horn cheapest per acre',
       '<b>All five are waterfront</b>; Lot 29 is cheapest per acre'],
-     (['22', '<span class="strike">Total 9 pages, no drawings</span>', '12 sections, no drawings',
-       '<b>True-scale plans and terrain sections for all five lots</b>'], 'tot')],
+     ['22', '<span class="strike">Total 9 pages, no drawings</span>', '12 sections, no drawings',
+      '<b>True-scale plans and terrain sections for all five lots</b>'],
+     (['23', '<span class="strike">No photography</span>',
+       'Seller frames used as supplied, by filename',
+       '<b>71 files audited to 42 distinct scenes</b> — filenames identify listings, not parcels; '
+       '<b>Lot 3 given a recorded-boundary aerial</b>; Lot 2 still has no photograph at all '
+       '(Appendix D)'], 'tot')],
     cls='compact') + """
 <p class="xs" style="margin-bottom:0;">The full claim-by-claim audit of the original document remains
 in <a href="docs/AUDIT.md">docs/AUDIT.md</a>. The evidence trail for everything new in this edition,
@@ -2713,9 +2895,12 @@ material unknown. Do them before you make an offer, not after.</p>
       1515/679 for Sections 1 lots, 1532/471 for Section 2, 84-29/885 for Section 16 — plus a POA
       resale certificate showing dues, transfer fees and any assessments.
       <span class="xs">Under $100.</span></li>
-  <li><b>Confirm Lot 29's identity.</b> Its situs of record is &ldquo;HIGHWAY 35&rdquo; with no street
-      number. Verify the listing refers to <b>PID 186219</b> and not another Section 16 lot.
-      <span class="xs">Free — BCAD and the listing agent.</span></li>
+  <li><b>Confirm Lot 29's identity, and its frontage.</b> Its situs of record is
+      &ldquo;HIGHWAY 35&rdquo; with no street number. Verify the listing refers to <b>PID 186219</b>
+      and not another Section 16 lot. In the same call, ask the county whether the <b>~10 ft of
+      frontage</b> on the Broken Arrow Trail cul-de-sac (&sect;8) satisfies the minimum frontage for a
+      building permit and a driveway culvert permit. If it does not, nothing else about this lot
+      matters. <span class="xs">Free — BCAD, the listing agent and the permit office.</span></li>
   <li><b>Order an OSSF site and soil evaluation</b> on the shortlisted lot. This is the highest-value
       money in the project: it converts §18's survey-scale inference into the permit-governing soil
       class, and it swings the septic budget by up to $17,000.
@@ -2735,6 +2920,10 @@ material unknown. Do them before you make an offer, not after.</p>
   <li><b>Confirm the TDI windstorm zone</b> for the parcel against TDI's own Brazoria County map. §24
       places all five in Inland I, but the dividing line follows SH 35 and Lots 1 and 3 are within 530
       ft of it. <span class="xs">Free.</span></li>
+  <li><b>Commission a drone pass on the shortlisted lot</b>, and ask the agent which parcel each
+      supplied photograph shows and how they know. <b>Lot 2 has no photograph at all</b> — see Appendix D — so
+      there it is the only way to see the ground before you commit. On <b>Lot 3</b>, brief the
+      surveyor to dimension the cul-de-sac frontage first (§8). <span class="xs">$150–$400.</span></li>
   <li><b>Order a boundary and topographic survey</b> on the lot you intend to buy, then test a real
       2,400–2,800 sq ft footprint at 30 ft finished floor against the septic field, the 100% reserve,
       the well at 100 ft, the 75 ft water setback and your garden. <span class="xs">$1,500–$3,500.</span></li>
@@ -3212,6 +3401,139 @@ its own page overleaf.</p>
 %s
 """ % (_subjects, _emails), "Appendix C &middot; Draft e-mails", "emails")
 
+
+# =========================================================================== Appendix D
+add("""
+<h2><span class="n">Appendix D &middot;</span> The seller photography &mdash; what was supplied,
+what was duplicated, and what it proves</h2>
+<p class="lead">Seventy-one image files were supplied for the five lots. They reduce to
+<b>42 distinct scenes</b>. This appendix records how that reduction was done, why the
+highest-pixel-count files were <b>not</b> the ones used, and the one finding that changes how every
+photograph in this document should be read.</p>
+
+<div class="note red">
+  <span class="lbl">The finding: filenames identify listings, not parcels</span>
+  The files arrive grouped by street address, which invites the assumption that a file named for
+  <b>808 Wagon Wheel Trail</b> shows 808 Wagon Wheel Trail. It does not follow.
+  <b>Eleven of the 48 de-duplicated frames were supplied under two or three different addresses.</b>
+  The clearest case: a frame showing <b>Flag Lake</b> was filed under the <b>1127 Saddle Horn Bend</b>
+  listing &mdash; and Flag Lake is <b>1.3 miles</b> from that parcel. The seller shot one set of drone
+  passes over this part of the subdivision and reused the attractive frames across every listing.
+  <b>What was not reused is the annotation.</b> Where a frame carries a drawn boundary or a printed
+  address label, that was added for one specific listing and appears under no other. So the annotation
+  is the evidence of which parcel is shown; the scenery is not.
+</div>
+
+<p>Every photograph in this document is therefore captioned under one of two labels, and they are
+printed on the figures themselves:</p>
+<ul>
+  <li><span class="tag mk" style="font-size:6.2pt;">boundary marked</span> &mdash; the frame carries
+      the seller's own outline or address label. This is the seller identifying the parcel. It is
+      still the seller's word, not a survey, but it is specific to one listing.</li>
+  <li><span class="tag cx" style="font-size:6.2pt;">area context</span> &mdash; no annotation. The
+      frame shows the subdivision, the water or the highway. It is <b>not</b> a picture of the parcel
+      and must not be read as one.</li>
+</ul>
+
+<table class="compact">
+  <caption>The 71 files by lot, after de-duplication. &ldquo;Reused&rdquo; counts frames that also
+  appear under a different street address.</caption>
+  <thead><tr><th style="width:34mm;">Lot</th><th>Distinct frames</th><th>App screenshots</th>
+    <th>POA map</th><th>Photographs</th><th>Marked or labelled</th><th>Reused</th></tr></thead>
+  <tbody>
+    <tr><td><b>1</b> &middot; 1127 Saddle Horn Bend</td><td>10</td><td>0</td><td>1</td><td>9</td>
+      <td><b>5</b></td><td>3</td></tr>
+    <tr class="warn"><td><b>2</b> &middot; 336 Wagon Wheel Trail W</td><td>9</td><td><b>9</b></td>
+      <td>0</td><td><b>0</b></td><td>0</td><td>0</td></tr>
+    <tr class="warn"><td><b>3</b> &middot; Lot 29 Broken Arrow Trail</td><td>3</td><td>2</td><td>0</td>
+      <td>1</td><td><b>0</b></td><td>1</td></tr>
+    <tr><td><b>4</b> &middot; 750 Wagon Wheel Trail</td><td>11</td><td>3</td><td>0</td><td>8</td>
+      <td><b>2</b></td><td>3</td></tr>
+    <tr><td><b>5</b> &middot; 808 Wagon Wheel Trail</td><td>15</td><td>0</td><td>1</td><td>14</td>
+      <td><b>7</b></td><td>4</td></tr>
+  </tbody>
+  <tfoot><tr><td><b>All five</b></td><td><b>48</b></td><td><b>14</b></td><td>2</td><td><b>32</b></td>
+    <td><b>14</b></td><td><b>11</b></td></tr></tfoot>
+</table>
+
+<div class="note amber">
+  <span class="lbl">Two lots have effectively no photography, and the table is the reason</span>
+  <b>Lot 2 has none at all.</b> All nine files supplied under 336 Wagon Wheel Trail W are screen
+  captures of phone apps &mdash; the Zillow card, an Apple Maps pin, a Risk Factor flood panel. They
+  are pictures of websites. <b>Lot 3 has one photograph and it is unusable for identification</b>: no
+  outline, no label, and the same frame appears in the Lot 1 upload. That is not a presentation
+  problem &mdash; on two of the five lots the seller has shown you nothing.
+</div>
+<div class="note green" style="margin-bottom:0;">
+  <span class="lbl">What was done about it, and what still is not covered</span>
+  <b>Lot 3 no longer depends on the seller's photography.</b> &sect;8 now carries two aerials built
+  from the county's own data rather than from marketing material &mdash; the recorded BCAD polygon
+  plotted over Esri World Imagery, with Brazoria County 911 street names, by
+  <span class="fp">tools/lotmap.py</span>. That is a stronger form of evidence than an outline drawn
+  by a seller, because the boundary is the one on record. It is also what surfaced the <b>10 ft
+  frontage</b> finding in &sect;8, which no photograph in the upload would have revealed.
+  <b>Lot 2 remains uncovered by ground-level imagery of any kind</b> &mdash; the same aerial treatment
+  could be generated for it, but an aerial cannot show you drainage, neighbouring clutter, or what the
+  ground feels like underfoot, and on Lot 2 there is nothing else.
+</div>
+
+<h3>Why the biggest files were not the ones used</h3>
+<p>Seventeen of the 71 files were <b>exactly 7,680 or 16,000 pixels wide</b>. Those are not camera
+dimensions; they are the output sizes of an AI super-resolution pass (Real-ESRGAN at 6&times; and
+12&times;) run over source frames about <b>1,290 pixels</b> wide. The extra pixels are not detail the
+camera recorded &mdash; they are detail the model invented. This document has already declined to
+upscale the NAIP aerials for the same reason, and it would be incoherent to accept invented detail
+here while refusing it there.</p>
+<p>The practical point is that <b>nothing was lost by refusing them</b>. Each gallery image is placed
+at a printed height of <b>48 mm</b> &mdash; the roughly two inches asked for &mdash; which needs about
+620 pixels. The genuine originals supply 700&ndash;1,090 pixels of height, so every placement prints at
+<b>328 dpi</b>, above the 300 dpi commercial-print standard. The upscales would have printed the same
+image at some 3,000 dpi: six times finer than any printer resolves, from a source that never held the
+information.</p>
+
+<table class="compact">
+  <caption>What was removed. Nothing is unrecoverable &mdash; all 71 files remain in the repository
+  history at commit <span class="fp">af3fc7f</span>.</caption>
+  <thead><tr><th style="width:52mm;">Category</th><th>Files</th><th>Size</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Redundant copies</td><td>23</td><td>260.7 MB</td>
+      <td>Same frame as another file in the set, at equal or lower genuine resolution</td></tr>
+    <tr><td>AI upscales</td><td>8</td><td>100.6 MB</td>
+      <td>Every one of these frames was already held at its native resolution, so the upscale added
+        file size and no information</td></tr>
+    <tr class="hi"><td><b>Removed</b></td><td><b>31</b></td><td><b>361.3 MB</b></td>
+      <td>76% of the uploaded bulk</td></tr>
+    <tr><td><b>Retained</b></td><td><b>40</b></td><td><b>115.8 MB</b></td>
+      <td>Filed under <span class="fp">uploads/lot1&hellip;lot5/</span>. <b>No AI-upscaled file
+        remains in the repository.</b></td></tr>
+  </tbody>
+</table>
+
+<h3>How the duplicates were found</h3>
+<p>By perceptual hash rather than by file checksum, because almost none of these duplicates are
+byte-identical &mdash; they differ in format, in JPEG quality and in pixel dimensions, so a checksum
+comparison finds nothing. Each image is reduced to greyscale at 17&times;16, and each pixel is compared
+with its right-hand neighbour to give a <b>256-bit difference hash</b>. Two frames are treated as the
+same when their hashes differ in <b>22 bits or fewer</b> and their aspect ratios agree within
+<b>6%</b>. The aspect test is what stops a genuine crop being discarded as a duplicate of its
+parent.</p>
+<p class="sm">One consequence worth stating, because it cuts against the method. Frames that differ
+<i>only</i> by the seller's annotation sit at a hash distance of about 15 bits &mdash; inside the
+threshold. They were <b>deliberately kept as separate frames</b>: an outlined frame and its unoutlined
+twin are the same photograph but not the same evidence, and it is precisely the annotation that carries
+the attribution. Collapsing them would have destroyed the one thing that makes the photography
+useful.</p>
+
+<div class="note teal" style="margin-bottom:0;">
+  <span class="lbl">What to do with this</span>
+  Two things. First, <b>commission a drone pass on any lot you shortlist</b> &mdash; it is a few
+  hundred dollars against a six-figure decision, and on Lots 2 and 3 it is the only way to see the
+  ground at all. Second, when the seller or an agent sends you a photograph, <b>ask which parcel it
+  shows and how they know</b>. On this evidence the answer will sometimes be that the frame was shot
+  over a different lot a mile away.
+</div>
+""", "Appendix D &middot; Seller photography audit", "photos")
+
 # =========================================================================== render
 # Real printed page numbers come from data/pagination.json, written by tools/paginate.py
 # after measuring the rendered sheets. Until that file exists we fall back to sheet order.
@@ -3320,6 +3642,22 @@ def _expand_dshot(m):
     return dshot(fn, cap)
 doc = _re2.sub(r'@@dshot:([^|]+)\|(.*?)@@', _expand_dshot, doc)
 
+
+def _expand_gshot(m):
+    """@@gshot:<path>|<mk|cx>|<caption>@@ — a gallery figure at any asset path.
+
+    Carries the explicit figure width, so captions cannot force the flex row to
+    wrap two side-by-side pictures onto separate lines.
+    """
+    src, kind, cap = m.group(1), m.group(2), m.group(3)
+    mm = _gal_mm(src)
+    style = ' style="width:%smm"' % mm if mm else ''
+    lbl = ('<span class="tag mk">boundary marked</span>' if kind == 'mk'
+           else '<span class="tag cx">area context</span>')
+    return ('<figure%s><img src="%s" alt="%s"><figcaption>%s%s</figcaption></figure>'
+            % (style, src, re.sub(r'<[^>]+>', '', cap), lbl, cap))
+doc = _re2.sub(r'@@gshot:([^|]+)\|(mk|cx)\|(.*?)@@', _expand_gshot, doc)
+
 _TALLY = ''.join(
     '<td class="n">%d / %d / %d</td>'
     % (sum(1 for _, _, v in SCORE if v[i][1] == 'g'),
@@ -3330,7 +3668,8 @@ doc = doc.replace('@@TALLY@@', _TALLY)
 
 doc = (doc.replace('@@V@@', VERSION)
           .replace('@@FOR@@', PREPARED_FOR)
-          .replace('@@ON@@', PREPARED_ON))
+          .replace('@@ON@@', PREPARED_ON)
+          .replace('@@GALH@@', ('%g' % GAL_H_MM)))
 with open(OUT, 'w') as fh:
     fh.write(doc)
 print("wrote %s — %d sheets, %d printed pages, %.0f kB"
