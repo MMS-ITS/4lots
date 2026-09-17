@@ -1,0 +1,86 @@
+{
+ "lot1-gal-1": {
+  "src": "1127 Saddle Horn Bnd Lot 84, Angleton, TX 77515 (2).png",
+  "idx": 9,
+  "src_w": 1290,
+  "src_h": 726,
+  "kind": "original",
+  "w": 1102,
+  "h": 620,
+  "ar": 1.7774,
+  "mm": 85.3,
+  "dpi": 328
+ },
+ "lot1-gal-2": {
+  "src": "1127 Saddle Horn Bnd Lot 84, Angleton, TX 77515 (1).png",
+  "idx": 8,
+  "src_w": 1290,
+  "src_h": 704,
+  "kind": "original",
+  "w": 1136,
+  "h": 620,
+  "ar": 1.8323,
+  "mm": 87.9,
+  "dpi": 328
+ },
+ "lot4-gal-1": {
+  "src": "750 Wagon Wheel Trl, Angleton, TX 77515 (1).png",
+  "idx": 31,
+  "src_w": 1540,
+  "src_h": 1021,
+  "kind": "original",
+  "w": 935,
+  "h": 620,
+  "ar": 1.5081,
+  "mm": 72.4,
+  "dpi": 328
+ },
+ "lot4-gal-2": {
+  "src": "750 Wagon Wheel Trl, Angleton, TX 77515 (8).png",
+  "idx": 28,
+  "src_w": 1536,
+  "src_h": 1024,
+  "kind": "original",
+  "w": 930,
+  "h": 620,
+  "ar": 1.5,
+  "mm": 72.0,
+  "dpi": 328
+ },
+ "lot5-gal-1": {
+  "src": "808 Wagon Wheel Trl, Angleton, TX 77515 (18).png",
+  "idx": 39,
+  "src_w": 1548,
+  "src_h": 1016,
+  "kind": "original",
+  "w": 945,
+  "h": 620,
+  "ar": 1.5242,
+  "mm": 73.2,
+  "dpi": 328
+ },
+ "lot5-gal-2": {
+  "src": "808 Wagon Wheel Trl, Angleton, TX 77515 (23).png",
+  "idx": 45,
+  "src_w": 1290,
+  "src_h": 952,
+  "kind": "original",
+  "w": 840,
+  "h": 620,
+  "ar": 1.3548,
+  "mm": 65.0,
+  "dpi": 328
+ },
+ "amenity-pier-dusk": {
+  "src": "750 Wagon Wheel Trl, Angleton, TX 77515 (4).png",
+  "idx": 29,
+  "src_w": 1448,
+  "src_h": 1086,
+  "kind": "original",
+  "w": 827,
+  "h": 620,
+  "ar": 1.3339,
+  "mm": 64.0,
+  "dpi": 328
+ }
+}

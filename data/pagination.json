@@ -1,5 +1,5 @@
 {
- "total_pages": 55,
+ "total_pages": 59,
  "sheets": {
   "cover": {
    "start": 1,
@@ -43,127 +43,131 @@
   },
   "lot3": {
    "start": 12,
-   "end": 12
-  },
-  "lot4": {
-   "start": 13,
    "end": 13
   },
-  "lot5": {
+  "lot4": {
    "start": 14,
    "end": 15
   },
-  "flood": {
+  "lot5": {
    "start": 16,
    "end": 17
   },
-  "terrain": {
+  "flood": {
    "start": 18,
-   "end": 18
-  },
-  "terrain1": {
-   "start": 19,
    "end": 19
   },
-  "terrain2": {
+  "terrain": {
    "start": 20,
    "end": 20
   },
-  "terrain3": {
+  "terrain1": {
    "start": 21,
    "end": 21
   },
-  "terrain4": {
+  "terrain2": {
    "start": 22,
    "end": 22
   },
-  "terrain5": {
+  "terrain3": {
    "start": 23,
    "end": 23
   },
-  "soil": {
+  "terrain4": {
    "start": 24,
    "end": 24
   },
-  "restrictions": {
+  "terrain5": {
    "start": 25,
    "end": 25
   },
-  "septic": {
+  "soil": {
    "start": 26,
    "end": 26
   },
-  "cost": {
+  "restrictions": {
    "start": 27,
    "end": 27
   },
-  "fill": {
+  "septic": {
    "start": 28,
+   "end": 28
+  },
+  "cost": {
+   "start": 29,
    "end": 29
   },
-  "carry": {
+  "fill": {
    "start": 30,
-   "end": 30
-  },
-  "wind": {
-   "start": 31,
    "end": 31
   },
-  "climate": {
+  "carry": {
    "start": 32,
    "end": 32
   },
-  "hazards": {
+  "wind": {
    "start": 33,
    "end": 33
   },
-  "services": {
+  "climate": {
    "start": 34,
    "end": 34
   },
-  "services2": {
+  "hazards": {
    "start": 35,
    "end": 35
   },
-  "leisure": {
+  "services": {
    "start": 36,
    "end": 36
   },
-  "community": {
+  "services2": {
    "start": 37,
    "end": 37
   },
-  "amenities": {
+  "leisure": {
    "start": 38,
-   "end": 40
+   "end": 38
   },
-  "scorecard": {
-   "start": 41,
+  "community": {
+   "start": 39,
+   "end": 39
+  },
+  "amenities": {
+   "start": 40,
    "end": 42
   },
-  "corrections": {
+  "scorecard": {
    "start": 43,
-   "end": 43
-  },
-  "next": {
-   "start": 44,
    "end": 44
   },
-  "sources": {
+  "corrections": {
    "start": 45,
    "end": 45
   },
-  "brief": {
+  "next": {
    "start": 46,
+   "end": 46
+  },
+  "sources": {
+   "start": 47,
    "end": 47
   },
-  "letters": {
+  "brief": {
    "start": 48,
    "end": 49
   },
-  "emails": {
+  "letters": {
    "start": 50,
-   "end": 55
+   "end": 51
+  },
+  "emails": {
+   "start": 52,
+   "end": 57
+  },
+  "photos": {
+   "start": 58,
+   "end": 59
   }
  }
 }
