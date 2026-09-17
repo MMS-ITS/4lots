@@ -1372,21 +1372,22 @@ _GAL['lot2'] = _NOPHOTO % (
     '<b>Lot 2 is the only parcel in the portfolio with no ground or aerial photography at all</b>, '
     'and the only visual evidence for it in this document is the NAIP aerial and the LiDAR terrain in '
     '&sect;22. If you shortlist this lot, a site visit or a commissioned drone pass is not optional.')
-_GAL['lot3'] = gallery('The parcel from above &mdash; recorded boundary on current imagery', [
-    ('lot3-gal-1', 'mk', 'Position in the subdivision. The lot sits inside the bend of the '
-     'watercourse, off the <b>Broken Arrow Trail</b> cul-de-sac, with <b>SH 35</b> along the top.'),
-    ('lot3-gal-2', 'mk', 'The recorded 1.30-acre polygon. A <b>triangle</b>: two long sides meeting '
-     'at a point on the cul-de-sac bulb. Note the <b>ploughed centre</b> and the tree line along '
-     'the water.'),
-], 'These replace the &ldquo;no photography&rdquo; note earlier editions carried for this lot. They '
-   'are not seller marketing graphics: the outline is the <b>recorded BCAD polygon</b> plotted on '
-   'Esri World Imagery by <span class="fp">tools/lotmap.py</span>, and the street names are Brazoria '
-   'County&rsquo;s own 911 centreline data. The 1.30 acres shown is the acreage of record, which is '
-   'what corrected the original portfolio&rsquo;s &ldquo;~1.0 ac est.&rdquo; '
-   'The plan drawings above already carried this triangle; what plotting it on imagery adds is '
-   '<b>context and ground cover</b> &mdash; the ploughed centre, the tree line along the water, the '
-   'farm track across the south-west &mdash; and one measurement nobody had taken. See the note '
-   'below.')
+_GAL['lot3'] = gallery('The parcel from above &mdash; listing aerials', [
+    ('lot3-gal-1', 'mk', 'Position in the subdivision, with the <b>1.3 ac</b> call-out. The lot sits '
+     'inside the bend of the watercourse off the <b>Broken Arrow Trail</b> cul-de-sac, '
+     '<b>SH 35 / Jimmy Phillips Blvd</b> along the top.'),
+    ('lot3-gal-2', 'mk', 'The boundary as marketed &mdash; a <b>triangle</b>, its two long sides '
+     'converging to a point at the cul-de-sac. The channel on the right is labelled '
+     '<b>Buffalo Camp Bayou</b>; see &sect;31 on that name.'),
+], 'Supplied for the listing, and they replace the &ldquo;no photography&rdquo; note earlier editions '
+   'carried for this lot. Imagery &copy; 2025 Airbus / Maxar Technologies via Google Maps; the '
+   'outline and the acreage call-out are the vendor&rsquo;s. The <b>1.3 ac</b> agrees with the 1.30 '
+   'acres of record, which is what corrected the original portfolio&rsquo;s &ldquo;~1.0 ac est.&rdquo; '
+   'The drawn triangle also agrees with the recorded BCAD polygon plotted independently by '
+   '<span class="fp">tools/lotmap.py</span> &mdash; so on this lot, unusually, the marketing graphic '
+   'and the record are consistent. What the imagery adds beyond the plan drawings is <b>ground '
+   'cover</b>: the ploughed centre, the tree line along the water, the farm track across the '
+   'south-west. And it makes visible the measurement in the note below.')
 
 _GAL['lot3'] += (
     '<div class="note red" style="margin-bottom:0;">'
@@ -3466,15 +3467,16 @@ printed on the figures themselves:</p>
 </div>
 <div class="note green" style="margin-bottom:0;">
   <span class="lbl">What was done about it, and what still is not covered</span>
-  <b>Lot 3 no longer depends on the seller's photography.</b> &sect;8 now carries two aerials built
-  from the county's own data rather than from marketing material &mdash; the recorded BCAD polygon
-  plotted over Esri World Imagery, with Brazoria County 911 street names, by
-  <span class="fp">tools/lotmap.py</span>. That is a stronger form of evidence than an outline drawn
-  by a seller, because the boundary is the one on record. It is also what surfaced the <b>10 ft
-  frontage</b> finding in &sect;8, which no photograph in the upload would have revealed.
-  <b>Lot 2 remains uncovered by ground-level imagery of any kind</b> &mdash; the same aerial treatment
-  could be generated for it, but an aerial cannot show you drainage, neighbouring clutter, or what the
-  ground feels like underfoot, and on Lot 2 there is nothing else.
+  <b>Lot 3 was covered separately.</b> Two annotated listing aerials were supplied for it outside the
+  71-file batch, and they are now in &sect;8. Because the batch could not be trusted on attribution,
+  they were checked rather than taken on faith: the recorded BCAD polygon was plotted independently
+  over Esri World Imagery by <span class="fp">tools/lotmap.py</span>, and the vendor's drawn triangle
+  matches the record. On this lot the marketing graphic and the county agree &mdash; which, given the
+  finding above, is worth having established rather than assumed. That same exercise is what produced
+  the <b>10 ft frontage</b> measurement in &sect;8, which no photograph would have revealed on its own.
+  <b>Lot 2 remains uncovered by imagery of any kind.</b> The aerial treatment could be generated for it
+  in minutes, but an aerial cannot show drainage, neighbouring clutter, or what the ground feels like
+  underfoot &mdash; and on Lot 2 there is nothing else at all.
 </div>
 
 <h3>Why the biggest files were not the ones used</h3>

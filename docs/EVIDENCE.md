@@ -814,18 +814,30 @@ All 71 files remain recoverable from commit `af3fc7f`.
 was **left as it stood**. The frame shows pickleball markings and a basketball pad but no pier and no
 boat ramp — matching the map's *521 Pool* node, not the *Clubhouse* node. The existing caption is right.
 
-## 20. Lot 3 aerials from record data (added v4.2)
+## 20. Lot 3 aerials, and the frontage measurement (added v4.2)
 
-Lot 3's only supplied photograph carries no annotation and also appears in the Lot 1 upload, so it
-cannot identify the parcel. Rather than leave the lot unillustrated, `tools/lotmap.py` renders two
-aerials from primary sources:
+Lot 3's only photograph *in the 71-file batch* carries no annotation and also appears in the Lot 1
+upload, so it cannot identify the parcel. Two annotated listing aerials were supplied for Lot 3
+separately (commit `d78296b`) and are the figures now placed in §8:
+
+- `uploads/lot3/…77515.webp` — wide context with a "1.3 ac" call-out, 1116 × 577
+- `uploads/lot3/…77515 -1.webp` — the boundary drawn as a triangle, 1013 × 598
+
+Imagery © 2025 Airbus / Maxar Technologies via Google Maps. The Google UI strip was cropped from the
+wide frame and its imagery credit carried into the caption instead. Placed at 48 mm tall: 296 dpi and
+316 dpi respectively — native height, not upscaled.
+
+Because the batch had already proved untrustworthy on attribution, the vendor's outline was **checked
+rather than accepted**. `tools/lotmap.py` (new) plots the same parcel independently from primary
+sources, and the drawn triangle matches the recorded polygon:
 
 - **Imagery** — Esri World Imagery tiles, z18 (context, 2,600 ft across) and z19 (close, 1,100 ft).
 - **Boundary** — the recorded BCAD polygon from `data/parcels.geojson`. Not a hand-drawn outline.
 - **Street names** — Brazoria County 911 road centrelines,
   `general/Parcels/MapServer/2`, field `Full_Name`. The county's spelling, not a basemap vendor's.
 
-Both print at 48 mm tall, 328 dpi.
+The cross-check renders at 48 mm / 328 dpi and can be run for any lot — `python3 tools/lotmap.py 2`
+would give Lot 2 the same treatment, which is the one remaining gap in the portfolio's imagery.
 
 ### Finding 4 — Lot 3's street frontage is about 10 ft
 

@@ -64,8 +64,10 @@ upcharge on the clay lots): **Lot 2 ~$65k**, Lot 3 ~$107k, Lot 4 ~$123k, Lot 1 ~
   was replaced with a higher-resolution copy (1,444 px over 1,280 px).
 - **Lot 2 has no photography at all** — all nine files under its address are phone screenshots of
   Zillow, Apple Maps and Risk Factor. Stated plainly on the lot page rather than papered over.
-- **Lot 3 given two aerials built from record data** (`tools/lotmap.py`): the recorded BCAD polygon over
-  Esri World Imagery with Brazoria County 911 street names.
+- **Lot 3 illustrated at last** — two annotated listing aerials placed on its page. The vendor's drawn
+  boundary was cross-checked against the recorded BCAD polygon with the new `tools/lotmap.py`, which
+  plots any lot over Esri World Imagery with Brazoria County 911 street names. On this lot the marketing
+  graphic and the county record agree.
 - **New finding — Lot 3's street frontage is about 10 ft.** Its recorded polygon is a triangle whose
   504 ft and 337 ft sides converge to very nearly a point on the Broken Arrow Trail cul-de-sac. Driveway
   and every utility must pass through that gap. **Lot 3's verdict was rewritten**: still the best value,
